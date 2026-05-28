@@ -1,7 +1,7 @@
 export default function DesignStudioPage() {
   return (
     <iframe
-      src="/ARCHITECTURE.HTML"
+      src="/Design%20Studio.html"
       title="STRUCTURA Design Studio"
       style={{
         display: "block",
