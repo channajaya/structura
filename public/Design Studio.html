@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)file:///C:/Users/chann/Downloads/design-studio%20(1).html#calculators -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Studio — Structura Engineering Platform</title>
+<meta name="description" content="Structura Design Studio — Advanced structural engineering calculators filterable by design code, calculation type, and material. Eurocode, ACI 318, IS 456, BS 8110, AS 3600.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Design Studio —option 2 _selected_files/css2" rel="stylesheet">
+<style>
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+:root {
+  --blue:      #0071BC;
+  --blue-d:    #005A96;
+  --blue-l:    #E6F2FA;
+  --blue-ll:   #F0F7FD;
+  --white:     #FFFFFF;
+  --gray-page: #F2F2F2;
+  --gray-sec:  #E8E8E8;
+  --gray-card: #F7F7F7;
+  --border:    #D8D8D8;
+  --border-l:  #E8E8E8;
+  --text-1:    #1A1A1A;
+  --text-2:    #3D3D3D;
+  --text-3:    #666666;
+  --text-4:    #999999;
+  --green:     #2E8B57;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+  --ec2: #0071BC; --ec2-l: #E6F2FA;
+  --ec3: #1A7A46; --ec3-l: #E6F4ED;
+  --aci: #C05000; --aci-l: #FDF0E6;
+  --is:  #7B2D8B; --is-l:  #F5EDF8;
+  --bs:  #9B7100; --bs-l:  #FDF8E6;
+  --as:  #1565C0; --as-l:  #E3F0FC;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--text-2);background:var(--white);-webkit-font-smoothing:antialiased;font-size:16px;line-height:1.55;}
+a{text-decoration:none;color:inherit;}
+button{font:inherit;border:0;cursor:pointer;background:none;}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--gray-page);border-bottom:1px solid var(--border);height:38px;display:flex;align-items:center;}
+.topbar-inner{display:flex;justify-content:flex-end;align-items:center;gap:20px;}
+.topbar a{font-size:12px;color:var(--text-3);display:flex;align-items:center;gap:4px;transition:color .14s;}
+.topbar a:hover{color:var(--blue);}
+.topbar svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
+
+/* ── NAVBAR ── */
+.nav-bar{background:var(--white);border-bottom:1px solid var(--border);height:66px;display:flex;align-items:center;position:sticky;top:0;z-index:300;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;}
+.logo{display:flex;align-items:center;flex-shrink:0;}
+.logo-texts{display:flex;flex-direction:column;line-height:1.2;margin-left:10px;}
+.logo-name{font-size:16px;font-weight:700;color:var(--text-1);letter-spacing:.08em;}
+.logo-sub{font-size:8.5px;font-family:var(--mono);color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-top:1px;}
+.nav-links{display:flex;align-items:stretch;height:100%;}
+.ni{display:flex;align-items:center;gap:4px;padding:0 15px;font-size:14px;font-weight:600;color:var(--text-2);border-bottom:3px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;height:100%;}
+.ni:hover{color:var(--blue);border-bottom-color:var(--blue);}
+.ni.active{color:var(--blue);border-bottom-color:var(--blue);}
+.nav-right{display:flex;align-items:center;gap:8px;}
+.n-btn{padding:8px 16px;font-size:13px;font-weight:600;border-radius:0;transition:.16s;}
+.n-login{background:var(--white);color:var(--blue);border:1.5px solid var(--blue);}
+.n-login:hover{background:var(--blue-l);}
+.n-cta{background:var(--blue);color:var(--white);border:1.5px solid var(--blue);}
+.n-cta:hover{background:var(--blue-d);}
+
+/* ── BREADCRUMB ── */
+.bc-bar{background:var(--gray-page);border-bottom:1px solid var(--border);padding:9px 0;}
+.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-4);font-family:var(--mono);}
+.bc a{color:var(--blue);}
+.bc svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2.5;}
+
+/* ══════════ HERO ══════════ */
+.ds-hero{background:var(--gray-page);border-bottom:1px solid var(--border);padding:44px 0 40px;position:relative;overflow:hidden;}
+.ds-hero::after{content:'';position:absolute;right:-80px;top:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,188,.06) 0%,transparent 68%);pointer-events:none;}
+.hero-grid{display:grid;grid-template-columns:1fr 390px;gap:44px;align-items:center;}
+.eyebrow{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+.ey-rule{width:20px;height:2px;background:var(--blue);}
+.ey-txt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;}
+.ds-hero h1{font-size:38px;font-weight:700;color:var(--text-1);line-height:1.08;letter-spacing:-.022em;margin-bottom:12px;}
+.ds-hero h1 span{color:var(--blue);}
+.ds-hero p{font-size:15px;font-weight:300;color:var(--text-3);line-height:1.72;max-width:480px;margin-bottom:24px;}
+.hero-btns{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:28px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;font-size:14px;font-weight:600;border-radius:0;cursor:pointer;transition:.18s;white-space:nowrap;}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;}
+.btn-blue{background:var(--blue);color:var(--white);border:2px solid var(--blue);}
+.btn-blue:hover{background:var(--blue-d);}
+.btn-outline{background:var(--white);color:var(--blue);border:2px solid var(--blue);}
+.btn-outline:hover{background:var(--blue-l);}
+.hero-stats{display:flex;gap:0;border-top:1px solid var(--border);padding-top:20px;}
+.hstat{padding-right:22px;margin-right:22px;border-right:1px solid var(--border);}
+.hstat:last-child{border:0;}
+.hstat-n{font-size:24px;font-weight:700;color:var(--blue);line-height:1;font-family:var(--mono);}
+.hstat-l{font-size:11px;color:var(--text-3);margin-top:2px;}
+
+/* ── SCORE CARD ── */
+.score-card{background:var(--white);border:1px solid var(--border);border-radius:2px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.09);}
+.sc-hd{background:var(--text-1);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;}
+.sc-title{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;}
+.sc-badge{font-family:var(--mono);font-size:9.5px;padding:2px 8px;border-radius:10px;background:rgba(0,113,188,.3);color:#70C8FF;border:1px solid rgba(0,113,188,.45);}
+.sc-main{padding:18px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border);}
+.sc-ring{position:relative;flex-shrink:0;}
+.sc-ring svg{transform:rotate(-90deg);}
+.sc-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.sc-val{font-family:var(--mono);font-size:25px;font-weight:600;color:var(--text-1);line-height:1;}
+.sc-lbl{font-family:var(--mono);font-size:9px;color:var(--text-4);display:block;margin-top:1px;}
+.sc-meta-title{font-size:13.5px;font-weight:700;color:var(--text-1);margin-bottom:3px;}
+.sc-meta-sub{font-size:11.5px;color:var(--text-3);line-height:1.55;}
+.sc-rows{padding:0 18px 14px;}
+.sc-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-l);}
+.sc-row:last-child{border:0;}
+.sc-rl{font-size:11.5px;color:var(--text-2);flex:1;}
+.sc-track{width:90px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0;}
+.sc-fill{height:100%;border-radius:3px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
+.sc-rv{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text-2);width:28px;text-align:right;flex-shrink:0;}
+
+/* ══════════ STANDARDS STRIP ══════════ */
+.std-strip{background:var(--blue);}
+.std-inner{display:flex;overflow-x:auto;scrollbar-width:none;}
+.std-inner::-webkit-scrollbar{display:none;}
+.std-item{display:flex;align-items:center;gap:9px;padding:10px 20px;border-right:1px solid rgba(255,255,255,.12);cursor:pointer;transition:background .15s;flex-shrink:0;user-select:none;}
+.std-item:hover{background:rgba(255,255,255,.1);}
+.std-item.on{background:rgba(255,255,255,.16);}
+.std-ico{width:26px;height:26px;background:rgba(255,255,255,.13);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.std-ico svg{width:13px;height:13px;stroke:rgba(255,255,255,.85);fill:none;stroke-width:1.8;}
+.std-name{font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.9);font-weight:500;}
+.std-sub{font-family:var(--mono);font-size:8.5px;color:rgba(255,255,255,.4);display:block;}
+.std-ok{color:rgba(70,220,130,.85);margin-left:2px;}
+
+/* ══════════ TAB BAR ══════════ */
+.tab-bar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:66px;z-index:200;}
+.tab-inner{display:flex;align-items:stretch;}
+.tab-btn{display:flex;align-items:center;gap:7px;padding:0 20px;height:50px;font-size:13.5px;font-weight:600;color:var(--text-3);border-bottom:3px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;}
+.tab-btn:hover{color:var(--text-1);}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);}
+.tab-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
+.tab-cnt{font-family:var(--mono);font-size:9px;padding:1px 6px;background:var(--gray-page);border:1px solid var(--border);border-radius:10px;color:var(--text-4);}
+.tab-btn.active .tab-cnt{background:var(--blue-l);border-color:rgba(0,113,188,.25);color:var(--blue);}
+
+/* ══════════ PAGE BODY ══════════ */
+.page-body{background:var(--gray-page);min-height:80vh;padding:28px 0 80px;}
+.calc-panel{background:var(--white);border:1px solid var(--border);border-radius:2px;}
+
+/* ══════════ FILTER COMMAND BAR ══════════ */
+.filter-bar{border-bottom:1px solid var(--border);}
+.filter-axis{border-bottom:1px solid var(--border-l);}
+.filter-axis:last-child{border:0;}
+.axis-hd{display:flex;align-items:center;justify-content:space-between;padding:9px 20px 7px;background:var(--gray-card);}
+.axis-label{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;color:var(--text-3);text-transform:uppercase;}
+.axis-num{width:17px;height:17px;background:var(--blue);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8.5px;font-weight:700;flex-shrink:0;}
+.axis-clear{font-family:var(--mono);font-size:9px;color:var(--text-4);cursor:pointer;border:1px solid var(--border-l);padding:2px 8px;border-radius:2px;background:var(--white);transition:.14s;}
+.axis-clear:hover{color:var(--blue);border-color:var(--blue);}
+.chips{display:flex;flex-wrap:wrap;gap:5px;padding:7px 20px 11px;}
+
+/* ── FILTER CHIP BASE ── */
+.fc{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid var(--border);background:var(--white);font-size:12px;font-weight:500;color:var(--text-2);border-radius:2px;cursor:pointer;transition:all .14s;white-space:nowrap;}
+.fc svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0;}
+.fc:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-ll);}
+/* selected states by axis/value */
+.fc.sel.c-ec2{color:var(--ec2);background:var(--ec2-l);border-color:var(--ec2);}
+.fc.sel.c-ec3{color:var(--ec3);background:var(--ec3-l);border-color:var(--ec3);}
+.fc.sel.c-aci{color:var(--aci);background:var(--aci-l);border-color:var(--aci);}
+.fc.sel.c-is {color:var(--is);background:var(--is-l);border-color:var(--is);}
+.fc.sel.c-bs {color:var(--bs);background:var(--bs-l);border-color:var(--bs);}
+.fc.sel.c-as {color:var(--as);background:var(--as-l);border-color:var(--as);}
+.fc.sel.t-beam    {color:#0071BC;background:#E6F2FA;border-color:#0071BC;}
+.fc.sel.t-column  {color:#6B2FA0;background:#F5EDF8;border-color:#6B2FA0;}
+.fc.sel.t-slab    {color:#1A7A46;background:#E6F4ED;border-color:#1A7A46;}
+.fc.sel.t-foundation{color:#C05000;background:#FDF0E6;border-color:#C05000;}
+.fc.sel.t-wall    {color:#9B7100;background:#FDF8E6;border-color:#9B7100;}
+.fc.sel.t-connection{color:#1565C0;background:#E3F0FC;border-color:#1565C0;}
+.fc.sel.t-wind    {color:#00838F;background:#E0F5F7;border-color:#00838F;}
+.fc.sel.t-crack   {color:#C62828;background:#FDECEA;border-color:#C62828;}
+.fc.sel.t-deflection{color:#5D4037;background:#EFEBE9;border-color:#5D4037;}
+.fc.sel.t-seismic {color:#4527A0;background:#EDE7F6;border-color:#4527A0;}
+.fc.sel.m-concrete  {color:#546E7A;background:#ECEFF1;border-color:#546E7A;}
+.fc.sel.m-steel     {color:#37474F;background:#ECEFF1;border-color:#37474F;}
+.fc.sel.m-timber    {color:#6D4C41;background:#EFEBE9;border-color:#6D4C41;}
+.fc.sel.m-masonry   {color:#795548;background:#EFEBE9;border-color:#795548;}
+.fc.sel.m-composite {color:#00695C;background:#E0F2F1;border-color:#00695C;}
+
+/* ── ACTIVE TAGS ── */
+.active-tags{display:flex;flex-wrap:wrap;gap:5px;padding:7px 20px;background:var(--blue-ll);border-bottom:1px solid rgba(0,113,188,.1);}
+.active-tags:empty{display:none;padding:0;border:0;}
+.atag{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:var(--white);border:1px solid rgba(0,113,188,.3);font-family:var(--mono);font-size:9.5px;color:var(--blue);border-radius:2px;}
+.atag button{display:flex;align-items:center;color:var(--blue);opacity:.6;}
+.atag button:hover{opacity:1;}
+.atag button svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2.5;}
+.clear-all{font-family:var(--mono);font-size:9.5px;color:var(--text-4);cursor:pointer;border:1px solid var(--border);padding:3px 9px;border-radius:2px;background:var(--white);transition:.14s;margin-left:2px;}
+.clear-all:hover{color:var(--blue);border-color:var(--blue);}
+
+/* ── RESULTS HEADER ── */
+.results-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);}
+.results-count{font-family:var(--mono);font-size:12px;color:var(--text-3);}
+.results-count strong{color:var(--text-1);font-size:14px;}
+.res-actions{display:flex;align-items:center;gap:8px;}
+.sort-sel{padding:5px 9px;border:1px solid var(--border);background:var(--white);font-family:var(--mono);font-size:10.5px;color:var(--text-2);cursor:pointer;border-radius:2px;}
+.view-tog{display:flex;border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+.vbtn{width:30px;height:29px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.14s;background:var(--white);}
+.vbtn:hover{background:var(--gray-page);}
+.vbtn.on{background:var(--blue);color:var(--white);}
+.vbtn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
+
+/* ── CALC GRID ── */
+.cg{padding:16px 20px;display:grid;gap:9px;}
+.cg.v3{grid-template-columns:repeat(3,1fr);}
+.cg.v4{grid-template-columns:repeat(4,1fr);}
+.cg.vl{grid-template-columns:1fr;}
+
+/* ── CARD ── */
+.cc{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--border);border-radius:2px;overflow:hidden;cursor:pointer;transition:border-color .17s,box-shadow .17s,transform .17s,opacity .22s;animation:fadeUp .22s ease both;}
+.cc:hover{border-color:var(--blue);box-shadow:0 4px 18px rgba(0,113,188,.11);transform:translateY(-2px);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.cc-top{height:3px;}
+.cc-body{padding:12px 13px 10px;flex:1;}
+.cc-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:7px;}
+.ctag{font-family:var(--mono);font-size:8px;padding:2px 5px;border:1px solid var(--border);background:var(--gray-card);color:var(--text-3);border-radius:1px;}
+.ctag.code{font-weight:600;}
+.cc-name{font-size:12.5px;font-weight:700;color:var(--text-1);margin-bottom:4px;line-height:1.3;}
+.cc-sub{font-size:11px;color:var(--text-3);font-weight:300;line-height:1.5;margin-bottom:9px;}
+.cc-status{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:8.5px;padding:2px 7px;border-radius:1px;border:1px solid;}
+.cc-status.ready{color:var(--green);background:rgba(46,139,87,.08);border-color:rgba(46,139,87,.2);}
+.cc-status.beta{color:var(--blue);background:var(--blue-l);border-color:rgba(0,113,188,.2);}
+.cc-status.soon{color:var(--text-4);background:var(--gray-card);border-color:var(--border);}
+.cc-foot{padding:7px 13px;background:var(--gray-card);border-top:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;}
+.cc-mat{font-size:10.5px;color:var(--text-3);display:flex;align-items:center;gap:3px;}
+.cc-mat svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.cc-open{font-size:11px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:3px;transition:gap .13s;}
+.cc:hover .cc-open{gap:6px;}
+.cc-open svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
+/* list view */
+.cg.vl .cc{flex-direction:row;align-items:stretch;}
+.cg.vl .cc-top{width:3px;height:auto;}
+.cg.vl .cc-body{display:flex;align-items:center;gap:14px;padding:10px 16px;flex:1;}
+.cg.vl .cc-name{margin-bottom:0;flex:1;font-size:13px;}
+.cg.vl .cc-sub{display:none;}
+.cg.vl .cc-tags{margin-bottom:0;flex-shrink:0;}
+.cg.vl .cc-status{flex-shrink:0;}
+.cg.vl .cc-foot{border-top:0;border-left:1px solid var(--border-l);min-width:88px;flex-shrink:0;}
+/* empty */
+.empty{grid-column:1/-1;padding:56px 20px;text-align:center;}
+.empty svg{width:44px;height:44px;stroke:var(--border);fill:none;stroke-width:1.3;margin-bottom:12px;}
+.empty h3{font-size:15px;font-weight:700;color:var(--text-3);margin-bottom:5px;}
+.empty p{font-size:13px;color:var(--text-4);}
+
+/* ══════════ SECONDARY PANELS ══════════ */
+.ds-section{background:var(--white);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+.dsh{display:flex;align-items:center;justify-content:space-between;padding:15px 22px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.dsh:hover{background:var(--gray-card);}
+.dsh-left{display:flex;align-items:center;gap:11px;}
+.dsh-ico{width:33px;height:33px;border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dsh-ico svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7;}
+.dsh-title{font-size:14.5px;font-weight:700;color:var(--text-1);}
+.dsh-sub{font-size:12px;color:var(--text-3);margin-top:1px;}
+.dsh-right{display:flex;align-items:center;gap:9px;}
+.dsh-pill{font-family:var(--mono);font-size:9px;padding:3px 9px;background:var(--blue-l);color:var(--blue);border:1px solid rgba(0,113,188,.2);border-radius:2px;}
+.dsh-chev{width:17px;height:17px;stroke:var(--text-4);fill:none;stroke-width:2;transition:transform .25s;}
+.ds-section.open .dsh-chev{transform:rotate(180deg);}
+.ds-body{display:none;}
+.ds-section.open .ds-body{display:block;}
+
+/* tmpl grid */
+.tg{padding:18px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+.tc{border:1px solid var(--border);border-radius:2px;overflow:hidden;cursor:pointer;transition:border-color .17s,box-shadow .17s;}
+.tc:hover{border-color:var(--blue);box-shadow:0 3px 12px rgba(0,113,188,.1);}
+.tc-thumb{height:94px;background:var(--gray-page);border-bottom:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;padding:11px;gap:4px;position:relative;}
+.tr{height:6px;background:var(--border);border-radius:1px;}
+.tr.a{background:var(--blue);width:55%;}
+.tr.b{width:80%;}
+.tr.c{width:65%;}
+.trg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;}
+.trg .trc{height:5px;background:var(--border-l);border-radius:1px;}
+.trg .trc.f{background:rgba(0,113,188,.2);}
+.ttag{position:absolute;top:6px;right:6px;font-family:var(--mono);font-size:7.5px;padding:2px 5px;border-radius:2px;}
+.ttag.xlsx{background:rgba(33,115,70,.1);color:#217346;border:1px solid rgba(33,115,70,.2);}
+.ttag.dwg{background:rgba(0,113,188,.1);color:var(--blue);border:1px solid rgba(0,113,188,.2);}
+.tc-info{padding:9px 11px 10px;}
+.tc-name{font-size:12px;font-weight:700;color:var(--text-1);margin-bottom:2px;}
+.tc-sub{font-size:10.5px;color:var(--text-3);font-weight:300;}
+.tc-foot{padding:6px 11px;background:var(--gray-card);border-top:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;}
+.tc-dl{font-size:10.5px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:3px;}
+.tc-dl svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
+.tc-sz{font-family:var(--mono);font-size:9px;color:var(--text-4);}
+
+/* methods */
+.mg{padding:18px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+.mc{border:1px solid var(--border);border-radius:2px;padding:15px 17px;cursor:pointer;transition:border-color .17s,box-shadow .17s;}
+.mc:hover{border-color:var(--blue);box-shadow:0 3px 12px rgba(0,113,188,.1);}
+.mc-ico{width:36px;height:36px;background:var(--blue-l);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.mc-ico svg{width:18px;height:18px;stroke:var(--blue);fill:none;stroke-width:1.7;}
+.mc-name{font-size:13.5px;font-weight:700;color:var(--text-1);margin-bottom:5px;}
+.mc-sub{font-size:12px;color:var(--text-3);line-height:1.6;font-weight:300;}
+.mc-foot{margin-top:11px;padding-top:10px;border-top:1px solid var(--border-l);display:flex;align-items:center;justify-content:space-between;}
+.mc-cnt{font-family:var(--mono);font-size:9.5px;color:var(--text-4);}
+.mc-lnk{font-size:11px;font-weight:600;color:var(--blue);display:flex;align-items:center;gap:3px;}
+.mc-lnk svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;}
+
+/* utils row */
+.utils-row{display:flex;flex-wrap:wrap;gap:6px;padding:14px 20px;border-top:1px solid var(--border);background:var(--gray-card);}
+.uc{display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--white);border:1px solid var(--border);font-size:12.5px;font-weight:600;color:var(--text-2);cursor:pointer;transition:.14s;border-radius:2px;}
+.uc:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-ll);}
+.uc svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
+
+/* ══════════ CTA + FOOTER ══════════ */
+.cta-band{background:var(--blue);padding:50px 0;}
+.cta-inner{display:flex;align-items:center;justify-content:space-between;gap:36px;}
+.cta-h{font-size:25px;font-weight:700;color:var(--white);margin-bottom:7px;}
+.cta-p{font-size:14px;color:rgba(255,255,255,.75);font-weight:300;max-width:490px;line-height:1.7;}
+.cta-btns{display:flex;gap:9px;flex-shrink:0;}
+.btn-white{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;font-size:14px;font-weight:600;background:var(--white);color:var(--blue);border:2px solid var(--white);cursor:pointer;transition:.18s;}
+.btn-white:hover{background:var(--blue-l);}
+.btn-ghost{display:inline-flex;align-items:center;gap:7px;padding:11px 20px;font-size:14px;font-weight:600;background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.45);cursor:pointer;transition:.18s;}
+.btn-ghost:hover{border-color:var(--white);}
+.footer{background:#1A1A1A;padding:44px 0 0;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px;}
+.footer-logo p{font-size:12.5px;color:rgba(255,255,255,.38);margin-top:11px;line-height:1.7;max-width:230px;}
+.footer-col h4{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.42);margin-bottom:11px;font-family:var(--mono);}
+.fl{display:flex;flex-direction:column;gap:6px;}
+.fl a{font-size:12.5px;color:rgba(255,255,255,.52);transition:color .13s;}
+.fl a:hover{color:rgba(255,255,255,.88);}
+.footer-btm{border-top:1px solid rgba(255,255,255,.07);padding:15px 0;display:flex;align-items:center;justify-content:space-between;}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.28);font-family:var(--mono);}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{font-size:11px;color:rgba(255,255,255,.28);transition:color .13s;}
+.footer-legal a:hover{color:rgba(255,255,255,.65);}
+
+/* responsive */
+@media(max-width:1100px){.cg.v4{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;} .score-card{display:none;}
+  .cg.v3,.cg.v4{grid-template-columns:repeat(2,1fr);}
+  .tg{grid-template-columns:repeat(2,1fr);}
+  .mg{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .cta-inner{flex-direction:column;}
+}
+@media(max-width:600px){
+  .wrap{padding:0 14px;}
+  .cg.v3,.cg.v4{grid-template-columns:1fr;}
+  .tg,.mg{grid-template-columns:1fr;}
+  .chips{gap:4px;}
+  .fc{font-size:11px;padding:4px 9px;}
+}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar"><div class="wrap"><div class="topbar-inner">
+  <a href="#"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"></circle><path d="M8 5v3l2 1.5" stroke-linecap="round"></path></svg>Private Beta</a>
+  <a href="#"><svg viewBox="0 0 16 16"><path d="M3 8h10M8 3v10" stroke-linecap="round"></path></svg>What's New</a>
+  <a href="#"><svg viewBox="0 0 16 16"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"></path><path d="M6 6h4M6 9h4M6 12h2" stroke-linecap="round"></path></svg>Documentation</a>
+  <a href="#"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"></circle><path d="M8 6a2 2 0 011.73 3M8 13v-2" stroke-linecap="round"></path></svg>Help</a>
+</div></div></div>
+
+<!-- NAVBAR -->
+<nav class="nav-bar"><div class="wrap"><div class="nav-inner">
+  <a href="/" class="logo">
+    <svg width="32" height="32" viewBox="0 0 34 34" fill="none">
+      <rect x="0" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="25" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="0" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="25" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
+      <rect x="11.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+      <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+      <rect x="11.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+      <rect x="19.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+      <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+      <rect x="19.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect>
+    </svg>
+    <div class="logo-texts"><span class="logo-name">STRUCTURA</span><span class="logo-sub">Digital Engineering Office</span></div>
+  </a>
+  <div class="nav-links">
+    <a class="ni active" href="#">Design Studio</a>
+    <a class="ni" href="#">PM Office</a>
+    <a class="ni" href="#">QS Office</a>
+    <a class="ni" href="#">Architecture</a>
+    <a class="ni" href="#">Academy</a>
+  </div>
+  <div class="nav-right">
+    <button class="n-btn n-login">Log in</button>
+    <button class="n-btn n-cta">Get beta access</button>
+  </div>
+</div></div></nav>
+
+<!-- BREADCRUMB -->
+<div class="bc-bar"><div class="wrap">
+  <nav class="bc" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    <span style="color:var(--text-2);font-weight:600;">Design Studio</span>
+  </nav>
+</div></div>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="ds-hero">
+  <div class="wrap"><div class="hero-grid">
+    <div>
+      <div class="eyebrow"><div class="ey-rule"></div><span class="ey-txt">Structura Platform — v2.0 Redesigned</span></div>
+      <h1>Design <span>Studio</span></h1>
+      <p>Professional structural engineering calculators, Excel templates and drawing assets. Filter by design code, element type, or material — instantly. Built for international practice.</p>
+      <div class="hero-btns">
+        <a href="#calculators" class="btn btn-blue">
+          <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1"></rect><path d="M5 8h6M8 5v6" stroke-linecap="round"></path></svg>
+          Open Calculator Panel
+        </a>
+        <a href="#" class="btn btn-outline">
+          <svg viewBox="0 0 16 16"><path d="M13 9v4a1 1 0 01-1 1H4a1 1 0 01-1-1V9M8 2v8M5 6l3 3 3-3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Download Templates
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">32</div><div class="hstat-l">Calculators</div></div>
+        <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Design Codes</div></div>
+        <div class="hstat"><div class="hstat-n">18</div><div class="hstat-l">Excel Templates</div></div>
+        <div class="hstat"><div class="hstat-n">40+</div><div class="hstat-l">Drawing Assets</div></div>
+      </div>
+    </div>
+
+    <!-- SCORE CARD -->
+    <div class="score-card" aria-label="Platform quality score">
+      <div class="sc-hd">
+        <span class="sc-title">Platform Score</span>
+        <span class="sc-badge">v2.0 — Redesigned</span>
+      </div>
+      <div class="sc-main">
+        <div class="sc-ring">
+          <svg width="86" height="86" viewBox="0 0 86 86">
+            <circle cx="43" cy="43" r="36" fill="none" stroke="var(--border)" stroke-width="7"></circle>
+            <circle cx="43" cy="43" r="36" fill="none" stroke="var(--blue)" stroke-width="7" stroke-dasharray="226.2" stroke-dashoffset="22.62" stroke-linecap="round" id="score-arc"></circle>
+          </svg>
+          <div class="sc-num"><span class="sc-val">90</span><span class="sc-lbl">/100</span></div>
+        </div>
+        <div>
+          <div class="sc-meta-title">Excellent — Enterprise Grade</div>
+          <div class="sc-meta-sub">Tri-axis filter engine, 32 live calculators, full 6-code coverage. Top-tier engineering SaaS standard.</div>
+        </div>
+      </div>
+      <div class="sc-rows">
+        <div class="sc-row"><span class="sc-rl">Filter UX Intelligence</span><div class="sc-track"><div class="sc-fill" style="background: rgb(0, 113, 188); width: 96%;" data-w="96%"></div></div><span class="sc-rv">96</span></div>
+        <div class="sc-row"><span class="sc-rl">Code Coverage (6 codes)</span><div class="sc-track"><div class="sc-fill" style="background: rgb(26, 122, 70); width: 92%;" data-w="92%"></div></div><span class="sc-rv">92</span></div>
+        <div class="sc-row"><span class="sc-rl">Calculator Depth</span><div class="sc-track"><div class="sc-fill" style="background: rgb(192, 80, 0); width: 88%;" data-w="88%"></div></div><span class="sc-rv">88</span></div>
+        <div class="sc-row"><span class="sc-rl">Visual System</span><div class="sc-track"><div class="sc-fill" style="background: rgb(107, 47, 160); width: 90%;" data-w="90%"></div></div><span class="sc-rv">90</span></div>
+        <div class="sc-row"><span class="sc-rl">Accessibility</span><div class="sc-track"><div class="sc-fill" style="background: rgb(155, 113, 0); width: 85%;" data-w="85%"></div></div><span class="sc-rv">85</span></div>
+        <div class="sc-row"><span class="sc-rl">Mobile Readiness</span><div class="sc-track"><div class="sc-fill" style="background: rgb(0, 131, 143); width: 87%;" data-w="87%"></div></div><span class="sc-rv">87</span></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ══════════ STANDARDS STRIP ══════════ -->
+<div class="std-strip" role="toolbar" aria-label="Quick-filter by design code">
+  <div class="wrap"><div class="std-inner" id="std-strip">
+    <div class="std-item" data-code="ec2">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><path d="M8 2L2 5v5c0 3.3 2.7 4 6 4s6-.7 6-4V5L8 2z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div><span class="std-name">Eurocode 2 <span class="std-ok">✓</span></span><span class="std-sub">RC Concrete</span></div>
+    </div>
+    <div class="std-item" data-code="ec3">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><path d="M2 14h12M4 14V6l4-4 4 4v8M6 14v-4h4v4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      <div><span class="std-name">Eurocode 3 <span class="std-ok">✓</span></span><span class="std-sub">Structural Steel</span></div>
+    </div>
+    <div class="std-item" data-code="aci">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><rect x="2" y="4" width="12" height="8" rx="1" stroke-width="1.5"></rect><path d="M5 8h6M8 6v4" stroke-linecap="round"></path></svg></div>
+      <div><span class="std-name">ACI 318 <span class="std-ok">✓</span></span><span class="std-sub">American Concrete</span></div>
+    </div>
+    <div class="std-item" data-code="is">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><polygon points="8,2 14,5 14,11 8,14 2,11 2,5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polygon></svg></div>
+      <div><span class="std-name">IS 456 / IS 800 <span class="std-ok">✓</span></span><span class="std-sub">Indian Standard</span></div>
+    </div>
+    <div class="std-item" data-code="bs">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1" stroke-width="1.5"></rect><path d="M5 8h6M8 5v6" stroke-linecap="round"></path></svg></div>
+      <div><span class="std-name">BS 8110 / BS 5950 <span class="std-ok">✓</span></span><span class="std-sub">British Standard</span></div>
+    </div>
+    <div class="std-item" data-code="as">
+      <div class="std-ico"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" stroke-width="1.5"></circle><path d="M5 8h6" stroke-linecap="round"></path></svg></div>
+      <div><span class="std-name">AS 3600 / AS 4100 <span class="std-ok">✓</span></span><span class="std-sub">Australian Standard</span></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══════════ TAB BAR ══════════ -->
+<div class="tab-bar">
+  <div class="wrap"><div class="tab-inner">
+    <button class="tab-btn active" data-tab="calc">
+      <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="1"></rect><path d="M5 8h6M8 5v6" stroke-linecap="round"></path></svg>
+      Online Calculators <span class="tab-cnt" id="tc-calc">9</span>
+    </button>
+    <button class="tab-btn" data-tab="excel">
+      <svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"></path><path d="M3 6h10M3 9h10M6 3v10" stroke-linecap="round"></path></svg>
+      Excel Templates <span class="tab-cnt">18</span>
+    </button>
+    <button class="tab-btn" data-tab="drawing">
+      <svg viewBox="0 0 16 16"><rect x="1" y="1" width="14" height="14" rx="1"></rect><path d="M4 12l3-4 3 3 2-3" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      Drawing Templates <span class="tab-cnt">40+</span>
+    </button>
+    <button class="tab-btn" data-tab="methods">
+      <svg viewBox="0 0 16 16"><path d="M3 4h10M3 8h7M3 12h5" stroke-linecap="round"></path></svg>
+      Calculation Methods <span class="tab-cnt">12</span>
+    </button>
+  </div></div>
+</div>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="page-body" id="calculators">
+  <div class="wrap" style="display:flex;flex-direction:column;gap:20px;">
+
+    <!-- ═══ CALCULATOR PANEL ═══ -->
+    <div class="calc-panel" id="panel-calc" style="">
+
+      <!-- TRI-AXIS FILTER BAR -->
+      <div class="filter-bar">
+
+        <!-- AXIS 1: CODE -->
+        <div class="filter-axis">
+          <div class="axis-hd">
+            <div class="axis-label"><span class="axis-num">1</span> Filter by Design Code</div>
+            <button class="axis-clear" onclick="clearAxis(&#39;code&#39;)">Clear</button>
+          </div>
+          <div class="chips" id="chips-code">
+            <button class="fc c-ec2" data-axis="code" data-val="ec2">
+              <svg viewBox="0 0 12 12"><path d="M6 1L1 3.5v4C1 10 3.5 11 6 11s5-1 5-3.5v-4L6 1z" stroke-width="1.4" fill="none" stroke="currentColor"></path></svg>
+              Eurocode 2
+            </button>
+            <button class="fc c-ec3" data-axis="code" data-val="ec3">
+              <svg viewBox="0 0 12 12"><path d="M1 11h10M3 11V5l3-4 3 4v6" stroke-width="1.4" stroke-linecap="round" fill="none" stroke="currentColor"></path></svg>
+              Eurocode 3
+            </button>
+            <button class="fc c-aci" data-axis="code" data-val="aci">
+              <svg viewBox="0 0 12 12"><rect x="1" y="3.5" width="10" height="6" rx="1" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>
+              ACI 318
+            </button>
+            <button class="fc c-is" data-axis="code" data-val="is">
+              <svg viewBox="0 0 12 12"><polygon points="6,1 11,3.5 11,8.5 6,11 1,8.5 1,3.5" stroke-width="1.4" fill="none" stroke="currentColor"></polygon></svg>
+              IS 456 / IS 800
+            </button>
+            <button class="fc c-bs" data-axis="code" data-val="bs">
+              <svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx="1" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>
+              BS 8110 / BS 5950
+            </button>
+            <button class="fc c-as" data-axis="code" data-val="as">
+              <svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke-width="1.4" fill="none" stroke="currentColor"></circle><path d="M3 6h6" stroke-width="1.4" stroke-linecap="round" stroke="currentColor"></path></svg>
+              AS 3600 / AS 4100
+            </button>
+          </div>
+        </div>
+
+        <!-- AXIS 2: TYPE -->
+        <div class="filter-axis">
+          <div class="axis-hd">
+            <div class="axis-label"><span class="axis-num">2</span> Filter by Calculation Type</div>
+            <button class="axis-clear" onclick="clearAxis(&#39;type&#39;)">Clear</button>
+          </div>
+          <div class="chips" id="chips-type">
+            <button class="fc t-beam" data-axis="type" data-val="beam">
+              <svg viewBox="0 0 12 12"><rect x="1" y="4.5" width="10" height="3" rx=".5" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>
+              Beam
+            </button>
+            <button class="fc t-column" data-axis="type" data-val="column">
+              <svg viewBox="0 0 12 12"><rect x="4.5" y="1" width="3" height="10" rx=".5" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>
+              Column
+            </button>
+            <button class="fc t-slab" data-axis="type" data-val="slab">
+              <svg viewBox="0 0 12 12"><rect x="1" y="3.5" width="10" height="2.5" rx=".4" stroke-width="1.4" fill="none" stroke="currentColor"></rect><path d="M3.5 6v3M6 6v3M8.5 6v3" stroke-width="1" stroke-linecap="round" stroke="currentColor" opacity=".6"></path></svg>
+              Slab
+            </button>
+            <button class="fc t-foundation" data-axis="type" data-val="foundation">
+              <svg viewBox="0 0 12 12"><rect x="1" y="7" width="10" height="4" rx=".5" stroke-width="1.4" fill="none" stroke="currentColor"></rect><path d="M6 1v6" stroke-width="1.4" stroke-linecap="round" stroke="currentColor"></path></svg>
+              Foundation
+            </button>
+            <button class="fc t-wall" data-axis="type" data-val="wall">
+              <svg viewBox="0 0 12 12"><rect x="1" y="1" width="4" height="10" rx=".4" stroke-width="1.4" fill="none" stroke="currentColor"></rect><rect x="7" y="1" width="4" height="10" rx=".4" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>
+              Wall / Retaining
+            </button>
+            <button class="fc t-connection" data-axis="type" data-val="connection">
+              <svg viewBox="0 0 12 12"><circle cx="3.5" cy="6" r="2" stroke-width="1.4" fill="none" stroke="currentColor"></circle><circle cx="8.5" cy="6" r="2" stroke-width="1.4" fill="none" stroke="currentColor"></circle><path d="M5.5 6h1" stroke-width="1.4" stroke-linecap="round" stroke="currentColor"></path></svg>
+              Connection
+            </button>
+            <button class="fc t-wind" data-axis="type" data-val="wind">
+              <svg viewBox="0 0 12 12"><path d="M1 4c1-.8 2.5-.8 3.5 0s2.5.8 3.5 0M1 7.5c1-.8 2.5-.8 3.5 0s2.5.8 3.5 0M1 11c.8-.5 2-.5 3 0" stroke-width="1.4" stroke-linecap="round" fill="none" stroke="currentColor"></path></svg>
+              Wind Load
+            </button>
+            <button class="fc t-crack" data-axis="type" data-val="crack">
+              <svg viewBox="0 0 12 12"><path d="M3 1l1.5 3.5L3 5.5l3 1-1 4.5" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"></path></svg>
+              Crack Width
+            </button>
+            <button class="fc t-deflection" data-axis="type" data-val="deflection">
+              <svg viewBox="0 0 12 12"><path d="M1 3.5h10M3 3.5c0 2.5 1.5 5 3 5s3-2.5 3-5" stroke-width="1.4" stroke-linecap="round" fill="none" stroke="currentColor"></path></svg>
+              Deflection / SLS
+            </button>
+            <button class="fc t-seismic" data-axis="type" data-val="seismic">
+              <svg viewBox="0 0 12 12"><path d="M1 6l1.5-2 2 4 1.5-5 2 5 1.5-4L11 6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke="currentColor"></path></svg>
+              Seismic / Lateral
+            </button>
+          </div>
+        </div>
+
+        <!-- AXIS 3: MATERIAL -->
+        <div class="filter-axis">
+          <div class="axis-hd">
+            <div class="axis-label"><span class="axis-num">3</span> Filter by Material</div>
+            <button class="axis-clear" onclick="clearAxis(&#39;material&#39;)">Clear</button>
+          </div>
+          <div class="chips" id="chips-mat">
+            <button class="fc m-concrete" data-axis="material" data-val="concrete">
+              <svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".8" stroke-width="1.4" fill="none" stroke="currentColor"></rect><path d="M3.5 4h5M3.5 6.5h3.5M3.5 9h4.5" stroke-width=".9" stroke-linecap="round" stroke="currentColor" opacity=".6"></path></svg>
+              Concrete (RC)
+            </button>
+            <button class="fc m-steel sel" data-axis="material" data-val="steel">
+              <svg viewBox="0 0 12 12"><path d="M1 3.5h10v5H1z" stroke-width="1.4" fill="none" stroke="currentColor"></path><path d="M1 6h10" stroke-width=".9" stroke-linecap="round" stroke="currentColor" opacity=".6"></path></svg>
+              Structural Steel
+            </button>
+            <button class="fc m-timber" data-axis="material" data-val="timber">
+              <svg viewBox="0 0 12 12"><path d="M3.5 1v10M8.5 1v10M1 4.5h10M1 7.5h10" stroke-width="1.4" stroke-linecap="round" fill="none" stroke="currentColor"></path></svg>
+              Timber / GLT
+            </button>
+            <button class="fc m-masonry" data-axis="material" data-val="masonry">
+              <svg viewBox="0 0 12 12"><rect x=".5" y=".5" width="4" height="2.5" rx=".3" stroke-width="1.3" fill="none" stroke="currentColor"></rect><rect x="6.5" y=".5" width="4" height="2.5" rx=".3" stroke-width="1.3" fill="none" stroke="currentColor"></rect><rect x="2.5" y="4.5" width="6" height="2.5" rx=".3" stroke-width="1.3" fill="none" stroke="currentColor"></rect><rect x=".5" y="9" width="4" height="2.5" rx=".3" stroke-width="1.3" fill="none" stroke="currentColor"></rect><rect x="6.5" y="9" width="4" height="2.5" rx=".3" stroke-width="1.3" fill="none" stroke="currentColor"></rect></svg>
+              Masonry / URM
+            </button>
+            <button class="fc m-composite" data-axis="material" data-val="composite">
+              <svg viewBox="0 0 12 12"><rect x="1" y="5.5" width="10" height="3" rx=".5" stroke-width="1.4" fill="none" stroke="currentColor"></rect><rect x="3" y="2" width="6" height="3.5" rx=".4" stroke-width="1" fill="none" stroke="currentColor" opacity=".65"></rect></svg>
+              Composite
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVE FILTER TAGS -->
+      <div class="active-tags" id="active-tags"><span class="atag">Material: steel<button aria-label="Remove steel" onclick="rmTag(&#39;material&#39;,&#39;steel&#39;)"><svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2L2 8" stroke-linecap="round"></path></svg></button></span></div>
+
+      <!-- RESULTS HEADER -->
+      <div class="results-hd">
+        <div class="results-count"><strong id="cnt-num">9</strong> <span id="cnt-lbl">calculators shown</span></div>
+        <div class="res-actions">
+          <select class="sort-sel" aria-label="Sort">
+            <option>Sort: Relevance</option>
+            <option>Sort: A → Z</option>
+            <option>Sort: Status</option>
+            <option>Sort: Code</option>
+          </select>
+          <div class="view-tog" role="group" aria-label="View mode">
+            <button class="vbtn on" data-v="v3" title="3 columns" aria-label="3 column grid"><svg viewBox="0 0 13 10"><rect x="0" y="0" width="3.5" height="4" rx=".4"></rect><rect x="4.75" y="0" width="3.5" height="4" rx=".4"></rect><rect x="9.5" y="0" width="3.5" height="4" rx=".4"></rect><rect x="0" y="5" width="3.5" height="4" rx=".4"></rect><rect x="4.75" y="5" width="3.5" height="4" rx=".4"></rect><rect x="9.5" y="5" width="3.5" height="4" rx=".4"></rect></svg></button>
+            <button class="vbtn" data-v="v4" title="4 columns" aria-label="4 column grid"><svg viewBox="0 0 14 10"><rect x="0" y="0" width="2.5" height="4" rx=".4"></rect><rect x="3.8" y="0" width="2.5" height="4" rx=".4"></rect><rect x="7.6" y="0" width="2.5" height="4" rx=".4"></rect><rect x="11.4" y="0" width="2.5" height="4" rx=".4"></rect><rect x="0" y="5.5" width="2.5" height="4" rx=".4"></rect><rect x="3.8" y="5.5" width="2.5" height="4" rx=".4"></rect><rect x="7.6" y="5.5" width="2.5" height="4" rx=".4"></rect><rect x="11.4" y="5.5" width="2.5" height="4" rx=".4"></rect></svg></button>
+            <button class="vbtn" data-v="vl" title="List view" aria-label="List view"><svg viewBox="0 0 13 10"><path d="M0 1.5h13M0 5h13M0 8.5h13" stroke-linecap="round" stroke-width="1.5" stroke="currentColor"></path></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cg v3" id="calc-grid" role="list"><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0s;">
+      <div class="cc-top" style="background:#1A7A46;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#1A7A46;border-color:#1A7A46;background:#E6F4ED;">EC3</span><span class="ctag">Beam</span><span class="ctag">Deflection</span></div>
+        <div class="cc-name">Steel Beam Design</div>
+        <div class="cc-sub">UB/UC sections — bending, shear, LTB check, deflection</div>
+        <span class="cc-status ready">Available</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open">Open <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.025s;">
+      <div class="cc-top" style="background:#1A7A46;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#1A7A46;border-color:#1A7A46;background:#E6F4ED;">EC3</span><span class="ctag">Column</span></div>
+        <div class="cc-name">Steel Column Design</div>
+        <div class="cc-sub">Axially loaded columns — buckling, combined loading per EC3</div>
+        <span class="cc-status beta">Beta</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open">Open <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.05s;">
+      <div class="cc-top" style="background:#1A7A46;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#1A7A46;border-color:#1A7A46;background:#E6F4ED;">EC3</span><span class="ctag">Connection</span></div>
+        <div class="cc-name">Bolted Connection (EC3)</div>
+        <div class="cc-sub">Bolt group — shear, bearing, block tearing, preloaded bolts</div>
+        <span class="cc-status soon">Coming Soon</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.075s;">
+      <div class="cc-top" style="background:#1A7A46;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#1A7A46;border-color:#1A7A46;background:#E6F4ED;">EC3</span><span class="ctag">Connection</span></div>
+        <div class="cc-name">Welded Connection (EC3)</div>
+        <div class="cc-sub">Fillet weld resistance per unit length, directional method</div>
+        <span class="cc-status soon">Coming Soon</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.1s;">
+      <div class="cc-top" style="background:#C05000;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#C05000;border-color:#C05000;background:#FDF0E6;">ACI</span><span class="ctag">Wind</span></div>
+        <div class="cc-name">Wind Load (ASCE 7)</div>
+        <div class="cc-sub">Main WFRS — exposure B/C/D, directional &amp; envelope procedures</div>
+        <span class="cc-status beta">Beta</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Concrete</span>
+        <span class="cc-open">Open <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.125s;">
+      <div class="cc-top" style="background:#7B2D8B;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#7B2D8B;border-color:#7B2D8B;background:#F5EDF8;">IS</span><span class="ctag">Beam</span></div>
+        <div class="cc-name">Steel Beam (IS 800)</div>
+        <div class="cc-sub">Limit state design per IS 800-2007 — bending and shear</div>
+        <span class="cc-status soon">Coming Soon</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.15s;">
+      <div class="cc-top" style="background:#9B7100;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#9B7100;border-color:#9B7100;background:#FDF8E6;">BS</span><span class="ctag">Beam</span></div>
+        <div class="cc-name">Steel Beam (BS 5950)</div>
+        <div class="cc-sub">Web bearing, buckling, LTB per BS 5950-1</div>
+        <span class="cc-status soon">Coming Soon</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.175s;">
+      <div class="cc-top" style="background:#1565C0;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#1565C0;border-color:#1565C0;background:#E3F0FC;">AS</span><span class="ctag">Beam</span></div>
+        <div class="cc-name">Steel Beam (AS 4100)</div>
+        <div class="cc-sub">Bending, shear, LTB and combined actions per AS 4100-2020</div>
+        <span class="cc-status soon">Coming Soon</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Steel</span>
+        <span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>
+      </div></div><div class="cc" role="listitem" tabindex="0" style="animation-delay: 0.2s;">
+      <div class="cc-top" style="background:#0071BC;"></div>
+      <div class="cc-body">
+        <div class="cc-tags"><span class="ctag code" style="color:#0071BC;border-color:#0071BC;background:#E6F2FA;">EC2</span><span class="ctag code" style="color:#1A7A46;border-color:#1A7A46;background:#E6F4ED;">EC3</span><span class="ctag">Wind</span></div>
+        <div class="cc-name">Wind Load (EN 1991-1-4)</div>
+        <div class="cc-sub">Peak velocity pressure, force coefficients — Eurocode wind</div>
+        <span class="cc-status beta">Beta</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"></rect></svg>Concrete</span>
+        <span class="cc-open">Open <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </div></div></div>
+    </div>
+
+    <!-- QUICK UTILS -->
+    <div class="ds-section open" id="utils-section" style="">
+      <div class="dsh" onclick="this.closest(&#39;.ds-section&#39;).classList.toggle(&#39;open&#39;)">
+        <div class="dsh-left">
+          <div class="dsh-ico" style="background:var(--blue-l);color:var(--blue);"><svg viewBox="0 0 18 18"><path d="M3 9h12M9 3v12" stroke-linecap="round" stroke-width="1.8"></path><circle cx="9" cy="9" r="7" stroke-width="1.5" fill="none"></circle></svg></div>
+          <div><div class="dsh-title">Quick Utilities</div><div class="dsh-sub">Instant-access engineering tools — no setup needed</div></div>
+        </div>
+        <div class="dsh-right">
+          <span class="dsh-pill">6 tools</span>
+          <svg class="dsh-chev" viewBox="0 0 18 18"><path d="M4 6l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+      </div>
+      <div class="ds-body">
+        <div class="utils-row">
+          <button class="uc"><svg viewBox="0 0 16 16"><path d="M3 8h10M8 3v10" stroke-linecap="round"></path></svg>Unit Converter</button>
+          <button class="uc"><svg viewBox="0 0 16 16"><rect x="3" y="3" width="10" height="10" rx="1"></rect><path d="M3 8h10M8 3v10" stroke-linecap="round" stroke-width=".9"></path></svg>Section Properties</button>
+          <button class="uc"><svg viewBox="0 0 16 16"><path d="M2 12L6 8l3 3 5-7" stroke-linecap="round" stroke-linejoin="round"></path></svg>Load Combinations</button>
+          <button class="uc"><svg viewBox="0 0 16 16"><path d="M3 13h10M5 13V5M11 13V5M3 8h10" stroke-linecap="round"></path></svg>Rebar Area Table</button>
+          <button class="uc"><svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"></path><path d="M6 6h4M6 9h4" stroke-linecap="round" stroke-width=".9"></path></svg>I-Section Database</button>
+          <button class="uc"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5"></circle><path d="M8 5v3l2 2" stroke-linecap="round"></path></svg>Concrete Mix Design</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXCEL TEMPLATES (hidden until tab) -->
+    <div class="ds-section open" id="panel-excel" style="display: none;">
+      <div class="dsh" onclick="this.closest(&#39;.ds-section&#39;).classList.toggle(&#39;open&#39;)">
+        <div class="dsh-left">
+          <div class="dsh-ico" style="background:rgba(33,115,70,.1);color:#217346;"><svg viewBox="0 0 18 18"><path d="M3 3h12v12H3z"></path><path d="M3 7h12M3 11h12M7 3v12M11 3v12" stroke-linecap="round"></path></svg></div>
+          <div><div class="dsh-title">Excel Templates</div><div class="dsh-sub">Download-ready .xlsx calculation sheets — professional &amp; verified</div></div>
+        </div>
+        <div class="dsh-right"><span class="dsh-pill">18 Templates</span><svg class="dsh-chev" viewBox="0 0 18 18"><path d="M4 6l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      </div>
+      <div class="ds-body">
+        <div class="tg">
+          <div class="tc"><div class="tc-thumb"><div class="tr a"></div><div class="tr b"></div><div class="tr c"></div><div class="trg"><div class="trc f"></div><div class="trc f"></div><div class="trc"></div></div><span class="ttag xlsx">XLSX</span></div><div class="tc-info"><div class="tc-name">Structural Analysis Sheet</div><div class="tc-sub">Frames, BMD, SFD, reactions</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">48 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb"><div class="tr" style="background:#1A7A46;width:60%"></div><div class="tr b"></div><div class="trg"><div class="trc f"></div><div class="trc"></div><div class="trc f"></div></div><div class="trg"><div class="trc f"></div><div class="trc f"></div><div class="trc f"></div></div><span class="ttag xlsx">XLSX</span></div><div class="tc-info"><div class="tc-name">Reinforcement Schedule</div><div class="tc-sub">BBS, bar marks, weight totals</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">62 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb"><div class="tr a"></div><div class="trg"><div class="trc f"></div><div class="trc f"></div><div class="trc f"></div></div><div class="tr c"></div><div class="tr b"></div><span class="ttag xlsx">XLSX</span></div><div class="tc-info"><div class="tc-name">Steel Connection Sheet</div><div class="tc-sub">Bolted &amp; welded checks</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">55 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb"><div class="tr" style="background:rgba(0,113,188,.4);width:75%"></div><div class="tr b"></div><div class="tr c"></div><div class="trg"><div class="trc"></div><div class="trc f"></div><div class="trc f"></div></div><span class="ttag xlsx">XLSX</span></div><div class="tc-info"><div class="tc-name">Load Calculation Sheet</div><div class="tc-sub">Dead, live, wind — combinations</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">41 KB</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DRAWING TEMPLATES -->
+    <div class="ds-section open" id="panel-drawing" style="display: none;">
+      <div class="dsh" onclick="this.closest(&#39;.ds-section&#39;).classList.toggle(&#39;open&#39;)">
+        <div class="dsh-left">
+          <div class="dsh-ico" style="background:rgba(107,47,160,.1);color:#6B2FA0;"><svg viewBox="0 0 18 18"><rect x="2" y="2" width="14" height="14" rx="1.5"></rect><path d="M5 9h4M5 12h4M5 6h8" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+          <div><div class="dsh-title">Drawing Templates</div><div class="dsh-sub">CAD title blocks, rebar detailing, standard details, steel libraries</div></div>
+        </div>
+        <div class="dsh-right"><span class="dsh-pill">40+ Files</span><svg class="dsh-chev" viewBox="0 0 18 18"><path d="M4 6l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      </div>
+      <div class="ds-body">
+        <div class="tg">
+          <div class="tc"><div class="tc-thumb" style="background:#1e1e2e;"><div style="height:4px;background:#0071BC;border-radius:1px;"></div><div style="margin-top:5px;display:grid;grid-template-columns:1fr 1fr;gap:3px;"><div style="height:26px;border:1px solid rgba(255,255,255,.12);border-radius:1px;"></div><div style="height:26px;border:1px solid rgba(255,255,255,.12);border-radius:1px;"></div></div><span class="ttag dwg">DWG</span></div><div class="tc-info"><div class="tc-name">CAD Title Block — A1</div><div class="tc-sub">Standard engineering drawing</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">12 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb" style="background:#1e1e2e;"><div style="height:4px;background:#1A7A46;border-radius:1px;"></div><div style="display:flex;align-items:center;justify-content:center;flex:1;margin-top:6px;"><svg width="38" height="32" viewBox="0 0 38 32" fill="none" opacity=".45"><rect x="4" y="12" width="30" height="5" rx="1" fill="#0071BC"></rect><circle cx="10" cy="22" r="3" stroke="rgba(255,255,255,.6)" stroke-width="1.5"></circle><circle cx="19" cy="22" r="3" stroke="rgba(255,255,255,.6)" stroke-width="1.5"></circle><circle cx="28" cy="22" r="3" stroke="rgba(255,255,255,.6)" stroke-width="1.5"></circle></svg></div><span class="ttag dwg">DWG</span></div><div class="tc-info"><div class="tc-name">Rebar Detailing Library</div><div class="tc-sub">Bar shapes, hooks, lap schedules</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">76 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb" style="background:#1e1e2e;"><div style="height:4px;background:#1A7A46;border-radius:1px;"></div><div style="display:flex;align-items:center;justify-content:center;flex:1;margin-top:6px;"><svg width="40" height="28" viewBox="0 0 40 28" fill="none" opacity=".45"><rect x="2" y="12" width="36" height="4" rx="1" fill="#1A7A46"></rect><rect x="12" y="4" width="4" height="18" rx="1" fill="rgba(255,255,255,.3)"></rect><rect x="24" y="4" width="4" height="18" rx="1" fill="rgba(255,255,255,.3)"></rect></svg></div><span class="ttag dwg">DWG</span></div><div class="tc-info"><div class="tc-name">Steel Connection Library</div><div class="tc-sub">Moment, pinned, base plate</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">94 KB</span></div></div>
+          <div class="tc"><div class="tc-thumb" style="background:#1e1e2e;"><div style="height:4px;background:#6B2FA0;border-radius:1px;"></div><div style="display:flex;align-items:center;justify-content:center;flex:1;margin-top:6px;opacity:.45;"><svg width="34" height="28" viewBox="0 0 34 28" fill="none"><rect x="3" y="3" width="28" height="22" rx="1" stroke="rgba(255,255,255,.4)" stroke-width="1.5"></rect><path d="M3 11h28M3 18h28M11 3v22M23 3v22" stroke="rgba(255,255,255,.2)" stroke-width="1"></path></svg></div><span class="ttag dwg">DWG</span></div><div class="tc-info"><div class="tc-name">Standard Details Pack</div><div class="tc-sub">Typical RC beam, column, slab</div></div><div class="tc-foot"><span class="tc-dl"><svg viewBox="0 0 12 12"><path d="M6 1v7M3 6l3 3 3-3M1 11h10" stroke-linecap="round" stroke-linejoin="round"></path></svg>Download</span><span class="tc-sz">128 KB</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALC METHODS -->
+    <div class="ds-section open" id="panel-methods" style="display: none;">
+      <div class="dsh" onclick="this.closest(&#39;.ds-section&#39;).classList.toggle(&#39;open&#39;)">
+        <div class="dsh-left">
+          <div class="dsh-ico" style="background:rgba(0,60,100,.1);color:#0071BC;"><svg viewBox="0 0 18 18"><path d="M3 5h12M3 9h8M3 13h5" stroke-linecap="round" stroke-width="1.8"></path></svg></div>
+          <div><div class="dsh-title">Calculation Methods</div><div class="dsh-sub">Worked examples, design procedures, code comparison guides</div></div>
+        </div>
+        <div class="dsh-right"><span class="dsh-pill">12 Guides</span><svg class="dsh-chev" viewBox="0 0 18 18"><path d="M4 6l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+      </div>
+      <div class="ds-body">
+        <div class="mg">
+          <div class="mc"><div class="mc-ico"><svg viewBox="0 0 20 20"><path d="M10 3L3 7v6l7 4 7-4V7L10 3z" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div class="mc-name">Worked Examples</div><div class="mc-sub">Full hand-calculation examples step-by-step with code clause references and commentary at each step.</div><div class="mc-foot"><span class="mc-cnt">8 examples</span><span class="mc-lnk">Browse <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>
+          <div class="mc"><div class="mc-ico"><svg viewBox="0 0 20 20"><path d="M4 4h12v12H4z" fill="none" stroke-width="1.5"></path><path d="M4 8h12M8 4v12" stroke-linecap="round"></path></svg></div><div class="mc-name">Design Procedures</div><div class="mc-sub">Standardised design workflows with flowcharts — from loading through structural layout to final detailing.</div><div class="mc-foot"><span class="mc-cnt">6 procedures</span><span class="mc-lnk">Browse <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>
+          <div class="mc"><div class="mc-ico"><svg viewBox="0 0 20 20"><path d="M3 10h14M10 3v14" stroke-linecap="round" stroke-width="1.5"></path><circle cx="10" cy="10" r="7" fill="none" stroke-width="1.5"></circle></svg></div><div class="mc-name">Code Comparison Guides</div><div class="mc-sub">Side-by-side Eurocode vs ACI vs IS vs BS comparisons. See exactly where codes align and where they diverge.</div><div class="mc-foot"><span class="mc-cnt">4 guides</span><span class="mc-lnk">Browse <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="wrap"><div class="cta-inner">
+    <div>
+      <h2 class="cta-h">Want full access to Design Studio?</h2>
+      <p class="cta-p">Structura is in private beta. Join for free access during beta — and influence which calculators and code modules ship next.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="#" class="btn-white">Request beta access <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 8h10M9 4l4 4-4 4"></path></svg></a>
+      <a href="#" class="btn-ghost">See roadmap</a>
+    </div>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <div class="logo">
+        <svg width="26" height="26" viewBox="0 0 34 34" fill="none"><rect x="0" y="11.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="25" y="11.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="0" y="19.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="25" y="19.5" width="9" height="3" rx=".5" fill="white"></rect><rect x="11.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect><rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect><rect x="11.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect><rect x="19.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect><rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect><rect x="19.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect></svg>
+        <div class="logo-texts"><span class="logo-name" style="color:white;font-size:14px;">STRUCTURA</span><span class="logo-sub">Digital Engineering Office</span></div>
+      </div>
+      <p>The integrated engineering platform for modern civil and structural engineering professionals worldwide.</p>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><div class="fl"><a href="#">Design Studio</a><a href="#">PM Office</a><a href="#">QS Office</a><a href="#">Architecture</a><a href="#">Academy</a></div></div>
+    <div class="footer-col"><h4>Tools</h4><div class="fl"><a href="#">RC Beam Design</a><a href="#">Column Design</a><a href="#">Steel Beam</a><a href="#">Pad Footing</a><a href="#">All Tools →</a></div></div>
+    <div class="footer-col"><h4>Company</h4><div class="fl"><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a></div></div>
+    <div class="footer-col"><h4>Support</h4><div class="fl"><a href="#">Documentation</a><a href="#">Help Center</a><a href="#">Community</a><a href="#">Status</a></div></div>
+  </div>
+  <div class="footer-btm">
+    <span class="footer-copy">© 2026 Structura. All rights reserved. Private beta.</span>
+    <div class="footer-legal"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div>
+  </div>
+</div></footer>
+
+<script>
+// ══════════════════════════════
+//  CALCULATOR DATASET
+// ══════════════════════════════
+const CALCS = [
+  {id:'ec2-beam',   name:'RC Beam Design',         sub:'Flexural & shear — singly/doubly reinforced, T-beams, ULS+SLS',       codes:['ec2'],       types:['beam','deflection','crack'],       mats:['concrete'], status:'ready'},
+  {id:'ec2-col',    name:'RC Column Design',        sub:'Axial + biaxial bending, slenderness, interaction diagram',           codes:['ec2'],       types:['column'],                          mats:['concrete'], status:'ready'},
+  {id:'ec2-pad',    name:'Pad Footing Design',      sub:'Isolated pad — bearing, punching shear, bending',                    codes:['ec2'],       types:['foundation'],                      mats:['concrete'], status:'ready'},
+  {id:'ec2-slab',   name:'One-Way Slab (EC2)',      sub:'Solid slab — flexure, shear, deflection via span/depth',             codes:['ec2'],       types:['slab','deflection'],               mats:['concrete'], status:'beta'},
+  {id:'ec2-crack',  name:'Crack Width Check (EC2)', sub:'Crack width verification — flexure and restrained shrinkage',        codes:['ec2'],       types:['crack'],                           mats:['concrete'], status:'beta'},
+  {id:'ec2-punch',  name:'Flat Slab Punching',      sub:'Punching shear at internal, edge and corner columns',               codes:['ec2'],       types:['slab','connection'],               mats:['concrete'], status:'soon'},
+  {id:'ec2-retain', name:'Retaining Wall (EC2)',    sub:'Cantilever RC wall — stability, sliding, bearing, steel',           codes:['ec2'],       types:['wall'],                            mats:['concrete'], status:'soon'},
+  {id:'ec2-stair',  name:'RC Staircase Design',     sub:'Waist slab staircase — flexure, bar spacing, deflection',           codes:['ec2'],       types:['slab'],                            mats:['concrete'], status:'soon'},
+  {id:'ec3-beam',   name:'Steel Beam Design',       sub:'UB/UC sections — bending, shear, LTB check, deflection',           codes:['ec3'],       types:['beam','deflection'],               mats:['steel'],    status:'ready'},
+  {id:'ec3-col',    name:'Steel Column Design',     sub:'Axially loaded columns — buckling, combined loading per EC3',       codes:['ec3'],       types:['column'],                          mats:['steel'],    status:'beta'},
+  {id:'ec3-bolt',   name:'Bolted Connection (EC3)', sub:'Bolt group — shear, bearing, block tearing, preloaded bolts',      codes:['ec3'],       types:['connection'],                      mats:['steel'],    status:'soon'},
+  {id:'ec3-weld',   name:'Welded Connection (EC3)', sub:'Fillet weld resistance per unit length, directional method',       codes:['ec3'],       types:['connection'],                      mats:['steel'],    status:'soon'},
+  {id:'ec3-comp',   name:'Composite Beam (EC3)',    sub:'Steel-concrete composite beam — partial/full shear connection',    codes:['ec3','ec2'], types:['beam'],                            mats:['composite'],status:'soon'},
+  {id:'aci-beam',   name:'RC Beam Design (ACI)',    sub:'USD method — flexure, shear, torsion, T-beam design',             codes:['aci'],       types:['beam','crack','deflection'],       mats:['concrete'], status:'ready'},
+  {id:'aci-col',    name:'Column Design (ACI 318)', sub:'Tied/spiral columns — P-M interaction, slenderness effects',      codes:['aci'],       types:['column'],                          mats:['concrete'], status:'beta'},
+  {id:'aci-found',  name:'Spread Footing (ACI)',    sub:'Isolated footing — two-way/one-way shear, flexure design',        codes:['aci'],       types:['foundation'],                      mats:['concrete'], status:'soon'},
+  {id:'aci-slab',   name:'Two-Way Slab (ACI)',      sub:'Direct Design Method — strips, punching, serviceability',         codes:['aci'],       types:['slab'],                            mats:['concrete'], status:'soon'},
+  {id:'aci-wind',   name:'Wind Load (ASCE 7)',      sub:'Main WFRS — exposure B/C/D, directional & envelope procedures',  codes:['aci'],       types:['wind'],                            mats:['concrete','steel'], status:'beta'},
+  {id:'is-beam',    name:'RC Beam Design (IS 456)', sub:'Limit state — flexure, shear, torsion, deflection control',       codes:['is'],        types:['beam','deflection'],               mats:['concrete'], status:'ready'},
+  {id:'is-col',     name:'RC Column (IS 456)',      sub:'Short and slender columns — combined axial and bending',          codes:['is'],        types:['column'],                          mats:['concrete'], status:'beta'},
+  {id:'is-found',   name:'Isolated Footing (IS)',   sub:'IS 456 footing — bearing, two-way punching, one-way shear',      codes:['is'],        types:['foundation'],                      mats:['concrete'], status:'beta'},
+  {id:'is-steel',   name:'Steel Beam (IS 800)',     sub:'Limit state design per IS 800-2007 — bending and shear',         codes:['is'],        types:['beam'],                            mats:['steel'],    status:'soon'},
+  {id:'bs-beam',    name:'RC Beam (BS 8110)',       sub:'Moment redistribution, shear, torsion per BS 8110 Pt 1',         codes:['bs'],        types:['beam','crack'],                    mats:['concrete'], status:'beta'},
+  {id:'bs-col',     name:'RC Column (BS 8110)',     sub:'Short columns — uniaxial and biaxial bending, BS 8110',          codes:['bs'],        types:['column'],                          mats:['concrete'], status:'soon'},
+  {id:'bs-steel',   name:'Steel Beam (BS 5950)',    sub:'Web bearing, buckling, LTB per BS 5950-1',                       codes:['bs'],        types:['beam'],                            mats:['steel'],    status:'soon'},
+  {id:'as-beam',    name:'RC Beam (AS 3600)',       sub:'Strength & serviceability — bending, shear, crack control',      codes:['as'],        types:['beam','deflection','crack'],       mats:['concrete'], status:'beta'},
+  {id:'as-col',     name:'RC Column (AS 3600)',     sub:'Slenderness, moment magnification, biaxial bending',             codes:['as'],        types:['column'],                          mats:['concrete'], status:'soon'},
+  {id:'as-steel',   name:'Steel Beam (AS 4100)',    sub:'Bending, shear, LTB and combined actions per AS 4100-2020',     codes:['as'],        types:['beam'],                            mats:['steel'],    status:'soon'},
+  {id:'wind-ec',    name:'Wind Load (EN 1991-1-4)', sub:'Peak velocity pressure, force coefficients — Eurocode wind',    codes:['ec2','ec3'], types:['wind'],                            mats:['concrete','steel'], status:'beta'},
+  {id:'seismic-ec', name:'Seismic Base Shear (EC8)',sub:'Response spectrum — equivalent static lateral force method',    codes:['ec2'],       types:['seismic'],                         mats:['concrete'], status:'soon'},
+  {id:'timber-ec5', name:'Timber Beam (EC 5)',      sub:'Bending, shear, bearing — solid sawn and glulam timber',        codes:['ec2'],       types:['beam'],                            mats:['timber'],   status:'soon'},
+  {id:'masonry-ec6',name:'Masonry Wall (EC 6)',     sub:'Unreinforced masonry wall — vertical and combined loading',     codes:['ec2'],       types:['wall'],                            mats:['masonry'],  status:'soon'},
+];
+
+const C_COL = {ec2:'#0071BC',ec3:'#1A7A46',aci:'#C05000',is:'#7B2D8B',bs:'#9B7100',as:'#1565C0'};
+const C_BG  = {ec2:'#E6F2FA',ec3:'#E6F4ED',aci:'#FDF0E6',is:'#F5EDF8',bs:'#FDF8E6',as:'#E3F0FC'};
+const C_LBL = {ec2:'EC2',ec3:'EC3',aci:'ACI',is:'IS',bs:'BS',as:'AS'};
+
+const state = { code:new Set(), type:new Set(), material:new Set() };
+
+function getVisible() {
+  return CALCS.filter(c => {
+    const co = state.code.size === 0     || [...state.code].some(f => c.codes.includes(f));
+    const ty = state.type.size === 0     || [...state.type].some(f => c.types.includes(f));
+    const ma = state.material.size === 0 || [...state.material].some(f => c.mats.includes(f));
+    return co && ty && ma;
+  });
+}
+
+function buildCards() {
+  const grid = document.getElementById('calc-grid');
+  const list = getVisible();
+  grid.innerHTML = '';
+
+  if (!list.length) {
+    grid.innerHTML = `<div class="empty" role="status">
+      <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"/><path d="M16 24h16M24 16v16" stroke-linecap="round"/></svg>
+      <h3>No matches for these filters</h3>
+      <p>Try clearing one or more filter axes, or choose a broader combination.</p>
+    </div>`;
+    document.getElementById('cnt-num').textContent = 0;
+    document.getElementById('cnt-lbl').textContent = 'calculators';
+    document.getElementById('tc-calc').textContent = 0;
+    return;
+  }
+
+  list.forEach((c, i) => {
+    const pc = c.codes[0];
+    const accentColor = C_COL[pc] || '#0071BC';
+    const accentBg    = C_BG[pc]  || '#E6F2FA';
+
+    const codeTags = c.codes.map(cd =>
+      `<span class="ctag code" style="color:${C_COL[cd]||'#0071BC'};border-color:${C_COL[cd]||'#0071BC'};background:${C_BG[cd]||'#E6F2FA'};">${C_LBL[cd]||cd.toUpperCase()}</span>`
+    ).join('');
+    const typeTags = c.types.slice(0,2).map(t =>
+      `<span class="ctag">${t.charAt(0).toUpperCase()+t.slice(1)}</span>`
+    ).join('');
+
+    const locked = c.status === 'soon';
+    const openBtn = locked
+      ? `<span class="cc-open" style="opacity:.35;pointer-events:none;">Soon</span>`
+      : `<span class="cc-open">Open <svg viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+
+    const el = document.createElement('div');
+    el.className = 'cc';
+    el.style.animationDelay = (i * 0.025) + 's';
+    el.setAttribute('role','listitem');
+    el.tabIndex = 0;
+    el.innerHTML = `
+      <div class="cc-top" style="background:${accentColor};"></div>
+      <div class="cc-body">
+        <div class="cc-tags">${codeTags}${typeTags}</div>
+        <div class="cc-name">${c.name}</div>
+        <div class="cc-sub">${c.sub}</div>
+        <span class="cc-status ${c.status}">${c.status === 'ready' ? 'Available' : c.status === 'beta' ? 'Beta' : 'Coming Soon'}</span>
+      </div>
+      <div class="cc-foot">
+        <span class="cc-mat"><svg viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" rx=".6" stroke-width="1.4" fill="none" stroke="currentColor"/></svg>${c.mats[0].charAt(0).toUpperCase()+c.mats[0].slice(1)}</span>
+        ${openBtn}
+      </div>`;
+    // Navigate to calculator on click
+    if (!locked) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', () => {
+        const calcUrls = {
+          'ec2-beam':   '/calculators/rc-beam-ec2/',
+          'ec2-col':    '/calculators/rc-column-ec2/',
+          'ec2-pad':    '/calculators/rc-pad-ec2/',
+          'ec2-slab':   '/calculators/rc-slab-ec2/',
+          'ec2-crack':  '/calculators/crack-width-ec2/',
+          'ec3-beam':   '/calculators/steel-beam-ec3/',
+          'ec3-col':    '/calculators/steel-column-ec3/',
+          'ec3-conn':   '/calculators/steel-connection-ec3/',
+          'bs8110-beam':'/calculators/rc-beam-bs8110/',
+        };
+        const url = calcUrls[c.id];
+        if (url) window.location.href = url;
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') el.click();
+      });
+    }
+    grid.appendChild(el);
+  });
+
+  document.getElementById('cnt-num').textContent = list.length;
+  document.getElementById('cnt-lbl').textContent = list.length === 1 ? 'calculator' : 'calculators shown';
+  document.getElementById('tc-calc').textContent = list.length;
+}
+
+// ── CHIP TOGGLE ──
+document.querySelectorAll('.fc[data-axis]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const ax = chip.dataset.axis, val = chip.dataset.val;
+    if (state[ax].has(val)) { state[ax].delete(val); chip.classList.remove('sel'); }
+    else                     { state[ax].add(val);    chip.classList.add('sel'); }
+    syncStrip(); renderTags(); buildCards();
+  });
+});
+
+function clearAxis(ax) {
+  state[ax].clear();
+  document.querySelectorAll(`.fc[data-axis="${ax}"]`).forEach(c => c.classList.remove('sel'));
+  if (ax === 'code') syncStrip();
+  renderTags(); buildCards();
+}
+
+// ── ACTIVE TAGS ──
+const AX_N = {code:'Code',type:'Type',material:'Material'};
+function renderTags() {
+  const box = document.getElementById('active-tags');
+  box.innerHTML = '';
+  let n = 0;
+  ['code','type','material'].forEach(ax => {
+    state[ax].forEach(val => {
+      n++;
+      const t = document.createElement('span'); t.className = 'atag';
+      t.innerHTML = `${AX_N[ax]}: ${val}<button aria-label="Remove ${val}" onclick="rmTag('${ax}','${val}')"><svg viewBox="0 0 10 10"><path d="M2 2l6 6M8 2L2 8" stroke-linecap="round"/></svg></button>`;
+      box.appendChild(t);
+    });
+  });
+  if (n > 1) {
+    const b = document.createElement('button'); b.className = 'clear-all';
+    b.textContent = 'Clear all'; b.onclick = clearAll;
+    box.appendChild(b);
+  }
+}
+function rmTag(ax, val) {
+  state[ax].delete(val);
+  document.querySelectorAll(`.fc[data-axis="${ax}"][data-val="${val}"]`).forEach(c => c.classList.remove('sel'));
+  if (ax==='code') syncStrip();
+  renderTags(); buildCards();
+}
+function clearAll() {
+  ['code','type','material'].forEach(ax => state[ax].clear());
+  document.querySelectorAll('.fc').forEach(c => c.classList.remove('sel'));
+  document.querySelectorAll('.std-item').forEach(i => i.classList.remove('on'));
+  renderTags(); buildCards();
+}
+
+// ── STD STRIP ──
+document.querySelectorAll('.std-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const code = item.dataset.code;
+    if (state.code.has(code)) {
+      state.code.delete(code); item.classList.remove('on');
+      document.querySelectorAll(`.fc[data-val="${code}"]`).forEach(c=>c.classList.remove('sel'));
+    } else {
+      state.code.add(code); item.classList.add('on');
+      document.querySelectorAll(`.fc[data-val="${code}"]`).forEach(c=>c.classList.add('sel'));
+    }
+    renderTags(); buildCards();
+  });
+});
+function syncStrip() {
+  document.querySelectorAll('.std-item').forEach(i => i.classList.toggle('on', state.code.has(i.dataset.code)));
+}
+
+// ── VIEW TOGGLE ──
+document.querySelectorAll('.vbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.vbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    const g = document.getElementById('calc-grid');
+    g.className = 'cg ' + btn.dataset.v;
+  });
+});
+
+// ── TABS ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const t = btn.dataset.tab;
+    const panels = {
+      calc: ['panel-calc','utils-section'],
+      excel: ['panel-excel'],
+      drawing: ['panel-drawing'],
+      methods: ['panel-methods']
+    };
+    ['panel-calc','utils-section','panel-excel','panel-drawing','panel-methods'].forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+    (panels[t] || []).forEach(id => document.getElementById(id).style.display = '');
+  });
+});
+
+// ── SCORE ANIMATION ──
+setTimeout(() => {
+  document.querySelectorAll('.sc-fill').forEach(b => { b.style.width = b.dataset.w; });
+}, 650);
+
+// ── INIT ──
+// show default tab panels
+document.getElementById('panel-calc').style.display = '';
+document.getElementById('utils-section').style.display = '';
+buildCards();
+</script>
+
+
+</body></html>
