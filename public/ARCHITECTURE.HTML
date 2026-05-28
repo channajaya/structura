@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Architecture — Planning, Drawing & Coordination Resources | STRUCTURA</title>
+<meta name="description" content="Practical architectural templates and sample tools for early design, documentation, and coordination — drawing registers, room data sheets, planning checklists and more." />
+<meta name="keywords" content="architecture templates, drawing register, room data sheet, authority submission, coordination checklist, STRUCTURA" />
+
+<meta property="og:title" content="Architecture — Planning, Drawing & Coordination Resources" />
+<meta property="og:description" content="Templates for early design, documentation, and coordination workflows." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="../assets/img/og-default.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Architecture — STRUCTURA",
+"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[
+{"@type":"ListItem","position":1,"name":"Home","item":"https://structura.example/"},
+{"@type":"ListItem","position":2,"name":"Architecture","item":"https://structura.example/architecture/"}]}}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+:root{--structura-blue:#0071BC;--structura-blue-dark:#005A96;--structura-blue-soft:#E6F1F9;--bg-light:#F2F2F2;--bg-white:#FFFFFF;--border:#E2E5E9;--text-primary:#0E1A2B;--text-secondary:#4A5568;--text-muted:#6B7280;--success:#16A34A;--warning:#D97706;--premium:#7C3AED;--shadow-md:0 4px 14px rgba(15,23,42,.08);--radius:12px;--radius-sm:8px;--font-sans:'Source Sans 3',system-ui,sans-serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font-sans);color:var(--text-primary);background:var(--bg-white);line-height:1.55}
+a{color:var(--structura-blue);text-decoration:none}a:hover{color:var(--structura-blue-dark)}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--text-primary)}
+.logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-weight:600}
+.logo small{display:block;font-weight:500;font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
+.nav-main{display:flex;gap:6px;align-items:center}
+.nav-main a{padding:8px 14px;border-radius:8px;color:var(--text-secondary);font-weight:500;font-size:14.5px;transition:.2s}
+.nav-main a:hover{background:var(--bg-light);color:var(--text-primary)}
+.nav-main a.active{color:var(--structura-blue);background:var(--structura-blue-soft)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius-sm);font-weight:600;font-size:14px;cursor:pointer;border:1px solid transparent;transition:.2s;font-family:inherit}
+.btn-primary{background:var(--structura-blue);color:#fff}.btn-primary:hover{background:var(--structura-blue-dark);transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--text-primary);border-color:var(--border)}.btn-outline:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
+.menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}.menu-toggle span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0}
+.breadcrumb{background:var(--bg-light);border-bottom:1px solid var(--border);padding:14px 0;font-size:13.5px}
+.breadcrumb ol{list-style:none;display:flex;gap:8px;padding:0;margin:0;color:var(--text-muted)}.breadcrumb li+li::before{content:"›";margin-right:8px}
+.hero{padding:64px 0 56px;background:radial-gradient(1000px 400px at 90% -10%,var(--structura-blue-soft),transparent 60%),linear-gradient(180deg,#fff,var(--bg-light));border-bottom:1px solid var(--border)}
+.hero-eyebrow{display:inline-block;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--structura-blue);background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;margin-bottom:18px}
+.hero h1{font-size:clamp(32px,4.5vw,52px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
+.hero p.lead{font-size:18px;color:var(--text-secondary);max-width:760px;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-top:40px;overflow:hidden}
+.stats-strip .stat{padding:20px 24px;border-right:1px solid var(--border)}.stats-strip .stat:last-child{border-right:0}
+.stats-strip .num{font-size:26px;font-weight:700;color:var(--structura-blue)}
+.stats-strip .lbl{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+section.block{padding:72px 0}section.block.alt{background:var(--bg-light)}
+.section-head{margin-bottom:36px;max-width:780px}
+.section-head .kicker{font-family:var(--font-mono);font-size:12px;color:var(--structura-blue);letter-spacing:.08em;text-transform:uppercase}
+.section-head h2{font-size:clamp(26px,3vw,36px);margin:8px 0 10px;letter-spacing:-.01em}
+.section-head p{color:var(--text-secondary);font-size:16.5px;margin:0}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:.2s;cursor:pointer}
+.cat-card:hover{transform:translateY(-2px);border-color:var(--structura-blue);box-shadow:var(--shadow-md)}
+.cat-icon{width:42px;height:42px;border-radius:10px;background:var(--structura-blue-soft);color:var(--structura-blue);display:grid;place-items:center;font-family:var(--font-mono);font-weight:600;margin-bottom:14px}
+.cat-card h3{margin:0 0 6px;font-size:18px}.cat-card p{margin:0;font-size:14.5px;color:var(--text-secondary)}
+.cat-card .count{margin-top:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+.filter-bar{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:24px}
+.search-input{flex:1;min-width:240px;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1px solid transparent;border-radius:var(--radius-sm);padding:10px 14px}
+.search-input:focus-within{border-color:var(--structura-blue);background:#fff}
+.search-input input{flex:1;background:transparent;border:0;outline:0;font:inherit;color:inherit}
+.filter-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-family:var(--font-mono);font-size:11.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--text-secondary);cursor:pointer;transition:.15s}
+.pill:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
+.pill.active{background:var(--structura-blue);color:#fff;border-color:var(--structura-blue)}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tool-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px;transition:.2s}
+.tool-card:hover{border-color:var(--structura-blue);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.tool-card .top{display:flex;justify-content:space-between;gap:10px}
+.tool-card h4{margin:0;font-size:16.5px;line-height:1.3}
+.tool-card .meta{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
+.tool-card p{margin:0;font-size:14px;color:var(--text-secondary)}
+.tool-card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:var(--bg-light);color:var(--text-secondary);border-radius:6px}
+.status{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;border-radius:6px}
+.status.available{background:rgba(22,163,74,.1);color:var(--success)}
+.status.soon{background:rgba(217,119,6,.1);color:var(--warning)}
+.tool-card .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.tool-card .actions .btn{padding:8px 12px;font-size:13px}
+.tool-card.preview-locked{user-select:none;-webkit-user-select:none}
+.disclaimer{background:var(--structura-blue-soft);border:1px solid #BFDBF1;border-radius:var(--radius);padding:18px 22px;color:#0A4E7A;font-size:14.5px}
+.disclaimer strong{color:#072F4D}
+.cta-strip{background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));color:#fff;border-radius:var(--radius);padding:40px;text-align:center}
+.cta-strip h3{margin:0 0 8px;font-size:26px}.cta-strip p{margin:0 0 20px;opacity:.9}
+.cta-strip .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.cta-strip .btn-outline:hover{background:#fff;color:var(--structura-blue)}
+.site-footer{background:#0B1626;color:#cbd5e1;padding:60px 0 24px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.site-footer h5{color:#fff;font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px}
+.site-footer a{color:#cbd5e1;display:block;padding:4px 0;font-size:14px}.site-footer a:hover{color:#fff}
+.code-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.code-badges span{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:rgba(255,255,255,.06);border-radius:6px;color:#94a3b8}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#94a3b8}
+.watermarked{position:relative;overflow:hidden}
+.watermarked::after{content:"STRUCTURA • PREVIEW";position:absolute;inset:0;pointer-events:none;display:grid;place-items:center;font-family:var(--font-mono);font-size:42px;color:rgba(0,113,188,.06);transform:rotate(-22deg)}
+@media (max-width: 980px){.cat-grid,.tool-grid{grid-template-columns:repeat(2,1fr)}.stats-strip{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width: 680px){.nav-main{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px}.nav-main.open{display:flex}.menu-toggle{display:block}.cat-grid,.tool-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}section.block{padding:48px 0}}
+:focus-visible{outline:2px solid var(--structura-blue);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="../index.html"><span class="logo-mark">S</span><span>STRUCTURA <small>Digital Engineering Office</small></span></a>
+    <nav class="nav-main" id="navMain">
+      <a href="../index.html#design-studio">Design Studio</a>
+      <a href="../pm-office/index.html">PM Office</a>
+      <a href="../qs-office/index.html">QS Office</a>
+      <a href="../architecture/index.html" class="active">Architecture</a>
+      <a href="../academy/index.html">Academy</a>
+      <a class="btn btn-primary" href="../index.html#beta">Join Beta</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav class="breadcrumb"><div class="container"><ol><li><a href="../index.html">Home</a></li><li>Architecture</li></ol></div></nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">CAD + STANDARDS · PLANNING &amp; DESIGN</span>
+    <h1>Architecture — Planning, Drawing &amp; Coordination Resources</h1>
+    <p class="lead">Practical architectural templates and sample tools for early design, documentation, and coordination — built to support consultants and design teams, not to replace them.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#templates">Browse Templates</a>
+      <a class="btn btn-outline" href="#categories">View Categories</a>
+    </div>
+    <div class="stats-strip">
+      <div class="stat"><div class="num">12+</div><div class="lbl">Templates</div></div>
+      <div class="stat"><div class="num">6</div><div class="lbl">Categories</div></div>
+      <div class="stat"><div class="num">Int'l</div><div class="lbl">Standards</div></div>
+      <div class="stat"><div class="num">Beta</div><div class="lbl">Free Access</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="categories">
+  <div class="container">
+    <div class="section-head"><div class="kicker">// 01 — Categories</div><h2>Browse by workflow</h2><p>From briefing and planning to authority submission — find templates aligned to each architectural phase.</p></div>
+    <div class="cat-grid">
+      <div class="cat-card" data-cat="plan"><div class="cat-icon">PL</div><h3>Planning Templates</h3><p>Briefing, space planning and area calculations.</p><div class="count">4 templates</div></div>
+      <div class="cat-card" data-cat="reg"><div class="cat-icon">DR</div><h3>Drawing Registers</h3><p>Drawing issue and revision tracking.</p><div class="count">2 templates</div></div>
+      <div class="cat-card" data-cat="room"><div class="cat-icon">RD</div><h3>Room Data Sheets</h3><p>Room, door, window and finishes schedules.</p><div class="count">3 templates</div></div>
+      <div class="cat-card" data-cat="sample"><div class="cat-icon">DS</div><h3>Design Samples</h3><p>Sample drawing packages and reference layouts.</p><div class="count">1 sample</div></div>
+      <div class="cat-card" data-cat="auth"><div class="cat-icon">AS</div><h3>Authority Submission</h3><p>Submission checklists and document trackers.</p><div class="count">1 template</div></div>
+      <div class="cat-card" data-cat="coord"><div class="cat-icon">CO</div><h3>Coordination Checklists</h3><p>Consultant and trade coordination items.</p><div class="count">1 template</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="templates">
+  <div class="container">
+    <div class="section-head"><div class="kicker">// 02 — Library</div><h2>Architectural Templates</h2><p>Filter, search, save, and open — built to support consistent architectural documentation.</p></div>
+
+    <div class="filter-bar">
+      <label class="search-input"><span>🔍</span><input type="search" id="searchInput" placeholder="Search — e.g. room schedule, drawing register, submission…"/></label>
+      <div class="filter-pills" id="filterPills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="plan">Planning</button>
+        <button class="pill" data-filter="reg">Drawing Registers</button>
+        <button class="pill" data-filter="room">Room Data</button>
+        <button class="pill" data-filter="auth">Authority</button>
+        <button class="pill" data-filter="soon">Coming Soon</button>
+      </div>
+    </div>
+
+    <div class="tool-grid" id="toolGrid">
+      <article class="tool-card preview-locked watermarked" data-cat="reg" data-status="available" data-title="Architectural drawing issue register">
+        <div class="top"><h4>Drawing Issue Register</h4><span class="status available">Available</span></div>
+        <div class="meta">Drawing Register · Excel</div>
+        <p>Track issued drawings, revisions, recipients and purpose of issue.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button><button class="btn btn-outline" data-action="fav">☆ Save</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="room" data-status="available" data-title="Room schedule template">
+        <div class="top"><h4>Room Schedule Template</h4><span class="status available">Available</span></div>
+        <div class="meta">Room Data · Excel</div>
+        <p>Room number, area, function, finishes and MEP requirements.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="room" data-status="available" data-title="Door and window schedule">
+        <div class="top"><h4>Door &amp; Window Schedule</h4><span class="status available">Available</span></div>
+        <div class="meta">Room Data · Excel</div>
+        <p>Type, size, material, finish, hardware and fire rating.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="room" data-status="available" data-title="Finishes schedule">
+        <div class="top"><h4>Finishes Schedule</h4><span class="status available">Available</span></div>
+        <div class="meta">Room Data · Excel</div>
+        <p>Floor, wall, ceiling and skirting finishes by room.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="plan" data-status="available" data-title="Planning checklist">
+        <div class="top"><h4>Planning Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Planning · PDF</div>
+        <p>Site, brief, regulations, zoning and access considerations.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="plan" data-status="available" data-title="Building area calculation sheet">
+        <div class="top"><h4>Building Area Calculation</h4><span class="status available">Available</span></div>
+        <div class="meta">Planning · Excel</div>
+        <p>GFA, NFA, plot ratio and area breakdown by use class.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="plan" data-status="available" data-title="Space planning checklist">
+        <div class="top"><h4>Space Planning Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Planning · PDF</div>
+        <p>Adjacencies, circulation, daylight and access flow.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="plan" data-status="available" data-title="Client briefing template">
+        <div class="top"><h4>Client Briefing Template</h4><span class="status available">Available</span></div>
+        <div class="meta">Planning · DOCX</div>
+        <p>Capture client requirements, budget, programme and aspirations.</p>
+        <div class="tags"><span class="tag">DOCX</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="reg" data-status="available" data-title="Drawing revision tracker">
+        <div class="top"><h4>Drawing Revision Tracker</h4><span class="status available">Available</span></div>
+        <div class="meta">Drawing Register · Excel</div>
+        <p>Revision codes, dates, reasons and approval status.</p>
+        <div class="tags"><span class="tag">EXCEL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="coord" data-status="available" data-title="Consultant coordination checklist">
+        <div class="top"><h4>Consultant Coordination Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Coordination · PDF</div>
+        <p>Structural, MEP and architectural coordination clash check items.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="auth" data-status="available" data-title="Authority submission checklist">
+        <div class="top"><h4>Authority Submission Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Authority · PDF</div>
+        <p>Generic submission items — adapt to your local authority requirements.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+      <article class="tool-card preview-locked" data-cat="sample" data-status="soon" data-title="Sample residential drawing package guide">
+        <div class="top"><h4>Sample Residential Drawing Package Guide</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Design Sample · PDF</div>
+        <p>Reference list of typical residential drawing sheets and contents.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+    </div>
+    <p id="emptyState" style="display:none;text-align:center;color:var(--text-muted);margin-top:24px">No templates match your search.</p>
+  </div>
+</section>
+
+<section class="block" style="padding-top:0">
+  <div class="container">
+    <div class="disclaimer">
+      <strong>Note:</strong> This section supports architectural coordination only. Final architectural design must be completed and approved by qualified professionals according to local regulations, building codes, and authority requirements.
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="container">
+    <div class="cta-strip">
+      <h3>Continue across the Structura platform</h3>
+      <p>Pair these templates with structural design, QS and PM tools for a complete workflow.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-outline" href="../academy/index.html">Visit Academy →</a>
+        <a class="btn btn-outline" href="../index.html">Back to Home</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="../index.html" style="color:#fff"><span class="logo-mark">S</span><span>STRUCTURA <small style="color:#94a3b8">Digital Engineering Office</small></span></a>
+        <p style="margin:14px 0 0;color:#94a3b8;font-size:14px;max-width:340px">5 integrated hubs · 60+ tools planned · 8 design codes supported.</p>
+        <div class="code-badges"><span>EUROCODE</span><span>ACI 318</span><span>AISC 360</span><span>IS 456/800</span><span>BS 8110/5950</span><span>AS 3600/4100</span></div>
+      </div>
+      <div><h5>Platform</h5><a href="../index.html#design-studio">Design Studio</a><a href="../pm-office/index.html">PM Office</a><a href="../qs-office/index.html">QS Office</a><a href="../architecture/index.html">Architecture</a><a href="../academy/index.html">Academy</a></div>
+      <div><h5>Architecture</h5><a href="#categories">Planning</a><a href="#categories">Room Data</a><a href="#categories">Drawing Registers</a><a href="#categories">Authority</a></div>
+      <div><h5>Resources</h5><a href="../index.html#beta">Join Beta</a><a href="../academy/index.html">Learning Hub</a><a href="#">Contact</a><a href="#">Privacy</a></div>
+    </div>
+    <div class="footer-bottom"><span>© <span id="year"></span> STRUCTURA — Digital Engineering Office. All rights reserved.</span><span>Beta release · Public launch 2026</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.getElementById('year').textContent=new Date().getFullYear();
+  const toggle=document.querySelector('.menu-toggle'),nav=document.getElementById('navMain');
+  toggle?.addEventListener('click',()=>{const o=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',o)});
+
+  const grid=document.getElementById('toolGrid'),cards=Array.from(grid.querySelectorAll('.tool-card'));
+  const search=document.getElementById('searchInput'),pills=document.querySelectorAll('#filterPills .pill'),empty=document.getElementById('emptyState');
+  let active='all';
+  function apply(){const q=(search.value||'').toLowerCase().trim();let n=0;cards.forEach(c=>{const t=(c.dataset.title||'').toLowerCase();const mq=!q||t.includes(q);const mf=active==='all'||active===c.dataset.cat||active===c.dataset.status;const s=mq&&mf;c.style.display=s?'':'none';if(s)n++;});empty.style.display=n?'none':'block'}
+  search.addEventListener('input',apply);
+  pills.forEach(p=>p.addEventListener('click',()=>{pills.forEach(x=>x.classList.remove('active'));p.classList.add('active');active=p.dataset.filter;apply();}));
+  document.querySelectorAll('.cat-card').forEach(c=>c.addEventListener('click',()=>{const cat=c.dataset.cat;const pill=document.querySelector(`#filterPills .pill[data-filter="${cat}"]`);if(pill)pill.click();document.getElementById('templates').scrollIntoView({behavior:'smooth'});}));
+
+  const FAV='structura_favs_arch',REC='structura_recent_arch';
+  const get=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return[]}};
+  const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v.slice(0,20)))}catch(e){}};
+  function markFavs(){const f=get(FAV);cards.forEach(c=>{const b=c.querySelector('[data-action="fav"]');if(b)b.textContent=f.includes(c.dataset.title)?'★ Saved':'☆ Save'});}
+  markFavs();
+  grid.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const c=b.closest('.tool-card'),t=c.dataset.title,a=b.dataset.action;
+    if(a==='fav'){const f=get(FAV);const i=f.indexOf(t);if(i>=0)f.splice(i,1);else f.unshift(t);set(FAV,f);markFavs();return;}
+    const r=get(REC).filter(x=>x!==t);r.unshift(t);set(REC,r);
+    alert(`Opening template: ${t}\n\nBeta preview. Final delivery will be server-side authenticated.`);
+  });
+  document.addEventListener('contextmenu',e=>{if(e.target.closest('.preview-locked'))e.preventDefault();});
+  document.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(e.key==='F12')e.preventDefault();if((e.ctrlKey||e.metaKey)&&['u','s'].includes(k))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&k==='i')e.preventDefault();});
+})();
+</script>
+</body>
+</html>

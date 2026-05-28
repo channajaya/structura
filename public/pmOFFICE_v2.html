@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ═══ SECURITY HEADERS ═══ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()" />
+
+<title>PM Office — Construction Management Apps &amp; Templates | STRUCTURA</title>
+<meta name="description" content="AI-powered apps and site-ready templates for construction managers, site engineers and QA/QC teams — daily reports, NCR trackers, punch lists, RFI assistants, inspection checklists and safety forms. Currently in private beta." />
+<meta name="keywords" content="construction management templates, site report, QA/QC checklist, safety templates, NCR, RFI, permit to work, STRUCTURA" />
+<meta name="author" content="STRUCTURA — Digital Engineering Office" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="PM Office — Construction Management Templates &amp; Apps" />
+<meta property="og:description" content="Site-ready forms, inspections, NCRs, permits and QA/QC templates for engineers, PMs and HSE teams. Private beta — free during the beta period." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://structura.example/pm-office/" />
+<meta property="og:image" content="../assets/img/og-pm.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "PM Office — STRUCTURA",
+  "description": "Construction management templates and apps for site teams.",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://structura.example/"},
+      {"@type":"ListItem","position":2,"name":"PM Office","item":"https://structura.example/pm-office/"}
+    ]
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Source+Sans+3:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+/* ===========================================================
+   STRUCTURA — Shared Design System (PM Office)
+   Front-end protection cannot fully prevent copying. True
+   protection requires server-side authentication, licensing,
+   and controlled file delivery.
+   =========================================================== */
+:root{
+  --structura-blue:#0071BC;
+  --structura-blue-dark:#005A96;
+  --structura-blue-soft:#E6F1F9;
+  --bg-light:#F2F2F2;
+  --bg-white:#FFFFFF;
+  --border:#E2E5E9;
+  --text-primary:#0E1A2B;
+  --text-secondary:#4A5568;
+  --text-muted:#6B7280;
+  --success:#16A34A;
+  --warning:#D97706;
+  --premium:#7C3AED;
+  --shadow-sm:0 1px 2px rgba(15,23,42,.06);
+  --shadow-md:0 4px 14px rgba(15,23,42,.08);
+  --radius:12px;
+  --radius-sm:8px;
+  --font-sans:'Source Sans 3',system-ui,-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:var(--font-sans);
+  color:var(--text-primary);background:var(--bg-white);
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+a{color:var(--structura-blue);text-decoration:none}
+a:hover{color:var(--structura-blue-dark)}
+img{max-width:100%;display:block}
+
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* ═══════════════════════════════════════
+   REDUCED MOTION — accessibility
+   ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === HEADER === */
+.site-header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+
+/* === LOGO — matched to index page (rebar-grid SVG + dual-text) === */
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0;text-decoration:none}
+.logo-icon{width:34px;height:34px;flex-shrink:0}
+.logo-texts{display:flex;flex-direction:column;line-height:1.2}
+.logo-name{font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:.08em;font-family:var(--font-sans)}
+.logo-sub{font-size:9px;font-family:var(--font-mono);color:var(--structura-blue);letter-spacing:.14em;text-transform:uppercase;margin-top:1px;font-weight:500}
+.logo:hover .logo-name{color:var(--structura-blue)}
+
+.nav-main{display:flex;gap:6px;align-items:center}
+.nav-main a{
+  padding:8px 14px;border-radius:8px;color:var(--text-secondary);
+  font-weight:500;font-size:14.5px;transition:.2s;
+}
+.nav-main a:hover{background:var(--bg-light);color:var(--text-primary)}
+.nav-main a.active{color:var(--structura-blue);background:var(--structura-blue-soft)}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 18px;border-radius:var(--radius-sm);
+  font-weight:600;font-size:14px;cursor:pointer;border:1px solid transparent;
+  transition:transform .15s,background .2s,border .2s;font-family:inherit;
+}
+.btn-primary{background:var(--structura-blue);color:#fff}
+.btn-primary:hover{background:var(--structura-blue-dark);color:#fff;transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--text-primary);border-color:var(--border)}
+.btn-outline:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
+.btn-ghost{background:transparent;color:var(--text-secondary)}
+.btn-ghost:hover{background:var(--bg-light)}
+
+.menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
+.menu-toggle span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;transition:.2s}
+
+/* === BREADCRUMB === */
+.breadcrumb{background:var(--bg-light);border-bottom:1px solid var(--border);padding:14px 0;font-size:13.5px}
+.breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0;margin:0;color:var(--text-muted)}
+.breadcrumb li+li::before{content:"›";margin-right:8px;color:var(--text-muted)}
+
+/* === HERO === */
+.hero{
+  padding:64px 0 56px;
+  background:
+    radial-gradient(1000px 400px at 90% -10%,var(--structura-blue-soft),transparent 60%),
+    linear-gradient(180deg,#fff,var(--bg-light));
+  border-bottom:1px solid var(--border);
+}
+.hero-eyebrow{
+  display:inline-block;font-family:var(--font-mono);font-size:12px;
+  letter-spacing:.08em;color:var(--structura-blue);
+  background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;margin-bottom:18px;
+}
+.hero h1{font-size:clamp(32px,4.5vw,52px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
+.hero p.lead{font-size:18px;color:var(--text-secondary);max-width:760px;margin:0 0 28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
+
+.stats-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  margin-top:40px;overflow:hidden;
+}
+.stats-strip .stat{padding:20px 24px;border-right:1px solid var(--border)}
+.stats-strip .stat:last-child{border-right:0}
+.stats-strip .num{font-size:26px;font-weight:700;color:var(--structura-blue)}
+.stats-strip .lbl{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* === SECTIONS === */
+section.block{padding:72px 0}
+section.block.alt{background:var(--bg-light)}
+.section-head{margin-bottom:36px;max-width:780px}
+.section-head .kicker{font-family:var(--font-mono);font-size:12px;color:var(--structura-blue);letter-spacing:.08em;text-transform:uppercase}
+.section-head h2{font-size:clamp(26px,3vw,36px);margin:8px 0 10px;letter-spacing:-.01em}
+.section-head p{color:var(--text-secondary);font-size:16.5px;margin:0}
+
+/* === CATEGORY CARDS === */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;transition:.2s;cursor:pointer;
+}
+.cat-card:hover{transform:translateY(-2px);border-color:var(--structura-blue);box-shadow:var(--shadow-md)}
+.cat-icon{
+  width:42px;height:42px;border-radius:10px;background:var(--structura-blue-soft);
+  color:var(--structura-blue-dark);display:grid;place-items:center;font-family:var(--font-mono);font-weight:600;margin-bottom:14px;
+}
+.cat-card h3{margin:0 0 6px;font-size:18px}
+.cat-card p{margin:0;font-size:14.5px;color:var(--text-secondary)}
+.cat-card .count{margin-top:12px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted)}
+
+/* === FILTER BAR === */
+.filter-bar{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:24px;
+}
+.search-input{
+  flex:1;min-width:240px;display:flex;align-items:center;gap:8px;
+  background:var(--bg-light);border:1px solid transparent;border-radius:var(--radius-sm);padding:10px 14px;
+}
+.search-input:focus-within{border-color:var(--structura-blue);background:#fff}
+.search-input input{flex:1;background:transparent;border:0;outline:0;font:inherit;color:inherit}
+.filter-pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{
+  font-family:var(--font-mono);font-size:11.5px;
+  padding:7px 12px;border-radius:999px;border:1px solid var(--border);
+  background:#fff;color:var(--text-secondary);cursor:pointer;transition:.15s;
+}
+.pill:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
+.pill.active{background:var(--structura-blue);color:#fff;border-color:var(--structura-blue)}
+
+/* === TOOL CARDS === */
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tool-card{
+  position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;display:flex;flex-direction:column;gap:12px;transition:.2s;
+}
+.tool-card:hover{border-color:var(--structura-blue);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.tool-card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.tool-card h4{margin:0;font-size:16.5px;line-height:1.3}
+.tool-card .meta{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
+.tool-card p{margin:0;font-size:14px;color:var(--text-secondary)}
+.tool-card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;
+  background:var(--bg-light);color:var(--text-secondary);border-radius:6px;
+}
+.status{
+  font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;border-radius:6px;font-weight:500;
+}
+.status.available{background:rgba(22,163,74,.1);color:var(--success)}
+.status.soon{background:rgba(217,119,6,.1);color:var(--warning)}
+.status.premium{background:rgba(124,58,237,.1);color:var(--premium)}
+.tool-card .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.tool-card .actions .btn{padding:8px 12px;font-size:13px}
+
+/* preview card text non-selectable (light protection) */
+.tool-card.preview-locked{user-select:none;-webkit-user-select:none}
+
+/* === DISCLAIMER === */
+.disclaimer{
+  background:#FFF8EC;border:1px solid #F5D58A;border-radius:var(--radius);
+  padding:18px 22px;color:#7A5400;font-size:14.5px;
+}
+.disclaimer strong{color:#5C3F00}
+
+/* === CTA === */
+.cta-strip{
+  background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));
+  color:#fff;border-radius:var(--radius);padding:40px;text-align:center;
+}
+.cta-strip h3{margin:0 0 8px;font-size:26px}
+.cta-strip p{margin:0 0 20px;opacity:.9}
+.cta-strip .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.cta-strip .btn-outline:hover{background:#fff;color:var(--structura-blue)}
+
+/* === FOOTER === */
+.site-footer{background:#0B1626;color:#cbd5e1;padding:60px 0 24px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.site-footer h5{color:#fff;font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px}
+.site-footer a{color:#cbd5e1;display:block;padding:4px 0;font-size:14px}
+.site-footer a:hover{color:#fff}
+.code-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.code-badges span{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:rgba(255,255,255,.06);border-radius:6px;color:#94a3b8}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.08);padding-top:20px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#94a3b8;
+}
+
+/* watermark for preview areas */
+.watermarked{position:relative;overflow:hidden}
+.watermarked::after{
+  content:"STRUCTURA • PREVIEW";position:absolute;inset:0;pointer-events:none;
+  display:grid;place-items:center;font-family:var(--font-mono);font-size:42px;color:rgba(0,113,188,.06);
+  transform:rotate(-22deg);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 980px){
+  .cat-grid,.tool-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  .stats-strip .stat:nth-child(2){border-right:0}
+  .stats-strip .stat:nth-child(1),.stats-strip .stat:nth-child(2){border-bottom:1px solid var(--border)}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 680px){
+  .nav-main{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px}
+  .nav-main.open{display:flex}
+  .menu-toggle{display:block}
+  .cat-grid,.tool-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  section.block{padding:48px 0}
+}
+
+/* === TOAST (replaces ugly alert() popups) === */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);
+  background:var(--text-primary);color:#fff;padding:14px 22px;
+  border-radius:var(--radius-sm);font-size:14px;
+  box-shadow:0 8px 24px rgba(15,23,42,.25);
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;
+  z-index:200;max-width:90vw;
+}
+.toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+.toast .toast-title{font-weight:600;margin-bottom:2px}
+.toast .toast-sub{font-size:12.5px;color:rgba(255,255,255,.7);font-family:var(--font-mono)}
+
+/* === APP CARDS — interactive HTML apps === */
+.app-card{
+  position:relative;background:linear-gradient(135deg,#0E1A2B 0%,#112240 100%);
+  border:1px solid rgba(0,113,188,.35);border-radius:var(--radius);
+  padding:22px;display:flex;flex-direction:column;gap:12px;transition:.2s;
+  color:#e2e8f0;
+}
+.app-card:hover{border-color:var(--structura-blue);box-shadow:0 6px 24px rgba(0,113,188,.22);transform:translateY(-2px)}
+.app-card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.app-card h4{margin:0;font-size:16.5px;line-height:1.3;color:#fff}
+.app-card .meta{font-family:var(--font-mono);font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
+.app-card p{margin:0;font-size:14px;color:#94a3b8}
+.app-card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.app-card .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.app-card .actions .btn{padding:8px 12px;font-size:13px}
+.app-card .btn-primary{background:var(--structura-blue);color:#fff;border-color:transparent}
+.app-card .btn-primary:hover{background:var(--structura-blue-dark)}
+.app-card .btn-outline{background:rgba(255,255,255,.06);color:#e2e8f0;border-color:rgba(255,255,255,.15)}
+.app-card .btn-outline:hover{border-color:var(--structura-blue);color:#fff}
+.tag-app{
+  font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;
+  background:rgba(0,113,188,.18);color:#7dd3f0;border-radius:6px;border:1px solid rgba(0,113,188,.3);
+}
+.badge-ai{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--font-mono);font-size:10px;padding:3px 8px;
+  background:linear-gradient(90deg,rgba(124,58,237,.25),rgba(0,113,188,.25));
+  color:#a78bfa;border:1px solid rgba(124,58,237,.4);border-radius:999px;
+}
+/* app-section divider */
+.apps-divider{
+  grid-column:1/-1;display:flex;align-items:center;gap:14px;
+  padding:8px 0 4px;
+}
+.apps-divider .label{
+  font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--structura-blue);white-space:nowrap;
+}
+.apps-divider hr{flex:1;border:0;border-top:1px dashed rgba(0,113,188,.3);margin:0}
+/* focus accessibility */
+:focus-visible{outline:2px solid var(--structura-blue);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="../index.html" aria-label="STRUCTURA — home">
+      <svg class="logo-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+        <rect x="0"    y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="25"   y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="0"    y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="25"   y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
+        <rect x="11.5" y="0"    width="3" height="9" rx=".5" fill="#005A96"/>
+        <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#005A96"/>
+        <rect x="11.5" y="25"   width="3" height="9" rx=".5" fill="#005A96"/>
+        <rect x="19.5" y="0"    width="3" height="9" rx=".5" fill="#005A96"/>
+        <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#005A96"/>
+        <rect x="19.5" y="25"   width="3" height="9" rx=".5" fill="#005A96"/>
+      </svg>
+      <div class="logo-texts">
+        <span class="logo-name">STRUCTURA</span>
+        <span class="logo-sub">Digital Engineering Office</span>
+      </div>
+    </a>
+    <nav class="nav-main" id="navMain" aria-label="Main navigation">
+      <a href="../index.html#design-studio">Design Studio</a>
+      <a href="../pm-office/index.html" class="active">PM Office</a>
+      <a href="../qs-office/index.html">QS Office</a>
+      <a href="../architecture/index.html">Architecture</a>
+      <a href="../academy/index.html">Academy</a>
+      <a class="btn btn-primary" href="../index.html#beta">Join Beta</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-controls="navMain" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ BREADCRUMB ============ -->
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <div class="container">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li aria-current="page">PM Office</li>
+    </ol>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">PROJECT MANAGEMENT · SITE APPS + REPORTS</span>
+    <h1>PM Office — Construction Apps &amp; Templates</h1>
+    <p class="lead">AI-powered web apps and professional site templates — daily reports, NCR trackers, punch lists, RFI assistants and QA/QC forms. Built for engineers, PMs, QA/QC teams, safety officers and contractors.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#templates">Browse Templates</a>
+      <a class="btn btn-outline" href="#categories">View Categories</a>
+    </div>
+
+    <div class="stats-strip" aria-label="PM Office stats">
+      <div class="stat"><div class="num">24</div><div class="lbl">Templates Available</div></div>
+      <div class="stat"><div class="num">8</div><div class="lbl">Interactive Apps</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Active Disciplines</div></div>
+      <div class="stat"><div class="num">Free</div><div class="lbl">During Beta</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY CARDS ============ -->
+<section class="block" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">// 01 — Categories</div>
+      <h2>Browse by discipline</h2>
+      <p>Seven focused categories aligned to real construction roles — pick a path and jump straight to the apps and templates.</p>
+    </div>
+    <div class="cat-grid" id="catGrid">
+      <div class="cat-card" data-cat="apps"><div class="cat-icon" style="background:#0E1A2B;color:#7dd3f0">⚡</div><h3>Interactive Apps</h3><p>AI-powered web apps for daily reports, NCRs, punch lists, RFIs and risk scoring — no installs needed.</p><div class="count">8 apps</div></div>
+      <div class="cat-card" data-cat="site"><div class="cat-icon">SM</div><h3>Site Management</h3><p>Daily and weekly reports, site instructions, deliveries and logs.</p><div class="count">8 templates</div></div>
+      <div class="cat-card" data-cat="qaqc"><div class="cat-icon">QC</div><h3>QA/QC</h3><p>Inspection requests, pour checklists, NCRs and corrective actions.</p><div class="count">8 templates</div></div>
+      <div class="cat-card" data-cat="safety"><div class="cat-icon">HS</div><h3>Health &amp; Safety</h3><p>Risk assessments, method statements, permits and toolbox talks.</p><div class="count">8 templates</div></div>
+      <div class="cat-card" data-cat="contract"><div class="cat-icon">CA</div><h3>Contractor Administration</h3><p>Subcontractor onboarding, approvals and correspondence.</p><div class="count">Coming soon</div></div>
+      <div class="cat-card" data-cat="progress"><div class="cat-icon">PM</div><h3>Progress Monitoring</h3><p>Weekly progress, S-curve trackers and look-ahead schedules.</p><div class="count">Coming soon</div></div>
+      <div class="cat-card" data-cat="corr"><div class="cat-icon">CO</div><h3>Project Correspondence</h3><p>RFIs, submittals, transmittals and meeting minutes.</p><div class="count">Coming soon</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEMPLATES LIST ============ -->
+<section class="block alt" id="templates">
+  <div class="container">
+    <div class="section-head">
+      <div class="kicker">// 02 — Template Library</div>
+      <h2>Apps &amp; Templates</h2>
+      <p>Search by name or filter by category and type. Launch an interactive app directly in your browser, or download a PDF/DOCX template. Save favourites to your browser for quick access later.</p>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" role="region" aria-label="Filter templates">
+      <label class="search-input" aria-label="Search templates">
+        <span role="img" aria-label="Search">🔍</span>
+        <input type="search" id="searchInput" placeholder="Search apps &amp; templates — e.g. NCR, punch list, RFI, permit…" />
+      </label>
+      <div class="filter-pills" id="filterPills">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="apps">⚡ Apps</button>
+        <button class="pill" data-filter="site">Site</button>
+        <button class="pill" data-filter="qaqc">QA/QC</button>
+        <button class="pill" data-filter="safety">Safety</button>
+        <button class="pill" data-filter="available">Available</button>
+        <button class="pill" data-filter="soon">Coming Soon</button>
+      </div>
+    </div>
+
+    <div class="tool-grid" id="toolGrid">
+
+      <!-- ⚡ INTERACTIVE APPS -->
+      <div class="apps-divider">
+        <span class="label">// Interactive Apps</span><hr><span class="badge-ai">✦ AI-Powered</span>
+      </div>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="AI Daily Site Report">
+        <div class="top"><h4>AI Daily Site Report</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Web App</div>
+        <p>Fill in weather, manpower and activities — AI drafts a professional daily report narrative. Export as PDF with one click.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">AI</span><span class="tag-app">PDF</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="NCR Tracker">
+        <div class="top"><h4>NCR Tracker</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Web App</div>
+        <p>Log, assign and close out non-conformances in the browser. Filterable register with status tracking, evidence notes and automatic ref numbering.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">REGISTER</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="Punch List Manager">
+        <div class="top"><h4>Punch List Manager</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Web App</div>
+        <p>Create and assign snag items to trades, set priorities and mark complete. Full filterable list with export to PDF for client handover.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">SNAG</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="RFI Assistant">
+        <div class="top"><h4>RFI Assistant</h4><span class="status available">Available</span></div>
+        <div class="meta">Project Correspondence · Web App</div>
+        <p>Draft, number and track Requests for Information. AI suggests clear technical questions from your brief. Log consultant responses with due dates.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">AI</span><span class="tag-app">RFI</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="Toolbox Talk Builder">
+        <div class="top"><h4>Toolbox Talk Builder</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Web App</div>
+        <p>Enter today's work activities — AI generates a targeted safety briefing in seconds. Sign off attendees digitally and export the completed record.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">AI</span><span class="tag-app">HSE</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="available" data-title="Risk Scoring Calculator">
+        <div class="top"><h4>Risk Scoring Calculator</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Web App</div>
+        <p>Select hazard, likelihood and severity from dropdowns — instantly get a risk rating matrix result with recommended controls. Printable output.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">RISK</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Launch App</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="soon" data-title="Manpower Planner">
+        <div class="top"><h4>Manpower Planner</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Site Management · Web App</div>
+        <p>Interactive week-by-week trade allocation grid. AI flags resource conflicts against your look-ahead schedule.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">AI</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <article class="app-card" data-cat="apps" data-status="soon" data-title="Submittal Log">
+        <div class="top"><h4>Submittal Log</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">QA/QC · Web App</div>
+        <p>Track material and shop drawing submittals, review cycles, revision status and consultant approval dates in one live register.</p>
+        <div class="tags"><span class="tag-app">HTML APP</span><span class="tag-app">REGISTER</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <!-- SITE MANAGEMENT (Templates) -->
+      <div class="apps-divider">
+        <span class="label">// Site Management Templates</span><hr>
+      </div>
+
+      <!-- SITE MANAGEMENT -->
+      <article class="tool-card preview-locked watermarked" data-cat="site" data-status="available" data-title="Daily site report">
+        <div class="top"><h4>Daily Site Report</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Template</div>
+        <p>Capture weather, manpower, plant, activities and progress notes per day.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">HTML APP</span><span class="tag">DAILY</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Open Template</button>
+          <button class="btn btn-outline" data-action="fav">☆ Save</button>
+        </div>
+      </article>
+
+      <article class="tool-card preview-locked watermarked" data-cat="site" data-status="available" data-title="Weekly progress report">
+        <div class="top"><h4>Weekly Progress Report</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Report</div>
+        <p>Summarise weekly trade progress, delays, and look-ahead actions.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">WEEKLY</span></div>
+        <div class="actions">
+          <button class="btn btn-primary" data-action="open">Open Template</button>
+          <button class="btn btn-outline" data-action="download">Download Sample</button>
+        </div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="available" data-title="Site instruction">
+        <div class="top"><h4>Site Instruction (SI)</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Form</div>
+        <p>Formal site instruction issued by the engineer or PM to the contractor.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">FORMAL</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button><button class="btn btn-outline" data-action="guide">View Guide</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="available" data-title="Work inspection request">
+        <div class="top"><h4>Work Inspection Request (WIR)</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Form</div>
+        <p>Request consultant/engineer inspection before next work phase.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">QA</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="available" data-title="Material delivery note">
+        <div class="top"><h4>Material Delivery Note</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Log</div>
+        <p>Track delivery date, supplier, quantity, batch and inspection status.</p>
+        <div class="tags"><span class="tag">HTML APP</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="soon" data-title="Labour attendance sheet">
+        <div class="top"><h4>Labour Attendance Sheet</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Site Management · Log</div>
+        <p>Daily trade-by-trade manpower record with totals and signature line.</p>
+        <div class="tags"><span class="tag">HTML APP</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="soon" data-title="Plant and machinery log">
+        <div class="top"><h4>Plant &amp; Machinery Log</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Site Management · Log</div>
+        <p>Track equipment on site, operator, hours, fuel and maintenance.</p>
+        <div class="tags"><span class="tag">HTML APP</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="site" data-status="available" data-title="Site meeting minutes">
+        <div class="top"><h4>Site Meeting Minutes</h4><span class="status available">Available</span></div>
+        <div class="meta">Site Management · Document</div>
+        <p>Structured minutes with attendees, actions, owners and due dates.</p>
+        <div class="tags"><span class="tag">DOCX</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <!-- QA/QC Templates -->
+      <div class="apps-divider">
+        <span class="label">// QA/QC Templates</span><hr>
+      </div>
+
+      <!-- QA/QC -->
+      <article class="tool-card preview-locked watermarked" data-cat="qaqc" data-status="available" data-title="Inspection request form">
+        <div class="top"><h4>Inspection Request Form</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Form</div>
+        <p>Standard inspection request with location, drawing ref and signatures.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">QAQC</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="available" data-title="Concrete pour checklist">
+        <div class="top"><h4>Concrete Pour Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Checklist</div>
+        <p>Pre-pour, during-pour and post-pour quality verification items.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">CONCRETE</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button><button class="btn btn-outline" data-action="guide">View Guide</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="available" data-title="Steel reinforcement inspection checklist">
+        <div class="top"><h4>Steel Reinforcement Inspection</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Checklist</div>
+        <p>Verify bar diameter, spacing, cover, lap length and tying quality.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">REBAR</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="available" data-title="Blockwork inspection checklist">
+        <div class="top"><h4>Blockwork Inspection Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Checklist</div>
+        <p>Course alignment, mortar, plumb, joints and reinforcement check.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="soon" data-title="Waterproofing inspection checklist">
+        <div class="top"><h4>Waterproofing Inspection</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">QA/QC · Checklist</div>
+        <p>Substrate, primer, membrane laps, terminations and flood test.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="available" data-title="Material approval request">
+        <div class="top"><h4>Material Approval Request</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Submittal</div>
+        <p>Submit materials for consultant approval with datasheets and samples.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="available" data-title="NCR report">
+        <div class="top"><h4>NCR — Non-Conformance Report</h4><span class="status available">Available</span></div>
+        <div class="meta">QA/QC · Report</div>
+        <p>Document, classify and close out non-conformities with evidence.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">NCR</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="qaqc" data-status="soon" data-title="Corrective action report">
+        <div class="top"><h4>Corrective Action Report</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">QA/QC · Report</div>
+        <p>Root-cause analysis and CAPA tracking aligned with ISO 9001 practice.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <!-- Safety Templates -->
+      <div class="apps-divider">
+        <span class="label">// Safety Templates</span><hr>
+      </div>
+
+      <!-- SAFETY -->
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="Risk assessment form">
+        <div class="top"><h4>Risk Assessment Form</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Form</div>
+        <p>Identify hazards, severity, likelihood and control measures.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">HSE</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="Method statement template">
+        <div class="top"><h4>Method Statement Template</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Document</div>
+        <p>Step-by-step safe working procedure with PPE and equipment.</p>
+        <div class="tags"><span class="tag">DOCX</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="Toolbox talk record">
+        <div class="top"><h4>Toolbox Talk Record</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Record</div>
+        <p>Daily HSE briefing with attendees and signatures.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="Permit to work">
+        <div class="top"><h4>Permit to Work</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Permit</div>
+        <p>Hot work, confined space, working at height — controlled entry permit.</p>
+        <div class="tags"><span class="tag">PDF</span><span class="tag">PTW</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="soon" data-title="Accident report">
+        <div class="top"><h4>Accident / Incident Report</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Safety · Report</div>
+        <p>Incident details, witnesses, root cause and corrective actions.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="PPE checklist">
+        <div class="top"><h4>PPE Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Checklist</div>
+        <p>Daily PPE compliance verification by trade.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="available" data-title="Safety inspection checklist">
+        <div class="top"><h4>Safety Inspection Checklist</h4><span class="status available">Available</span></div>
+        <div class="meta">Safety · Checklist</div>
+        <p>Weekly site safety walk inspection items.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-primary" data-action="open">Open Template</button></div>
+      </article>
+
+      <article class="tool-card preview-locked" data-cat="safety" data-status="soon" data-title="Site induction checklist">
+        <div class="top"><h4>Site Induction Checklist</h4><span class="status soon">Coming Soon</span></div>
+        <div class="meta">Safety · Checklist</div>
+        <p>New worker induction items, HSE briefing and acknowledgement.</p>
+        <div class="tags"><span class="tag">PDF</span></div>
+        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
+      </article>
+    </div>
+
+    <p id="emptyState" style="display:none;text-align:center;color:var(--text-muted);margin-top:24px">
+      No templates match your search.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DISCLAIMER ============ -->
+<section class="block" style="padding-top:0">
+  <div class="container">
+    <div class="disclaimer" role="note">
+      <strong>Professional use disclaimer:</strong> All templates are provided as references for professional engineers, project managers, QS and HSE specialists. They must be reviewed, adapted to project, contract, authority and local safety requirements, and signed off by competent professionals before use. Structura accepts no liability for outcomes from template use.
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="block alt">
+  <div class="container">
+    <div class="cta-strip">
+      <h3>Continue across the Structura platform</h3>
+      <p>Five integrated hubs for civil and structural engineering practice — new templates added every two weeks during beta.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-outline" href="../index.html">Back to Home</a>
+        <a class="btn btn-outline" href="../qs-office/index.html">Go to QS Office →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="../index.html" style="text-decoration:none">
+          <svg class="logo-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true" style="filter:brightness(2)">
+            <rect x="0"    y="11.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="25"   y="11.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="0"    y="19.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="25"   y="19.5" width="9" height="3" rx=".5" fill="#ffffff"/>
+            <rect x="11.5" y="0"    width="3" height="9" rx=".5" fill="#4DA6E0"/>
+            <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#4DA6E0"/>
+            <rect x="11.5" y="25"   width="3" height="9" rx=".5" fill="#4DA6E0"/>
+            <rect x="19.5" y="0"    width="3" height="9" rx=".5" fill="#4DA6E0"/>
+            <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#4DA6E0"/>
+            <rect x="19.5" y="25"   width="3" height="9" rx=".5" fill="#4DA6E0"/>
+          </svg>
+          <div class="logo-texts">
+            <span class="logo-name" style="color:#fff">STRUCTURA</span>
+            <span class="logo-sub" style="color:#4DA6E0">Digital Engineering Office</span>
+          </div>
+        </a>
+        <p style="margin:14px 0 0;color:#94a3b8;font-size:14px;max-width:340px">
+          Site-ready templates for engineers, project managers, QA/QC and HSE teams. Built from real construction workflows.
+        </p>
+      </div>
+      <div>
+        <h5>Platform</h5>
+        <a href="../index.html#design-studio">Design Studio</a>
+        <a href="../pm-office/index.html">PM Office</a>
+        <a href="../qs-office/index.html">QS Office</a>
+        <a href="../architecture/index.html">Architecture</a>
+        <a href="../academy/index.html">Academy</a>
+      </div>
+      <div>
+        <h5>PM Office</h5>
+        <a href="#categories">Site Management</a>
+        <a href="#categories">QA/QC</a>
+        <a href="#categories">Safety</a>
+        <a href="#templates">All Templates</a>
+      </div>
+      <div>
+        <h5>Resources</h5>
+        <a href="../index.html#beta">Join Beta</a>
+        <a href="../academy/index.html">Learning Hub</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> STRUCTURA — Digital Engineering Office. All rights reserved.</span>
+      <span>Beta release · Public launch 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   STRUCTURA — Shared Page Logic (PM Office)
+   - Search, filter, favourites (localStorage), recently viewed
+   - Mobile menu, smooth scroll
+   - Light front-end protection
+   NOTE: Front-end protection cannot fully prevent copying. True
+   protection requires server-side authentication, licensing,
+   and controlled file delivery.
+   ===================================================================== */
+(function(){
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Auto-add aria-labels to disabled "Coming Soon" buttons for screen readers
+  document.querySelectorAll('.tool-card button[disabled]').forEach(b => {
+    b.setAttribute('aria-label', 'Coming soon — this template is not yet available');
+  });
+
+  // mobile menu
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.getElementById('navMain');
+  toggle?.addEventListener('click', ()=>{
+    const open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+
+  // search + filter
+  const grid = document.getElementById('toolGrid');
+  const cards = Array.from(grid.querySelectorAll('.tool-card, .app-card'));
+  const dividers = Array.from(grid.querySelectorAll('.apps-divider'));
+  const search = document.getElementById('searchInput');
+  const pills = document.querySelectorAll('#filterPills .pill');
+  const empty = document.getElementById('emptyState');
+  let activeFilter = 'all';
+
+  function applyFilters(){
+    const q = (search.value||'').trim().toLowerCase();
+    let visible = 0;
+    cards.forEach(c=>{
+      const title = (c.dataset.title||'').toLowerCase();
+      const cat = c.dataset.cat;
+      const st = c.dataset.status;
+      const matchQ = !q || title.includes(q);
+      const matchF = activeFilter==='all' || activeFilter===cat || activeFilter===st;
+      const show = matchQ && matchF;
+      c.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    // show/hide dividers based on what's visible
+    dividers.forEach(d => { d.style.display = ''; });
+    if(activeFilter !== 'all') {
+      dividers.forEach(d => { d.style.display = 'none'; });
+    }
+    empty.style.display = visible ? 'none' : 'block';
+  }
+  search.addEventListener('input', applyFilters);
+  pills.forEach(p=>p.addEventListener('click', ()=>{
+    pills.forEach(x=>{ x.classList.remove('active'); x.setAttribute('aria-pressed','false'); });
+    p.classList.add('active');
+    p.setAttribute('aria-pressed','true');
+    activeFilter = p.dataset.filter;
+    applyFilters();
+  }));
+  // Initial aria-pressed state
+  pills.forEach(p => p.setAttribute('aria-pressed', p.classList.contains('active') ? 'true' : 'false'));
+
+  // category card → filter
+  document.querySelectorAll('.cat-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const cat = card.dataset.cat;
+      const filterVal = cat === 'apps' ? 'apps' : cat;
+      const pill = document.querySelector(`#filterPills .pill[data-filter="${filterVal}"]`);
+      if(pill){ pill.click(); }
+      document.getElementById('templates').scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // favourites + recently viewed
+  const FAV_KEY = 'structura_favs_pm';
+  const REC_KEY = 'structura_recent_pm';
+  const getList = k => { try{ return JSON.parse(localStorage.getItem(k)||'[]'); } catch(e){ return []; } };
+  const setList = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v.slice(0,20))); }catch(e){} };
+
+  function markFavs(){
+    const favs = getList(FAV_KEY);
+    cards.forEach(c=>{
+      const btn = c.querySelector('[data-action="fav"]');
+      if(!btn) return;
+      btn.textContent = favs.includes(c.dataset.title) ? '★ Saved' : '☆ Save';
+    });
+  }
+  markFavs();
+
+  /* ============================================================
+     TOAST — replaces ugly alert() boxes
+     ============================================================ */
+  function showToast(title, sub){
+    let t = document.getElementById('structura-toast');
+    if(!t){
+      t = document.createElement('div');
+      t.id = 'structura-toast';
+      t.className = 'toast';
+      t.setAttribute('role','status');
+      t.setAttribute('aria-live','polite');
+      document.body.appendChild(t);
+    }
+    t.innerHTML = `<div class="toast-title">${title}</div>${sub ? `<div class="toast-sub">${sub}</div>` : ''}`;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(()=>t.classList.remove('show'), 3200);
+  }
+
+  grid.addEventListener('click', e=>{
+    const btn = e.target.closest('button[data-action]');
+    if(!btn) return;
+    const card = btn.closest('.tool-card, .app-card');
+    if(!card) return;
+    const title = card.dataset.title;
+    const action = btn.dataset.action;
+
+    if(action==='fav'){
+      const favs = getList(FAV_KEY);
+      const idx = favs.indexOf(title);
+      if(idx>=0) favs.splice(idx,1); else favs.unshift(title);
+      setList(FAV_KEY, favs);
+      markFavs();
+      showToast(idx >= 0 ? 'Removed from favourites' : 'Saved to favourites', title);
+      return;
+    }
+
+    // record recently viewed
+    const rec = getList(REC_KEY).filter(x=>x!==title);
+    rec.unshift(title);
+    setList(REC_KEY, rec);
+
+    const isApp = card.classList.contains('app-card');
+    const map = {open: isApp ? 'Launching app' : 'Opening template', download:'Downloading sample', guide:'Opening guide'};
+    showToast(`${map[action]||'Action'}: ${title}`, 'Beta preview — full delivery requires beta access');
+  });
+})();
+</script>
+</body>
+</html>

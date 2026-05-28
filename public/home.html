@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- ═══ PRIMARY SEO ═══ -->
+<title>Structura — The Digital Engineering Office (Private Beta)</title>
+<meta name="description" content="Structura is a new integrated platform for civil and structural engineers — design calculators, BOQ tools, project management and learning resources. Built to Eurocode, ACI, IS 456, BS 8110 and AS 3600. Currently in private beta."/>
+<meta name="keywords" content="structural engineering software, RC beam design, Eurocode calculation tool, civil engineering platform, BOQ estimation, column design, pad footing design, IS 456 design, ACI 318 tools, online engineering calculator"/>
+<meta name="robots" content="index, follow"/>
+<meta name="author" content="Structura Engineering Platform"/>
+<link rel="canonical" href="https://www.structura.app/"/>
+
+<!-- ═══ SECURITY HEADERS ═══ -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<meta http-equiv="X-Content-Type-Options" content="nosniff"/>
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=()"/>
+
+<!-- ═══ OPEN GRAPH (Facebook, LinkedIn, WhatsApp) ═══ -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.structura.app/"/>
+<meta property="og:title" content="Structura — The Digital Engineering Office (Private Beta)"/>
+<meta property="og:description" content="An integrated platform for civil and structural engineers — built to Eurocode, ACI, IS 456, BS 8110 and AS 3600. Currently in private beta. Sign up for early access."/>
+<meta property="og:image" content="https://www.structura.app/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="Structura"/>
+<meta property="og:locale" content="en_US"/>
+
+<!-- ═══ TWITTER CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Structura — The Digital Engineering Office"/>
+<meta name="twitter:description" content="A new integrated platform for civil & structural engineers. Eurocode, ACI, IS, BS, AS support. Private beta."/>
+<meta name="twitter:image" content="https://www.structura.app/og-image.png"/>
+
+<!-- ═══ STRUCTURED DATA — Organization + SoftwareApplication ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.structura.app/#organization",
+      "name": "Structura",
+      "url": "https://www.structura.app",
+      "logo": "https://www.structura.app/logo.png",
+      "description": "Digital engineering platform for civil and structural engineering professionals.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "support@structura.app"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.structura.app/#software",
+      "name": "Structura Engineering Platform",
+      "url": "https://www.structura.app",
+      "applicationCategory": "EngineeringApplication",
+      "operatingSystem": "Web",
+      "description": "Integrated platform for structural and civil engineering calculations, project management, BOQ estimation, and learning. Built to Eurocode, ACI 318, IS 456, BS 8110, AS 3600. Currently in private beta.",
+      "featureList": [
+        "RC Beam Design (Eurocode 2, ACI 318, IS 456)",
+        "Column Design",
+        "Pad Footing Design",
+        "Steel Beam Design (Eurocode 3, AISC 360)",
+        "BOQ Estimation",
+        "BBS Rebar Generator",
+        "Site Inspection Reports",
+        "QA/QC Checklists"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.structura.app/#website",
+      "url": "https://www.structura.app",
+      "name": "Structura",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.structura.app/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- ═══ FAVICON (placeholder paths) ═══ -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<meta name="theme-color" content="#0071BC"/>
+
+<!-- ═══ FONTS — font-display:swap for performance ═══ -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   REDUCED MOTION — accessibility
+   ═══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════
+   PERFORMANCE — off-screen rendering hint
+   Add IMPORTANT note for devs:
+   For any future external <a target="_blank"> links,
+   always include rel="noopener noreferrer" to prevent
+   window.opener exploitation and referrer leakage.
+   ═══════════════════════════════════════ */
+.section, .stats-bar, .trusted-strip {
+  content-visibility: auto;
+  contain-intrinsic-size: 600px;
+}
+
+/* ═══════════════════════════════════════
+   EXACT TEKLA.COM / TRIMBLE PALETTE
+   Screenshot-matched color values
+   ═══════════════════════════════════════ */
+:root {
+  --blue:       #0071BC;   /* Trimble blue — exact from screenshot buttons */
+  --blue-d:     #005A96;   /* hover */
+  --blue-l:     #E6F2FA;   /* light blue tint */
+  --white:      #FFFFFF;
+  --gray-page:  #F2F2F2;   /* Tekla page background — light warm gray */
+  --gray-sec:   #E8E8E8;   /* section divider gray */
+  --gray-card:  #F7F7F7;   /* card bg */
+  --border:     #D8D8D8;   /* borders */
+  --border-l:   #E8E8E8;
+  --text-1:     #1A1A1A;   /* Tekla bold headlines */
+  --text-2:     #3D3D3D;   /* body */
+  --text-3:     #666666;   /* secondary/muted */
+  --text-4:     #999999;   /* placeholder */
+  --nav-top-bg: #F2F2F2;   /* Tekla topbar — same light gray */
+  --green-ok:   #2E8B57;
+  --mono:       'JetBrains Mono', monospace;
+  --sans:       'Source Sans 3', 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); color: var(--text-2); background: var(--white); -webkit-font-smoothing: antialiased; font-size: 16px; line-height: 1.55; }
+a { text-decoration: none; color: inherit; }
+button { font: inherit; border: 0; cursor: pointer; background: none; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+/* ── BUTTONS — exact Tekla style ── */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 15px; font-weight: 600; border-radius: 0; cursor: pointer; transition: background .18s, border-color .18s; white-space: nowrap; }
+.btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+/* Tekla solid blue CTA — exactly as in screenshot */
+.btn-blue { background: var(--blue); color: var(--white); border: 2px solid var(--blue); }
+.btn-blue:hover { background: var(--blue-d); border-color: var(--blue-d); }
+/* Tekla white outline */
+.btn-outline { background: var(--white); color: var(--blue); border: 2px solid var(--blue); }
+.btn-outline:hover { background: var(--blue-l); }
+/* text link Tekla-style */
+.lnk { color: var(--blue); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; transition: color .15s; }
+.lnk:hover { color: var(--blue-d); text-decoration: underline; }
+.lnk svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; transition: transform .15s; }
+.lnk:hover svg { transform: translateX(2px); }
+
+/* ══════════════════════════════════
+   HEADER — Tekla.com exact layout:
+   topbar (gray) + main nav (white)
+   ══════════════════════════════════ */
+.topbar { background: var(--nav-top-bg); border-bottom: 1px solid var(--border); height: 40px; display: flex; align-items: center; }
+.topbar-inner { display: flex; justify-content: flex-end; align-items: center; gap: 22px; }
+.topbar a { font-size: 12.5px; color: var(--text-3); transition: color .14s; display: flex; align-items: center; gap: 5px; }
+.topbar a:hover { color: var(--blue); }
+.topbar svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+.nav-bar { background: var(--white); border-bottom: 1px solid var(--border); height: 68px; display: flex; align-items: center; position: sticky; top: 0; z-index: 200; }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+.logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.logo-icon { width: 34px; height: 34px; }
+.logo-texts { display: flex; flex-direction: column; line-height: 1.2; }
+.logo-name { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: .08em; }
+.logo-sub { font-size: 9px; font-family: var(--mono); color: var(--blue); letter-spacing: .14em; text-transform: uppercase; margin-top: 1px; }
+.nav-links { display: flex; align-items: stretch; height: 100%; }
+.ni { display: flex; align-items: center; gap: 5px; padding: 0 16px; font-size: 14.5px; font-weight: 600; color: var(--text-2); border-bottom: 3px solid transparent; cursor: pointer; transition: .15s; white-space: nowrap; height: 100%; }
+.ni:hover { color: var(--blue); border-bottom-color: var(--blue); }
+.ni.active { color: var(--blue); border-bottom-color: var(--blue); }
+.ni svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; opacity: .5; }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.n-search { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--text-3); border-radius: 2px; transition: .15s; }
+.n-search:hover { background: var(--gray-page); color: var(--text-1); }
+.n-search svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+.n-btn { padding: 9px 18px; font-size: 13.5px; font-weight: 600; border-radius: 0; transition: .16s; }
+.n-login { background: var(--white); color: var(--blue); border: 1.5px solid var(--blue); }
+.n-login:hover { background: var(--blue-l); }
+.n-cta { background: var(--blue); color: var(--white); border: 1.5px solid var(--blue); }
+.n-cta:hover { background: var(--blue-d); border-color: var(--blue-d); }
+
+/* ══════════════════════════════════
+   HERO — Tekla: light gray bg,
+   headline left, preview cards right
+   ══════════════════════════════════ */
+.hero { background: var(--gray-page); border-bottom: 1px solid var(--border); padding: 0; overflow: hidden; }
+.hero-inner { display: grid; grid-template-columns: 1fr 520px; gap: 56px; align-items: center; padding: 72px 0 60px; }
+
+.h-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+.h-ey-rule { width: 22px; height: 2px; background: var(--blue); }
+.h-ey-text { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; }
+
+.hero-h1 { font-size: 52px; font-weight: 700; color: var(--text-1); line-height: 1.06; letter-spacing: -.025em; margin-bottom: 18px; max-width: 560px; }
+.hero-p { font-size: 17px; font-weight: 300; color: var(--text-3); line-height: 1.7; max-width: 500px; margin-bottom: 28px; }
+
+/* code pills */
+.code-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 30px; }
+.cpill { font-family: var(--mono); font-size: 10.5px; padding: 4px 10px; border: 1px solid var(--border); background: var(--white); color: var(--text-3); letter-spacing: .06em; border-radius: 2px; transition: .15s; }
+.cpill:hover { border-color: var(--blue); color: var(--blue); }
+
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+
+/* trust row */
+.trust-row { display: flex; align-items: center; gap: 0; border-top: 1px solid var(--border); padding-top: 24px; }
+.tr-item { display: flex; flex-direction: column; padding-right: 28px; margin-right: 28px; border-right: 1px solid var(--border); }
+.tr-item:last-child { border: 0; }
+.tr-n { font-size: 26px; font-weight: 700; color: var(--blue); line-height: 1; }
+.tr-l { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
+/* ── HERO RIGHT: preview cards ── */
+.hero-right { position: relative; height: 480px; }
+.pstack { position: relative; width: 100%; height: 100%; }
+
+/* cards */
+.pc { position: absolute; background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06); }
+.pc-main { width: 400px; top: 10px; right: 0; animation: fl1 7s ease-in-out infinite; }
+.pc-side { width: 205px; top: 200px; right: 352px; animation: fl2 8s ease-in-out infinite .7s; }
+.pc-mini { width: 175px; bottom: 10px; right: 42px; animation: fl3 6s ease-in-out infinite 1.4s; }
+@keyframes fl1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
+@keyframes fl2 { 0%,100%{transform:translateY(0) rotate(-1.5deg)} 50%{transform:translateY(-7px) rotate(-1.5deg)} }
+@keyframes fl3 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+/* card chrome bar */
+.pc-bar { height: 30px; background: var(--blue); display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+.pc-bar-gray { background: var(--gray-page); border-bottom: 1px solid var(--border); }
+.pc-bar-title { font-family: var(--mono); font-size: 9.5px; color: rgba(255,255,255,.75); letter-spacing: .08em; flex: 1; }
+.pc-bar-gray .pc-bar-title { color: var(--text-3); }
+.pc-tag { font-family: var(--mono); font-size: 8.5px; padding: 2px 6px; border-radius: 2px; }
+.t-blue { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); border: 1px solid rgba(255,255,255,.2); }
+.t-green { background: rgba(46,139,87,.15); color: #2E8B57; border: 1px solid rgba(46,139,87,.25); }
+.t-green-dk { background: rgba(46,139,87,.1); color: #2E8B57; border: 1px solid rgba(46,139,87,.2); }
+
+/* RC beam card body */
+.rcb { padding: 12px 14px; }
+.rc2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.rc-panel { background: var(--gray-card); border: 1px solid var(--border-l); padding: 8px 10px; border-radius: 2px; }
+.rc-panel-hd { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; color: var(--text-4); text-transform: uppercase; padding-bottom: 5px; margin-bottom: 5px; border-bottom: 1px solid var(--border); }
+.rc-r { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px solid var(--border-l); }
+.rc-r:last-child { border: 0; }
+.rc-lbl { font-family: var(--mono); font-size: 9px; color: var(--text-3); }
+.rc-v { font-family: var(--mono); font-size: 10.5px; font-weight: 500; color: var(--text-1); }
+.rc-v.ok { color: var(--green-ok); font-weight: 700; }
+/* bmd sketch */
+.bmd { background: var(--gray-card); border: 1px solid var(--border-l); border-radius: 2px; height: 44px; position: relative; overflow: hidden; margin-bottom: 8px; }
+.bmd-lbl { font-family: var(--mono); font-size: 8px; color: var(--text-4); position: absolute; top: 4px; left: 8px; }
+.bmd-beam-line { position: absolute; top: 50%; left: 8%; right: 8%; height: 2px; background: var(--blue); transform: translateY(-4px); }
+.bmd-svg { position: absolute; bottom: 0; left: 0; right: 0; height: 26px; }
+/* util */
+.util-row { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9.5px; color: var(--text-3); margin-bottom: 4px; }
+.util-row span.ok { color: var(--green-ok); font-weight: 700; }
+.util-track { height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.util-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--green-ok)); width: 62%; border-radius: 10px; }
+/* card footer */
+.pc-foot { padding: 8px 14px; background: var(--gray-card); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.pc-step { font-family: var(--mono); font-size: 8.5px; color: var(--text-4); }
+.pc-fbtns { display: flex; gap: 5px; }
+.pfb { padding: 5px 10px; font-size: 10px; font-weight: 600; border: 1.5px solid; border-radius: 0; cursor: pointer; }
+.pfb-sec { border-color: var(--border); color: var(--text-3); background: var(--white); }
+.pfb-pri { border-color: var(--blue); background: var(--blue); color: var(--white); }
+
+/* BOQ card */
+.boq-body { padding: 10px 12px; }
+.boq-section-hd { font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; color: var(--text-4); text-transform: uppercase; padding-bottom: 5px; margin-bottom: 6px; border-bottom: 1px solid var(--border); }
+.btbl { width: 100%; border-collapse: collapse; font-size: 9px; font-family: var(--mono); }
+.btbl th { padding: 4px 5px; background: var(--gray-page); color: var(--text-4); font-weight: 500; text-align: left; border-bottom: 1px solid var(--border); font-size: 8.5px; }
+.btbl th:not(:first-child) { text-align: right; }
+.btbl td { padding: 4px 5px; border-bottom: 1px solid var(--border-l); color: var(--text-2); }
+.btbl td:not(:first-child) { text-align: right; }
+.btbl tr.cat td { background: var(--blue-l); color: var(--blue); font-weight: 700; font-size: 8.5px; }
+.btbl tr.tot td { border-top: 1.5px solid var(--border); font-weight: 700; color: var(--blue); font-size: 10px; }
+
+/* site progress mini */
+.mini-body { padding: 9px 11px; }
+.mini-h { font-size: 11px; font-weight: 700; color: var(--text-1); margin-bottom: 8px; }
+.prog-r { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; font-family: var(--mono); font-size: 8.5px; }
+.prog-nm { color: var(--text-3); width: 65px; flex-shrink: 0; }
+.prog-tr { flex: 1; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 2px; }
+.prog-pct { color: var(--text-4); width: 26px; text-align: right; flex-shrink: 0; }
+
+/* floating badge */
+.badge-chip { position: absolute; background: var(--blue); border-radius: 2px; padding: 6px 12px; color: var(--white); box-shadow: 0 4px 16px rgba(0,113,188,.35); }
+.bc-val { font-family: var(--mono); font-size: 18px; font-weight: 600; line-height: 1; }
+.bc-lbl { font-family: var(--mono); font-size: 8.5px; opacity: .65; margin-top: 2px; }
+
+/* ── TICKER ── */
+.ticker { background: var(--blue); padding: 10px 0; overflow: hidden; }
+.ticker-scroll { display: flex; animation: tick 32s linear infinite; width: max-content; }
+.ti { font-family: var(--mono); font-size: 10.5px; color: rgba(255,255,255,.55); letter-spacing: .1em; padding: 0 24px; border-right: 1px solid rgba(255,255,255,.15); white-space: nowrap; }
+.ti.hi { color: rgba(255,255,255,.9); }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ══════════════════════════════════
+   STATS BAR
+   ══════════════════════════════════ */
+.stats-bar { background: var(--white); border-bottom: 3px solid var(--blue); }
+.stats-inner { display: flex; }
+.stat { flex: 1; padding: 22px 20px; border-right: 1px solid var(--border); text-align: center; }
+.stat:last-child { border-right: 0; }
+.stat-n { font-size: 28px; font-weight: 700; color: var(--blue); line-height: 1; }
+.stat-l { font-size: 13px; color: var(--text-3); margin-top: 3px; }
+
+/* ══════════════════════════════════
+   SECTION BASE
+   ══════════════════════════════════ */
+.section { padding: 72px 0; background: var(--white); }
+.section-gray { background: var(--gray-page); }
+.section-blue { background: var(--blue); color: var(--white); }
+
+.s-eye { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.s-eye-rule { width: 20px; height: 2px; background: var(--blue); }
+.s-eye span { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; color: var(--blue); text-transform: uppercase; }
+.s-eye.wh .s-eye-rule { background: rgba(255,255,255,.5); }
+.s-eye.wh span { color: rgba(255,255,255,.6); }
+
+.s-h2 { font-size: 38px; font-weight: 700; color: var(--text-1); line-height: 1.08; letter-spacing: -.02em; margin-bottom: 12px; }
+.s-h2.wh { color: var(--white); }
+.s-sub { font-size: 16px; color: var(--text-3); font-weight: 300; max-width: 560px; line-height: 1.7; }
+.s-sub.wh { color: rgba(255,255,255,.65); }
+.s-head { margin-bottom: 48px; }
+.s-head-flex { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+
+/* ══════════════════════════════════
+   PRODUCT BRANCH CARDS — immersive
+   photo + glass overlay + animated CTA
+   ══════════════════════════════════ */
+
+/* grid: 5 equal columns */
+.mod-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+}
+
+/* each card */
+.mod {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 460px;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  transition: flex .45s cubic-bezier(.4,0,.2,1);
+}
+.mod:last-child { border-right: 0; }
+
+/* hover: expand card */
+.mod-grid:hover .mod { flex: 1; }
+.mod-grid:hover .mod:hover { flex: 1.75; }
+
+/* background photo */
+.mod-photo {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .55s cubic-bezier(.4,0,.2,1), filter .4s;
+  filter: brightness(.55) saturate(.8);
+}
+.mod:hover .mod-photo {
+  transform: scale(1.06);
+  filter: brightness(.45) saturate(1.1);
+}
+
+/* coloured brand overlay — each branch gets its accent */
+.mod-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .4s;
+}
+.mod:hover .mod-overlay { opacity: 1; }
+
+/* branch accent colours */
+.mod-ds  .mod-photo { background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=75'); }
+.mod-ds  .mod-overlay { background: linear-gradient(180deg, rgba(0,113,188,0) 0%, rgba(0,113,188,0.72) 100%); }
+
+.mod-pm  .mod-photo { background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=75'); }
+.mod-pm  .mod-overlay { background: linear-gradient(180deg, rgba(16,78,45,0) 0%, rgba(16,78,45,0.72) 100%); }
+
+.mod-qs  .mod-photo { background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=75'); }
+.mod-qs  .mod-overlay { background: linear-gradient(180deg, rgba(100,40,0,0) 0%, rgba(100,40,0,0.72) 100%); }
+
+.mod-arc .mod-photo { background-image: url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=75'); }
+.mod-arc .mod-overlay { background: linear-gradient(180deg, rgba(50,20,90,0) 0%, rgba(50,20,90,0.72) 100%); }
+
+.mod-ac  .mod-photo { background-image: url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=75'); }
+.mod-ac  .mod-overlay { background: linear-gradient(180deg, rgba(0,60,100,0) 0%, rgba(0,60,100,0.72) 100%); }
+
+/* dark gradient always-on at bottom for text legibility */
+.mod-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 25%,
+    rgba(0,0,0,.15) 55%,
+    rgba(0,0,0,.82) 100%
+  );
+  pointer-events: none;
+}
+
+/* branch tab at top */
+.mod-tab {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  transition: height .3s;
+}
+.mod:hover .mod-tab { height: 5px; }
+.mod-ds  .mod-tab { background: #0071BC; }
+.mod-pm  .mod-tab { background: #1A7A46; }
+.mod-qs  .mod-tab { background: #C05000; }
+.mod-arc .mod-tab { background: #6B2FA0; }
+.mod-ac  .mod-tab { background: #0099CC; }
+
+/* branch icon badge top-left */
+.mod-icon-badge {
+  position: absolute;
+  top: 20px; left: 18px;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.12);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .3s, transform .3s;
+}
+.mod:hover .mod-icon-badge {
+  background: rgba(255,255,255,.22);
+  transform: scale(1.08);
+}
+.mod-icon-badge svg {
+  width: 22px; height: 22px;
+  stroke: rgba(255,255,255,.9);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* tool count pill top-right */
+.mod-count {
+  position: absolute;
+  top: 20px; right: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.8);
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.15);
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+/* content pinned to bottom */
+.mod-body {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* branch label */
+.mod-branch {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 6px;
+  transition: color .3s;
+}
+.mod:hover .mod-branch { color: rgba(255,255,255,.75); }
+
+/* title */
+.mod-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 4px rgba(0,0,0,.4);
+}
+
+/* description — hidden until hover, slides up */
+.mod-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  line-height: 1.6;
+  font-weight: 300;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .35s, margin .35s;
+  margin-bottom: 0;
+}
+.mod:hover .mod-desc,
+.mod:focus-within .mod-desc {
+  max-height: 120px;
+  opacity: 1;
+  margin-bottom: 16px;
+}
+
+/* feature pill row — hidden until hover */
+.mod-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height .4s .05s cubic-bezier(.4,0,.2,1), opacity .3s .05s;
+  margin-bottom: 0;
+}
+.mod:hover .mod-features,
+.mod:focus-within .mod-features {
+  max-height: 60px;
+  opacity: 1;
+  margin-bottom: 14px;
+}
+.mod-feat-pill {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  padding: 3px 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 20px;
+  color: rgba(255,255,255,.7);
+  white-space: nowrap;
+}
+
+/* CTA button — animated arrow on hover */
+.mod-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  background: var(--white);
+  color: var(--text-1);
+  font-size: 13.5px;
+  font-weight: 700;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background .2s,
+    color .2s,
+    transform .2s,
+    box-shadow .2s;
+  transform: translateY(4px);
+  opacity: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+}
+.mod:hover .mod-cta,
+.mod:focus-within .mod-cta {
+  transform: translateY(0);
+  opacity: 1;
+}
+/* Visible focus outline for keyboard users */
+.mod-cta:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+.mod-cta:hover {
+  background: var(--blue);
+  color: var(--white);
+  box-shadow: 0 6px 24px rgba(0,113,188,.45);
+}
+.mod-cta-icon {
+  width: 20px; height: 20px;
+  background: currentColor;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform .25s;
+}
+.mod-cta:hover .mod-cta-icon { transform: translateX(3px); }
+.mod-cta-icon svg {
+  width: 11px; height: 11px;
+  stroke: var(--text-1);
+  fill: none; stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mod-cta:hover .mod-cta-icon svg { stroke: var(--blue); }
+
+/* fallback static CTA for accessibility (shown when no hover, e.g. keyboard) */
+.mod-cta-static {
+  display: none;
+}
+
+/* ══════════════════════════════════
+   TOOLS GRID — Tekla browse style
+   ══════════════════════════════════ */
+.tools-strip { background: var(--gray-page); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 52px 0; }
+.tools-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.tools-title { font-size: 22px; font-weight: 700; color: var(--text-1); }
+.tool-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.tc { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--white); border: 1px solid var(--border); border-radius: 2px; cursor: pointer; transition: border-color .16s, box-shadow .16s; }
+.tc:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(0,113,188,.12); }
+.tc-ico { width: 32px; height: 32px; background: var(--blue-l); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .16s; }
+.tc:hover .tc-ico { background: var(--blue); }
+.tc-ico svg { width: 17px; height: 17px; stroke: var(--blue); fill: none; stroke-width: 1.7; stroke-linecap: round; }
+.tc:hover .tc-ico svg { stroke: var(--white); }
+.tc-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.tc-code { font-family: var(--mono); font-size: 9.5px; color: var(--text-4); margin-top: 1px; }
+
+/* ══════════════════════════════════
+   CALC APP SECTION — blue bg
+   ══════════════════════════════════ */
+.calc-section { background: var(--gray-page); padding: 80px 0; border-top: 1px solid var(--border); }
+.calc-grid { display: grid; grid-template-columns: 460px 1fr; gap: 64px; align-items: center; }
+.calc-ui { background: var(--white); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
+.cu-hdr { background: var(--blue); padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; }
+.cu-title { font-family: var(--mono); font-size: 12px; color: var(--white); letter-spacing: .07em; font-weight: 500; }
+.cu-tags { display: flex; gap: 5px; }
+.cu-tag { font-family: var(--mono); font-size: 8.5px; padding: 2px 7px; border-radius: 2px; border: 1px solid; }
+.cu-tag.blue { background: rgba(255,255,255,.12); color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.2); }
+.cu-tag.green { background: rgba(46,139,87,.15); color: #5DC98A; border-color: rgba(46,139,87,.25); }
+.cu-body { display: grid; grid-template-columns: 1fr 1fr; }
+.cu-in { padding: 18px; border-right: 1px solid var(--border); }
+.cu-out { padding: 18px; background: var(--gray-card); }
+.cu-sec-lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; color: var(--text-4); text-transform: uppercase; padding-bottom: 8px; margin-bottom: 12px; border-bottom: 1px solid var(--border); }
+.cu-field { margin-bottom: 10px; }
+.cu-field label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10.5px; color: var(--text-3); margin-bottom: 4px; }
+.cu-row { display: flex; }
+.cu-inp { flex: 1; padding: 7px 10px; border: 1px solid var(--border); border-right: 0; font-family: var(--mono); font-size: 12.5px; color: var(--text-1); background: var(--white); transition: border-color .15s; }
+.cu-inp:focus { outline: 0; border-color: var(--blue); }
+.cu-unit { padding: 7px 10px; border: 1px solid var(--border); background: var(--gray-card); font-family: var(--mono); font-size: 10px; color: var(--text-4); }
+.cu-res { display: flex; justify-content: space-between; align-items: center; padding: 7.5px 0; border-bottom: 1px solid var(--border-l); }
+.cu-res:last-of-type { border: 0; }
+.cu-rl { font-family: var(--mono); font-size: 11px; color: var(--text-3); }
+.cu-rv { font-family: var(--mono); font-size: 12px; font-weight: 600; color: var(--text-1); }
+.cu-rv.pass { color: var(--green-ok); }
+.cu-util { margin-top: 14px; }
+.cu-uh { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 10px; color: var(--text-3); margin-bottom: 5px; }
+.cu-uh .ok { color: var(--green-ok); font-weight: 700; }
+.cu-ut { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; }
+.cu-uf { height: 100%; background: linear-gradient(90deg, var(--blue), var(--green-ok)); width: 62%; border-radius: 10px; }
+.cu-foot { padding: 11px 18px; background: var(--gray-card); border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.cu-step { font-family: var(--mono); font-size: 9.5px; color: var(--text-4); }
+.cu-btns { display: flex; gap: 6px; }
+.cub { padding: 7px 14px; font-size: 12px; font-weight: 600; border: 1.5px solid; border-radius: 0; cursor: pointer; transition: .15s; font-family: var(--sans); }
+.cub.s { border-color: var(--border); color: var(--text-3); background: var(--white); }
+.cub.s:hover { background: var(--gray-page); }
+.cub.p { border-color: var(--blue); background: var(--blue); color: var(--white); }
+.cub.p:hover { background: var(--blue-d); }
+
+/* features 2x3 */
+.feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 8px; }
+.feat { padding: 20px; background: var(--white); border: 1px solid var(--border); border-radius: 2px; transition: box-shadow .18s; }
+.feat:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.feat-ico { width: 40px; height: 40px; background: var(--blue-l); border-radius: 2px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.feat-ico svg { width: 20px; height: 20px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+.feat-h { font-size: 14.5px; font-weight: 700; color: var(--text-1); margin-bottom: 6px; }
+.feat-p { font-size: 13px; color: var(--text-3); line-height: 1.6; font-weight: 300; }
+
+/* ══════════════════════════════════
+   STANDARDS
+   ══════════════════════════════════ */
+.std-section { background: var(--blue); padding: 32px 0; }
+.std-inner { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.std-lbl { font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; flex-shrink: 0; }
+.std-div { width: 1px; height: 32px; background: rgba(255,255,255,.15); flex-shrink: 0; }
+.std-pills { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+.sp { padding: 8px 14px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: 2px; font-family: var(--mono); font-size: 13px; font-weight: 600; color: rgba(255,255,255,.65); letter-spacing: .04em; cursor: pointer; transition: .15s; line-height: 1; }
+.sp span { display: block; font-size: 9px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .06em; margin-top: 2px; }
+.sp:hover, .sp.on { background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); color: var(--white); }
+.sp.on span { color: rgba(255,255,255,.6); }
+
+/* ══════════════════════════════════
+   TESTIMONIALS
+   ══════════════════════════════════ */
+.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.tcard { padding: 24px; background: var(--white); border: 1px solid var(--border); border-radius: 2px; transition: box-shadow .2s; position: relative; }
+.tcard:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.tcard::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--blue); transform:scaleX(0); transform-origin:left; transition:.22s; }
+.tcard:hover::before { transform:scaleX(1); }
+.t-stars { display: flex; gap: 2px; margin-bottom: 12px; }
+.t-stars svg { width: 14px; height: 14px; fill: #E8330A; }
+.t-q { font-size: 14px; color: var(--text-3); line-height: 1.75; margin-bottom: 20px; font-weight: 300; font-style: italic; }
+.t-auth { display: flex; align-items: center; gap: 11px; padding-top: 16px; border-top: 1px solid var(--border); }
+.t-av { width: 38px; height: 38px; border-radius: 50%; background: var(--blue-l); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--blue); border: 2px solid rgba(0,113,188,.15); flex-shrink: 0; }
+.t-name { font-size: 14px; font-weight: 700; color: var(--text-1); }
+.t-role { font-family: var(--mono); font-size: 10px; color: var(--text-4); margin-top: 1px; }
+
+/* ══════════════════════════════════
+   CTA BAND — Tekla blue full width
+   ══════════════════════════════════ */
+.cta-band { background: var(--blue); padding: 64px 0; }
+.cta-inner { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+.cta-h { font-size: 34px; font-weight: 700; color: var(--white); line-height: 1.1; letter-spacing: -.01em; }
+.cta-p { font-size: 16px; color: rgba(255,255,255,.7); margin-top: 10px; font-weight: 300; }
+.cta-btns { display: flex; gap: 10px; flex-shrink: 0; }
+.btn-white { background: var(--white); color: var(--blue); border: 2px solid var(--white); font-size: 14.5px; font-weight: 700; padding: 13px 24px; border-radius: 0; display: inline-flex; align-items: center; gap: 8px; transition: background .16s; cursor: pointer; }
+.btn-white:hover { background: var(--blue-l); }
+.btn-white svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+.btn-wh-outline { background: transparent; color: var(--white); border: 2px solid rgba(255,255,255,.5); font-size: 14.5px; font-weight: 600; padding: 13px 24px; border-radius: 0; display: inline-flex; align-items: center; gap: 8px; transition: .16s; cursor: pointer; }
+.btn-wh-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+/* ══════════════════════════════════
+   FOOTER
+   ══════════════════════════════════ */
+.footer { background: var(--text-1); padding: 56px 0 28px; }
+.footer-grid { display: grid; grid-template-columns: 240px repeat(4,1fr); gap: 48px; margin-bottom: 44px; }
+.footer-logo { display: flex; flex-direction: column; gap: 14px; }
+.footer-logo p { font-size: 13.5px; color: rgba(255,255,255,.35); line-height: 1.7; font-weight: 300; }
+.footer-col h4 { font-family: var(--mono); font-size: 9.5px; font-weight: 500; color: rgba(255,255,255,.7); letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.footer-links { display: flex; flex-direction: column; gap: 8px; }
+.footer-links a { font-size: 13.5px; color: rgba(255,255,255,.35); transition: color .14s; }
+.footer-links a:hover { color: rgba(255,255,255,.75); }
+.footer-btm { border-top: 1px solid rgba(255,255,255,.07); padding-top: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.footer-copy { font-size: 12.5px; color: rgba(255,255,255,.2); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 12.5px; color: rgba(255,255,255,.2); transition: .14s; }
+.footer-legal a:hover { color: rgba(255,255,255,.5); }
+
+/* ══════════════════════════════════
+   SKIP LINK — accessibility
+   ══════════════════════════════════ */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  padding: 10px 20px;
+  background: var(--blue);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 0 0 4px 4px;
+  z-index: 9999;
+  transition: top .15s;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* ══════════════════════════════════
+   FOCUS RINGS — WCAG 2.1 AA
+   ══════════════════════════════════ */
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+button:focus-visible,
+a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+/* ══════════════════════════════════
+   SEMANTIC NAV ITEMS (button/a)
+   ══════════════════════════════════ */
+.ni {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 16px;
+  font-size: 14.5px; font-weight: 600;
+  color: var(--text-2);
+  border: none; border-bottom: 3px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition: .15s; white-space: nowrap;
+  height: 100%; font-family: var(--sans);
+  text-decoration: none;
+}
+.ni:hover { color: var(--blue); border-bottom-color: var(--blue); }
+.ni.active { color: var(--blue); border-bottom-color: var(--blue); }
+.ni svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; opacity: .5; pointer-events: none; }
+
+/* ══════════════════════════════════
+   HAMBURGER BUTTON
+   ══════════════════════════════════ */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  align-items: center; justify-content: center;
+  background: none; border: 1.5px solid var(--border);
+  border-radius: 2px; cursor: pointer;
+  color: var(--text-2); transition: .15s;
+  flex-shrink: 0;
+}
+.hamburger:hover { border-color: var(--blue); color: var(--blue); }
+.hamburger svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+.hamburger .icon-close { display: none; }
+.hamburger.open .icon-open { display: none; }
+.hamburger.open .icon-close { display: block; }
+
+/* ══════════════════════════════════
+   MOBILE MENU DRAWER
+   ══════════════════════════════════ */
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: var(--white);
+  border-bottom: 3px solid var(--blue);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  z-index: 199;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .3s ease, opacity .25s ease;
+  opacity: 0;
+}
+.mobile-menu.open {
+  max-height: 600px;
+  opacity: 1;
+}
+.mob-nav-list {
+  list-style: none;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mob-nav-list li a,
+.mob-nav-list li button {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 14px 24px;
+  font-size: 15px; font-weight: 600; color: var(--text-1);
+  background: none; border: none; cursor: pointer;
+  font-family: var(--sans); text-decoration: none;
+  transition: background .14s, color .14s;
+  border-left: 3px solid transparent;
+}
+.mob-nav-list li a:hover,
+.mob-nav-list li button:hover {
+  background: var(--blue-l);
+  color: var(--blue);
+  border-left-color: var(--blue);
+}
+.mob-nav-list li button svg {
+  width: 13px; height: 13px; stroke: currentColor;
+  fill: none; stroke-width: 2.5; opacity: .5;
+}
+.mob-nav-actions {
+  display: flex; gap: 10px; padding: 16px 24px;
+  align-items: center; flex-wrap: wrap;
+}
+.mob-login {
+  padding: 10px 20px; font-size: 14px; font-weight: 600;
+  color: var(--blue); border: 1.5px solid var(--blue);
+  border-radius: 0; background: var(--white); cursor: pointer;
+  font-family: var(--sans); transition: background .15s;
+  text-decoration: none;
+}
+.mob-login:hover { background: var(--blue-l); }
+.mob-cta {
+  flex: 1; padding: 11px 20px; font-size: 14px; font-weight: 700;
+  background: var(--blue); color: var(--white);
+  border: none; border-radius: 0; cursor: pointer;
+  font-family: var(--sans); text-align: center;
+  transition: background .15s; text-decoration: none;
+  display: block;
+}
+.mob-cta:hover { background: var(--blue-d); }
+.mob-code-row {
+  padding: 12px 24px 16px;
+  display: flex; flex-wrap: wrap; gap: 5px;
+  border-top: 1px solid var(--border);
+}
+.mob-cpill {
+  font-family: var(--mono); font-size: 10px; padding: 3px 8px;
+  border: 1px solid var(--border); border-radius: 2px;
+  color: var(--text-3); background: var(--gray-page);
+}
+
+/* ══════════════════════════════════
+   TRUSTED BY LOGOS STRIP
+   ══════════════════════════════════ */
+.trusted-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 28px 0;
+}
+.trusted-inner {
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.trusted-lbl {
+  font-family: var(--mono); font-size: 10.5px;
+  color: var(--text-4); letter-spacing: .12em;
+  text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+}
+.trusted-div { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+.trusted-logos { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; flex: 1; }
+.trusted-logo {
+  padding: 7px 16px; border: 1px solid var(--border);
+  border-radius: 2px; background: var(--white);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; cursor: default; transition: border-color .15s, box-shadow .15s;
+}
+.trusted-logo:hover { border-color: var(--blue); box-shadow: 0 2px 8px rgba(0,113,188,.08); }
+.tl-name { font-size: 12.5px; font-weight: 700; color: var(--text-2); letter-spacing: .02em; }
+.tl-type { font-family: var(--mono); font-size: 9px; color: var(--text-4); letter-spacing: .06em; }
+
+/* ══════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════ */
+@media(max-width:1100px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .mod-grid { grid-template-columns: repeat(3,1fr); border-radius: 4px; }
+  .mod { min-height: 360px; flex: unset !important; border-right: 0; border-bottom: 1px solid var(--border); }
+  .mod:last-child { border-bottom: 0; }
+  .mod-desc { max-height: 100px !important; opacity: 1 !important; margin-bottom: 14px !important; }
+  .mod-features { max-height: 60px !important; opacity: 1 !important; margin-bottom: 12px !important; }
+  .mod-cta { transform: translateY(0) !important; opacity: 1 !important; }
+  .calc-grid { grid-template-columns: 1fr; }
+}
+@media(max-width:900px) {
+  .nav-links { display: none; }
+  .n-login, .n-cta { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+  .nav-bar { position: sticky; top: 0; }
+  .mod-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:800px) {
+  .test-grid { grid-template-columns: 1fr 1fr; }
+  .cta-inner { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .trusted-inner { gap: 16px; }
+}
+@media(max-width:600px) {
+  .s-h2 { font-size: 30px; }
+  .hero-h1 { font-size: 36px; }
+  .test-grid { grid-template-columns: 1fr; }
+  .stats-inner { flex-wrap: wrap; }
+  .mod-grid { grid-template-columns: 1fr; }
+  .mod { min-height: 280px; }
+  .cta-btns { flex-direction: column; }
+  .trusted-logos { gap: 4px; }
+  .trusted-logo { padding: 6px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── SKIP LINK (accessibility) ── -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="wrap" style="width:100%">
+    <div class="topbar-inner">
+      <a href="#">About Structura</a>
+      <a href="#">
+        <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5c-2 1.5-3.5 3.5-3.5 5.5s1.5 4 3.5 5.5"/><path d="M7 1.5c2 1.5 3.5 3.5 3.5 5.5s-1.5 4-3.5 5.5"/><path d="M1.5 7h11"/></svg>
+        International (English)
+      </a>
+      <a href="#">
+        <svg viewBox="0 0 14 14"><circle cx="6" cy="6" r="4.5"/><path d="M10 10l2.5 2.5"/></svg>
+        Search
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN NAV ── -->
+<header class="nav-bar" role="banner">
+  <div class="wrap" style="width:100%">
+    <div class="nav-inner">
+      <a href="/" class="logo" aria-label="Structura — home">
+        <svg class="logo-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+          <rect x="0"    y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="12.5" y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="25"   y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="0"    y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="12.5" y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="25"   y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
+          <rect x="11.5" y="0"    width="3"  height="9"   rx=".5" fill="#005A96"/>
+          <rect x="11.5" y="12.5" width="3"  height="9"   rx=".5" fill="#005A96"/>
+          <rect x="11.5" y="25"   width="3"  height="9"   rx=".5" fill="#005A96"/>
+          <rect x="19.5" y="0"    width="3"  height="9"   rx=".5" fill="#005A96"/>
+          <rect x="19.5" y="12.5" width="3"  height="9"   rx=".5" fill="#005A96"/>
+          <rect x="19.5" y="25"   width="3"  height="9"   rx=".5" fill="#005A96"/>
+        </svg>
+        <div class="logo-texts">
+          <span class="logo-name">STRUCTURA</span>
+          <span class="logo-sub">Digital Engineering Office</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" role="navigation" aria-label="Main navigation">
+        <button class="ni active" aria-expanded="false" aria-haspopup="true">
+          Products <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ni" aria-expanded="false" aria-haspopup="true">
+          Solutions <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ni" aria-expanded="false" aria-haspopup="true">
+          Resources <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ni" aria-expanded="false" aria-haspopup="true">
+          Support <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <a href="/about" class="ni">About</a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="n-search" aria-label="Search the site">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.5 13.5l4 4"/></svg>
+        </button>
+        <a href="/login" class="n-btn n-login">Login</a>
+        <a href="/signup" class="n-btn n-cta">Request beta</a>
+        <!-- hamburger — visible on mobile only -->
+        <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="icon-open" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+          <svg class="icon-close" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MOBILE MENU DRAWER ── -->
+  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
+    <ul class="mob-nav-list" role="list">
+      <li><button aria-expanded="false">Products <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+      <li><button aria-expanded="false">Solutions <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+      <li><button aria-expanded="false">Resources <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+      <li><button aria-expanded="false">Support <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/pricing">Pricing</a></li>
+    </ul>
+    <div class="mob-code-row" aria-label="Supported design codes">
+      <span class="mob-cpill">EUROCODE</span>
+      <span class="mob-cpill">ACI 318</span>
+      <span class="mob-cpill">IS 456</span>
+      <span class="mob-cpill">BS 8110</span>
+      <span class="mob-cpill">AS 3600</span>
+      <span class="mob-cpill">AISC 360</span>
+    </div>
+    <div class="mob-nav-actions">
+      <a href="/login" class="mob-login">Login</a>
+      <a href="/signup" class="mob-cta">Request beta access</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════ HERO ══════════════ -->
+<main id="main-content">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+
+      <div class="hero-left">
+        <div class="h-eyebrow"><div class="h-ey-rule"></div><span class="h-ey-text">Private Beta · Structural &amp; Civil Engineering</span></div>
+        <h1 class="hero-h1">The Digital<br>Engineering Office<br>for Professionals</h1>
+        <p class="hero-p">An integrated platform for civil and structural engineers — design calculators, BOQs, project management and learning, in one workspace. Built by an engineer, for engineers.</p>
+        <div class="code-row">
+          <span class="cpill">EUROCODE</span><span class="cpill">ACI 318</span><span class="cpill">BS 8110</span><span class="cpill">IS 456</span><span class="cpill">AS 3600</span><span class="cpill">SLS 1317</span><span class="cpill">AISC 360</span>
+        </div>
+        <div class="hero-btns">
+          <a href="#signup" class="btn btn-blue">Request beta access <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#products" class="btn btn-outline">Explore the platform</a>
+        </div>
+        <div class="trust-row">
+          <div class="tr-item"><span class="tr-n">5</span><span class="tr-l">Integrated Hubs</span></div>
+          <div class="tr-item"><span class="tr-n">8+</span><span class="tr-l">Design Codes</span></div>
+          <div class="tr-item"><span class="tr-n">Beta</span><span class="tr-l">Stage Release</span></div>
+          <div class="tr-item"><span class="tr-n">Free</span><span class="tr-l">During Beta</span></div>
+        </div>
+      </div>
+
+      <!-- FLOATING TEMPLATE PREVIEWS -->
+      <div class="hero-right">
+        <div class="pstack">
+
+          <!-- MAIN: RC Beam -->
+          <div class="pc pc-main">
+            <div class="pc-bar">
+              <span class="pc-bar-title">RC BEAM DESIGN — B-201 · EUROCODE 2</span>
+              <span class="pc-tag t-blue">EC2</span>
+              <span class="pc-tag t-green">✓ PASS</span>
+            </div>
+            <div class="rcb">
+              <div class="rc2col">
+                <div class="rc-panel">
+                  <div class="rc-panel-hd">Inputs</div>
+                  <div class="rc-r"><span class="rc-lbl">Width b</span><span class="rc-v">250 mm</span></div>
+                  <div class="rc-r"><span class="rc-lbl">Depth h</span><span class="rc-v">500 mm</span></div>
+                  <div class="rc-r"><span class="rc-lbl">f'ck</span><span class="rc-v">C25/30</span></div>
+                  <div class="rc-r"><span class="rc-lbl">M_Ed</span><span class="rc-v">85.4 kNm</span></div>
+                </div>
+                <div class="rc-panel">
+                  <div class="rc-panel-hd">Results</div>
+                  <div class="rc-r"><span class="rc-lbl">K factor</span><span class="rc-v">0.054</span></div>
+                  <div class="rc-r"><span class="rc-lbl">A_s,req</span><span class="rc-v">512 mm²</span></div>
+                  <div class="rc-r"><span class="rc-lbl">A_s,prov</span><span class="rc-v">628 mm²</span></div>
+                  <div class="rc-r"><span class="rc-lbl">Util.</span><span class="rc-v ok">0.62 ✓</span></div>
+                </div>
+              </div>
+              <div class="bmd">
+                <span class="bmd-lbl">BENDING MOMENT DIAGRAM</span>
+                <div class="bmd-beam-line"></div>
+                <svg class="bmd-svg" viewBox="0 0 370 26" preserveAspectRatio="none">
+                  <path d="M10 2 Q185 24 360 2" fill="none" stroke="#0071BC" stroke-width="1.5" opacity=".5"/>
+                  <path d="M10 2 Q185 24 360 2 L360 24 L10 24Z" fill="rgba(0,113,188,0.07)"/>
+                </svg>
+              </div>
+              <div class="util-row"><span>Utilization ratio</span><span class="ok">62% — PASS ✓</span></div>
+              <div class="util-track"><div class="util-fill"></div></div>
+            </div>
+            <div class="pc-foot">
+              <span class="pc-step">Step 4 / 6 — Flexural reinforcement</span>
+              <div class="pc-fbtns">
+                <button class="pfb pfb-sec">Export PDF</button>
+                <button class="pfb pfb-pri">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SIDE: BOQ -->
+          <div class="pc pc-side">
+            <div class="pc-bar pc-bar-gray">
+              <span class="pc-bar-title">BOQ — STRUCTURAL WORKS</span>
+            </div>
+            <div class="boq-body">
+              <div class="boq-section-hd">Bill of Quantities</div>
+              <table class="btbl">
+                <thead><tr><th>Description</th><th>Unit</th><th>Qty</th><th>Amount</th></tr></thead>
+                <tbody>
+                  <tr class="cat"><td colspan="4">A. CONCRETE</td></tr>
+                  <tr><td>Foundations C25</td><td>m³</td><td>48.5</td><td>$8,973</td></tr>
+                  <tr><td>Columns C30</td><td>m³</td><td>22.4</td><td>$4,704</td></tr>
+                  <tr><td>Beams C25</td><td>m³</td><td>31.8</td><td>$6,201</td></tr>
+                  <tr class="cat"><td colspan="4">B. REBAR</td></tr>
+                  <tr><td>High yield bars</td><td>t</td><td>18.6</td><td>$17,112</td></tr>
+                  <tr class="tot"><td colspan="3">TOTAL</td><td>$36,990</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- MINI: Site progress -->
+          <div class="pc pc-mini">
+            <div class="pc-bar pc-bar-gray">
+              <span class="pc-bar-title">SITE PROGRESS</span>
+            </div>
+            <div class="mini-body">
+              <div class="mini-h">Week 22 Report</div>
+              <div class="prog-r"><span class="prog-nm">Foundations</span><div class="prog-tr"><div class="prog-fill" style="width:100%;background:#2E8B57"></div></div><span class="prog-pct">100%</span></div>
+              <div class="prog-r"><span class="prog-nm">Columns</span><div class="prog-tr"><div class="prog-fill" style="width:78%;background:#0071BC"></div></div><span class="prog-pct">78%</span></div>
+              <div class="prog-r"><span class="prog-nm">Slabs</span><div class="prog-tr"><div class="prog-fill" style="width:45%;background:#E8330A"></div></div><span class="prog-pct">45%</span></div>
+              <div class="prog-r"><span class="prog-nm">MEP</span><div class="prog-tr"><div class="prog-fill" style="width:18%;background:#ccc"></div></div><span class="prog-pct">18%</span></div>
+            </div>
+          </div>
+
+          <!-- floating stat chip -->
+          <div class="badge-chip" style="bottom:86px;right:2px;animation:fl1 5.5s ease-in-out infinite 3s">
+            <div class="bc-val">0.62</div>
+            <div class="bc-lbl">UTILIZATION</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ticker -->
+  <div class="ticker">
+    <div class="ticker-scroll">
+      <span class="ti hi">RC BEAM DESIGN</span><span class="ti">RC SLAB DESIGN</span><span class="ti">COLUMN DESIGN</span><span class="ti">STEEL BEAM</span><span class="ti hi">PAD FOOTING DESIGN</span><span class="ti">PILE DESIGN</span><span class="ti">RETAINING WALL</span><span class="ti hi">BOQ ESTIMATION</span><span class="ti">BBS GENERATOR</span><span class="ti">CRACK WIDTH CHECK</span><span class="ti">DEFLECTION CHECK</span><span class="ti hi">SITE INSPECTION REPORT</span><span class="ti">QA/QC CHECKLIST</span><span class="ti">RATE ANALYSIS</span>
+      <span class="ti hi">RC BEAM DESIGN</span><span class="ti">RC SLAB DESIGN</span><span class="ti">COLUMN DESIGN</span><span class="ti">STEEL BEAM</span><span class="ti hi">PAD FOOTING DESIGN</span><span class="ti">PILE DESIGN</span><span class="ti">RETAINING WALL</span><span class="ti hi">BOQ ESTIMATION</span><span class="ti">BBS GENERATOR</span><span class="ti">CRACK WIDTH CHECK</span><span class="ti">DEFLECTION CHECK</span><span class="ti hi">SITE INSPECTION REPORT</span><span class="ti">QA/QC CHECKLIST</span><span class="ti">RATE ANALYSIS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ STATS ══════════════ -->
+<div class="stats-bar">
+  <div class="wrap" style="width:100%">
+    <div class="stats-inner">
+      <div class="stat"><div class="stat-n">5</div><div class="stat-l">Integrated Hubs</div></div>
+      <div class="stat"><div class="stat-n">60+</div><div class="stat-l">Tools Planned</div></div>
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Design Codes Supported</div></div>
+      <div class="stat"><div class="stat-n">Free</div><div class="stat-l">During Beta Period</div></div>
+      <div class="stat"><div class="stat-n">2026</div><div class="stat-l">Public Launch</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DESIGN CODES SUPPORTED ══════════════ -->
+<div class="trusted-strip" aria-label="Design codes and standards supported">
+  <div class="wrap">
+    <div class="trusted-inner">
+      <span class="trusted-lbl">Built to international standards</span>
+      <div class="trusted-div"></div>
+      <div class="trusted-logos" role="list">
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">Eurocode</span>
+          <span class="tl-type">EN 1990–1999</span>
+        </div>
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">ACI 318</span>
+          <span class="tl-type">USA · CONCRETE</span>
+        </div>
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">AISC 360</span>
+          <span class="tl-type">USA · STEEL</span>
+        </div>
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">IS 456 / 800</span>
+          <span class="tl-type">INDIA</span>
+        </div>
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">BS 8110 / 5950</span>
+          <span class="tl-type">UNITED KINGDOM</span>
+        </div>
+        <div class="trusted-logo" role="listitem">
+          <span class="tl-name">AS 3600 / 4100</span>
+          <span class="tl-type">AUSTRALIA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ALL PRODUCTS ══════════════ -->
+<section class="section section-gray" id="products" aria-labelledby="products-heading">
+  <div class="wrap">
+    <div class="s-head">
+      <div class="s-eye"><div class="s-eye-rule"></div><span>Platform</span></div>
+      <h2 class="s-h2" id="products-heading">All Structura Products</h2>
+      <p class="s-sub">From structural calculation to site management — every tool your practice needs, fully integrated and standards-compliant.</p>
+    </div>
+
+    <div class="mod-grid" role="list">
+
+      <!-- ── 1. DESIGN STUDIO ── -->
+      <article class="mod mod-ds" role="listitem" aria-label="Design Studio — Structural Engineering">
+        <div class="mod-photo" aria-hidden="true"></div>
+        <div class="mod-overlay" aria-hidden="true"></div>
+        <div class="mod-vignette" aria-hidden="true"></div>
+        <div class="mod-tab" aria-hidden="true"></div>
+        <div class="mod-icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="15" height="16" rx="1.5"/><path d="M5 9h9M5 12h7M5 15h5"/><rect x="15" y="9" width="7" height="10" rx="1"/><path d="M17 12h3M17 15h2"/></svg>
+        </div>
+        <span class="mod-count">60+ Tools</span>
+        <div class="mod-body">
+          <span class="mod-branch">Structural Engineering</span>
+          <h3 class="mod-title">Design Studio</h3>
+          <p class="mod-desc">Create, calculate, and generate professional calculation reports compliant with Eurocode, ACI, IS 456, BS 8110, AS 3600 and more.</p>
+          <div class="mod-features">
+            <span class="mod-feat-pill">RC Beam &amp; Slab</span>
+            <span class="mod-feat-pill">Column Design</span>
+            <span class="mod-feat-pill">Steel &amp; Timber</span>
+            <span class="mod-feat-pill">PDF Reports</span>
+          </div>
+          <a href="/design-studio" class="mod-cta">
+            Learn more
+            <span class="mod-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- ── 2. PM OFFICE ── -->
+      <article class="mod mod-pm" role="listitem" aria-label="PM Office — Project Management">
+        <div class="mod-photo" aria-hidden="true"></div>
+        <div class="mod-overlay" aria-hidden="true"></div>
+        <div class="mod-vignette" aria-hidden="true"></div>
+        <div class="mod-tab" aria-hidden="true"></div>
+        <div class="mod-icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="1.5"/><path d="M2 8h20"/><rect x="6" y="12" width="4" height="6" rx=".5"/><rect x="13" y="14" width="4" height="4" rx=".5"/></svg>
+        </div>
+        <span class="mod-count">Site + Reports</span>
+        <div class="mod-body">
+          <span class="mod-branch">Project Management</span>
+          <h3 class="mod-title">PM Office</h3>
+          <p class="mod-desc">Manage site reports, RFIs, NCRs, submittals and QA/QC checklists from one streamlined workspace — on desktop or mobile.</p>
+          <div class="mod-features">
+            <span class="mod-feat-pill">Site Inspection</span>
+            <span class="mod-feat-pill">RFI &amp; NCR</span>
+            <span class="mod-feat-pill">QA/QC Checklist</span>
+            <span class="mod-feat-pill">Approvals</span>
+          </div>
+          <a href="/pm-office" class="mod-cta">
+            Learn more
+            <span class="mod-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- ── 3. QS OFFICE ── -->
+      <article class="mod mod-qs" role="listitem" aria-label="QS Office — Quantity Surveying">
+        <div class="mod-photo" aria-hidden="true"></div>
+        <div class="mod-overlay" aria-hidden="true"></div>
+        <div class="mod-vignette" aria-hidden="true"></div>
+        <div class="mod-tab" aria-hidden="true"></div>
+        <div class="mod-icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="12" height="18" rx="1.5"/><path d="M6 8h6M6 11h6M6 14h4"/><rect x="17" y="12" width="5" height="9" rx="1"/><path d="M18 9.5l1.5 2.5"/></svg>
+        </div>
+        <span class="mod-count">BOQ + BBS</span>
+        <div class="mod-body">
+          <span class="mod-branch">Quantity Surveying</span>
+          <h3 class="mod-title">QS Office</h3>
+          <p class="mod-desc">Produce BOQs, rate analyses, rebar schedules and cost estimates with precision, powered by live cost databases.</p>
+          <div class="mod-features">
+            <span class="mod-feat-pill">BOQ Estimation</span>
+            <span class="mod-feat-pill">Rate Analysis</span>
+            <span class="mod-feat-pill">BBS Generator</span>
+            <span class="mod-feat-pill">Cost Database</span>
+          </div>
+          <a href="/qs-office" class="mod-cta">
+            Learn more
+            <span class="mod-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- ── 4. ARCHITECTURE ── -->
+      <article class="mod mod-arc" role="listitem" aria-label="Architecture — Planning and Design">
+        <div class="mod-photo" aria-hidden="true"></div>
+        <div class="mod-overlay" aria-hidden="true"></div>
+        <div class="mod-vignette" aria-hidden="true"></div>
+        <div class="mod-tab" aria-hidden="true"></div>
+        <div class="mod-icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3L3 8v13h18V8z"/><rect x="9" y="13" width="4" height="8"/><rect x="14" y="11" width="4" height="10"/><path d="M3 8l9-5 9 5"/></svg>
+        </div>
+        <span class="mod-count">CAD + Standards</span>
+        <div class="mod-body">
+          <span class="mod-branch">Planning &amp; Design</span>
+          <h3 class="mod-title">Architecture</h3>
+          <p class="mod-desc">Area tools, stair calculators, CAD blocks, accessibility guidelines and planning tools built to international standards.</p>
+          <div class="mod-features">
+            <span class="mod-feat-pill">Area Tools</span>
+            <span class="mod-feat-pill">Stair Design</span>
+            <span class="mod-feat-pill">CAD Blocks</span>
+            <span class="mod-feat-pill">Accessibility</span>
+          </div>
+          <a href="/architecture" class="mod-cta">
+            Learn more
+            <span class="mod-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+      <!-- ── 5. ACADEMY ── -->
+      <article class="mod mod-ac" role="listitem" aria-label="Academy — Engineering Education">
+        <div class="mod-photo" aria-hidden="true"></div>
+        <div class="mod-overlay" aria-hidden="true"></div>
+        <div class="mod-vignette" aria-hidden="true"></div>
+        <div class="mod-tab" aria-hidden="true"></div>
+        <div class="mod-icon-badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5z"/><path d="M5 10.5v7c0 2.5 3.1 4 7 4s7-1.5 7-4v-7"/><path d="M22 8v8"/><circle cx="22" cy="18" r="1.5"/></svg>
+        </div>
+        <span class="mod-count">Courses + Certs</span>
+        <div class="mod-body">
+          <span class="mod-branch">Learning &amp; Education</span>
+          <h3 class="mod-title">Academy</h3>
+          <p class="mod-desc">Master structural concepts through video courses, interactive simulations, quizzes and industry-recognised certificates.</p>
+          <div class="mod-features">
+            <span class="mod-feat-pill">Video Courses</span>
+            <span class="mod-feat-pill">Simulations</span>
+            <span class="mod-feat-pill">Quizzes</span>
+            <span class="mod-feat-pill">Certificates</span>
+          </div>
+          <a href="/academy" class="mod-cta">
+            Learn more
+            <span class="mod-cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
+            </span>
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TOOLS ══════════════ -->
+<div class="tools-strip">
+  <div class="wrap">
+    <div class="tools-hdr">
+      <h3 class="tools-title">Popular Engineering Tools</h3>
+      <a href="#" class="lnk">View all 200+ tools <svg viewBox="0 0 13 13"><path d="M1 6.5h11M7.5 2.5l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="tool-grid">
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><path d="M2 8.5h13" stroke-linecap="round"/><path d="M2 8.5l2-4.5M15 8.5l-2-4.5"/></svg></div><div><div class="tc-name">RC Beam Design</div><div class="tc-code">EC2 / ACI / IS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><rect x="3" y="3" width="11" height="11" rx="1"/><path d="M3 7.5h11M7.5 3v11"/></svg></div><div><div class="tc-name">RC Slab Design</div><div class="tc-code">EC2 / BS / IS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><rect x="6.5" y="2" width="4" height="13" rx=".5"/><path d="M4 15h9"/></svg></div><div><div class="tc-name">Column Design</div><div class="tc-code">EC2 / ACI</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><path d="M3 14h11v-3H3z"/><path d="M5.5 11V7M8.5 11V5M11.5 11V7"/></svg></div><div><div class="tc-name">Pad Footing</div><div class="tc-code">EC7 / ACI</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><path d="M2 13l3-6.5 3 4.5 2-3 4 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><div class="tc-name">Deflection Check</div><div class="tc-code">EC2 / IS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><rect x="2" y="5" width="13" height="7" rx="1"/><path d="M2 8.5h13"/></svg></div><div><div class="tc-name">Steel Beam</div><div class="tc-code">EC3 / AISC</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><path d="M4 2v13M13 2v13M4 6h9M4 10h9"/></svg></div><div><div class="tc-name">BBS Generator</div><div class="tc-code">IS / BS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><circle cx="8.5" cy="10.5" r="4"/><path d="M8.5 2v3M2 10.5h3M15 10.5h-3" stroke-linecap="round"/></svg></div><div><div class="tc-name">Pile Design</div><div class="tc-code">EC7 / BS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><path d="M2 15L8.5 2l6.5 13H2"/><path d="M5.5 10.5h6"/></svg></div><div><div class="tc-name">Retaining Wall</div><div class="tc-code">EC7 / IS</div></div></div>
+      <div class="tc"><div class="tc-ico"><svg viewBox="0 0 17 17"><rect x="3" y="3" width="11" height="11" rx="1"/><path d="M6 8.5h5M8.5 6v5" stroke-linecap="round"/></svg></div><div><div class="tc-name">Crack Width</div><div class="tc-code">EC2 / BS</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ CALC APP ══════════════ -->
+<section class="calc-section">
+  <div class="wrap">
+    <div class="calc-grid">
+      <div class="calc-ui">
+        <div class="cu-hdr">
+          <span class="cu-title">RC BEAM DESIGN — B-201</span>
+          <div class="cu-tags"><span class="cu-tag blue">EUROCODE 2</span><span class="cu-tag green">✓ VERIFIED</span></div>
+        </div>
+        <div class="cu-body">
+          <div class="cu-in">
+            <div class="cu-sec-lbl">Section &amp; Loads</div>
+            <div class="cu-field"><label><span>Width b</span><span>mm</span></label><div class="cu-row"><input class="cu-inp" value="250"/><span class="cu-unit">mm</span></div></div>
+            <div class="cu-field"><label><span>Total depth h</span><span>mm</span></label><div class="cu-row"><input class="cu-inp" value="500"/><span class="cu-unit">mm</span></div></div>
+            <div class="cu-field"><label><span>M_Ed</span><span>kNm</span></label><div class="cu-row"><input class="cu-inp" value="85.40"/><span class="cu-unit">kNm</span></div></div>
+            <div class="cu-field"><label><span>Concrete grade</span><span>—</span></label><div class="cu-row"><input class="cu-inp" value="C25/30"/><span class="cu-unit">—</span></div></div>
+          </div>
+          <div class="cu-out">
+            <div class="cu-sec-lbl">Design Results</div>
+            <div class="cu-res"><span class="cu-rl">K factor</span><span class="cu-rv">0.054</span></div>
+            <div class="cu-res"><span class="cu-rl">z / d</span><span class="cu-rv">0.949</span></div>
+            <div class="cu-res"><span class="cu-rl">A_s,req</span><span class="cu-rv">512 mm²</span></div>
+            <div class="cu-res"><span class="cu-rl">A_s,prov</span><span class="cu-rv">628 mm²</span></div>
+            <div class="cu-res"><span class="cu-rl">Utilization</span><span class="cu-rv pass">0.62 — PASS ✓</span></div>
+            <div class="cu-util">
+              <div class="cu-uh"><span>Utilization ratio</span><span class="ok">62%</span></div>
+              <div class="cu-ut"><div class="cu-uf"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="cu-foot">
+          <span class="cu-step">Step 4 of 6 — Flexural Reinforcement</span>
+          <div class="cu-btns">
+            <button class="cub s">← Back</button>
+            <button class="cub s">Export PDF</button>
+            <button class="cub p">Next Step →</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="s-eye"><div class="s-eye-rule"></div><span>Calculation Engine</span></div>
+        <h2 class="s-h2">Built for Engineers.<br>Designed for Precision.</h2>
+        <p class="s-sub" style="margin-bottom:28px">Every calculation is step-by-step transparent, standards-referenced, and instantly exportable — audit-ready every time.</p>
+        <div class="feat-grid">
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="7.5"/><path d="M7 10l2.5 2.5L14 7" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feat-h">International Standards</div>
+            <p class="feat-p">Eurocode, ACI, IS, BS, AS and AISC — validated against published worked examples.</p>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></div>
+            <div class="feat-h">Professional Reports</div>
+            <p class="feat-p">PDF, Word &amp; Excel exports with full step-by-step calculation breakdowns.</p>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><path d="M10 3v14M3 10h14"/><circle cx="10" cy="10" r="3"/></svg></div>
+            <div class="feat-h">Inline Validation</div>
+            <p class="feat-p">Real-time error checking, utilization bars and engineering tooltips on every input.</p>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 10h6M10 7v6" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            <div class="feat-h">Save &amp; Access Anywhere</div>
+            <p class="feat-p">Projects and reports synced across all your devices in real time.</p>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><path d="M5 10h10M10 5v10" stroke-width="1.8" stroke-linecap="round"/><rect x="2" y="2" width="16" height="16" rx="2"/></svg></div>
+            <div class="feat-h">Unit Flexibility</div>
+            <p class="feat-p">Toggle between SI and imperial units at any stage of your workflow.</p>
+          </div>
+          <div class="feat">
+            <div class="feat-ico"><svg viewBox="0 0 20 20"><path d="M10 3l2 5h5l-4 3 1.5 5.5L10 13.5 5.5 16.5 7 11 3 8h5z"/></svg></div>
+            <div class="feat-h">Continuous Learning</div>
+            <p class="feat-p">Academy courses, video tutorials and certifications to keep your skills sharp.</p>
+          </div>
+        </div>
+        <a href="#signup" class="btn btn-blue" style="margin-top:28px">Request beta access <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ STANDARDS ══════════════ -->
+<div class="std-section">
+  <div class="wrap">
+    <div class="std-inner">
+      <span class="std-lbl">Engineered for global codes</span>
+      <div class="std-div"></div>
+      <div class="std-pills">
+        <div class="sp on">EC<span>Eurocode</span></div>
+        <div class="sp">ACI<span>American</span></div>
+        <div class="sp">BS<span>British</span></div>
+        <div class="sp on">IS<span>Indian</span></div>
+        <div class="sp">AS<span>Australian</span></div>
+        <div class="sp">SLS<span>Sri Lankan</span></div>
+        <div class="sp">AISC<span>Steel</span></div>
+        <div class="sp">NZS<span>New Zealand</span></div>
+        <div class="sp">ASCE<span>Loads</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ WHY STRUCTURA ══════════════ -->
+<section class="section section-gray">
+  <div class="wrap">
+    <div class="s-head" style="text-align:center">
+      <div class="s-eye" style="justify-content:center"><div class="s-eye-rule"></div><span>Why Structura</span></div>
+      <h2 class="s-h2">Built on Engineering Principles, Not Marketing</h2>
+      <p class="s-sub" style="margin:14px auto 0">An honest look at what we're building and why — directly from the founder.</p>
+    </div>
+    <div class="test-grid">
+      <div class="tcard">
+        <div class="t-stars" aria-hidden="true">
+          <svg viewBox="0 0 16 16" style="width:20px;height:20px;fill:#0071BC"><path d="M3 2h10v3H5v6h8v3H3z"/></svg>
+        </div>
+        <p class="t-q">Most engineers stitch together spreadsheets, PDFs, and disconnected tools across projects. Structura brings calculation, BOQ, project tracking, and reference under one roof — built around how real practices actually work.</p>
+        <div class="t-auth"><div class="t-av">01</div><div><div class="t-name">Integrated by Design</div><div class="t-role">Five hubs, one shared workspace</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="t-stars" aria-hidden="true">
+          <svg viewBox="0 0 16 16" style="width:20px;height:20px;fill:#0071BC"><path d="M8 1l2 5h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z"/></svg>
+        </div>
+        <p class="t-q">Every calculation in Structura is step-by-step transparent and references the exact clause of the governing code. No black boxes. Reports are audit-ready, and worked examples will be published for verification against textbook results.</p>
+        <div class="t-auth"><div class="t-av">02</div><div><div class="t-name">Transparent &amp; Verifiable</div><div class="t-role">Every step shown, every clause cited</div></div></div>
+      </div>
+      <div class="tcard">
+        <div class="t-stars" aria-hidden="true">
+          <svg viewBox="0 0 16 16" style="width:20px;height:20px;fill:#0071BC"><circle cx="8" cy="8" r="6" fill="none" stroke="#0071BC" stroke-width="2"/><path d="M5 8l2.5 2.5L11 6" fill="none" stroke="#0071BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="t-q">Structura is in private beta. Build is in progress, and early users help shape what ships first. You won't see inflated user counts or fake reviews here — what you see is what's built. Join the beta to test, give feedback, and use it free.</p>
+        <div class="t-auth"><div class="t-av">03</div><div><div class="t-name">Honestly in Beta</div><div class="t-role">Public launch planned for 2026</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div>
+        <h2 class="cta-h">Want early access?</h2>
+        <p class="cta-p">Structura is in private beta, with new modules shipping every few weeks. Join the waitlist to get free access during the beta period and help shape the roadmap.</p>
+      </div>
+      <div class="cta-btns">
+        <a href="#signup" class="btn-white">Request beta access <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#roadmap" class="btn-wh-outline">See the roadmap</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-logo">
+        <div class="logo">
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none">
+            <rect x="0" y="11.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="25" y="11.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="0" y="19.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="25" y="19.5" width="9" height="3" rx=".5" fill="white"/>
+            <rect x="11.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"/>
+            <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"/>
+            <rect x="11.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"/>
+            <rect x="19.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"/>
+            <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"/>
+            <rect x="19.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"/>
+          </svg>
+          <div class="logo-texts" style="margin-left:10px">
+            <span class="logo-name" style="font-size:15px">STRUCTURA</span>
+            <span class="logo-sub">Digital Engineering Office</span>
+          </div>
+        </div>
+        <p>The integrated engineering platform for modern civil and structural engineering professionals worldwide.</p>
+      </div>
+      <div class="footer-col"><h4>Platform</h4><div class="footer-links"><a href="#">Design Studio</a><a href="#">PM Office</a><a href="#">QS Office</a><a href="#">Architecture</a><a href="#">Academy</a></div></div>
+      <div class="footer-col"><h4>Tools</h4><div class="footer-links"><a href="#">RC Beam Design</a><a href="#">Column Design</a><a href="#">Steel Beam</a><a href="#">Pad Footing</a><a href="#">All Tools →</a></div></div>
+      <div class="footer-col"><h4>Company</h4><div class="footer-links"><a href="#">About Structura</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Partners</a></div></div>
+      <div class="footer-col"><h4>Support</h4><div class="footer-links"><a href="#">Documentation</a><a href="#">Help Center</a><a href="#">Community</a><a href="#">Pricing</a><a href="#">Status</a></div></div>
+    </div>
+    <div class="footer-btm">
+      <span class="footer-copy">© 2026 Structura. All rights reserved. Private beta.</span>
+      <div class="footer-legal"><a href="/privacy">Privacy Policy</a><a href="/terms">Terms of Service</a><a href="/cookies">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var btn = document.getElementById('hamburger-btn');
+  var menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+
+  function openMenu() {
+    btn.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Close navigation menu');
+    menu.classList.add('open');
+    menu.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function closeMenu() {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open navigation menu');
+    menu.classList.remove('open');
+    menu.setAttribute('aria-hidden', 'true');
+  }
+
+  btn.addEventListener('click', function() {
+    if (btn.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  /* close on Escape key */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && btn.classList.contains('open')) {
+      closeMenu();
+      btn.focus();
+    }
+  });
+
+  /* close when clicking outside */
+  document.addEventListener('click', function(e) {
+    if (btn.classList.contains('open') &&
+        !menu.contains(e.target) &&
+        !btn.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  /* close on any mobile menu link click */
+  menu.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  /* close on resize back to desktop */
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 900) closeMenu();
+  });
+})();
+</script>
+
+<!-- ══════════════ COOKIE CONSENT (GDPR / CCPA / PDPA) ══════════════ -->
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="position:fixed; bottom:16px; left:16px; right:16px; max-width:580px; margin:0 auto; background:#1A1A1A; color:#fff; padding:18px 22px; border-radius:6px; box-shadow:0 8px 32px rgba(0,0,0,0.35); z-index:9999; display:none; font-size:14px; line-height:1.5;">
+  <div style="display:flex; flex-direction:column; gap:12px;">
+    <div>
+      <strong style="display:block; margin-bottom:6px; font-size:15px;">We respect your privacy</strong>
+      <span style="color:rgba(255,255,255,0.8);">Structura uses essential cookies to run the site and optional analytics cookies to help us improve. You can change this anytime in our <a href="/cookies" style="color:#4DA6E0; text-decoration:underline;">Cookie Policy</a>.</span>
+    </div>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <button id="cookie-accept" style="background:#0071BC; color:#fff; border:0; padding:9px 18px; font-size:13.5px; font-weight:600; border-radius:3px; cursor:pointer;">Accept all</button>
+      <button id="cookie-essential" style="background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,0.4); padding:9px 18px; font-size:13.5px; font-weight:600; border-radius:3px; cursor:pointer;">Essential only</button>
+      <a href="/cookies" style="color:rgba(255,255,255,0.7); align-self:center; font-size:13px; text-decoration:underline;">Manage preferences</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  try {
+    var consent = localStorage.getItem('structura-cookie-consent');
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    if (!consent) banner.style.display = 'block';
+
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      try { localStorage.setItem('structura-cookie-consent', 'all'); } catch(e) {}
+      banner.style.display = 'none';
+    });
+    document.getElementById('cookie-essential').addEventListener('click', function() {
+      try { localStorage.setItem('structura-cookie-consent', 'essential'); } catch(e) {}
+      banner.style.display = 'none';
+    });
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
