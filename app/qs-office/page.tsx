@@ -1,8 +1,8 @@
-export default function Home() {
+export default function QsOfficePage() {
   return (
     <iframe
-      src="/home.html"
-      title="STRUCTURA Home"
+      src="/qsOFFICE.html"
+      title="STRUCTURA QS Office"
       style={{
         display: "block",
         width: "100%",

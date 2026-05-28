@@ -1,8 +1,8 @@
-export default function Home() {
+export default function AcademyPage() {
   return (
     <iframe
-      src="/home.html"
-      title="STRUCTURA Home"
+      src="/academy.html"
+      title="STRUCTURA Academy"
       style={{
         display: "block",
         width: "100%",

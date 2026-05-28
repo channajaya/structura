@@ -1,8 +1,8 @@
-export default function Home() {
+export default function PmOfficePage() {
   return (
     <iframe
-      src="/home.html"
-      title="STRUCTURA Home"
+      src="/pmOFFICE_v2.html"
+      title="STRUCTURA PM Office"
       style={{
         display: "block",
         width: "100%",
