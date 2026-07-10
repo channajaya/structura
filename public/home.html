@@ -170,36 +170,15 @@ button { font: inherit; border: 0; cursor: pointer; background: none; }
 .lnk:hover svg { transform: translateX(2px); }
 
 /* ══════════════════════════════════
-   HEADER — Tekla.com exact layout:
-   topbar (gray) + main nav (white)
+   Shared brand logo styles — still used by the footer logo mark.
+   The header itself now lives in the shared SiteHeader component
+   rendered outside this page.
    ══════════════════════════════════ */
-.topbar { background: var(--nav-top-bg); border-bottom: 1px solid var(--border); height: 40px; display: flex; align-items: center; }
-.topbar-inner { display: flex; justify-content: flex-end; align-items: center; gap: 22px; }
-.topbar a { font-size: 12.5px; color: var(--text-3); transition: color .14s; display: flex; align-items: center; gap: 5px; }
-.topbar a:hover { color: var(--blue); }
-.topbar svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-
-.nav-bar { background: var(--white); border-bottom: 1px solid var(--border); height: 68px; display: flex; align-items: center; position: sticky; top: 0; z-index: 200; }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
 .logo { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .logo-icon { width: 34px; height: 34px; }
 .logo-texts { display: flex; flex-direction: column; line-height: 1.2; }
 .logo-name { font-size: 17px; font-weight: 700; color: var(--text-1); letter-spacing: .08em; }
 .logo-sub { font-size: 9px; font-family: var(--mono); color: var(--blue); letter-spacing: .14em; text-transform: uppercase; margin-top: 1px; }
-.nav-links { display: flex; align-items: stretch; height: 100%; }
-.ni { display: flex; align-items: center; gap: 5px; padding: 0 16px; font-size: 14.5px; font-weight: 600; color: var(--text-2); border-bottom: 3px solid transparent; cursor: pointer; transition: .15s; white-space: nowrap; height: 100%; }
-.ni:hover { color: var(--blue); border-bottom-color: var(--blue); }
-.ni.active { color: var(--blue); border-bottom-color: var(--blue); }
-.ni svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; opacity: .5; }
-.nav-right { display: flex; align-items: center; gap: 10px; }
-.n-search { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--text-3); border-radius: 2px; transition: .15s; }
-.n-search:hover { background: var(--gray-page); color: var(--text-1); }
-.n-search svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.8; }
-.n-btn { padding: 9px 18px; font-size: 13.5px; font-weight: 600; border-radius: 0; transition: .16s; }
-.n-login { background: var(--white); color: var(--blue); border: 1.5px solid var(--blue); }
-.n-login:hover { background: var(--blue-l); }
-.n-cta { background: var(--blue); color: var(--white); border: 1.5px solid var(--blue); }
-.n-cta:hover { background: var(--blue-d); border-color: var(--blue-d); }
 
 /* ══════════════════════════════════
    HERO — Tekla: light gray bg,
@@ -368,6 +347,8 @@ button { font: inherit; border: 0; cursor: pointer; background: none; }
   cursor: pointer;
   border-right: 1px solid var(--border);
   transition: flex .45s cubic-bezier(.4,0,.2,1);
+  text-decoration: none;
+  color: inherit;
 }
 .mod:last-child { border-right: 0; }
 
@@ -529,7 +510,7 @@ button { font: inherit; border: 0; cursor: pointer; background: none; }
   margin-bottom: 0;
 }
 .mod:hover .mod-desc,
-.mod:focus-within .mod-desc {
+.mod:focus-visible .mod-desc {
   max-height: 120px;
   opacity: 1;
   margin-bottom: 16px;
@@ -547,7 +528,7 @@ button { font: inherit; border: 0; cursor: pointer; background: none; }
   margin-bottom: 0;
 }
 .mod:hover .mod-features,
-.mod:focus-within .mod-features {
+.mod:focus-visible .mod-features {
   max-height: 60px;
   opacity: 1;
   margin-bottom: 14px;
@@ -563,71 +544,15 @@ button { font: inherit; border: 0; cursor: pointer; background: none; }
   white-space: nowrap;
 }
 
-/* CTA button — animated arrow on hover */
-.mod-cta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 13px 18px;
-  background: var(--white);
-  color: var(--text-1);
-  font-size: 13.5px;
-  font-weight: 700;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  text-decoration: none;
-  transition:
-    background .2s,
-    color .2s,
-    transform .2s,
-    box-shadow .2s;
-  transform: translateY(4px);
-  opacity: 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,.3);
-}
-.mod:hover .mod-cta,
-.mod:focus-within .mod-cta {
-  transform: translateY(0);
-  opacity: 1;
-}
-/* Visible focus outline for keyboard users */
-.mod-cta:focus-visible {
-  outline: 3px solid var(--white);
-  outline-offset: 3px;
-}
 a:focus-visible, button:focus-visible, input:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 2px;
 }
-.mod-cta:hover {
-  background: var(--blue);
-  color: var(--white);
-  box-shadow: 0 6px 24px rgba(0,113,188,.45);
+a.mod:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: -3px;
+  z-index: 1;
 }
-.mod-cta-icon {
-  width: 20px; height: 20px;
-  background: currentColor;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: transform .25s;
-}
-.mod-cta:hover .mod-cta-icon { transform: translateX(3px); }
-.mod-cta-icon svg {
-  width: 11px; height: 11px;
-  stroke: var(--text-1);
-  fill: none; stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.mod-cta:hover .mod-cta-icon svg { stroke: var(--blue); }
-
-/* fallback static CTA for accessibility (shown when no hover, e.g. keyboard) */
-.mod-cta-static {
-  display: none;
-}
-
 /* ══════════════════════════════════
    TOOLS GRID — Tekla browse style
    ══════════════════════════════════ */
@@ -785,120 +710,6 @@ button:focus-visible,
 a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 /* ══════════════════════════════════
-   SEMANTIC NAV ITEMS (button/a)
-   ══════════════════════════════════ */
-.ni {
-  display: flex; align-items: center; gap: 5px;
-  padding: 0 16px;
-  font-size: 14.5px; font-weight: 600;
-  color: var(--text-2);
-  border: none; border-bottom: 3px solid transparent;
-  background: none;
-  cursor: pointer;
-  transition: .15s; white-space: nowrap;
-  height: 100%; font-family: var(--sans);
-  text-decoration: none;
-}
-.ni:hover { color: var(--blue); border-bottom-color: var(--blue); }
-.ni.active { color: var(--blue); border-bottom-color: var(--blue); }
-.ni svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; opacity: .5; pointer-events: none; }
-
-/* ══════════════════════════════════
-   HAMBURGER BUTTON
-   ══════════════════════════════════ */
-.hamburger {
-  display: none;
-  width: 40px; height: 40px;
-  align-items: center; justify-content: center;
-  background: none; border: 1.5px solid var(--border);
-  border-radius: 2px; cursor: pointer;
-  color: var(--text-2); transition: .15s;
-  flex-shrink: 0;
-}
-.hamburger:hover { border-color: var(--blue); color: var(--blue); }
-.hamburger svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
-.hamburger .icon-close { display: none; }
-.hamburger.open .icon-open { display: none; }
-.hamburger.open .icon-close { display: block; }
-
-/* ══════════════════════════════════
-   MOBILE MENU DRAWER
-   ══════════════════════════════════ */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  top: 100%; left: 0; right: 0;
-  background: var(--white);
-  border-bottom: 3px solid var(--blue);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-  z-index: 199;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height .3s ease, opacity .25s ease;
-  opacity: 0;
-}
-.mobile-menu.open {
-  max-height: 600px;
-  opacity: 1;
-}
-.mob-nav-list {
-  list-style: none;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-}
-.mob-nav-list li a,
-.mob-nav-list li button {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; padding: 14px 24px;
-  font-size: 15px; font-weight: 600; color: var(--text-1);
-  background: none; border: none; cursor: pointer;
-  font-family: var(--sans); text-decoration: none;
-  transition: background .14s, color .14s;
-  border-left: 3px solid transparent;
-}
-.mob-nav-list li a:hover,
-.mob-nav-list li button:hover {
-  background: var(--blue-l);
-  color: var(--blue);
-  border-left-color: var(--blue);
-}
-.mob-nav-list li button svg {
-  width: 13px; height: 13px; stroke: currentColor;
-  fill: none; stroke-width: 2.5; opacity: .5;
-}
-.mob-nav-actions {
-  display: flex; gap: 10px; padding: 16px 24px;
-  align-items: center; flex-wrap: wrap;
-}
-.mob-login {
-  padding: 10px 20px; font-size: 14px; font-weight: 600;
-  color: var(--blue); border: 1.5px solid var(--blue);
-  border-radius: 0; background: var(--white); cursor: pointer;
-  font-family: var(--sans); transition: background .15s;
-  text-decoration: none;
-}
-.mob-login:hover { background: var(--blue-l); }
-.mob-cta {
-  flex: 1; padding: 11px 20px; font-size: 14px; font-weight: 700;
-  background: var(--blue); color: var(--white);
-  border: none; border-radius: 0; cursor: pointer;
-  font-family: var(--sans); text-align: center;
-  transition: background .15s; text-decoration: none;
-  display: block;
-}
-.mob-cta:hover { background: var(--blue-d); }
-.mob-code-row {
-  padding: 12px 24px 16px;
-  display: flex; flex-wrap: wrap; gap: 5px;
-  border-top: 1px solid var(--border);
-}
-.mob-cpill {
-  font-family: var(--mono); font-size: 10px; padding: 3px 8px;
-  border: 1px solid var(--border); border-radius: 2px;
-  color: var(--text-3); background: var(--gray-page);
-}
-
-/* ══════════════════════════════════
    TRUSTED BY LOGOS STRIP
    ══════════════════════════════════ */
 .trusted-strip {
@@ -937,15 +748,9 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
   .mod:last-child { border-bottom: 0; }
   .mod-desc { max-height: 100px !important; opacity: 1 !important; margin-bottom: 14px !important; }
   .mod-features { max-height: 60px !important; opacity: 1 !important; margin-bottom: 12px !important; }
-  .mod-cta { transform: translateY(0) !important; opacity: 1 !important; }
   .calc-grid { grid-template-columns: 1fr; }
 }
 @media(max-width:900px) {
-  .nav-links { display: none; }
-  .n-login, .n-cta { display: none; }
-  .hamburger { display: flex; }
-  .mobile-menu { display: block; }
-  .nav-bar { position: sticky; top: 0; }
   .mod-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:800px) {
@@ -973,103 +778,6 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- ── TOPBAR ── -->
-<div class="topbar">
-  <div class="wrap" style="width:100%">
-    <div class="topbar-inner">
-      <a href="#">About Structura</a>
-      <a href="#">
-        <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><path d="M7 1.5c-2 1.5-3.5 3.5-3.5 5.5s1.5 4 3.5 5.5"/><path d="M7 1.5c2 1.5 3.5 3.5 3.5 5.5s-1.5 4-3.5 5.5"/><path d="M1.5 7h11"/></svg>
-        International (English)
-      </a>
-      <a href="#">
-        <svg viewBox="0 0 14 14"><circle cx="6" cy="6" r="4.5"/><path d="M10 10l2.5 2.5"/></svg>
-        Search
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- ── MAIN NAV ── -->
-<header class="nav-bar" role="banner">
-  <div class="wrap" style="width:100%">
-    <div class="nav-inner">
-      <a href="/" class="logo" aria-label="Structura — home">
-        <svg class="logo-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-          <rect x="0"    y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="12.5" y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="25"   y="11.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="0"    y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="12.5" y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="25"   y="19.5" width="9"  height="3" rx=".5" fill="#0071BC"/>
-          <rect x="11.5" y="0"    width="3"  height="9"   rx=".5" fill="#005A96"/>
-          <rect x="11.5" y="12.5" width="3"  height="9"   rx=".5" fill="#005A96"/>
-          <rect x="11.5" y="25"   width="3"  height="9"   rx=".5" fill="#005A96"/>
-          <rect x="19.5" y="0"    width="3"  height="9"   rx=".5" fill="#005A96"/>
-          <rect x="19.5" y="12.5" width="3"  height="9"   rx=".5" fill="#005A96"/>
-          <rect x="19.5" y="25"   width="3"  height="9"   rx=".5" fill="#005A96"/>
-        </svg>
-        <div class="logo-texts">
-          <span class="logo-name">STRUCTURA</span>
-          <span class="logo-sub">Digital Engineering Office</span>
-        </div>
-      </a>
-
-      <nav class="nav-links" role="navigation" aria-label="Main navigation">
-        <button class="ni active" aria-expanded="false" aria-haspopup="true">
-          Products <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="ni" aria-expanded="false" aria-haspopup="true">
-          Solutions <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="ni" aria-expanded="false" aria-haspopup="true">
-          Resources <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button class="ni" aria-expanded="false" aria-haspopup="true">
-          Support <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <a href="/about" class="ni" target="_top">About</a>
-      </nav>
-
-      <div class="nav-right">
-        <button class="n-search" aria-label="Search the site">
-          <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13.5 13.5l4 4"/></svg>
-        </button>
-        <a href="/login" class="n-btn n-login" target="_top">Login</a>
-        <a href="/signup" class="n-btn n-cta" target="_top">Request beta</a>
-        <!-- hamburger — visible on mobile only -->
-        <button class="hamburger" id="hamburger-btn" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
-          <svg class="icon-open" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
-          <svg class="icon-close" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── MOBILE MENU DRAWER ── -->
-  <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation" aria-hidden="true">
-    <ul class="mob-nav-list" role="list">
-      <li><button aria-expanded="false">Products <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
-      <li><button aria-expanded="false">Solutions <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
-      <li><button aria-expanded="false">Resources <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
-      <li><button aria-expanded="false">Support <svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 4l3.5 3.5L9 4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></li>
-      <li><a href="/about" target="_top">About</a></li>
-      <li><a href="/pricing">Pricing</a></li>
-    </ul>
-    <div class="mob-code-row" aria-label="Supported design codes">
-      <span class="mob-cpill">EUROCODE</span>
-      <span class="mob-cpill">ACI 318</span>
-      <span class="mob-cpill">IS 456</span>
-      <span class="mob-cpill">BS 8110</span>
-      <span class="mob-cpill">AS 3600</span>
-      <span class="mob-cpill">AISC 360</span>
-    </div>
-    <div class="mob-nav-actions">
-      <a href="/login" class="mob-login" target="_top">Login</a>
-      <a href="/signup" class="mob-cta" target="_top">Request beta access</a>
-    </div>
-  </div>
-</header>
-
 <!-- ══════════════ HERO ══════════════ -->
 <main id="main-content">
 <section class="hero">
@@ -1261,7 +969,7 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
     <div class="mod-grid" role="list">
 
       <!-- ── 1. DESIGN STUDIO ── -->
-      <article class="mod mod-ds" role="listitem" aria-label="Design Studio — Structural Engineering">
+      <a href="/design-studio" class="mod mod-ds" role="listitem" aria-label="Design Studio — Structural Engineering" target="_top">
         <div class="mod-photo" aria-hidden="true"></div>
         <div class="mod-overlay" aria-hidden="true"></div>
         <div class="mod-vignette" aria-hidden="true"></div>
@@ -1280,17 +988,11 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
             <span class="mod-feat-pill">Steel &amp; Timber</span>
             <span class="mod-feat-pill">PDF Reports</span>
           </div>
-          <a href="/design-studio" class="mod-cta" target="_top">
-            Learn more
-            <span class="mod-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
-            </span>
-          </a>
         </div>
-      </article>
+      </a>
 
       <!-- ── 2. PM OFFICE ── -->
-      <article class="mod mod-pm" role="listitem" aria-label="PM Office — Project Management">
+      <a href="/pm-office" class="mod mod-pm" role="listitem" aria-label="PM Office — Project Management" target="_top">
         <div class="mod-photo" aria-hidden="true"></div>
         <div class="mod-overlay" aria-hidden="true"></div>
         <div class="mod-vignette" aria-hidden="true"></div>
@@ -1309,17 +1011,11 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
             <span class="mod-feat-pill">QA/QC Checklist</span>
             <span class="mod-feat-pill">Approvals</span>
           </div>
-          <a href="/pm-office" class="mod-cta" target="_top">
-            Learn more
-            <span class="mod-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
-            </span>
-          </a>
         </div>
-      </article>
+      </a>
 
       <!-- ── 3. QS OFFICE ── -->
-      <article class="mod mod-qs" role="listitem" aria-label="QS Office — Quantity Surveying">
+      <a href="/qs-office" class="mod mod-qs" role="listitem" aria-label="QS Office — Quantity Surveying" target="_top">
         <div class="mod-photo" aria-hidden="true"></div>
         <div class="mod-overlay" aria-hidden="true"></div>
         <div class="mod-vignette" aria-hidden="true"></div>
@@ -1338,17 +1034,11 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
             <span class="mod-feat-pill">BBS Generator</span>
             <span class="mod-feat-pill">Cost Database</span>
           </div>
-          <a href="/qs-office" class="mod-cta" target="_top">
-            Learn more
-            <span class="mod-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
-            </span>
-          </a>
         </div>
-      </article>
+      </a>
 
       <!-- ── 4. ARCHITECTURE ── -->
-      <article class="mod mod-arc" role="listitem" aria-label="Architecture — Planning and Design">
+      <a href="/architecture" class="mod mod-arc" role="listitem" aria-label="Architecture — Planning and Design" target="_top">
         <div class="mod-photo" aria-hidden="true"></div>
         <div class="mod-overlay" aria-hidden="true"></div>
         <div class="mod-vignette" aria-hidden="true"></div>
@@ -1367,17 +1057,11 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
             <span class="mod-feat-pill">CAD Blocks</span>
             <span class="mod-feat-pill">Accessibility</span>
           </div>
-          <a href="/architecture" class="mod-cta" target="_top">
-            Learn more
-            <span class="mod-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
-            </span>
-          </a>
         </div>
-      </article>
+      </a>
 
       <!-- ── 5. ACADEMY ── -->
-      <article class="mod mod-ac" role="listitem" aria-label="Academy — Engineering Education">
+      <a href="/academy" class="mod mod-ac" role="listitem" aria-label="Academy — Engineering Education" target="_top">
         <div class="mod-photo" aria-hidden="true"></div>
         <div class="mod-overlay" aria-hidden="true"></div>
         <div class="mod-vignette" aria-hidden="true"></div>
@@ -1396,14 +1080,8 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
             <span class="mod-feat-pill">Quizzes</span>
             <span class="mod-feat-pill">Certificates</span>
           </div>
-          <a href="/academy" class="mod-cta" target="_top">
-            Learn more
-            <span class="mod-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 11 11"><path d="M2 5.5h7M5.5 2l3.5 3.5L5.5 9"/></svg>
-            </span>
-          </a>
         </div>
-      </article>
+      </a>
 
     </div>
   </div>
@@ -1624,66 +1302,6 @@ a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
     </div>
   </div>
 </footer>
-
-<script>
-(function() {
-  var btn = document.getElementById('hamburger-btn');
-  var menu = document.getElementById('mobile-menu');
-  if (!btn || !menu) return;
-
-  function openMenu() {
-    btn.classList.add('open');
-    btn.setAttribute('aria-expanded', 'true');
-    btn.setAttribute('aria-label', 'Close navigation menu');
-    menu.classList.add('open');
-    menu.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = '';
-  }
-
-  function closeMenu() {
-    btn.classList.remove('open');
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Open navigation menu');
-    menu.classList.remove('open');
-    menu.setAttribute('aria-hidden', 'true');
-  }
-
-  btn.addEventListener('click', function() {
-    if (btn.classList.contains('open')) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  });
-
-  /* close on Escape key */
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && btn.classList.contains('open')) {
-      closeMenu();
-      btn.focus();
-    }
-  });
-
-  /* close when clicking outside */
-  document.addEventListener('click', function(e) {
-    if (btn.classList.contains('open') &&
-        !menu.contains(e.target) &&
-        !btn.contains(e.target)) {
-      closeMenu();
-    }
-  });
-
-  /* close on any mobile menu link click */
-  menu.querySelectorAll('a').forEach(function(link) {
-    link.addEventListener('click', closeMenu);
-  });
-
-  /* close on resize back to desktop */
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 900) closeMenu();
-  });
-})();
-</script>
 
 <!-- ══════════════ COOKIE CONSENT (GDPR / CCPA / PDPA) ══════════════ -->
 <div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" style="position:fixed; bottom:16px; left:16px; right:16px; max-width:580px; margin:0 auto; background:#1A1A1A; color:#fff; padding:18px 22px; border-radius:6px; box-shadow:0 8px 32px rgba(0,0,0,0.35); z-index:9999; display:none; font-size:14px; line-height:1.5;">

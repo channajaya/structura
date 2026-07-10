@@ -43,42 +43,20 @@ body{font-family:var(--sans);color:var(--text-2);background:var(--white);-webkit
 a{text-decoration:none;color:inherit;}
 button{font:inherit;border:0;cursor:pointer;background:none;}
 .wrap{max-width:1280px;margin:0 auto;padding:0 32px;}
+.container{max-width:1280px;margin:0 auto;padding:0 24px;}
 
-/* ── TOPBAR ── */
-.topbar{background:var(--gray-page);border-bottom:1px solid var(--border);height:38px;display:flex;align-items:center;}
-.topbar-inner{display:flex;justify-content:flex-end;align-items:center;gap:20px;}
-.topbar a{font-size:12px;color:var(--text-3);display:flex;align-items:center;gap:4px;transition:color .14s;}
-.topbar a:hover{color:var(--blue);}
-.topbar svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;}
-
-/* ── NAVBAR ── */
-.nav-bar{background:var(--white);border-bottom:1px solid var(--border);height:66px;display:flex;align-items:center;position:sticky;top:0;z-index:300;}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%;}
-.logo{display:flex;align-items:center;flex-shrink:0;}
-.logo-texts{display:flex;flex-direction:column;line-height:1.2;margin-left:10px;}
-.logo-name{font-size:16px;font-weight:700;color:var(--text-1);letter-spacing:.08em;}
-.logo-sub{font-size:8.5px;font-family:var(--mono);color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-top:1px;}
-.nav-links{display:flex;align-items:stretch;height:100%;}
-.ni{display:flex;align-items:center;gap:4px;padding:0 15px;font-size:14px;font-weight:600;color:var(--text-2);border-bottom:3px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;height:100%;}
-.ni:hover{color:var(--blue);border-bottom-color:var(--blue);}
-.ni.active{color:var(--blue);border-bottom-color:var(--blue);}
-.nav-right{display:flex;align-items:center;gap:8px;}
-.n-btn{padding:8px 16px;font-size:13px;font-weight:600;border-radius:0;transition:.16s;}
-.n-login{background:var(--white);color:var(--blue);border:1.5px solid var(--blue);}
-.n-login:hover{background:var(--blue-l);}
-.n-cta{background:var(--blue);color:var(--white);border:1.5px solid var(--blue);}
-.n-cta:hover{background:var(--blue-d);}
-
-/* ── BREADCRUMB ── */
-.bc-bar{background:var(--gray-page);border-bottom:1px solid var(--border);padding:9px 0;}
-.bc{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-4);font-family:var(--mono);}
-.bc a{color:var(--blue);}
-.bc svg{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:2.5;}
+/* Logo styles — still used by the footer brand mark below.
+   The page header itself now lives in the shared SiteHeader component. */
+.logo{display:flex;align-items:center;gap:12px;flex-shrink:0;text-decoration:none}
+.logo-icon{width:34px;height:34px;flex-shrink:0}
+.logo-texts{display:flex;flex-direction:column;line-height:1.2}
+.logo-name{font-size:17px;font-weight:700;color:var(--text-1);letter-spacing:.08em;}
+.logo-sub{font-size:9px;font-family:var(--mono);color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-top:1px;font-weight:500}
 
 /* ══════════ HERO ══════════ */
 .ds-hero{background:var(--gray-page);border-bottom:1px solid var(--border);padding:44px 0 40px;position:relative;overflow:hidden;}
 .ds-hero::after{content:'';position:absolute;right:-80px;top:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,188,.06) 0%,transparent 68%);pointer-events:none;}
-.hero-grid{display:grid;grid-template-columns:1fr 390px;gap:44px;align-items:center;}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:44px;align-items:center;}
 .eyebrow{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
 .ey-rule{width:20px;height:2px;background:var(--blue);}
 .ey-txt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--blue);text-transform:uppercase;}
@@ -98,27 +76,6 @@ button{font:inherit;border:0;cursor:pointer;background:none;}
 .hstat-n{font-size:24px;font-weight:700;color:var(--blue);line-height:1;font-family:var(--mono);}
 .hstat-l{font-size:11px;color:var(--text-3);margin-top:2px;}
 
-/* ── SCORE CARD ── */
-.score-card{background:var(--white);border:1px solid var(--border);border-radius:2px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.09);}
-.sc-hd{background:var(--text-1);padding:11px 16px;display:flex;align-items:center;justify-content:space-between;}
-.sc-title{font-family:var(--mono);font-size:9.5px;color:rgba(255,255,255,.55);letter-spacing:.1em;text-transform:uppercase;}
-.sc-badge{font-family:var(--mono);font-size:9.5px;padding:2px 8px;border-radius:10px;background:rgba(0,113,188,.3);color:#70C8FF;border:1px solid rgba(0,113,188,.45);}
-.sc-main{padding:18px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--border);}
-.sc-ring{position:relative;flex-shrink:0;}
-.sc-ring svg{transform:rotate(-90deg);}
-.sc-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
-.sc-val{font-family:var(--mono);font-size:25px;font-weight:600;color:var(--text-1);line-height:1;}
-.sc-lbl{font-family:var(--mono);font-size:9px;color:var(--text-4);display:block;margin-top:1px;}
-.sc-meta-title{font-size:13.5px;font-weight:700;color:var(--text-1);margin-bottom:3px;}
-.sc-meta-sub{font-size:11.5px;color:var(--text-3);line-height:1.55;}
-.sc-rows{padding:0 18px 14px;}
-.sc-row{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-l);}
-.sc-row:last-child{border:0;}
-.sc-rl{font-size:11.5px;color:var(--text-2);flex:1;}
-.sc-track{width:90px;height:5px;background:var(--border);border-radius:3px;overflow:hidden;flex-shrink:0;}
-.sc-fill{height:100%;border-radius:3px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);}
-.sc-rv{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text-2);width:28px;text-align:right;flex-shrink:0;}
-
 /* ══════════ STANDARDS STRIP ══════════ */
 .std-strip{background:var(--blue);}
 .std-inner{display:flex;overflow-x:auto;scrollbar-width:none;}
@@ -133,7 +90,7 @@ button{font:inherit;border:0;cursor:pointer;background:none;}
 .std-ok{color:rgba(70,220,130,.85);margin-left:2px;}
 
 /* ══════════ TAB BAR ══════════ */
-.tab-bar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:66px;z-index:200;}
+.tab-bar{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;}
 .tab-inner{display:flex;align-items:stretch;}
 .tab-btn{display:flex;align-items:center;gap:7px;padding:0 20px;height:50px;font-size:13.5px;font-weight:600;color:var(--text-3);border-bottom:3px solid transparent;cursor:pointer;transition:.15s;white-space:nowrap;}
 .tab-btn:hover{color:var(--text-1);}
@@ -332,7 +289,7 @@ button{font:inherit;border:0;cursor:pointer;background:none;}
 /* responsive */
 @media(max-width:1100px){.cg.v4{grid-template-columns:repeat(3,1fr);}}
 @media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr;} .score-card{display:none;}
+  .hero-grid{grid-template-columns:1fr;}
   .cg.v3,.cg.v4{grid-template-columns:repeat(2,1fr);}
   .tg{grid-template-columns:repeat(2,1fr);}
   .mg{grid-template-columns:1fr 1fr;}
@@ -350,55 +307,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
 </style>
 </head>
 <body>
-
-<!-- TOPBAR -->
-<div class="topbar"><div class="wrap"><div class="topbar-inner">
-  <a href="#"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"></circle><path d="M8 5v3l2 1.5" stroke-linecap="round"></path></svg>Private Beta</a>
-  <a href="#"><svg viewBox="0 0 16 16"><path d="M3 8h10M8 3v10" stroke-linecap="round"></path></svg>What's New</a>
-  <a href="#"><svg viewBox="0 0 16 16"><path d="M4 2h8a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V3a1 1 0 011-1z"></path><path d="M6 6h4M6 9h4M6 12h2" stroke-linecap="round"></path></svg>Documentation</a>
-  <a href="#"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"></circle><path d="M8 6a2 2 0 011.73 3M8 13v-2" stroke-linecap="round"></path></svg>Help</a>
-</div></div></div>
-
-<!-- NAVBAR -->
-<nav class="nav-bar"><div class="wrap"><div class="nav-inner">
-  <a href="/" class="logo">
-    <svg width="32" height="32" viewBox="0 0 34 34" fill="none">
-      <rect x="0" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="25" y="11.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="0" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="25" y="19.5" width="9" height="3" rx=".5" fill="#1A1A1A"></rect>
-      <rect x="11.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-      <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-      <rect x="11.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-      <rect x="19.5" y="0" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-      <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-      <rect x="19.5" y="25" width="3" height="9" rx=".5" fill="#0071BC"></rect>
-    </svg>
-    <div class="logo-texts"><span class="logo-name">STRUCTURA</span><span class="logo-sub">Digital Engineering Office</span></div>
-  </a>
-  <div class="nav-links">
-    <a class="ni active" href="#">Design Studio</a>
-    <a class="ni" href="#">PM Office</a>
-    <a class="ni" href="#">QS Office</a>
-    <a class="ni" href="#">Architecture</a>
-    <a class="ni" href="#">Academy</a>
-  </div>
-  <div class="nav-right">
-    <button class="n-btn n-login">Log in</button>
-    <button class="n-btn n-cta">Get beta access</button>
-  </div>
-</div></div></nav>
-
-<!-- BREADCRUMB -->
-<div class="bc-bar"><div class="wrap">
-  <nav class="bc" aria-label="Breadcrumb">
-    <a href="/">Home</a>
-    <svg viewBox="0 0 12 12"><path d="M4 2l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-    <span style="color:var(--text-2);font-weight:600;">Design Studio</span>
-  </nav>
-</div></div>
 
 <!-- ══════════ HERO ══════════ -->
 <section class="ds-hero">
@@ -422,35 +330,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offse
         <div class="hstat"><div class="hstat-n">6</div><div class="hstat-l">Design Codes</div></div>
         <div class="hstat"><div class="hstat-n">18</div><div class="hstat-l">Excel Templates</div></div>
         <div class="hstat"><div class="hstat-n">40+</div><div class="hstat-l">Drawing Assets</div></div>
-      </div>
-    </div>
-
-    <!-- SCORE CARD -->
-    <div class="score-card" aria-label="Platform quality score">
-      <div class="sc-hd">
-        <span class="sc-title">Platform Score</span>
-        <span class="sc-badge">v2.0 — Redesigned</span>
-      </div>
-      <div class="sc-main">
-        <div class="sc-ring">
-          <svg width="86" height="86" viewBox="0 0 86 86">
-            <circle cx="43" cy="43" r="36" fill="none" stroke="var(--border)" stroke-width="7"></circle>
-            <circle cx="43" cy="43" r="36" fill="none" stroke="var(--blue)" stroke-width="7" stroke-dasharray="226.2" stroke-dashoffset="22.62" stroke-linecap="round" id="score-arc"></circle>
-          </svg>
-          <div class="sc-num"><span class="sc-val">90</span><span class="sc-lbl">/100</span></div>
-        </div>
-        <div>
-          <div class="sc-meta-title">Excellent — Enterprise Grade</div>
-          <div class="sc-meta-sub">Tri-axis filter engine, 32 live calculators, full 6-code coverage. Top-tier engineering SaaS standard.</div>
-        </div>
-      </div>
-      <div class="sc-rows">
-        <div class="sc-row"><span class="sc-rl">Filter UX Intelligence</span><div class="sc-track"><div class="sc-fill" style="background: rgb(0, 113, 188); width: 96%;" data-w="96%"></div></div><span class="sc-rv">96</span></div>
-        <div class="sc-row"><span class="sc-rl">Code Coverage (6 codes)</span><div class="sc-track"><div class="sc-fill" style="background: rgb(26, 122, 70); width: 92%;" data-w="92%"></div></div><span class="sc-rv">92</span></div>
-        <div class="sc-row"><span class="sc-rl">Calculator Depth</span><div class="sc-track"><div class="sc-fill" style="background: rgb(192, 80, 0); width: 88%;" data-w="88%"></div></div><span class="sc-rv">88</span></div>
-        <div class="sc-row"><span class="sc-rl">Visual System</span><div class="sc-track"><div class="sc-fill" style="background: rgb(107, 47, 160); width: 90%;" data-w="90%"></div></div><span class="sc-rv">90</span></div>
-        <div class="sc-row"><span class="sc-rl">Accessibility</span><div class="sc-track"><div class="sc-fill" style="background: rgb(155, 113, 0); width: 85%;" data-w="85%"></div></div><span class="sc-rv">85</span></div>
-        <div class="sc-row"><span class="sc-rl">Mobile Readiness</span><div class="sc-track"><div class="sc-fill" style="background: rgb(0, 131, 143); width: 87%;" data-w="87%"></div></div><span class="sc-rv">87</span></div>
       </div>
     </div>
   </div></div>
@@ -1106,17 +985,11 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-// ── SCORE ANIMATION ──
-setTimeout(() => {
-  document.querySelectorAll('.sc-fill').forEach(b => { b.style.width = b.dataset.w; });
-}, 650);
-
 // ── INIT ──
 // show default tab panels
 document.getElementById('panel-calc').style.display = '';
 document.getElementById('utils-section').style.display = '';
 buildCards();
 </script>
-
 
 </body></html>

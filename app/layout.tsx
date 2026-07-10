@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Sans_3, JetBrains_Mono } from "next/font/google";
+import SiteNotice from "@/components/SiteNotice";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +11,20 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Same brand fonts used by every subpage's markup — loaded once here so the
+// shared SiteHeader (rendered outside the subpage iframes) matches exactly.
+const sourceSans3 = Source_Sans_3({
+  variable: "--font-structura-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-structura-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +40,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${sourceSans3.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex h-full min-h-full flex-col">
+        <SiteNotice />
+        <main className="min-h-0 flex-1">{children}</main>
+      </body>
     </html>
   );
 }

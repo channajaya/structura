@@ -1,14 +1,5 @@
+import IframePage from "@/components/IframePage";
+
 export default function Home() {
-  return (
-    <iframe
-      src="/home.html"
-      title="STRUCTURA Home"
-      style={{
-        display: "block",
-        width: "100%",
-        height: "100vh",
-        border: "none",
-      }}
-    />
-  );
+  return <IframePage src="/home.html" title="STRUCTURA Home" />;
 }

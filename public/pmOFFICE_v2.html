@@ -96,29 +96,13 @@ img{max-width:100%;display:block}
   }
 }
 
-/* === HEADER === */
-.site-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(10px);
-  border-bottom:1px solid var(--border);
-}
-.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
-
-/* === LOGO — matched to index page (rebar-grid SVG + dual-text) === */
+/* Logo styles — still used by the footer brand mark below.
+   The page header itself now lives in the shared SiteHeader component. */
 .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;text-decoration:none}
 .logo-icon{width:34px;height:34px;flex-shrink:0}
 .logo-texts{display:flex;flex-direction:column;line-height:1.2}
 .logo-name{font-size:17px;font-weight:700;color:var(--text-primary);letter-spacing:.08em;font-family:var(--font-sans)}
 .logo-sub{font-size:9px;font-family:var(--font-mono);color:var(--structura-blue);letter-spacing:.14em;text-transform:uppercase;margin-top:1px;font-weight:500}
-.logo:hover .logo-name{color:var(--structura-blue)}
-
-.nav-main{display:flex;gap:6px;align-items:center}
-.nav-main a{
-  padding:8px 14px;border-radius:8px;color:var(--text-secondary);
-  font-weight:500;font-size:14.5px;transition:.2s;
-}
-.nav-main a:hover{background:var(--bg-light);color:var(--text-primary)}
-.nav-main a.active{color:var(--structura-blue);background:var(--structura-blue-soft)}
 
 .btn{
   display:inline-flex;align-items:center;gap:8px;
@@ -132,14 +116,6 @@ img{max-width:100%;display:block}
 .btn-outline:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
 .btn-ghost{background:transparent;color:var(--text-secondary)}
 .btn-ghost:hover{background:var(--bg-light)}
-
-.menu-toggle{display:none;background:none;border:0;cursor:pointer;padding:8px}
-.menu-toggle span{display:block;width:22px;height:2px;background:var(--text-primary);margin:5px 0;transition:.2s}
-
-/* === BREADCRUMB === */
-.breadcrumb{background:var(--bg-light);border-bottom:1px solid var(--border);padding:14px 0;font-size:13.5px}
-.breadcrumb ol{list-style:none;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0;margin:0;color:var(--text-muted)}
-.breadcrumb li+li::before{content:"›";margin-right:8px;color:var(--text-muted)}
 
 /* === HERO === */
 .hero{
@@ -286,9 +262,6 @@ section.block.alt{background:var(--bg-light)}
   .footer-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width: 680px){
-  .nav-main{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px}
-  .nav-main.open{display:flex}
-  .menu-toggle{display:block}
   .cat-grid,.tool-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}
   section.block{padding:48px 0}
@@ -351,53 +324,6 @@ section.block.alt{background:var(--bg-light)}
 </style>
 </head>
 <body>
-
-<!-- ============ HEADER ============ -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="logo" href="../index.html" aria-label="STRUCTURA — home">
-      <svg class="logo-icon" viewBox="0 0 34 34" fill="none" aria-hidden="true">
-        <rect x="0"    y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="12.5" y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="25"   y="11.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="0"    y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="12.5" y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="25"   y="19.5" width="9" height="3" rx=".5" fill="#0071BC"/>
-        <rect x="11.5" y="0"    width="3" height="9" rx=".5" fill="#005A96"/>
-        <rect x="11.5" y="12.5" width="3" height="9" rx=".5" fill="#005A96"/>
-        <rect x="11.5" y="25"   width="3" height="9" rx=".5" fill="#005A96"/>
-        <rect x="19.5" y="0"    width="3" height="9" rx=".5" fill="#005A96"/>
-        <rect x="19.5" y="12.5" width="3" height="9" rx=".5" fill="#005A96"/>
-        <rect x="19.5" y="25"   width="3" height="9" rx=".5" fill="#005A96"/>
-      </svg>
-      <div class="logo-texts">
-        <span class="logo-name">STRUCTURA</span>
-        <span class="logo-sub">Digital Engineering Office</span>
-      </div>
-    </a>
-    <nav class="nav-main" id="navMain" aria-label="Main navigation">
-      <a href="../index.html#design-studio">Design Studio</a>
-      <a href="../pm-office/index.html" class="active">PM Office</a>
-      <a href="../qs-office/index.html">QS Office</a>
-      <a href="../architecture/index.html">Architecture</a>
-      <a href="../academy/index.html">Academy</a>
-      <a class="btn btn-primary" href="../index.html#beta">Join Beta</a>
-    </nav>
-    <button class="menu-toggle" aria-label="Toggle menu" aria-controls="navMain" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
-
-<!-- ============ BREADCRUMB ============ -->
-<nav class="breadcrumb" aria-label="Breadcrumb">
-  <div class="container">
-    <ol>
-      <li><a href="../index.html">Home</a></li>
-      <li aria-current="page">PM Office</li>
-    </ol>
-  </div>
-</nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -876,14 +802,6 @@ section.block.alt{background:var(--bg-light)}
   // Auto-add aria-labels to disabled "Coming Soon" buttons for screen readers
   document.querySelectorAll('.tool-card button[disabled]').forEach(b => {
     b.setAttribute('aria-label', 'Coming soon — this template is not yet available');
-  });
-
-  // mobile menu
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.getElementById('navMain');
-  toggle?.addEventListener('click', ()=>{
-    const open = nav.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
   });
 
   // search + filter
