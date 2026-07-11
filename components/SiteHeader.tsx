@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 /**
@@ -17,6 +18,14 @@ type NavItem = {
   label: string;
 };
 
+/** One extra breadcrumb segment beyond the active nav item (e.g. a software
+ * or topic name on a deeper page). The last crumb in the trail is always
+ * rendered as the current page, regardless of whether it has an `href`. */
+export type BreadcrumbCrumb = {
+  label: string;
+  href?: string;
+};
+
 const NAV_ITEMS: NavItem[] = [
   { id: "home", href: "/", label: "Home" },
   { id: "design-studio", href: "/design-studio", label: "Design Studio" },
@@ -24,19 +33,49 @@ const NAV_ITEMS: NavItem[] = [
   { id: "qs-office", href: "/qs-office", label: "QS Office" },
   { id: "architecture", href: "/architecture", label: "Architecture" },
   { id: "academy", href: "/academy", label: "Academy" },
+  { id: "tutorials", href: "/tutorials", label: "Video Tutorials" },
 ];
 
-export default function SiteHeader() {
+function isActiveNavItem(item: NavItem, pathname: string) {
+  if (item.href === "/") return pathname === "/";
+  return pathname === item.href || pathname.startsWith(`${item.href}/`);
+}
+
+function buildBreadcrumbTrail(
+  activeItem: NavItem,
+  extra?: BreadcrumbCrumb[],
+): BreadcrumbCrumb[] {
+  if (activeItem.id === "home" && (!extra || extra.length === 0)) {
+    return [{ label: "Home" }];
+  }
+  const trail: BreadcrumbCrumb[] = [{ label: "Home", href: "/" }];
+  if (extra && extra.length > 0) {
+    trail.push({ label: activeItem.label, href: activeItem.href });
+    trail.push(...extra);
+  } else {
+    trail.push({ label: activeItem.label });
+  }
+  return trail;
+}
+
+type SiteHeaderProps = {
+  /** Extra breadcrumb segments for pages nested below a top-level nav item
+   * (e.g. Home > Video Tutorials > TSD). Omit for top-level pages. */
+  breadcrumbExtra?: BreadcrumbCrumb[];
+};
+
+export default function SiteHeader({ breadcrumbExtra }: SiteHeaderProps = {}) {
   const pathname = usePathname();
   const activeItem =
-    NAV_ITEMS.find((item) => item.href === pathname) ?? NAV_ITEMS[0];
+    NAV_ITEMS.find((item) => isActiveNavItem(item, pathname)) ?? NAV_ITEMS[0];
+  const breadcrumbTrail = buildBreadcrumbTrail(activeItem, breadcrumbExtra);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="structura-header">
       <header className="site-header">
         <div className="container header-inner">
-          <a className="logo" href="/" aria-label="STRUCTURA — home">
+          <Link className="logo" href="/" aria-label="STRUCTURA — home">
             <svg
               className="logo-icon"
               viewBox="0 0 34 34"
@@ -60,21 +99,21 @@ export default function SiteHeader() {
               <span className="logo-name">STRUCTURA</span>
               <span className="logo-sub">Digital Engineering Office</span>
             </div>
-          </a>
+          </Link>
 
           <nav className={`nav-main${mobileOpen ? " open" : ""}`} aria-label="Main navigation">
             {NAV_ITEMS.map((item) => (
-              <a
+              <Link
                 key={item.id}
                 href={item.href}
                 className={item.id === activeItem.id ? "active" : undefined}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
-            <a className="btn-primary" href="/#beta">
+            <Link className="btn-primary" href="/#beta">
               Join Beta
-            </a>
+            </Link>
           </nav>
 
           <button
@@ -94,16 +133,14 @@ export default function SiteHeader() {
       <nav className="breadcrumb" aria-label="Breadcrumb">
         <div className="container">
           <ol>
-            {activeItem.id === "home" ? (
-              <li aria-current="page">Home</li>
-            ) : (
-              <>
-                <li>
-                  <a href="/">Home</a>
+            {breadcrumbTrail.map((crumb, index) => {
+              const isLast = index === breadcrumbTrail.length - 1;
+              return (
+                <li key={`${crumb.label}-${index}`} aria-current={isLast ? "page" : undefined}>
+                  {!isLast && crumb.href ? <Link href={crumb.href}>{crumb.label}</Link> : crumb.label}
                 </li>
-                <li aria-current="page">{activeItem.label}</li>
-              </>
-            )}
+              );
+            })}
           </ol>
         </div>
       </nav>
