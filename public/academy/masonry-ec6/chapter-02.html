@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chapter 2: Materials &amp; Characteristic Strength | STRUCTURA Academy</title>
+<meta content="Chapter 2 interactive guide: masonry unit properties, mortar class, unit grouping, characteristic compressive strength and design strength to Eurocode 6." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Sans+3:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" rel="stylesheet"/>
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<style>
+:root{
+  --structura-blue:#0071BC;--structura-blue-dark:#005A96;--structura-blue-soft:#E6F1F9;
+  --ink:#0E1A2B;--text:#4A5568;--muted:#6B7280;--border:#E2E5E9;--bg:#F7F8FA;--white:#fff;
+  --success:#16A34A;--success-soft:#EAF7EE;--warning:#D97706;--warning-soft:#FEF6EC;--danger:#DC2626;--danger-soft:#FDECEC;
+  --radius:14px;--radius-sm:8px;--shadow:0 6px 22px rgba(15,23,42,.08);--shadow-lg:0 18px 42px rgba(15,23,42,.14);
+  --font-sans:'Source Sans 3',system-ui,-apple-system,Segoe UI,sans-serif;--font-serif:'Source Serif 4',Georgia,serif;--font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}a{color:var(--structura-blue);text-decoration:none}a:hover{color:var(--structura-blue-dark)}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}.site-header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}.header-inner{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1280px;margin:0 auto;padding:0 24px}.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--ink)}.logo-mark{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-weight:600}.logo small{display:block;font-weight:500;font-size:11px;color:var(--muted);font-family:var(--font-mono)}.nav-main{display:flex;gap:8px;align-items:center}.nav-main a{padding:8px 14px;border-radius:8px;color:var(--text);font-weight:600;font-size:14px}.nav-main a:hover{background:var(--bg);color:var(--ink)}.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--radius-sm);font-weight:700;font-size:14px;cursor:pointer;border:1px solid transparent;font-family:inherit}.btn-primary{background:var(--structura-blue);color:#fff!important}.btn-primary:hover{background:var(--structura-blue-dark)}
+.breadcrumb{background:var(--bg);border-bottom:1px solid var(--border);padding:13px 0;font-size:13.5px}.breadcrumb ol{list-style:none;display:flex;gap:8px;padding:0;margin:0;color:var(--muted);max-width:1280px;margin:0 auto;padding-left:24px}.breadcrumb li+li::before{content:'›';margin-right:8px;color:var(--muted)}
+.guide-hero{padding:56px 0 40px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff,var(--bg))}.kicker{font-family:var(--font-mono);font-size:12px;color:var(--structura-blue);letter-spacing:.1em;text-transform:uppercase}.guide-hero h1{font-family:var(--font-serif);font-size:clamp(31px,4.2vw,48px);line-height:1.12;margin:12px 0 14px;letter-spacing:-.015em}.dek{font-size:18px;color:var(--text);max-width:780px;margin:0 0 14px}.guide-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.badge{font-family:var(--font-mono);font-size:11px;padding:5px 10px;border-radius:6px;background:#fff;border:1px solid var(--border);color:var(--text)}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:46px;align-items:start}.guide-body{padding:46px 0}.toc{position:sticky;top:88px;font-size:13.5px}.toc-title{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}.toc a{display:block;padding:7px 0 7px 12px;border-left:2px solid var(--border);color:var(--text);line-height:1.35}.toc a:hover,.toc a.active{border-left-color:var(--structura-blue);color:var(--structura-blue);font-weight:700}@media(max-width:940px){.layout{grid-template-columns:1fr}.toc{display:none}.calc-grid,.cards-3,.cards-2{grid-template-columns:1fr!important}}
+.content h2{font-family:var(--font-serif);font-size:27px;font-weight:650;margin:46px 0 14px;padding-top:12px;border-top:1px solid var(--border);scroll-margin-top:88px}.content h2:first-child{border-top:0;margin-top:0}.content h3{font-size:17px;margin:26px 0 10px;color:var(--ink)}.content p{font-size:16px;color:var(--text);margin:0 0 16px;max-width:74ch}.content ul{color:var(--text);font-size:16px;max-width:74ch;margin-top:8px}.content li{margin:5px 0}
+.lead-card{border:1px solid var(--border);background:linear-gradient(180deg,#fff,#fbfcfd);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:24px}.lead-card strong{color:var(--ink)}.learning-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 8px}.flow-card{border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px}.flow-card .num{width:28px;height:28px;border-radius:50%;background:var(--structura-blue);color:#fff;display:grid;place-items:center;font-family:var(--font-mono);font-weight:700;font-size:12px;margin-bottom:8px}.flow-card h4{margin:0 0 4px;font-size:14.5px}.flow-card p{margin:0;font-size:13.5px;color:var(--muted)}@media(max-width:900px){.learning-flow{grid-template-columns:1fr 1fr}}
+.eq-block{background:var(--bg);border:1px solid var(--border);border-left:4px solid var(--structura-blue);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:18px 20px;margin:16px 0;overflow-x:auto}.eq-caption{font-family:var(--font-mono);font-size:12px;color:var(--muted);margin-top:-8px;margin-bottom:14px}.inline-math{font-family:var(--font-serif);font-style:italic;color:var(--ink)}
+.symbol-table,.data-table,.calc-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}.symbol-table th,.symbol-table td,.data-table th,.data-table td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}.symbol-table th,.data-table th{background:var(--bg);font-family:var(--font-mono);font-size:11.5px;text-transform:uppercase;color:var(--text);letter-spacing:.04em}.symbol-table td:first-child,.data-table td.mono{font-family:var(--font-mono);white-space:nowrap;color:var(--ink)}.data-table td.center,.data-table th.center{text-align:center}.data-table tr.highlight td{background:var(--structura-blue-soft)}.scroll-table{overflow-x:auto;border-radius:var(--radius-sm)}
+.note{border-left:4px solid var(--structura-blue);background:var(--structura-blue-soft);padding:14px 18px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:14.5px;color:var(--ink);margin:16px 0}.note.warn{border-left-color:var(--warning);background:var(--warning-soft)}.note.danger{border-left-color:var(--danger);background:var(--danger-soft)}.source-note{font-size:13px;color:var(--muted);font-style:italic;margin-top:8px}
+.ref-chip{display:inline-flex;align-items:center;gap:4px;font-family:var(--font-mono);font-size:11.5px;font-weight:700;color:var(--structura-blue-dark);background:var(--structura-blue-soft);border:1px solid #BFDCEF;border-radius:5px;padding:2px 7px;cursor:pointer;line-height:1.5;white-space:nowrap}.ref-chip:hover{background:var(--structura-blue);color:#fff;border-color:var(--structura-blue)}.ref-chip::after{content:'';width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);margin-left:1px}
+.cards-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}.cards-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}.mini-card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;padding:17px;box-shadow:0 3px 12px rgba(15,23,42,.04)}.mini-card h4{margin:0 0 6px;font-size:16px;color:var(--ink)}.mini-card p{margin:0;font-size:14px;color:var(--text)}.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}.pill{font-family:var(--font-mono);font-size:11.5px;border-radius:999px;padding:4px 9px;background:var(--bg);border:1px solid var(--border);color:var(--text)}
+.unit-selector{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}.unit-tile{border:1px solid var(--border);border-radius:12px;background:#fff;padding:14px;cursor:pointer;transition:.15s;min-height:130px}.unit-tile:hover,.unit-tile.active{border-color:var(--structura-blue);box-shadow:var(--shadow);background:var(--structura-blue-soft)}.unit-tile svg{width:100%;height:54px;margin-bottom:6px}.unit-tile h4{margin:0 0 4px;font-size:14.5px}.unit-tile p{font-size:12.5px;margin:0;color:var(--muted);line-height:1.35}@media(max-width:900px){.unit-selector{grid-template-columns:1fr 1fr}}
+.figure-card{border:1px solid var(--border);border-radius:var(--radius);background:#fff;padding:18px;margin:18px 0;box-shadow:var(--shadow)}.figure-card img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--border);cursor:zoom-in;background:#fff}.fig-caption{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.45}.fig-actions{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}.small-btn{border:1px solid var(--structura-blue);background:var(--structura-blue-soft);color:var(--structura-blue-dark);font-family:var(--font-mono);font-size:12px;font-weight:700;border-radius:999px;padding:7px 12px;cursor:pointer}.small-btn:hover{background:var(--structura-blue);color:white}
+.calc-sheet-header{width:100%;border-collapse:collapse;margin:18px 0 0;font-size:13px}.calc-sheet-header td{border:1px solid var(--border);padding:8px 12px}.calc-sheet-header td.label{background:var(--ink);color:#fff;font-family:var(--font-mono);font-size:10.5px;text-transform:uppercase;width:15%}.calc-title-bar{background:var(--structura-blue);color:#fff;padding:10px 16px;font-weight:800;font-size:16px}.calc-table{border:1px solid var(--border);border-top:0;margin:0 0 18px;border-radius:0 0 var(--radius-sm) var(--radius-sm);overflow:hidden}.calc-table th{background:var(--ink);color:#fff;padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em}.calc-table td{padding:10px 14px;border-top:1px solid var(--border);vertical-align:top}.calc-table .ref{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);width:18%}.calc-table .calc{font-family:var(--font-mono);font-size:13px;color:var(--ink);width:58%}.calc-table .out{font-family:var(--font-mono);font-weight:700;color:var(--structura-blue);white-space:nowrap;width:24%}.calc-table tr.result-row td{background:var(--success-soft)}.calc-table tr.result-row .out{color:var(--success)}
+.calc-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow-lg);margin:20px 0}.calc-card h3{font-family:var(--font-serif);font-size:22px;margin:0 0 4px}.calc-card .sub{color:var(--muted);font-size:14px;margin-bottom:20px}.calc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px 18px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-family:var(--font-mono);font-size:11.5px;color:var(--text)}.field input,.field select{font:inherit;font-size:15px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg)}.field input:focus,.field select:focus{outline:0;border-color:var(--structura-blue);background:#fff}.calc-results{margin-top:22px;border-top:1px solid var(--border);padding-top:18px}.result-line{display:flex;justify-content:space-between;gap:14px;align-items:baseline;padding:9px 0;border-bottom:1px dashed var(--border);font-size:15px}.result-line:last-child{border-bottom:0}.result-line .val{font-family:var(--font-mono);font-weight:800;color:var(--structura-blue);font-size:16px;text-align:right}.result-line .val.warn{color:var(--warning)}.result-line .val.good{color:var(--success)}.chart-card{border:1px solid var(--border);border-radius:var(--radius);padding:18px;background:#fff;margin-top:18px}.bar-row{display:grid;grid-template-columns:150px 1fr 80px;gap:12px;align-items:center;margin:10px 0;font-size:13.5px;color:var(--text)}.bar-track{height:14px;background:var(--bg);border-radius:999px;overflow:hidden;border:1px solid var(--border)}.bar-fill{height:100%;background:linear-gradient(90deg,var(--structura-blue),var(--structura-blue-dark));border-radius:999px;width:0}
+.mistake-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:16px 0}.mistake{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border);background:#fff;border-radius:12px;padding:14px}.mistake .icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--danger-soft);color:var(--danger);font-weight:800;flex:0 0 auto}.mistake p{margin:0;font-size:14.5px}@media(max-width:700px){.mistake-grid{grid-template-columns:1fr}.bar-row{grid-template-columns:1fr}}
+.disclaimer{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;font-size:13.5px;color:var(--text);margin-top:44px}.site-footer{background:var(--ink);color:#94a3b8;padding:40px 0;font-size:13.5px;text-align:center}
+.overlay{display:none;position:fixed;inset:0;background:rgba(14,26,43,.62);z-index:1000;align-items:center;justify-content:center;padding:20px}.overlay.open{display:flex}.modal{background:#fff;border-radius:var(--radius);max-width:920px;width:100%;max-height:86vh;overflow:auto;box-shadow:var(--shadow-lg)}.modal-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:#fff;z-index:2}.modal-badge{width:34px;height:34px;border-radius:8px;background:var(--structura-blue);color:#fff;display:grid;place-items:center;font-family:var(--font-mono);font-weight:800;font-size:13px;flex-shrink:0}.modal-title{font-weight:800;font-size:16px;flex:1}.modal-close{background:none;border:0;font-size:20px;cursor:pointer;color:var(--muted);padding:4px}.modal-body{padding:20px}.modal-body p{font-size:15px;color:var(--text)}.modal-body img{width:100%;height:auto;border:1px solid var(--border);border-radius:8px;background:#fff}.modal-body .mini-source{margin-top:12px;font-size:12.5px;color:var(--muted);border-top:1px dashed var(--border);padding-top:12px}.lightbox-img{max-width:min(1120px,96vw);max-height:88vh;border-radius:10px;border:1px solid var(--border);box-shadow:var(--shadow-lg);background:#fff}
+
+/* Refined worked example block */
+.we-refined{border:1px solid var(--border);border-radius:var(--radius);background:#fff;box-shadow:var(--shadow);margin:18px 0 26px;overflow:hidden}
+.we-refined-head{background:linear-gradient(135deg,var(--ink),#1f334f);color:#fff;padding:18px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.we-refined-head h3{margin:0;color:#fff;font-family:var(--font-serif);font-size:22px}.we-refined-head p{margin:4px 0 0;color:#d7e3ef;font-size:14px}.we-badge{font-family:var(--font-mono);font-size:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 10px;color:#fff;white-space:nowrap}
+.we-body{padding:22px}.given-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0 18px}.given-card{border:1px solid var(--border);border-radius:12px;background:var(--bg);padding:14px}.given-card h4{margin:0 0 8px;font-size:15px;color:var(--ink)}.given-card ul{margin:0;padding-left:18px;font-size:14px;color:var(--text)}.given-card li{margin:3px 0}.formula-strip{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}.formula-mini{border:1px solid var(--border);border-left:4px solid var(--structura-blue);border-radius:0 10px 10px 0;background:#fff;padding:12px 14px}.formula-mini .label{font-family:var(--font-mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}.formula-mini .eq-block{margin:0;padding:10px 12px;background:var(--bg)}
+.we-step-table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.we-step-table th{background:var(--ink);color:#fff;padding:10px 12px;text-align:left;font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em}.we-step-table td{border-top:1px solid var(--border);padding:12px;vertical-align:top}.we-step-table td.ref{font-family:var(--font-mono);font-size:11.5px;color:var(--muted);white-space:nowrap}.we-step-table td.step{font-weight:700;color:var(--ink);width:18%}.we-step-table td.output{font-family:var(--font-mono);font-weight:700;color:var(--structura-blue);white-space:nowrap}.we-step-table .math-cell{min-width:260px}.we-step-table tr.case-start td{background:#fbfdff;border-top:2px solid var(--structura-blue)}.we-step-table tr.result-row td{background:var(--success-soft)}.we-step-table .katex-display{margin:.15em 0;text-align:left}.comparison-card{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}.comparison-item{border:1px solid var(--border);border-radius:12px;padding:16px;background:#fff}.comparison-item strong{display:block;color:var(--ink);margin-bottom:6px}.comparison-value{font-family:var(--font-mono);font-size:20px;font-weight:800;color:var(--structura-blue)}.comparison-item.winner{border-color:#86d39d;background:var(--success-soft)}
+@media(max-width:800px){.given-grid,.formula-strip,.comparison-card{grid-template-columns:1fr}.we-step-table{font-size:13px}.we-step-table td.ref,.we-step-table td.output{white-space:normal}}
+
+</style>
+<style id="structura-unified-v1">
+:root{--sa-blue:#0071BC;--sa-blue-dark:#005A96;--sa-blue-soft:#E6F1F9;--sa-ink:#0E1A2B;--sa-muted:#526071;--sa-line:#DDE4EC;--sa-soft:#F7F9FC;--sa-card:#FFFFFF;--sa-green:#16A34A;--sa-red:#DC2626;--sa-orange:#D97706;--sa-radius:16px;--sa-shadow:0 14px 38px rgba(15,23,42,.10);--sa-serif:"Source Serif 4",Georgia,serif;--sa-sans:"Source Sans 3",Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;--sa-mono:"JetBrains Mono",Consolas,ui-monospace,monospace}
+html{scroll-behavior:smooth}body{font-family:var(--sa-sans)!important;color:var(--sa-ink)!important;background:#fff!important;line-height:1.68!important;font-size:17px!important}.site-header{box-shadow:none!important}.header-inner,.breadcrumb,.hero-inner,.layout,.main-grid,.footer-inner,.course-shell{max-width:1180px!important}p{max-width:72ch}main p,.content p,.section p,.article p,.chapter-section p,.card p,.note p{text-align:justify;text-justify:inter-word}li{text-align:left}.hero p,.lead,.muted,.caption,.small,.toc a{text-align:left!important}h1,h2,h3,h4{letter-spacing:-.015em;color:var(--sa-ink)}h1{font-size:clamp(2.1rem,4vw,4.3rem)!important;line-height:1.04!important}h2{font-size:clamp(1.5rem,2vw,2.15rem)!important;line-height:1.18!important;margin-top:2.2rem}h3{font-size:1.22rem!important}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.35rem 0}.equation,.formula,.formula-box,.eq-box{border-left:4px solid var(--sa-blue)!important;background:linear-gradient(90deg,#F8FBFF,#fff)!important;border-radius:12px!important}table{border-collapse:separate!important;border-spacing:0!important;width:100%!important;border:1px solid var(--sa-line)!important;border-radius:14px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 4px 16px rgba(15,23,42,.05)!important}th{background:#EAF4FB!important;color:#082F49!important;font-weight:800!important;text-align:left!important}td,th{padding:12px 14px!important;border-bottom:1px solid var(--sa-line)!important;vertical-align:top!important}tr:last-child td{border-bottom:none!important}.calc-table td:nth-child(2),.calculation-table td:nth-child(2){font-family:var(--sa-sans)!important}.ref-chip,.clause-chip,.source-chip,.table-chip,button[data-ref]{border-radius:999px!important;border:1px solid #B9D9EE!important;background:#F2F8FC!important;color:#005A96!important;font-weight:800!important;padding:.38rem .72rem!important;display:inline-flex!important;align-items:center!important;gap:.35rem!important}.ref-chip:hover,.clause-chip:hover,.source-chip:hover,.table-chip:hover,button[data-ref]:hover{background:#E2F1FA!important;transform:translateY(-1px)}.course-map{max-width:1180px;margin:0 auto;padding:14px 24px 0}.course-card{border:1px solid var(--sa-line);background:rgba(255,255,255,.92);box-shadow:0 8px 24px rgba(15,23,42,.06);border-radius:18px;padding:14px}.course-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}.course-title{font-weight:900;color:#0B3C5D;display:flex;align-items:center;gap:8px}.course-title::before{content:"";width:9px;height:9px;background:var(--sa-blue);border-radius:50%;box-shadow:0 0 0 5px var(--sa-blue-soft)}.course-nav{display:grid;grid-template-columns:repeat(13,minmax(38px,1fr));gap:6px}.course-nav a{display:grid;place-items:center;height:34px;border-radius:10px;border:1px solid var(--sa-line);background:#F8FAFC;color:#334155;font-weight:800;font-size:13px}.course-nav a:hover{background:#E6F1F9;color:#005A96}.course-nav a.active{background:var(--sa-blue);border-color:var(--sa-blue);color:#fff}.course-prevnext{display:flex;gap:8px;flex-wrap:wrap}.course-prevnext a{border:1px solid var(--sa-line);border-radius:999px;padding:6px 10px;font-weight:750;background:#fff;color:#0E1A2B}.generated-figure{border:1px solid var(--sa-line);border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,23,42,.07);padding:12px;margin:1rem 0}.generated-figure svg{display:block;width:100%;height:auto}.generated-caption{border-top:1px solid var(--sa-line);padding:10px 4px 2px;display:flex;gap:8px;flex-wrap:wrap;color:var(--sa-muted);font-size:14px}.generated-caption strong{color:var(--sa-ink)}.source-note,.reference-note{border:1px solid var(--sa-line);border-radius:14px;background:#FBFDFF;padding:14px 16px;color:#334155}.modal,.reference-modal{backdrop-filter:blur(8px)}.modal-content,.modal-panel,.reference-panel{border-radius:18px!important;box-shadow:var(--sa-shadow)!important}.section,.card,.info-card,.example-card,.calc-card{border-radius:18px!important}.skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}.skip-link:focus{left:18px;top:18px;width:auto;height:auto;z-index:9999;background:#fff;color:#005A96;border:2px solid #005A96;border-radius:10px;padding:8px 12px}.site-footer,.footer{border-top:1px solid var(--sa-line)!important;background:#F8FAFC!important}.chapter-footer-nav{max-width:1180px;margin:30px auto 0;padding:0 24px 36px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.chapter-footer-nav a{border:1px solid var(--sa-line);background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 6px 18px rgba(15,23,42,.05);font-weight:800;color:#0E1A2B}.chapter-footer-nav a:hover{color:#005A96;background:#F8FBFF}@media(max-width:760px){body{font-size:16px!important}.course-nav{grid-template-columns:repeat(7,1fr)}.course-map{padding-inline:14px}.chapter-footer-nav{padding-inline:14px}.header-links{display:none!important}table{font-size:14px!important}td,th{padding:9px!important}}
+</style>
+<link href="chapter-01.html" rel="prev"/><link href="chapter-03.html" rel="next"/>
+<style id="structura-format-v2">
+:root{--blue:var(--sa-blue,#0071BC);--blue-dark:var(--sa-blue-dark,#005A96);--blue-soft:var(--sa-blue-soft,#E6F1F9);--ink:var(--sa-ink,#0E1A2B);--muted:var(--sa-muted,#526071);--line:var(--sa-line,#DDE4EC);--border:var(--sa-line,#DDE4EC);--border2:#B9D9EE;--bg:var(--sa-soft,#F7F9FC);--white:#fff;--green:var(--sa-green,#16A34A);--green-soft:#EAF7EE;--orange:var(--sa-orange,#D97706);--orange-soft:#FFF7ED;--red:var(--sa-red,#DC2626);--red-soft:#FEF2F2;--shadow:var(--sa-shadow,0 14px 38px rgba(15,23,42,.10));--radius:16px;--font-sans:var(--sa-sans,'Source Sans 3',system-ui,-apple-system,'Segoe UI',Arial,sans-serif);--font-serif:var(--sa-serif,'Source Serif 4',Georgia,serif);--font-mono:var(--sa-mono,'JetBrains Mono',Consolas,ui-monospace,monospace);--sans:var(--font-sans);--serif:var(--font-serif);--mono:var(--font-mono)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0!important;font-family:var(--font-sans)!important;color:var(--ink)!important;background:#fff!important;line-height:1.68!important;font-size:17px!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}a{color:var(--blue);text-decoration:none}a:hover{color:var(--blue-dark)}p{max-width:72ch}main p,.content p,.section p,.content-section p,.article p,.chapter-section p,.card p,.note p,.info-card p{text-align:justify;text-justify:inter-word}.hero p,.lead,.caption,.small,.toc a,.source,.eq-note{text-align:left!important}li{text-align:left}h1,h2,h3,h4{letter-spacing:-.015em;color:var(--ink)}
+.site-header{position:sticky!important;top:0;z-index:80;background:rgba(255,255,255,.92)!important;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)!important;box-shadow:none!important}.site-header .progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:linear-gradient(90deg,var(--blue),#58a6d6)}.header-inner{height:68px!important;max-width:1280px!important;margin:0 auto!important;padding:0 24px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:20px!important}.brand,.logo{display:flex!important;align-items:center!important;gap:10px!important;font-weight:800!important;font-size:18px!important;color:var(--ink)!important;letter-spacing:0!important}.brand-mark,.logo-mark{width:34px!important;height:34px!important;border-radius:9px!important;background:linear-gradient(135deg,var(--blue),var(--blue-dark))!important;display:grid!important;place-items:center!important;color:#fff!important;font-family:var(--font-mono)!important;font-weight:700!important}.brand small,.logo small{display:block;font-family:var(--font-mono);font-size:11px;font-weight:500;color:#6B7280;margin-top:-2px}.header-links,.nav-main{display:flex!important;align-items:center!important;gap:8px!important}.header-links a,.nav-main a{font-size:14.5px!important;font-weight:600!important;color:var(--muted)!important;padding:8px 12px!important;border-radius:8px!important}.header-links a:hover,.nav-main a:hover{background:#F7F8FA!important;color:var(--ink)!important}.header-links .beta,.nav-main .btn-primary{background:var(--blue)!important;color:#fff!important;border-radius:9px!important;padding:10px 16px!important;font-weight:700!important}.breadcrumb{background:#F7F8FA!important;border-bottom:1px solid var(--line)!important;font-size:13.5px!important;max-width:none!important;margin:0!important;padding:0!important;color:#6B7280!important}.breadcrumb ol{max-width:1280px;margin:0 auto;padding:13px 24px;display:flex;gap:8px;list-style:none;color:#6B7280}.breadcrumb li+li::before{content:'›';margin-right:8px;color:#9aa3b2}
+.hero{background:linear-gradient(180deg,#fff 0%,#f7fbff 54%,#F7F8FA 100%)!important;border-bottom:1px solid var(--line)!important;border-top:0!important;padding:54px 0 34px!important}.hero-inner,.hero-grid{max-width:1120px!important;margin:0 auto!important;padding:0 24px!important;display:grid!important;grid-template-columns:minmax(0,1fr) 320px!important;gap:36px!important;align-items:center!important}.eyebrow,.kicker{font-family:var(--font-mono)!important;font-size:12px!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--blue)!important;font-weight:700!important}.hero h1,h1{font-family:var(--font-serif)!important;font-size:clamp(34px,5vw,54px)!important;line-height:1.05!important;margin:12px 0 16px!important;letter-spacing:-.02em!important}.hero p,.dek{font-size:18px!important;line-height:1.62!important;color:var(--muted)!important;max-width:760px!important;margin:0 0 20px!important}.badges,.meta{display:flex!important;flex-wrap:wrap!important;gap:9px!important}.badge{font-family:var(--font-mono)!important;font-size:11.5px!important;border:1px solid var(--line)!important;border-radius:7px!important;background:#fff!important;color:var(--muted)!important;padding:5px 10px!important;font-weight:600!important}.hero-card{background:#fff!important;border:1px solid var(--line)!important;border-radius:16px!important;padding:22px!important;box-shadow:0 6px 22px rgba(15,23,42,.08)!important}.hero-card h2,.hero-card h3{font-size:16px!important;margin:0 0 12px!important;font-family:var(--font-serif)!important}.hero-card ul{display:grid;gap:9px;margin:0;padding-left:18px;color:var(--muted);font-size:14.5px!important}
+.guide-body{padding:42px 0}.layout{max-width:1120px!important;margin:0 auto!important;padding:42px 24px!important;display:grid!important;grid-template-columns:220px minmax(0,1fr)!important;gap:48px!important;align-items:start!important}.toc{position:sticky!important;top:92px!important;align-self:start!important;font-size:13.5px!important;border:0!important;background:transparent!important;padding:0!important;box-shadow:none!important}.toc-card,.toc{border-radius:16px}.toc-card{border:1px solid var(--line)!important;background:#fff!important;box-shadow:0 6px 22px rgba(15,23,42,.08)!important;padding:14px!important}.toc h3,.toc-title{font-family:var(--font-mono)!important;font-size:11px!important;text-transform:uppercase!important;letter-spacing:.08em!important;color:#6B7280!important;margin:0 0 8px!important}.toc a{display:block!important;color:var(--muted)!important;padding:7px 8px 7px 12px!important;border-left:2px solid var(--line)!important;border-bottom:0!important;border-radius:0 7px 7px 0!important;font-weight:600!important;font-size:13.5px!important}.toc a:hover,.toc a.active{border-left-color:var(--blue)!important;background:var(--blue-soft)!important;color:var(--blue-dark)!important}.content{min-width:0!important}.section,.content-section{scroll-margin-top:96px!important;margin-bottom:48px!important;border-bottom:0!important;padding:0!important}.section+.section,.content-section+.content-section{border-top:1px solid var(--line)!important;padding-top:24px!important}.section h2,.content-section h2,.guide-body h2{font-family:var(--font-serif)!important;font-size:clamp(24px,3vw,31px)!important;line-height:1.2!important;margin:4px 0 12px!important;letter-spacing:-.01em!important}.section h3,.guide-body h3{font-family:var(--font-sans)!important;font-size:1.22rem!important;margin:24px 0 8px!important}.lead{font-size:18px!important;color:#3E4A5C!important}.section-label{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--blue);font-weight:700}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;border-top:1px solid var(--line);padding-top:24px;margin-bottom:12px}.content-section:first-child .section-head{border-top:0;padding-top:0}
+.ref-chip,.clause-chip,.source-chip,.table-chip,button[data-ref],.small-btn{border-radius:999px!important;border:1px solid #B9D9EE!important;background:#F2F8FC!important;color:#005A96!important;font-weight:800!important;padding:.38rem .72rem!important;display:inline-flex!important;align-items:center!important;gap:.35rem!important;font-family:var(--font-mono)!important;font-size:11.5px!important;cursor:pointer}.ref-chip:hover,.clause-chip:hover,.source-chip:hover,.table-chip:hover,button[data-ref]:hover,.small-btn:hover{background:#E2F1FA!important;transform:translateY(-1px)}.note{border-left:4px solid var(--blue)!important;background:var(--blue-soft)!important;border-radius:0 9px 9px 0!important;padding:14px 18px!important;margin:16px 0!important;color:var(--ink)!important;font-size:15px!important}.note.warn,.warn{border-left-color:var(--orange)!important;background:#FEF6EC!important}.note.danger,.danger{border-left-color:var(--red)!important;background:#FDECEC!important}.note.good,.success{border-left-color:var(--green)!important;background:#EAF7EE!important}
+.equation-card,.eq-block,.formula-box,.eq-box{border:1px solid var(--line)!important;border-radius:14px!important;background:#fff!important;box-shadow:0 4px 16px rgba(15,23,42,.05)!important}.eq-title{background:var(--ink)!important;color:#fff!important;padding:10px 14px!important;font-family:var(--font-mono)!important;font-size:12px!important;font-weight:700!important;letter-spacing:.04em!important;text-transform:uppercase!important}.eq-block{border-left:4px solid var(--blue)!important;background:linear-gradient(90deg,#F8FBFF,#fff)!important;padding:16px 18px!important;margin:14px 0!important;overflow-x:auto!important}.eq,.katex{font-family:var(--font-serif)}.katex-display{overflow-x:auto;overflow-y:hidden;padding:.35rem 0}.eq-note{padding:12px 16px;font-size:13.5px;color:var(--muted)}
+table{border-collapse:separate!important;border-spacing:0!important;width:100%!important;border:1px solid var(--line)!important;border-radius:14px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 4px 16px rgba(15,23,42,.05)!important}th{background:#EAF4FB!important;color:#082F49!important;font-weight:800!important;text-align:left!important}td,th{padding:12px 14px!important;border-bottom:1px solid var(--line)!important;vertical-align:top!important}tr:last-child td{border-bottom:none!important}.symbol-table th,.calc-table th{background:#EAF4FB!important;color:#082F49!important}.calc-table td:nth-child(2),.calculation-table td:nth-child(2){font-family:var(--font-sans)!important}.calc-table td.ref{font-family:var(--font-mono)!important;color:#64748B!important}.calc-table td.out{font-family:var(--font-mono)!important;color:#005A96!important;font-weight:700!important}.result-row td,.result-pass{background:#EAF7EE!important}.fail-row td{background:#FDECEC!important}.warn-row td{background:#FEF6EC!important}
+.info-card,.card,.example-card,.calc-card,.figure-card,.svg-card,.diagram,.generated-figure{border:1px solid var(--line)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 10px 30px rgba(15,23,42,.07)!important}.info-card,.card,.calc-card{padding:18px!important}.grid-2,.grid-3,.grid-4{display:grid!important;gap:16px!important}.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))!important}.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))!important}.grid-4{grid-template-columns:repeat(4,minmax(0,1fr))!important}.example-card{overflow:hidden!important;margin:22px 0!important}.example-head{background:linear-gradient(135deg,#162033,#243148)!important;color:#fff!important;padding:18px 22px!important}.example-head h3{color:#fff!important;margin:0!important}.example-body{padding:22px!important}.figure-card,.svg-card,.diagram{position:relative!important;padding:16px!important;margin:20px 0!important;background:#fff!important}.figure-card img,.modal-body img{display:block!important;max-width:100%!important;height:auto!important;margin:0 auto!important;border-radius:9px!important;border:1px solid var(--line)!important}.figure-card[data-source]::after,.source-badge{content:attr(data-source);position:absolute;right:16px;bottom:16px;background:rgba(255,255,255,.92);border:1px solid var(--line);color:#334155;border-radius:999px;padding:4px 8px;font-family:var(--font-mono);font-size:10.5px;font-weight:700;box-shadow:0 2px 8px rgba(15,23,42,.08)}.caption{font-size:13px!important;color:#6B7280!important;text-align:center!important;margin:12px auto 0!important;max-width:80ch!important;font-style:italic!important}.source{font-size:13px!important;color:#64748B!important;text-align:center!important;font-style:italic!important;margin-top:8px!important}.flow{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important;margin:18px 0!important}.flow div{border:1px solid var(--line)!important;border-radius:14px!important;background:#fff!important;padding:15px!important}.course-map{max-width:1180px!important;margin:0 auto!important;padding:14px 24px 0!important}.course-card{border:1px solid var(--line)!important;background:rgba(255,255,255,.92)!important;box-shadow:0 8px 24px rgba(15,23,42,.06)!important;border-radius:18px!important;padding:14px!important}.course-nav{display:grid!important;grid-template-columns:repeat(13,minmax(38px,1fr))!important;gap:6px!important}.course-nav a{display:grid!important;place-items:center!important;height:34px!important;border-radius:10px!important;border:1px solid var(--line)!important;background:#F8FAFC!important;color:#334155!important;font-weight:800!important;font-size:13px!important}.course-nav a.active{background:var(--blue)!important;border-color:var(--blue)!important;color:#fff!important}.source-note.redrawn-note-banner{display:none!important}.site-footer,.footer{border-top:1px solid var(--line)!important;background:#F8FAFC!important;color:#526071!important;margin-top:36px!important}.footer-inner{max-width:1180px!important;margin:0 auto!important;padding:28px 24px!important;display:block!important;color:#526071!important}.footer strong,.site-footer strong{color:var(--ink)!important}.footer p,.site-footer p{color:#526071!important}.chapter-footer-nav{max-width:1180px!important;margin:30px auto 0!important;padding:0 24px 36px!important;display:flex!important;justify-content:space-between!important;gap:16px!important;flex-wrap:wrap!important}.chapter-footer-nav a{border:1px solid var(--line)!important;background:#fff!important;border-radius:14px!important;padding:12px 16px!important;box-shadow:0 6px 18px rgba(15,23,42,.05)!important;font-weight:800!important;color:var(--ink)!important}.chapter-footer-nav a:hover{color:#005A96!important;background:#F8FBFF!important}.modal-backdrop{backdrop-filter:blur(8px)}.modal,.modal-content,.modal-panel,.reference-panel{border-radius:18px!important;box-shadow:0 16px 42px rgba(15,23,42,.16)!important}@media(max-width:900px){.hero-inner,.hero-grid,.layout{grid-template-columns:1fr!important}.toc{position:static!important}.grid-2,.grid-3,.grid-4,.flow,.input-grid,.result-grid,.mistakes,.summary-cards{grid-template-columns:1fr!important}.header-links{display:none!important}.course-nav{grid-template-columns:repeat(7,1fr)!important}}@media(max-width:760px){body{font-size:16px!important}.course-map{padding-inline:14px!important}.chapter-footer-nav{padding-inline:14px!important}table{font-size:14px!important}td,th{padding:9px!important}}
+</style>
+
+<style id="structura-final-consistency-patch">
+/* STRUCTURA final consistency patch: applied across all 13 chapters */
+:root{
+  --sa-blue:#0071BC;--sa-blue-dark:#005A96;--sa-blue-soft:#E6F1F9;
+  --sa-ink:#0E1A2B;--sa-muted:#4A5568;--sa-line:#E2E5E9;
+  --sa-sans:'Source Sans 3',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --sa-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sa-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+html{scroll-behavior:smooth!important;}
+body{font-family:var(--sa-sans)!important;font-size:17px!important;line-height:1.68!important;color:var(--sa-ink)!important;background:#fff!important;}
+h1,h2,h3,h4,.brand,.hero-kicker,.section-kicker,.toc-title,.toc h3{font-family:var(--sa-sans)!important;}
+p{max-width:72ch;}
+main p,.content p,.section p,.content-section p,.chapter-section p,.article p,.card p,.note p,.info-card p{text-align:justify!important;text-justify:inter-word!important;}
+.hero p,.lead,.caption,.source,.small,.toc a,.eq-note,.generated-caption{text-align:left!important;}
+li{text-align:left!important;}
+.toc a{transition:background .15s ease,border-color .15s ease,color .15s ease!important;}
+.toc a.active{border-left-color:var(--sa-blue)!important;background:var(--sa-blue-soft)!important;color:var(--sa-blue-dark)!important;}
+/* Keep mathematics consistent across chapters. Let KaTeX use its own math fonts while normalising size and surrounding block style. */
+.katex{font-size:1.04em!important;color:var(--sa-ink)!important;}
+.katex-display{overflow-x:auto!important;overflow-y:hidden!important;padding:.35rem 0!important;margin:.45rem 0!important;}
+.math,var,.symbol{font-family:var(--sa-serif)!important;font-style:italic!important;color:var(--sa-ink)!important;}
+.math sub,.math sup,var sub,var sup,.symbol sub,.symbol sup{font-family:var(--sa-serif)!important;font-style:normal!important;}
+.eq,.equation-inline{font-family:var(--sa-serif)!important;font-style:italic!important;}
+.eq-block,.equation,.formula,.formula-box,.eq-box{border-left:4px solid var(--sa-blue)!important;background:linear-gradient(90deg,#F8FBFF,#fff)!important;border-radius:14px!important;border-top:1px solid var(--sa-line)!important;border-right:1px solid var(--sa-line)!important;border-bottom:1px solid var(--sa-line)!important;box-shadow:0 4px 16px rgba(15,23,42,.05)!important;}
+.eq-title{font-family:var(--sa-mono)!important;font-size:12px!important;font-weight:700!important;letter-spacing:.04em!important;text-transform:uppercase!important;}
+.calc-table td:nth-child(2),.calculation-table td:nth-child(2){font-family:var(--sa-sans)!important;}
+.calc-table .katex,.calculation-table .katex{font-size:1.03em!important;}
+.ref-chip,.clause-chip,.source-chip,.table-chip,button[data-ref]{font-family:var(--sa-sans)!important;}
+</style>
+
+</head>
+<body data-structura-chapter="2"><a class="skip-link" href="#main-content">Skip to main content</a>
+<header class="site-header"><div class="header-inner">
+<a class="logo" href="../../index.html"><span class="logo-mark">S</span><span>STRUCTURA <small>Digital Engineering Office</small></span></a>
+<nav class="nav-main" id="main-content"><a href="../index.html">Academy</a><a class="btn btn-primary" href="../../index.html#beta">Join Beta</a></nav>
+</div></header>
+<nav class="breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../index.html">Academy</a></li><li>Masonry Materials &amp; Characteristic Strength</li></ol></nav><nav aria-label="Masonry Design to Eurocode 6 chapter navigation" class="course-map"><div class="course-card"><div class="course-top"><div class="course-title">Masonry Design to Eurocode 6 · Chapter 2 of 13</div><div class="course-prevnext"><a href="chapter-01.html">← Ch. 1</a><a href="chapter-03.html">Ch. 3 →</a></div></div><div class="course-nav"><a aria-label="Chapter 1: What Is Structural Masonry?" class="" href="chapter-01.html">1</a><a aria-label="Chapter 2: Materials &amp; Characteristic Strength" class="active" href="chapter-02.html">2</a><a aria-label="Chapter 3: EC6 Design Framework" class="" href="chapter-03.html">3</a><a aria-label="Chapter 4: Mechanics of Masonry Behaviour" class="" href="chapter-04.html">4</a><a aria-label="Chapter 5: Vertical Load Resistance: Theory" class="" href="chapter-05.html">5</a><a aria-label="Chapter 6: Vertical Load Design: Worked Examples" class="" href="chapter-06.html">6</a><a aria-label="Chapter 7: Concentrated &amp; Bearing Loads" class="" href="chapter-07.html">7</a><a aria-label="Chapter 8: Slenderness, Effective Height &amp; Buckling Detail" class="" href="chapter-08.html">8</a><a aria-label="Chapter 9: Laterally Loaded Panels: Theory" class="" href="chapter-09.html">9</a><a aria-label="Chapter 10: Laterally Loaded Panels: Worked Examples" class="" href="chapter-10.html">10</a><a aria-label="Chapter 11: Wind Loading Interface (EN 1991-1-4)" class="" href="chapter-11.html">11</a><a aria-label="Chapter 12: Cavity Walls &amp; Wall Ties" class="" href="chapter-12.html">12</a><a aria-label="Chapter 13: Combined Vertical + Lateral Loading" class="" href="chapter-13.html">13</a></div></div></nav><div class="source-note redrawn-note-banner" style="max-width:1180px;margin:18px auto 0;padding:12px 18px"><strong>Reference use:</strong> diagrams and reference tables in this page are presented as Redrawn teaching material or editable HTML tables, not screenshots from the books or standards.</div>
+<section class="guide-hero"><div class="container">
+<span class="kicker">Structural · EN 1996-1-1 §3 · Intermediate</span>
+<h1>Masonry Materials and Characteristic Compressive Strength</h1>
+<p class="dek">A structured route from unit strength and mortar class to characteristic compressive strength <span class="inline-math">f<sub>k</sub></span> and design compressive strength <span class="inline-math">f<sub>d</sub></span> - with complete reference tables, worked comparison, and a live calculator.</p>
+<div class="guide-meta"><span class="badge">EN 1996-1-1 §3.1, §3.2, §3.6.1</span><span class="badge">Material selection</span><span class="badge">Live calculator</span><span class="badge">~18 min read</span></div>
+</div></section>
+<section class="guide-body"><div class="container layout">
+<nav class="toc"><div class="toc-title">On this page</div>
+<a href="#overview">1. Strength route</a>
+<a href="#notations">2. Notations</a>
+<a href="#unit-strength">3. Unit strength</a>
+<a href="#unit-grouping">4. Unit grouping</a>
+<a href="#mortar">5. Mortar strength</a>
+<a href="#fk">6. Characteristic strength</a>
+<a href="#small-section">7. Small section factor</a>
+<a href="#fd">8. Design strength</a>
+<a href="#worked-example">9. Worked example</a>
+<a href="#calculator">10. Calculator</a>
+<a href="#mistakes">11. Common mistakes</a>
+</nav>
+<div class="content">
+<h2 id="overview">1. Strength Route Used in This Chapter</h2>
+<div class="lead-card">
+<p><strong>Chapter purpose:</strong> this chapter explains how masonry material strength is selected for design. The reader starts with unit type, unit group and mortar class, then calculates <span class="inline-math">f<sub>k</sub></span> and finally <span class="inline-math">f<sub>d</sub></span>. The same values are used later in vertical resistance checks.</p>
+<div class="learning-flow">
+<div class="flow-card"><div class="num">1</div><h4>Choose unit</h4><p>Clay, concrete, AAC, calcium silicate or stone.</p></div>
+<div class="flow-card"><div class="num">2</div><h4>Confirm group</h4><p>Use hole volume and web/shell limits.</p></div>
+<div class="flow-card"><div class="num">3</div><h4>Select mortar</h4><p>Use mortar class and mortar system.</p></div>
+<div class="flow-card"><div class="num">4</div><h4>Calculate strength</h4><p>Find <span class="inline-math">f<sub>k</sub></span>, apply checks, then divide by <span class="inline-math">γ<sub>M</sub></span>.</p></div>
+</div>
+</div>
+<h2 id="notations">2. Notations</h2>
+<div class="scroll-table"><table class="symbol-table">
+<tr><th>Symbol</th><th>Meaning</th><th>Typical unit</th></tr>
+<tr><td><span class="inline-math">f<sub>b</sub></span></td><td>Normalised mean compressive strength of masonry unit</td><td>N/mm²</td></tr>
+<tr><td><span class="inline-math">f<sub>m</sub></span></td><td>Compressive strength of mortar</td><td>N/mm²</td></tr>
+<tr><td><span class="inline-math">f<sub>k</sub></span></td><td>Characteristic compressive strength of masonry</td><td>N/mm²</td></tr>
+<tr><td><span class="inline-math">f<sub>d</sub></span></td><td>Design compressive strength of masonry</td><td>N/mm²</td></tr>
+<tr><td><span class="inline-math">K</span></td><td>Coefficient depending on unit type, group and mortar type</td><td>-</td></tr>
+<tr><td><span class="inline-math">α, β</span></td><td>Exponents in the characteristic strength equation</td><td>-</td></tr>
+<tr><td><span class="inline-math">γ<sub>M</sub></span></td><td>Material partial factor for masonry</td><td>-</td></tr>
+<tr><td><span class="inline-math">A</span></td><td>Loaded gross cross-sectional area used for the small-section check</td><td>m²</td></tr>
+</table></div>
+<h2 id="unit-strength">3. Masonry Units and Unit Strength</h2>
+<p>A masonry unit may be a clay brick, concrete block, calcium silicate unit, AAC block or natural stone unit. For design, the test strength of the unit is converted to a normalised mean compressive strength, <span class="inline-math">f<sub>b</sub></span>, so that units of different sizes can be compared consistently. <span class="ref-chip" data-clause="en772">EN 772-1 / normalised strength</span></p>
+<div class="cards-3">
+<div class="mini-card"><h4>Use declared product data</h4><p>Take unit type, declared compressive strength and unit group from the manufacturer or project specification.</p></div>
+<div class="mini-card"><h4>Use <span class="inline-math">f<sub>b</sub></span> in design</h4><p>The normalised strength is the unit strength input used in the masonry strength equation.</p></div>
+<div class="mini-card"><h4>Do not use brick strength directly</h4><p>Masonry strength also depends on mortar, unit group, workmanship and National Annex values.</p></div>
+</div>
+<div class="note">Key idea: a brick or block has its own strength, but the completed wall has a different strength because the unit, mortar and bond interact.</div>
+<h2 id="unit-grouping">4. Unit Grouping</h2>
+<p>Eurocode 6 groups masonry units according to the volume and direction of holes, together with web and shell thickness. The group affects the coefficient <span class="inline-math">K</span> used in the <span class="inline-math">f<sub>k</sub></span> equation. <span class="ref-chip" data-clause="table31">EN 1996-1-1 Table 3.1</span></p>
+<div class="unit-selector" id="unitSelector"></div>
+<div class="note" id="groupInfo">Select a group above to see the design meaning.</div>
+<div class="note reference-note"><strong>Reference table kept in pop-up:</strong> To keep the chapter page readable, the full Eurocode unit-grouping table is shown only inside the <span class="inline-math">EN 1996-1-1 Table 3.1</span> reference pop-up. Click the blue clause/table chip above to open the complete table.</div>
+<div class="note warn">For teaching examples in this book, solid clay bricks are treated as Group 1 and many hollow concrete blocks are treated as Group 2. In real design, always confirm the group using the product declaration and the current Table 3.1.</div>
+<h2 id="mortar">5. Mortar Strength</h2>
+<p>Mortar contributes to bedding, durability and load transfer between units. A mortar class such as M4 means a mortar compressive strength of about 4 N/mm² at 28 days. <span class="ref-chip" data-clause="mortar">EN 1996-1-1 §3.2 / EN 998-2</span></p>
+<div class="cards-3">
+<div class="mini-card"><h4>General-purpose mortar</h4><p>Common for ordinary brick and block masonry and used in most teaching examples in this book.</p><div class="pill-row"><span class="pill">G mortar</span><span class="pill">ordinary joints</span></div></div>
+<div class="mini-card"><h4>Thin-layer mortar</h4><p>Used with accurate units such as AAC blocks. The equation exponents and <span class="inline-math">K</span> values may change.</p><div class="pill-row"><span class="pill">T mortar</span><span class="pill">thin joints</span></div></div>
+<div class="mini-card"><h4>Lightweight mortar</h4><p>Used where low density and thermal performance are important. Use the density band required by the National Annex table.</p><div class="pill-row"><span class="pill">L mortar</span><span class="pill">density based</span></div></div>
+</div>
+<h2 id="fk">6. Characteristic Compressive Strength of Masonry</h2>
+<p>For masonry with general-purpose mortar, the characteristic compressive strength is obtained from the unit strength, mortar strength and coefficient <span class="inline-math">K</span>. <span class="ref-chip" data-clause="ec6-361">EN 1996-1-1 §3.6.1</span> <span class="ref-chip" data-clause="uk-na4">UK NA Table NA.4</span></p>
+<div class="eq-block">$$ fk = K\, fb^{\alpha}\, fm^{\beta} $$</div>
+<div class="eq-caption">Characteristic compressive strength equation. Use proper subscript notation: <span class="inline-math">f<sub>k</sub></span>, <span class="inline-math">f<sub>b</sub></span> and <span class="inline-math">f<sub>m</sub></span>.</div>
+<ul>
+<li><span class="inline-math">K</span> depends on masonry unit material, unit group and mortar type.</li>
+<li><span class="inline-math">α</span> and <span class="inline-math">β</span> depend on the mortar system.</li>
+<li>For general-purpose mortar, the common teaching form uses <span class="inline-math">α = 0.7</span> and <span class="inline-math">β = 0.3</span>.</li>
+</ul>
+<div class="note reference-note"><strong>Reference table kept in pop-up:</strong> The full <span class="inline-math">K</span> coefficient table is available from the <span class="inline-math">UK NA Table NA.4</span> reference chip above. The main page keeps only the design route and equation, while the detailed reference table opens in the pop-up window.</div>
+<h2 id="small-section">7. Small Cross-Section Factor</h2>
+<p>Small loaded cross-sections are more sensitive to local variation in units and workmanship. Therefore, where the loaded gross cross-sectional area is less than 0.1 m², the characteristic compressive strength is reduced. <span class="ref-chip" data-clause="small-section">EN 1996-1-1 §3.6.1.2</span></p>
+<div class="eq-block">$$ A &lt; 0.1\;m^2 \quad \Rightarrow \quad f_{k,red}=fk\,(0.7+3A) $$</div>
+<div class="eq-caption"><span class="inline-math">A</span> is the loaded gross cross-sectional area in m².</div>
+<div class="note warn">This check is easy to miss for narrow piers, returns and small masonry columns. The calculator below applies the factor automatically.</div>
+<h2 id="fd">8. Design Compressive Strength</h2>
+<p>The design compressive strength is the characteristic strength divided by the material partial factor. The value of <span class="inline-math">γ<sub>M</sub></span> depends on the category of manufacturing control and the class of execution control. <span class="ref-chip" data-clause="ec6-243">EN 1996-1-1 §2.4.3</span> <span class="ref-chip" data-clause="uk-na1">UK NA Table NA.1</span></p>
+<div class="eq-block">$$ f_d = \frac{fk}{\gamma_M} $$</div>
+<p>For Sri Lankan teaching examples, Category II units and Class 2 execution are often assumed unless better quality control is confirmed. This gives a conservative route for early calculations.</p>
+<div class="note reference-note"><strong>Reference factors kept in pop-up:</strong> The <span class="inline-math">γ<sub>M</sub></span> tables are available from the <span class="inline-math">EN 1996-1-1 §2.4.3</span> and <span class="inline-math">UK NA Table NA.1</span> reference chips above. This keeps the theory page clean while still giving the complete reference when needed.</div>
+<h2 id="worked-example">9. Worked Example WE-01 — Characteristic and Design Strength</h2>
+<p>This worked example compares two masonry materials using the same mortar class. It follows the sequence: select the correct <span class="inline-math">K</span> value, calculate the characteristic compressive strength <span class="inline-math">f<sub>k</sub></span>, then divide by <span class="inline-math">γ<sub>M</sub></span> to obtain the design compressive strength <span class="inline-math">f<sub>d</sub></span>.</p>
+<div class="we-refined">
+<div class="we-refined-head">
+<div>
+<h3>WE-01: Clay Brick vs Hollow Concrete Block</h3>
+<p>Characteristic and design compressive strength comparison — EN 1996-1-1 §3.6.1 and §2.4.3</p>
+</div>
+<span class="we-badge">STRUCTURA Academy · MAS-WE-01</span>
+</div>
+<div class="we-body">
+<table class="calc-sheet-header">
+<tr><td class="label">Project</td><td>STRUCTURA Academy — Worked Example WE-01</td><td class="label">Job Ref.</td><td>MAS-WE-01</td></tr>
+<tr><td class="label">Section</td><td>Ch.2 — Characteristic Strength</td><td class="label">Sheet No.</td><td>1 of 1</td></tr>
+<tr><td class="label">Calc. by</td><td>STRUCTURA</td><td class="label">Date</td><td>Rev. A</td></tr>
+</table>
+<div class="given-grid">
+<div class="given-card">
+<h4>Case A — Group 1 clay brick</h4>
+<ul>
+<li>General-purpose M4 mortar</li>
+<li><span class="inline-math">f<sub>b</sub> = 10 N/mm²</span></li>
+<li><span class="inline-math">f<sub>m</sub> = 4 N/mm²</span></li>
+<li><span class="inline-math">K = 0.50</span></li>
+</ul>
+</div>
+<div class="given-card">
+<h4>Case B — Group 2 hollow concrete block</h4>
+<ul>
+<li>General-purpose M4 mortar</li>
+<li><span class="inline-math">f<sub>b</sub> = 5 N/mm²</span></li>
+<li><span class="inline-math">f<sub>m</sub> = 4 N/mm²</span></li>
+<li><span class="inline-math">K = 0.52</span></li>
+</ul>
+</div>
+</div>
+<div class="note">Use <span class="inline-math">γ<sub>M</sub> = 3.0</span> for this teaching example, representing Category II units with Class 2 execution control.</div>
+<div class="formula-strip">
+<div class="formula-mini">
+<div class="label">Characteristic strength</div>
+<div class="eq-block">$$ fk = K\,fb^{0.7}\,fm^{0.3} $$</div>
+</div>
+<div class="formula-mini">
+<div class="label">Design strength</div>
+<div class="eq-block">$$ f_d = \frac{fk}{\gamma_M} $$</div>
+</div>
+</div>
+<div class="scroll-table">
+<table class="we-step-table">
+<thead>
+<tr><th>Reference</th><th>Step</th><th>Proper equation / calculation</th><th>Output</th></tr>
+</thead>
+<tbody>
+<tr class="case-start">
+<td class="ref">EN 1996-1-1 §3.6.1<br/>NA Table NA.4</td>
+<td class="step">Case A input</td>
+<td class="math-cell">Group 1 clay brick with general-purpose mortar.</td>
+<td class="output">\(K = 0.50\)</td>
+</tr>
+<tr>
+<td class="ref">EN 1996-1-1 §3.6.1</td>
+<td class="step">Find <span class="inline-math">f<sub>k</sub></span></td>
+<td class="math-cell">$$\begin{aligned} fk &amp;= K\,fb^{0.7}\,fm^{0.3} \\ &amp;= 0.50\times 10^{0.7}\times 4^{0.3} \\ &amp;= 3.79\;\text{N/mm}^2 \end{aligned}$$</td>
+<td class="output">\(fk = 3.79\;\text{N/mm}^2\)</td>
+</tr>
+<tr class="result-row">
+<td class="ref">EN 1996-1-1 §2.4.3<br/>NA Table NA.1</td>
+<td class="step">Find <span class="inline-math">f<sub>d</sub></span></td>
+<td class="math-cell">$$\begin{aligned} f_d &amp;= \frac{fk}{\gamma_M} \\ &amp;= \frac{3.79}{3.0} \\ &amp;= 1.26\;\text{N/mm}^2 \end{aligned}$$</td>
+<td class="output">\(f_d = 1.26\;\text{N/mm}^2\)</td>
+</tr>
+<tr class="case-start">
+<td class="ref">EN 1996-1-1 §3.6.1<br/>NA Table NA.4</td>
+<td class="step">Case B input</td>
+<td class="math-cell">Group 2 hollow concrete block with general-purpose mortar.</td>
+<td class="output">\(K = 0.52\)</td>
+</tr>
+<tr>
+<td class="ref">EN 1996-1-1 §3.6.1</td>
+<td class="step">Find <span class="inline-math">f<sub>k</sub></span></td>
+<td class="math-cell">$$\begin{aligned} fk &amp;= K\,fb^{0.7}\,fm^{0.3} \\ &amp;= 0.52\times 5^{0.7}\times 4^{0.3} \\ &amp;= 2.43\;\text{N/mm}^2 \end{aligned}$$</td>
+<td class="output">\(fk = 2.43\;\text{N/mm}^2\)</td>
+</tr>
+<tr class="result-row">
+<td class="ref">EN 1996-1-1 §2.4.3<br/>NA Table NA.1</td>
+<td class="step">Find <span class="inline-math">f<sub>d</sub></span></td>
+<td class="math-cell">$$\begin{aligned} f_d &amp;= \frac{fk}{\gamma_M} \\ &amp;= \frac{2.43}{3.0} \\ &amp;= 0.81\;\text{N/mm}^2 \end{aligned}$$</td>
+<td class="output">\(f_d = 0.81\;\text{N/mm}^2\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="comparison-card">
+<div class="comparison-item winner">
+<strong>Case A — clay brick masonry</strong>
+<div class="comparison-value">1.26 N/mm²</div>
+<p>Higher design compressive strength for the selected assumptions.</p>
+</div>
+<div class="comparison-item">
+<strong>Case B — hollow concrete block masonry</strong>
+<div class="comparison-value">0.81 N/mm²</div>
+<p>Lower value due to the selected unit strength, unit group and <span class="inline-math">K</span> coefficient.</p>
+</div>
+</div>
+<div class="note">Result: for these assumptions, the clay brick masonry has the higher <span class="inline-math">f<sub>d</sub></span>. The result is controlled by the normalised unit strength <span class="inline-math">f<sub>b</sub></span>, mortar strength <span class="inline-math">f<sub>m</sub></span>, unit group and coefficient <span class="inline-math">K</span>.</div>
+<p class="source-note">Before using this in practice, take <span class="inline-math">f<sub>b</sub></span>, <span class="inline-math">f<sub>m</sub></span>, <span class="inline-math">K</span> and <span class="inline-math">γ<sub>M</sub></span> from the product declaration, current Eurocode/National Annex and project specification.</p>
+</div>
+</div>
+<h2 id="calculator">10. Try It Yourself - Strength Calculator</h2>
+<p>Choose a preset or enter your own values. The calculator updates <span class="inline-math">f<sub>k</sub></span>, the small-section factor, and <span class="inline-math">f<sub>d</sub></span> instantly.</p>
+<div class="calc-card">
+<h3>Characteristic and Design Compressive Strength</h3>
+<div class="sub">Uses <span class="inline-math"><em>f</em><sub>k</sub> = K <em>f</em><sub>b</sub><sup>α</sup> <em>f</em><sub>m</sub><sup>β</sup></span> and <span class="inline-math"><em>f</em><sub>d</sub> = <em>f</em><sub>k</sub> / γ<sub>M</sub></span></div>
+<div class="calc-grid">
+<div class="field"><label>Material preset</label><select id="preset"><option value="custom">Custom / manual</option><option value="clay1">Clay brick - Group 1, M4</option><option value="block2">Hollow concrete block - Group 2, M4</option><option value="aac1">AAC block - Group 1, M4</option></select></div>
+<div class="field"><label><em>f</em><sub>b</sub> - Unit strength (N/mm²)</label><input id="fb" step="0.1" type="number" value="10"/></div>
+<div class="field"><label><em>f</em><sub>m</sub> - Mortar strength (N/mm²)</label><input id="fm" step="0.1" type="number" value="4"/></div>
+<div class="field"><label>K - Table value</label><input id="Kval" step="0.01" type="number" value="0.50"/></div>
+<div class="field"><label>α</label><input id="alpha" step="0.01" type="number" value="0.7"/></div>
+<div class="field"><label>β</label><input id="beta" step="0.01" type="number" value="0.3"/></div>
+<div class="field"><label>γ_M</label><input id="gamma" step="0.1" type="number" value="3.0"/></div>
+<div class="field"><label>Loaded area A (m²)</label><input id="area" step="0.01" type="number" value="0.15"/></div>
+<div class="field"><label>Small-section rule</label><select id="applySmall"><option value="auto">Auto apply if A &lt; 0.1 m²</option><option value="off">Do not apply</option></select></div>
+</div>
+<div class="calc-results">
+<div class="result-line"><span>Base characteristic strength, <em>f</em><sub>k</sub></span><span class="val" id="outFk">-</span></div>
+<div class="result-line"><span>Small-section factor</span><span class="val" id="outFactor">-</span></div>
+<div class="result-line"><span>Adjusted characteristic strength, <em>f</em><sub>k,red</sub></span><span class="val" id="outFkAdj">-</span></div>
+<div class="result-line"><span>Design compressive strength, <em>f</em><sub>d</sub></span><span class="val" id="outFd">-</span></div>
+</div>
+<div class="chart-card" id="chart">
+<strong>Comparison using current teaching presets</strong>
+<div class="bar-row"><span>Clay G1, M4</span><div class="bar-track"><div class="bar-fill" id="barClay"></div></div><span id="barClayVal">-</span></div>
+<div class="bar-row"><span>Block G2, M4</span><div class="bar-track"><div class="bar-fill" id="barBlock"></div></div><span id="barBlockVal">-</span></div>
+<div class="bar-row"><span>AAC G1, M4</span><div class="bar-track"><div class="bar-fill" id="barAac"></div></div><span id="barAacVal">-</span></div>
+</div>
+<p class="source-note">Educational tool only. Always verify <span class="inline-math"><em>f</em><sub>b</sub></span>, <span class="inline-math"><em>f</em><sub>m</sub></span>, <span class="inline-math">K</span> and <span class="inline-math">γ<sub>M</sub></span> against the product declaration, current Eurocode/National Annex and project specification.</p>
+</div>
+<h2 id="mistakes">11. Common Mistakes to Flag</h2>
+<div class="mistake-grid">
+<div class="mistake"><div class="icon">!</div><p>Using unit strength directly as masonry strength.</p></div>
+<div class="mistake"><div class="icon">!</div><p>Selecting <span class="inline-math">K</span> without confirming unit group and mortar type.</p></div>
+<div class="mistake"><div class="icon">!</div><p>Forgetting that <span class="inline-math">α</span> and <span class="inline-math">β</span> change for thin-layer mortar.</p></div>
+<div class="mistake"><div class="icon">!</div><p>Forgetting the small cross-section factor for piers and columns.</p></div>
+<div class="mistake"><div class="icon">!</div><p>Using <span class="inline-math">γ<sub>M</sub></span> from the wrong execution or control category.</p></div>
+<div class="mistake"><div class="icon">!</div><p>Mixing N/mm² and kN/m² without conversion.</p></div>
+</div>
+<div class="disclaimer"><strong>Important:</strong> Educational content only. Clause notes and table reconstructions are provided for learning and checking the interface. Always verify final design values against the current licensed Eurocode, the correct National Annex and project specifications. All design decisions must be checked and signed off by a competent engineer.</div>
+</div></div></section>
+<nav aria-label="Previous and next chapter" class="chapter-footer-nav"><a href="chapter-01.html">← Previous: Chapter 1</a><a href="chapter-03.html">Next: Chapter 3 →</a></nav>
+<div class="overlay" id="modalOverlay" onclick="closeModal(event)"><div class="modal"><div class="modal-head"><div class="modal-badge" id="modalBadge">§</div><div class="modal-title" id="modalTitle">Reference</div><button class="modal-close" onclick="closeModal(null)">✕</button></div><div class="modal-body" id="modalBody"></div></div></div>
+<script>
+const yearEl=document.getElementById('year'); if(yearEl){yearEl.textContent=new Date().getFullYear();}
+window.addEventListener('load', () => { if (window.renderMathInElement) renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}]}); });
+(function(){const links=document.querySelectorAll('.toc a');const sections=Array.from(links).map(a=>document.querySelector(a.getAttribute('href')));window.addEventListener('scroll',()=>{let idx=0;sections.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<130)idx=i;});links.forEach((a,i)=>a.classList.toggle('active',i===idx));},{passive:true});})();
+
+const FULL_TABLE_31 = '';
+const GAMMA_REC = `data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20760%20420%22%3E%3Cdefs%3E%3Cstyle%3E.t%7Bfont%3A700%2028px%20Arial%3Bfill%3A%230E1A2B%7D.s%7Bfont%3A600%2018px%20Arial%3Bfill%3A%23526071%7D.b%7Bfill%3A%23d9a074%3Bstroke%3A%237c4b35%3Bstroke-width%3A2%7D.line%7Bstroke%3A%230071BC%3Bstroke-width%3A4%3Bmarker-end%3Aurl%28%23m%29%7D%3C/style%3E%3Cmarker%20id%3D%22m%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%227%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L8%2C3%20z%22%20fill%3D%22%230071BC%22/%3E%3C/marker%3E%3C/defs%3E%3Crect%20width%3D%22760%22%20height%3D%22420%22%20rx%3D%2220%22%20fill%3D%22%23F8FAFC%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22670%22%20height%3D%22330%22%20rx%3D%2218%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23DDE4EC%22/%3E%3Cg%20transform%3D%22translate%2895%20150%29%22%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2246%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%22138%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3C/g%3E%3Cline%20class%3D%22line%22%20x1%3D%22440%22%20y1%3D%22132%22%20x2%3D%22440%22%20y2%3D%22210%22/%3E%3Cline%20class%3D%22line%22%20x1%3D%22510%22%20y1%3D%22132%22%20x2%3D%22510%22%20y2%3D%22210%22/%3E%3Ctext%20class%3D%22t%22%20x%3D%22475%22%20y%3D%2296%22%20text-anchor%3D%22middle%22%3ERedrawn%20reference%20figure%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%3ESTRUCTURA%20teaching%20graphic%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22288%22%20text-anchor%3D%22middle%22%3EVerify%20exact%20clause/table%20values%20from%20the%20licensed%20standard.%3C/text%3E%3C/svg%3E`;
+const WORD_K = `data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20760%20420%22%3E%3Cdefs%3E%3Cstyle%3E.t%7Bfont%3A700%2028px%20Arial%3Bfill%3A%230E1A2B%7D.s%7Bfont%3A600%2018px%20Arial%3Bfill%3A%23526071%7D.b%7Bfill%3A%23d9a074%3Bstroke%3A%237c4b35%3Bstroke-width%3A2%7D.line%7Bstroke%3A%230071BC%3Bstroke-width%3A4%3Bmarker-end%3Aurl%28%23m%29%7D%3C/style%3E%3Cmarker%20id%3D%22m%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%227%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L8%2C3%20z%22%20fill%3D%22%230071BC%22/%3E%3C/marker%3E%3C/defs%3E%3Crect%20width%3D%22760%22%20height%3D%22420%22%20rx%3D%2220%22%20fill%3D%22%23F8FAFC%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22670%22%20height%3D%22330%22%20rx%3D%2218%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23DDE4EC%22/%3E%3Cg%20transform%3D%22translate%2895%20150%29%22%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2246%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%22138%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3C/g%3E%3Cline%20class%3D%22line%22%20x1%3D%22440%22%20y1%3D%22132%22%20x2%3D%22440%22%20y2%3D%22210%22/%3E%3Cline%20class%3D%22line%22%20x1%3D%22510%22%20y1%3D%22132%22%20x2%3D%22510%22%20y2%3D%22210%22/%3E%3Ctext%20class%3D%22t%22%20x%3D%22475%22%20y%3D%2296%22%20text-anchor%3D%22middle%22%3ERedrawn%20reference%20figure%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%3ESTRUCTURA%20teaching%20graphic%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22288%22%20text-anchor%3D%22middle%22%3EVerify%20exact%20clause/table%20values%20from%20the%20licensed%20standard.%3C/text%3E%3C/svg%3E`;
+const WORD_GAMMA = `data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20760%20420%22%3E%3Cdefs%3E%3Cstyle%3E.t%7Bfont%3A700%2028px%20Arial%3Bfill%3A%230E1A2B%7D.s%7Bfont%3A600%2018px%20Arial%3Bfill%3A%23526071%7D.b%7Bfill%3A%23d9a074%3Bstroke%3A%237c4b35%3Bstroke-width%3A2%7D.line%7Bstroke%3A%230071BC%3Bstroke-width%3A4%3Bmarker-end%3Aurl%28%23m%29%7D%3C/style%3E%3Cmarker%20id%3D%22m%22%20markerWidth%3D%2210%22%20markerHeight%3D%2210%22%20refX%3D%227%22%20refY%3D%223%22%20orient%3D%22auto%22%3E%3Cpath%20d%3D%22M0%2C0%20L0%2C6%20L8%2C3%20z%22%20fill%3D%22%230071BC%22/%3E%3C/marker%3E%3C/defs%3E%3Crect%20width%3D%22760%22%20height%3D%22420%22%20rx%3D%2220%22%20fill%3D%22%23F8FAFC%22/%3E%3Crect%20x%3D%2245%22%20y%3D%2245%22%20width%3D%22670%22%20height%3D%22330%22%20rx%3D%2218%22%20fill%3D%22%23FFFFFF%22%20stroke%3D%22%23DDE4EC%22/%3E%3Cg%20transform%3D%22translate%2895%20150%29%22%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%220%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2246%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%22138%22%20y%3D%2236%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%220%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3Crect%20class%3D%22b%22%20x%3D%2292%22%20y%3D%2272%22%20width%3D%2288%22%20height%3D%2232%22/%3E%3C/g%3E%3Cline%20class%3D%22line%22%20x1%3D%22440%22%20y1%3D%22132%22%20x2%3D%22440%22%20y2%3D%22210%22/%3E%3Cline%20class%3D%22line%22%20x1%3D%22510%22%20y1%3D%22132%22%20x2%3D%22510%22%20y2%3D%22210%22/%3E%3Ctext%20class%3D%22t%22%20x%3D%22475%22%20y%3D%2296%22%20text-anchor%3D%22middle%22%3ERedrawn%20reference%20figure%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22260%22%20text-anchor%3D%22middle%22%3ESTRUCTURA%20teaching%20graphic%3C/text%3E%3Ctext%20class%3D%22s%22%20x%3D%22475%22%20y%3D%22288%22%20text-anchor%3D%22middle%22%3EVerify%20exact%20clause/table%20values%20from%20the%20licensed%20standard.%3C/text%3E%3C/svg%3E`;
+
+const K_TABLE_HTML = `<div class="scroll-table"><table class="data-table">
+<tr><th>Masonry unit</th><th>Group / condition</th><th>General-purpose</th><th>Thin-layer</th><th>Lightweight 600-800</th><th>Lightweight 800-1300</th></tr>
+<tr><td>Clay</td><td>Group 1</td><td>0.50</td><td>0.75</td><td>0.30</td><td>0.40</td></tr>
+<tr><td>Clay</td><td>Group 2</td><td>0.40</td><td>0.70</td><td>0.25</td><td>0.30</td></tr>
+<tr><td>Calcium silicate</td><td>Group 1</td><td>0.50</td><td>0.80</td><td>B</td><td>B</td></tr>
+<tr><td>Calcium silicate</td><td>Group 2</td><td>0.40</td><td>0.70</td><td>B</td><td>B</td></tr>
+<tr><td>Aggregate concrete</td><td>Group 1</td><td>0.55</td><td>0.80</td><td>0.45</td><td>0.45</td></tr>
+<tr><td>Aggregate concrete</td><td>Group 1 units laid flat</td><td>0.50</td><td>0.70</td><td>0.40</td><td>0.40</td></tr>
+<tr><td>Aggregate concrete</td><td>Group 2</td><td>0.52</td><td>0.76</td><td>0.45</td><td>0.45</td></tr>
+<tr><td>AAC</td><td>Group 1</td><td>0.55</td><td>0.80</td><td>0.45</td><td>0.45</td></tr>
+<tr><td>Manufactured stone</td><td>Group 1</td><td>0.45</td><td>0.75</td><td>B</td><td>B</td></tr>
+<tr><td>Dimensioned natural stone</td><td>Group 1</td><td>0.45</td><td>B</td><td>B</td><td>B</td></tr>
+</table></div><p class="mini-source">A = no value available for that combination. B = combination not traditionally used in the UK National Annex source table. Verify against the project National Annex.</p>`;
+const UK_GAMMA_HTML = `<div class="scroll-table"><table class="data-table"><tr><th>Material / condition</th><th>Class 1</th><th>Class 2</th></tr><tr><td>Unreinforced masonry in direct/flexural compression, Category I</td><td>2.3</td><td>2.7</td></tr><tr><td>Unreinforced masonry in direct/flexural compression, Category II</td><td>2.6</td><td>3.0</td></tr><tr><td>Reinforced masonry in direct/flexural compression, Category I</td><td>2.0</td><td>C</td></tr><tr><td>Reinforced masonry in direct/flexural compression, Category II</td><td>2.3</td><td>C</td></tr><tr><td>Flexural tension, Category I and II</td><td>2.3</td><td>2.7</td></tr><tr><td>Unreinforced masonry in shear, Category I and II</td><td>2.5</td><td>2.5</td></tr><tr><td>Wall ties</td><td>3.5</td><td>3.5</td></tr><tr><td>Straps</td><td>1.5</td><td>1.5</td></tr></table></div><p class="mini-source">Clean reconstruction of the UK NA style values shown in the chapter source image. Verify the current National Annex before design.</p>`;
+
+const CLAUSES = {
+  'en772': {badge:'f_b', title:'Normalised mean compressive strength of units', body:`<p>For design, the tested unit compressive strength is converted to a normalised mean compressive strength, <strong>f<sub>b</sub></strong>. In the Eurocode symbol list, <strong>f<sub>b</sub></strong> is defined as the normalised mean compressive strength of a masonry unit. The definition of normalised unit strength is linked to the EN 771 unit standards and EN 772-1 test method.</p><div class="note">Use <strong>f<sub>b</sub></strong> in the masonry strength equation - do not substitute the wall strength or the declared unit strength without normalisation.</div><p class="mini-source">Reference orientation: EN 1996-1-1 symbol list and unit property clauses; EN 772-1 for compressive strength testing.</p>`},
+  'table31': {badge:'3.1', title:'EN 1996-1-1 Table 3.1 - Unit grouping', body:`<p>Editable STRUCTURA teaching table based on the EC6 unit-grouping concept. It avoids screenshot use and keeps the reference information readable inside the pop-up.</p><table class="ref-table"><thead><tr><th>Unit group</th><th>Typical geometry concept</th><th>Design meaning</th></tr></thead><tbody><tr><td>Group 1</td><td>Solid or lightly voided units; AAC, manufactured stone and natural stone are normally treated here.</td><td>Usually the most direct group for characteristic masonry strength selection.</td></tr><tr><td>Group 2</td><td>Vertically voided units with moderate void percentage and web/shell limits.</td><td>Requires the correct K value and careful manufacturer data.</td></tr><tr><td>Group 3</td><td>More heavily voided vertically perforated units.</td><td>Often more restrictive; confirm availability and National Annex approach.</td></tr><tr><td>Group 4</td><td>Units with horizontal voids in the laid orientation.</td><td>Design assumptions differ from vertically perforated units.</td></tr></tbody></table><p class="mini-source">Redrawn editable teaching table. Use the current licensed EN 1996-1-1 Table 3.1 and National Annex for final design values.</p>`},
+  'mortar': {badge:'3.2', title:'EN 1996-1-1 §3.2 / EN 998-2 - Mortar', body:`<p>Mortar is specified by type and strength. In this chapter, the main distinction is between general-purpose mortar, thin-layer mortar and lightweight mortar. The mortar strength <strong>f<sub>m</sub></strong> is used in the characteristic compressive strength equation.</p><div class="cards-3"><div class="mini-card"><h4>General-purpose</h4><p>Ordinary mortar without special characteristics.</p></div><div class="mini-card"><h4>Thin-layer</h4><p>Designed mortar for thin bed joints and accurate units.</p></div><div class="mini-card"><h4>Lightweight</h4><p>Designed mortar with low dry hardened density.</p></div></div><p class="mini-source">Reference orientation: EN 1996-1-1 §3.2 and EN 998-2.</p>`},
+  'ec6-361': {badge:'3.6', title:'EN 1996-1-1 §3.6.1 - Characteristic compressive strength', body:`<p>The characteristic compressive strength of masonry is obtained from unit strength, mortar strength and a coefficient depending on unit type, group and mortar. For this teaching chapter, the common general-purpose mortar form is:</p><div class="eq-block">$$ f_k = K f_b^{0.7} f_m^{0.3} $$</div><p><strong>f<sub>k</sub></strong> is not the same as unit strength. It is the characteristic compressive strength of the masonry assemblage.</p><p class="mini-source">Reference orientation: EN 1996-1-1 §3.6.1 and National Annex values for K.</p>`},
+  'uk-na4': {badge:'K', title:'National Annex Table for K values', body:`<p>The <strong>K</strong> coefficient depends on unit material, unit group and mortar type. A clean table is used here instead of a cropped image so the values remain readable on the website.</p>${K_TABLE_HTML}<div class="figure-card"><img src="${WORD_K}" alt="Source image of UK NA Table NA.4"></div>`},
+  'small-section': {badge:'3.6.1.2', title:'EN 1996-1-1 §3.6.1.2 - Small cross-section factor', body:`<p>Where the loaded gross cross-sectional area is less than 0.1 m², a reduction is applied because small loaded areas are more sensitive to local variation in units and workmanship.</p><div class="eq-block">$$ f_{k,red}=f_k(0.7+3A) \quad \text{for } A < 0.1m^2 $$</div><p><strong>A</strong> is in square metres. This is important for small piers and narrow masonry columns.</p>`},
+  'ec6-243': {badge:'2.4.3', title:'EN 1996-1-1 §2.4.3 - Material partial factor', body:`<p>The design value of a material property is obtained by dividing the characteristic value by the relevant partial factor for materials, <strong>γ<sub>M</sub></strong>. National Annex values govern the project design basis.</p><div class="eq-block">$$ f_d = \frac{f_k}{\gamma_M} $$</div><img src="${GAMMA_REC}" alt="Complete recommended gamma M table from EN 1996-1-1"><p class="mini-source">Based on EN 1996-1-1. National Annex values may differ.</p>`},
+  'uk-na1': {badge:'γM', title:'UK NA style teaching table for γM', body:`<p>The chapter teaching example uses Category II units and Class 2 execution, giving <strong>γ<sub>M</sub> = 3.0</strong> for unreinforced masonry in direct/flexural compression.</p>${UK_GAMMA_HTML}<div class="figure-card"><img src="${WORD_GAMMA}" alt="Source image of UK NA Table NA.1"></div>`}
+};
+function showClause(key) {const c=CLAUSES[key]; if(!c) return; document.getElementById('modalBadge').innerHTML=c.badge; document.getElementById('modalTitle').innerHTML=c.title; document.getElementById('modalBody').innerHTML=c.body; document.getElementById('modalOverlay').classList.add('open'); document.body.style.overflow='hidden'; if(window.renderMathInElement) renderMathInElement(document.getElementById('modalBody'), {delimiters:[{left:'$$',right:'$$',display:true}]});}
+function closeModal(evt) { if(evt && evt.target !== document.getElementById('modalOverlay')) return; document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+document.addEventListener('keydown', e => { if(e.key==='Escape'){closeModal(null); closeImage(null);} });
+document.addEventListener('click', e => { const chip=e.target.closest('.ref-chip'); if(chip) showClause(chip.dataset.clause); });
+function openImage(src,title){document.getElementById('lightboxImg').src=src;document.getElementById('imageOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeImage(evt){if(evt && evt.target!==document.getElementById('imageOverlay'))return;document.getElementById('imageOverlay').classList.remove('open');document.body.style.overflow='';}
+
+const GROUPS=[
+ {label:'Group 1',desc:'Solid units or units with limited holes. Often used for solid clay bricks and solid blocks.',holes:0},
+ {label:'Group 2',desc:'Units with moderate vertical holes. Many hollow concrete blocks fall here when product data confirms it.',holes:4},
+ {label:'Group 3',desc:'Units with higher vertical hole percentage. Confirm values carefully because not all National Annex tables provide K values.',holes:6},
+ {label:'Group 4',desc:'Units with horizontal holes. Not suitable for all K table combinations.',holes:-1}
+];
+function unitSvg(holes){let h=''; if(holes>0){for(let i=0;i<holes;i++){let x=25+(i%3)*26,y=14+Math.floor(i/3)*22; h+=`<circle cx="${x}" cy="${y}" r="7" fill="#fff" stroke="#4A5568"/>`;}} else if(holes<0){h='<rect x="14" y="14" width="72" height="10" fill="#fff" stroke="#4A5568"/><rect x="14" y="34" width="72" height="10" fill="#fff" stroke="#4A5568"/>';} return `<svg viewBox="0 0 100 60"><rect x="8" y="8" width="84" height="44" rx="3" fill="#D9DEE3" stroke="#4A5568" stroke-width="1.5"/>${h}</svg>`;}
+const ug=document.getElementById('unitSelector');
+GROUPS.forEach((g,i)=>{const d=document.createElement('div');d.className='unit-tile'+(i===0?' active':'');d.innerHTML=unitSvg(g.holes)+`<h4>${g.label}</h4><p>${g.desc}</p>`;d.addEventListener('click',()=>{document.querySelectorAll('.unit-tile').forEach(x=>x.classList.remove('active'));d.classList.add('active');document.getElementById('groupInfo').textContent=g.desc;});ug.appendChild(d);});document.getElementById('groupInfo').textContent=GROUPS[0].desc;
+
+const presets={clay1:{fb:10,fm:4,K:0.50,a:0.7,b:0.3,g:3.0,A:0.15},block2:{fb:5,fm:4,K:0.52,a:0.7,b:0.3,g:3.0,A:0.15},aac1:{fb:3,fm:4,K:0.55,a:0.7,b:0.3,g:3.0,A:0.15}};
+const ids=['fb','fm','Kval','alpha','beta','gamma','area'];
+const els=Object.fromEntries(ids.map(id=>[id,document.getElementById(id)]));
+function calcValues(v){let fk=v.K*Math.pow(v.fb,v.a)*Math.pow(v.fm,v.b);let factor=(v.applySmall && v.A<0.1)?(0.7+3*v.A):1;let fkAdj=fk*factor;let fd=fkAdj/v.g;return {fk,factor,fkAdj,fd};}
+function refresh(){const p=document.getElementById('preset').value;if(p!=='custom'){const v=presets[p];els.fb.value=v.fb;els.fm.value=v.fm;els.Kval.value=v.K.toFixed(2);els.alpha.value=v.a;els.beta.value=v.b;els.gamma.value=v.g;els.area.value=v.A;document.getElementById('preset').value='custom';}
+ const v={fb:+els.fb.value,fm:+els.fm.value,K:+els.Kval.value,a:+els.alpha.value,b:+els.beta.value,g:+els.gamma.value,A:+els.area.value,applySmall:document.getElementById('applySmall').value==='auto'};
+ if(Object.values(v).some(x=>typeof x==='number' && (!Number.isFinite(x)||x<0))) return;
+ const r=calcValues(v);document.getElementById('outFk').textContent=r.fk.toFixed(2)+' N/mm²';
+ const fact=document.getElementById('outFactor');fact.textContent=r.factor.toFixed(3)+(r.factor<1?' (applied)':' (not applied)');fact.className='val '+(r.factor<1?'warn':'good');
+ document.getElementById('outFkAdj').textContent=r.fkAdj.toFixed(2)+' N/mm²';document.getElementById('outFd').textContent=r.fd.toFixed(2)+' N/mm²';
+ updateBars();}
+function updateBars(){const data=[['barClay','barClayVal',presets.clay1],['barBlock','barBlockVal',presets.block2],['barAac','barAacVal',presets.aac1]].map(([b,l,p])=>{let r=calcValues({...p,applySmall:false});return [b,l,r.fd];});const max=Math.max(...data.map(d=>d[2]));data.forEach(([b,l,fd])=>{document.getElementById(b).style.width=(fd/max*100).toFixed(1)+'%';document.getElementById(l).textContent=fd.toFixed(2);});}
+document.getElementById('preset').addEventListener('change',refresh);ids.forEach(id=>els[id].addEventListener('input',refresh));document.getElementById('applySmall').addEventListener('change',refresh);refresh();
+</script>
+<footer class="site-footer unified-footer"><div class="footer-inner"><strong>STRUCTURA Academy</strong><p>Educational interface for Masonry Design to Eurocode 6. Clause chips and reference pop-ups are learning summaries and redrawn teaching material, not a substitute for the licensed Eurocode, National Annex, project specification or competent engineering review.</p><p>Chapter 2: Materials &amp; Characteristic Strength</p></div><p class="small">© <span id="year">2026</span> STRUCTURA Academy.</p></footer>
+<script id="structura-scrollspy-consistency-patch">
+(function(){
+  function ready(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn,{once:true});} else {fn();} }
+  ready(function(){
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+    if(!links.length){ return; }
+    var sections = links.map(function(a){
+      var href = a.getAttribute('href');
+      try { return document.querySelector(href); } catch(e) { return null; }
+    });
+    function activate(index){
+      links.forEach(function(a,i){ a.classList.toggle('active', i===index); });
+    }
+    var ticking=false;
+    function update(){
+      var current=0;
+      var trigger=150;
+      for(var i=0;i<sections.length;i++){
+        var sec=sections[i];
+        if(sec && sec.getBoundingClientRect().top <= trigger){ current=i; }
+      }
+      activate(current);
+      ticking=false;
+    }
+    window.addEventListener('scroll',function(){
+      if(!ticking){ window.requestAnimationFrame(update); ticking=true; }
+    },{passive:true});
+    window.addEventListener('resize',update);
+    update();
+  });
+})();
+</script>
+
+</body>
+</html>
