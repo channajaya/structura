@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Academy — Civil Engineering Learning Guides | STRUCTURA</title>
-<meta name="description" content="Practical guides, tutorials, examples, and AI-assisted workflows for civil engineers, students, and construction professionals. Master structural concepts, QS, QA/QC and site engineering." />
-<meta name="keywords" content="civil engineering learning, structural engineering tutorial, BOQ guide, QA/QC training, AutoCAD, Bluebeam, AI engineering, STRUCTURA Academy" />
+<title>Academy — Interactive Design-Code Textbooks | STRUCTURA</title>
+<meta name="description" content="Academy is a growing library of interactive, code-aware textbooks across structural design, construction management, geotechnical work and coordination — built for practicing engineers and engineers in training." />
+<meta name="keywords" content="civil engineering learning, eurocode textbook, EC6 masonry, structural engineering tutorial, construction management, geotechnical engineering, AI engineering, STRUCTURA Academy" />
 
-<meta property="og:title" content="Academy — Civil Engineering Learning Guides" />
-<meta property="og:description" content="Video courses, simulations, quizzes and certificates for civil engineering professionals." />
+<meta property="og:title" content="Academy — Interactive Design-Code Textbooks" />
+<meta property="og:description" content="Live calculators, clickable clause references and worked examples — inside a growing library of design-code textbooks for practicing engineers." />
 <meta property="og:type" content="website" />
 <meta property="og:image" content="../assets/img/og-default.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -41,66 +41,86 @@ a{color:var(--structura-blue);text-decoration:none}a:hover{color:var(--structura
 .btn-outline{background:#fff;color:var(--text-primary);border-color:var(--border)}.btn-outline:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
 .hero{padding:64px 0 56px;background:radial-gradient(1000px 400px at 90% -10%,var(--structura-blue-soft),transparent 60%),linear-gradient(180deg,#fff,var(--bg-light));border-bottom:1px solid var(--border)}
 .hero-eyebrow{display:inline-block;font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;color:var(--structura-blue);background:#fff;border:1px solid var(--border);padding:6px 12px;border-radius:999px;margin-bottom:18px}
-.hero h1{font-size:clamp(32px,4.5vw,52px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
-.hero p.lead{font-size:18px;color:var(--text-secondary);max-width:760px;margin:0 0 28px}
-.hero-actions{display:flex;flex-wrap:wrap;gap:12px}
-.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-top:40px;overflow:hidden}
-.stats-strip .stat{padding:20px 24px;border-right:1px solid var(--border)}.stats-strip .stat:last-child{border-right:0}
-.stats-strip .num{font-size:26px;font-weight:700;color:var(--structura-blue)}
+.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em;max-width:900px}
+.hero p.lead{font-size:17px;color:var(--text-secondary);max-width:760px;margin:0 0 32px}
+.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border:1px solid var(--border);border-radius:var(--radius);margin-top:8px;overflow:hidden}
+.stats-strip .stat{padding:18px 22px;border-right:1px solid var(--border)}.stats-strip .stat:last-child{border-right:0}
+.stats-strip .num{font-size:24px;font-weight:700;color:var(--structura-blue)}
 .stats-strip .lbl{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em}
-section.block{padding:72px 0}section.block.alt{background:var(--bg-light)}
-.section-head{margin-bottom:36px;max-width:780px}
+section.block{padding:64px 0}section.block.alt{background:var(--bg-light)}
+.section-head{margin-bottom:28px;max-width:780px}
 .section-head .kicker{font-family:var(--font-mono);font-size:12px;color:var(--structura-blue);letter-spacing:.08em;text-transform:uppercase}
-.section-head h2{font-size:clamp(26px,3vw,36px);margin:8px 0 10px;letter-spacing:-.01em}
-.section-head p{color:var(--text-secondary);font-size:16.5px;margin:0}
-.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.cat-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:.2s;cursor:pointer}
-.cat-card:hover{transform:translateY(-2px);border-color:var(--structura-blue);box-shadow:var(--shadow-md)}
-.cat-icon{width:42px;height:42px;border-radius:10px;background:var(--structura-blue-soft);color:var(--structura-blue);display:grid;place-items:center;font-family:var(--font-mono);font-weight:600;margin-bottom:14px}
-.cat-card h3{margin:0 0 6px;font-size:17px}.cat-card p{margin:0;font-size:14px;color:var(--text-secondary)}
-.filter-bar{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:24px}
-.search-input{flex:1;min-width:240px;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1px solid transparent;border-radius:var(--radius-sm);padding:10px 14px}
-.search-input:focus-within{border-color:var(--structura-blue);background:#fff}
-.search-input input{flex:1;background:transparent;border:0;outline:0;font:inherit;color:inherit}
-.filter-pills{display:flex;flex-wrap:wrap;gap:8px}
-.pill{font-family:var(--font-mono);font-size:11.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--border);background:#fff;color:var(--text-secondary);cursor:pointer;transition:.15s}
-.pill:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
-.pill.active{background:var(--structura-blue);color:#fff;border-color:var(--structura-blue)}
-.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.tool-card{position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px;transition:.2s}
-.tool-card:hover{border-color:var(--structura-blue);box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.tool-card .top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.tool-card h4{margin:0;font-size:16.5px;line-height:1.3}
-.tool-card .meta{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em}
-.tool-card p{margin:0;font-size:14px;color:var(--text-secondary)}
-.tool-card .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:var(--bg-light);color:var(--text-secondary);border-radius:6px}
-.level{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;border-radius:6px}
-.level.beg{background:rgba(22,163,74,.1);color:var(--success)}
-.level.int{background:rgba(0,113,188,.1);color:var(--structura-blue)}
-.level.pro{background:rgba(124,58,237,.1);color:var(--premium)}
-.status{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;border-radius:6px}
-.status.free{background:rgba(22,163,74,.1);color:var(--success)}
-.status.premium{background:rgba(124,58,237,.1);color:var(--premium)}
-.status.soon{background:rgba(217,119,6,.1);color:var(--warning)}
-.tool-card .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
-.tool-card .actions .btn{padding:8px 12px;font-size:13px}
-.tool-card.preview-locked{user-select:none;-webkit-user-select:none}
+.section-head h2{font-size:clamp(24px,3vw,32px);margin:8px 0 8px;letter-spacing:-.01em}
+.section-head p{color:var(--text-secondary);font-size:15.5px;margin:0}
+
+/* Category selector + catalogue */
+.cat-selector{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+.cat-tab{font-family:var(--font-sans);font-size:14.5px;font-weight:600;padding:11px 18px;border-radius:10px;border:1px solid var(--border);background:#fff;color:var(--text-primary);cursor:pointer;display:flex;align-items:center;gap:9px;transition:.15s}
+.cat-tab .icon-badge{width:26px;height:26px;border-radius:7px;background:var(--bg-light);color:var(--text-muted);display:grid;place-items:center;flex-shrink:0}
+.cat-tab .live-count{font-family:var(--font-mono);font-size:11px;opacity:.75}
+.cat-tab.active{border-color:var(--structura-blue);background:var(--structura-blue-soft);color:var(--structura-blue)}
+.cat-tab.active .icon-badge{background:var(--structura-blue);color:#fff}
+.cat-panel{display:none}
+.cat-panel.active{display:block}
+.sub-group{margin-bottom:32px}
+.sub-group:last-child{margin-bottom:0}
+.sub-group-label{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+.sub-card{border-radius:var(--radius);overflow:hidden;background:#fff;border:1px solid var(--border);display:flex;flex-direction:column;padding:20px;gap:10px;transition:.2s}
+.sub-card.live{border-color:#B9DDF2}
+.sub-card.live:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.sub-card .row-top{display:flex;align-items:center;justify-content:space-between}
+.sub-card .code-chip{font-family:var(--font-mono);font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:6px;background:var(--bg-light);color:var(--text-muted)}
+.sub-card.live .code-chip{background:var(--structura-blue-soft);color:var(--structura-blue-dark)}
+.status-chip{font-family:var(--font-mono);font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:4px 8px;border-radius:6px}
+.status-chip.live{color:var(--success);background:rgba(22,163,74,.1)}
+.status-chip.soon{color:var(--warning);background:rgba(217,119,6,.1)}
+.sub-card .sub-title{display:flex;align-items:center;gap:8px}
+.sub-card .sub-title h3{font-size:17.5px;font-weight:700;margin:0;color:var(--text-primary)}
+.sub-card.soon .sub-title h3{color:var(--text-muted)}
+.sub-card .sub-stats,.sub-card .sub-blurb{font-size:13.5px;color:var(--text-secondary);margin:0;line-height:1.5}
+.sub-card .start-link{margin-top:auto;padding-top:6px;font-size:14px;font-weight:600}
+.sub-card .waitlist-actions{margin-top:auto;padding-top:6px}
+.sub-card .waitlist-btn{background:#fff;border:1px solid var(--border);color:var(--text-primary);font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:8px;cursor:pointer}
+.sub-card .waitlist-btn:hover{border-color:var(--structura-blue);color:var(--structura-blue)}
+.sub-card .waitlist-form{display:none;gap:6px}
+.sub-card .waitlist-form.open{display:flex}
+.sub-card .waitlist-form input{flex:1;min-width:0;font-size:13px;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-family:var(--font-sans)}
+.sub-card .waitlist-form button{background:var(--structura-blue);color:#fff;border:none;font-size:13px;font-weight:600;padding:8px 12px;border-radius:6px;cursor:pointer;white-space:nowrap}
+.sub-card .waitlist-done{display:none;font-size:13.5px;font-weight:600;color:var(--success)}
+.sub-card .waitlist-done.shown{display:inline}
+
+/* Format section */
+.format-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.format-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px}
+.format-card svg{border-radius:8px}
+.format-card .format-title{display:flex;align-items:center;gap:8px}
+.format-card h3{font-size:16.5px;font-weight:700;margin:0}
+.format-card p{font-size:14px;line-height:1.6;color:var(--text-secondary);margin:0}
+
 .disclaimer{background:#FFF8EC;border:1px solid #F5D58A;border-radius:var(--radius);padding:18px 22px;color:#7A5400;font-size:14.5px}
 .disclaimer strong{color:#5C3F00}
-.cta-strip{background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));color:#fff;border-radius:var(--radius);padding:40px;text-align:center}
-.cta-strip h3{margin:0 0 8px;font-size:26px}.cta-strip p{margin:0 0 20px;opacity:.9}
-.cta-strip .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
-.cta-strip .btn-outline:hover{background:#fff;color:var(--structura-blue)}
-.site-footer{background:#0B1626;color:#cbd5e1;padding:60px 0 24px;margin-top:40px}
+.cta-strip{background:linear-gradient(135deg,var(--structura-blue),var(--structura-blue-dark));color:#fff;border-radius:16px;padding:44px;text-align:center}
+.cta-strip h3{margin:0 0 10px;font-size:clamp(22px,3vw,28px)}
+.cta-strip p{margin:0 0 22px;opacity:.92;font-size:15.5px;max-width:520px;margin-left:auto;margin-right:auto}
+.beta-form{display:none;gap:10px;flex-wrap:wrap;justify-content:center}
+.beta-form.active{display:flex}
+.beta-form input{flex:1;min-width:220px;max-width:340px;font-size:14.5px;padding:12px 14px;border:1px solid rgba(255,255,255,.4);border-radius:8px;background:rgba(255,255,255,.1);color:#fff;font-family:var(--font-sans)}
+.beta-form input::placeholder{color:rgba(255,255,255,.7)}
+.beta-form button{background:#fff;color:var(--structura-blue);font-weight:700;font-size:14.5px;padding:12px 22px;border:none;border-radius:8px;cursor:pointer}
+.beta-done{display:none;font-size:16px;font-weight:700}
+.beta-done.shown{display:inline}
+.beta-note{font-family:var(--font-mono);font-size:11.5px;color:rgba(255,255,255,.75);margin-top:16px}
+
+.site-footer{background:#0B1626;color:#cbd5e1;padding:60px 0 24px;margin-top:0}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
 .site-footer h5{color:#fff;font-size:13px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.08em;margin:0 0 14px}
 .site-footer a{color:#cbd5e1;display:block;padding:4px 0;font-size:14px}.site-footer a:hover{color:#fff}
 .code-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .code-badges span{font-family:var(--font-mono);font-size:10.5px;padding:4px 8px;background:rgba(255,255,255,.06);border-radius:6px;color:#94a3b8}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#94a3b8}
-@media (max-width: 980px){.cat-grid{grid-template-columns:repeat(2,1fr)}.tool-grid{grid-template-columns:repeat(2,1fr)}.stats-strip{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
-@media (max-width: 680px){.cat-grid,.tool-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}section.block{padding:48px 0}}
+@media (max-width: 980px){.stats-strip{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media (max-width: 680px){.footer-grid{grid-template-columns:1fr}section.block{padding:48px 0}}
 :focus-visible{outline:2px solid var(--structura-blue);outline-offset:2px;border-radius:6px}
 </style>
 </head>
@@ -108,243 +128,170 @@ section.block{padding:72px 0}section.block.alt{background:var(--bg-light)}
 
 <section class="hero">
   <div class="container">
-    <span class="hero-eyebrow">COURSES + CERTS · LEARNING &amp; EDUCATION</span>
-    <h1>Academy — Civil Engineering Learning Guides</h1>
-    <p class="lead">Practical guides, tutorials, examples, and AI-assisted workflows for civil engineers, students, and construction professionals. Master structural concepts through clear, code-aware content.</p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#topics">Browse Topics</a>
-      <a class="btn btn-outline" href="#categories">View Categories</a>
-    </div>
+    <span class="hero-eyebrow">CIVIL ENGINEERING LEARNING PLATFORM</span>
+    <h1>Academy: interactive design-code textbooks — and the rest of civil engineering practice</h1>
+    <p class="lead">Academy isn't only a codes reference. It's a growing library across structural design, construction management, geotechnical work and coordination — each guide built for practicing engineers and engineers in training who move across jurisdictions and disciplines, not just readers of one code.</p>
     <div class="stats-strip">
-      <div class="stat"><div class="num">25+</div><div class="lbl">Guides</div></div>
-      <div class="stat"><div class="num">7</div><div class="lbl">Categories</div></div>
-      <div class="stat"><div class="num">3</div><div class="lbl">Levels</div></div>
-      <div class="stat"><div class="num">Free</div><div class="lbl">Beta Access</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Categories</div></div>
+      <div class="stat"><div class="num">1</div><div class="lbl">Module live</div></div>
+      <div class="stat"><div class="num">13</div><div class="lbl">Chapters live</div></div>
+      <div class="stat"><div class="num">36</div><div class="lbl">Sections</div></div>
     </div>
   </div>
 </section>
 
-<section class="block" id="categories">
+<section class="block" id="catalogue">
   <div class="container">
-    <div class="section-head"><div class="kicker">// 01 — Learning Tracks</div><h2>Choose your track</h2><p>Seven curated learning paths covering structural engineering, site work, QS, QA/QC, software and AI workflows.</p></div>
-    <div class="cat-grid">
-      <div class="cat-card" data-cat="struct"><div class="cat-icon">SE</div><h3>Structural Engineering</h3><p>Beams, columns, foundations and load paths.</p></div>
-      <div class="cat-card" data-cat="site"><div class="cat-icon">SI</div><h3>Site Engineering</h3><p>Setting out, concrete and reinforcement work.</p></div>
-      <div class="cat-card" data-cat="qs"><div class="cat-icon">QS</div><h3>Quantity Surveying</h3><p>BOQ, BBS, variations and payment certificates.</p></div>
-      <div class="cat-card" data-cat="qaqc"><div class="cat-icon">QC</div><h3>QA/QC</h3><p>Inspection, audits and quality systems.</p></div>
-      <div class="cat-card" data-cat="cm"><div class="cat-icon">CM</div><h3>Construction Management</h3><p>Planning, scheduling and contractor admin.</p></div>
-      <div class="cat-card" data-cat="soft"><div class="cat-icon">SW</div><h3>Engineering Software</h3><p>AutoCAD, Bluebeam, Excel and Tekla workflows.</p></div>
-      <div class="cat-card" data-cat="ai"><div class="cat-icon">AI</div><h3>AI for Engineers</h3><p>AI-assisted documentation and workflows.</p></div>
+    <div class="section-head">
+      <div class="kicker">// Catalogue</div>
+      <h2>Choose a category</h2>
+      <p>Live modules read in full today. Everything else is on the roadmap — join the waitlist for any topic and we'll notify you the day it ships.</p>
     </div>
-  </div>
-</section>
 
-<section class="block alt" id="topics">
-  <div class="container">
-    <div class="section-head"><div class="kicker">// 02 — Topics</div><h2>Learning Topics</h2><p>Filter by track or level. Save topics to revisit later — your progress is stored locally.</p></div>
+    <div class="cat-selector" id="catSelector">
+      <button class="cat-tab active" data-cat="structural">
+        <span class="icon-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6,3H15L18,6V21H6Z M15,3V6H18 M8,11H16 M8,15H13"></path></svg></span>
+        Structural design <span class="live-count">1 live</span>
+      </button>
+      <button class="cat-tab" data-cat="cm">
+        <span class="icon-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4,6H12 M4,12H16 M4,18H9"></path></svg></span>
+        Construction management &amp; delivery
+      </button>
+      <button class="cat-tab" data-cat="geo">
+        <span class="icon-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3,7H21 M3,12H21 M3,17H21 M12,3L9,7H15Z"></path></svg></span>
+        Geotechnical &amp; foundations
+      </button>
+      <button class="cat-tab" data-cat="arch">
+        <span class="icon-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4,9H14V19H4Z M9,5H19V15H9Z"></path></svg></span>
+        Architecture &amp; coordination
+      </button>
+    </div>
 
-    <div class="filter-bar">
-      <label class="search-input"><span>🔍</span><input type="search" id="searchInput" placeholder="Search — e.g. column design, take-off, AutoCAD…"/></label>
-      <div class="filter-pills" id="filterPills">
-        <button class="pill active" data-filter="all">All</button>
-        <button class="pill" data-filter="struct">Structural</button>
-        <button class="pill" data-filter="site">Site</button>
-        <button class="pill" data-filter="qs">QS</button>
-        <button class="pill" data-filter="soft">Software</button>
-        <button class="pill" data-filter="ai">AI</button>
-        <button class="pill" data-filter="beg">Beginner</button>
-        <button class="pill" data-filter="int">Intermediate</button>
-        <button class="pill" data-filter="pro">Professional</button>
-        <button class="pill" data-filter="soon">Coming Soon</button>
+    <!-- STRUCTURAL -->
+    <div class="cat-panel active" data-cat="structural">
+      <div class="sub-group">
+        <div class="sub-group-label">Eurocodes</div>
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC2</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8,3V21 M16,3V21 M8,3H16 M8,21H16 M8,8H16 M8,14H16"></path></svg><h3>Concrete</h3></div><p class="sub-blurb">Design of concrete structures.</p><div class="waitlist-actions" data-code="EC2"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC2</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC3</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,4H19 M5,20H19 M12,4V20 M6,4V7 M18,4V7 M6,17V20 M18,17V20"></path></svg><h3>Steel</h3></div><p class="sub-blurb">Design of steel structures.</p><div class="waitlist-actions" data-code="EC3"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC3</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC5</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,4H21V20H3Z M5,9C7,8 9,10 11,9C13,8 15,10 17,9C18.5,8.5 19.5,9 21,9 M5,14C7,13 9,15 11,14C13,13 15,15 17,14C18.5,13.5 19.5,14 21,14"></path></svg><h3>Timber</h3></div><p class="sub-blurb">Design of timber structures — glulam, connections and service classes. Planned.</p><div class="waitlist-actions" data-code="EC5"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC5</span></div></article>
+          <article class="sub-card live"><div class="row-top"><span class="code-chip">EC6</span><span class="status-chip live">Live</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071BC" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,6H21 M3,12H21 M3,18H21 M8,6V12 M14,6V12 M11,12V18 M17,12V18 M5,12V18"></path></svg><h3>Masonry</h3></div><p class="sub-stats">13 chapters · 36 sections</p><a class="start-link" href="/academy/masonry-ec6/index.html" target="_top">Start reading →</a></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC7</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,7H21 M3,12H21 M3,17H21 M12,3L9,7H15Z"></path></svg><h3>Geotechnical</h3></div><p class="sub-blurb">Geotechnical design.</p><div class="waitlist-actions" data-code="EC7"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC7</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC8</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,7H21 M3,12H21 M3,17H21 M12,3L9,7H15Z"></path></svg><h3>Seismic</h3></div><p class="sub-blurb">Design for earthquake resistance. Planned.</p><div class="waitlist-actions" data-code="EC8"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC8</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">EC9</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,4H19 M5,20H19 M12,4V20 M6,4V7 M18,4V7 M6,17V20 M18,17V20"></path></svg><h3>Aluminium</h3></div><p class="sub-blurb">Design of aluminium structures. Planned.</p><div class="waitlist-actions" data-code="EC9"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for EC9</span></div></article>
+        </div>
+      </div>
+      <div class="sub-group">
+        <div class="sub-group-label">ACI (American)</div>
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">ACI 318</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8,3V21 M16,3V21 M8,3H16 M8,21H16 M8,8H16 M8,14H16"></path></svg><h3>Concrete</h3></div><p class="sub-blurb">Building code requirements for structural concrete.</p><div class="waitlist-actions" data-code="ACI318"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for ACI 318</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">AISC</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,4H19 M5,20H19 M12,4V20 M6,4V7 M18,4V7 M6,17V20 M18,17V20"></path></svg><h3>Steel (companion)</h3></div><p class="sub-blurb">Steel construction manual companion volume.</p><div class="waitlist-actions" data-code="AISC"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for AISC</span></div></article>
+        </div>
+      </div>
+      <div class="sub-group">
+        <div class="sub-group-label">IS (Indian Standards)</div>
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">IS 456</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8,3V21 M16,3V21 M8,3H16 M8,21H16 M8,8H16 M8,14H16"></path></svg><h3>Concrete</h3></div><p class="sub-blurb">Plain and reinforced concrete code of practice.</p><div class="waitlist-actions" data-code="IS456"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for IS 456</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">IS 800</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,4H19 M5,20H19 M12,4V20 M6,4V7 M18,4V7 M6,17V20 M18,17V20"></path></svg><h3>Steel</h3></div><p class="sub-blurb">General construction in steel.</p><div class="waitlist-actions" data-code="IS800"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for IS 800</span></div></article>
+        </div>
+      </div>
+      <div class="sub-group">
+        <div class="sub-group-label">AS (Australian Standards)</div>
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">AS 3600</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8,3V21 M16,3V21 M8,3H16 M8,21H16 M8,8H16 M8,14H16"></path></svg><h3>Concrete</h3></div><p class="sub-blurb">Concrete structures standard.</p><div class="waitlist-actions" data-code="AS3600"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for AS 3600</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">AS 4100</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,4H19 M5,20H19 M12,4V20 M6,4V7 M18,4V7 M6,17V20 M18,17V20"></path></svg><h3>Steel</h3></div><p class="sub-blurb">Steel structures standard.</p><div class="waitlist-actions" data-code="AS4100"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for AS 4100</span></div></article>
+        </div>
       </div>
     </div>
 
-    <div class="tool-grid" id="toolGrid">
-      <!-- STRUCTURAL -->
-      <article class="tool-card preview-locked" data-cat="struct" data-level="beg" data-status="free" data-title="RC beam design basics">
-        <div class="top"><h4>RC Beam Design Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Structural · EC2 / ACI / IS</div>
-        <p>Bending moment, flexural reinforcement and a worked utilisation example.</p>
-        <div class="tags"><span class="tag">RC</span><span class="tag">BEAM</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button><button class="btn btn-outline" data-action="fav">☆ Save</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="int" data-status="free" data-title="Column design basics">
-        <div class="top"><h4>Column Design Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Structural · EC2 / ACI</div>
-        <p>Axial and biaxial bending interaction, slenderness and detailing.</p>
-        <div class="tags"><span class="tag">RC</span><span class="tag">COLUMN</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="int" data-status="free" data-title="Foundation design basics">
-        <div class="top"><h4>Foundation Design Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Structural · EC7 / ACI</div>
-        <p>Pad and pile foundations, bearing capacity, settlement principles.</p>
-        <div class="tags"><span class="tag">FOUNDATION</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="int" data-status="free" data-title="Steel beam design basics">
-        <div class="top"><h4>Steel Beam Design Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Structural · EC3 / AISC</div>
-        <p>Section classification, bending, shear and deflection check workflow.</p>
-        <div class="tags"><span class="tag">STEEL</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="beg" data-status="free" data-title="Load paths">
-        <div class="top"><h4>Load Paths</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Structural · Concepts</div>
-        <p>How loads travel from slab to beam to column to foundation.</p>
-        <div class="tags"><span class="tag">CONCEPT</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="pro" data-status="premium" data-title="Structural detailing">
-        <div class="top"><h4>Structural Detailing</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level pro">Professional</span><span class="status premium">Premium</span></div></div>
-        <div class="meta">Structural · Detailing</div>
-        <p>Anchorage, laps, hooks and joint detailing best practice.</p>
-        <div class="tags"><span class="tag">DETAIL</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Preview</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="struct" data-level="int" data-status="free" data-title="masonry design to eurocode 6">
-        <div class="top"><h4>Masonry Design to Eurocode 6</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Module</span></div></div>
-        <div class="meta">13-chapter interactive module · EN 1996</div>
-        <p>Materials, characteristic strength, vertical and lateral load resistance, slenderness, cavity walls and worked examples for structural masonry to EC6.</p>
-        <div class="tags"><span class="tag">MASONRY</span><span class="tag">EC6</span></div>
-        <div class="actions"><a class="btn btn-primary" href="/academy/masonry-ec6/index.html" target="_top">Open Module</a></div>
-      </article>
-
-      <!-- SITE -->
-      <article class="tool-card preview-locked" data-cat="site" data-level="beg" data-status="free" data-title="Setting out basics">
-        <div class="top"><h4>Setting Out Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Site · Survey</div>
-        <p>Grid lines, control points and instrument setup workflow.</p>
-        <div class="tags"><span class="tag">SURVEY</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="site" data-level="int" data-status="free" data-title="Concrete inspection">
-        <div class="top"><h4>Concrete Inspection</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Site · QA</div>
-        <p>Pre-pour, slump, cube sampling and curing checks.</p>
-        <div class="tags"><span class="tag">QA</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="site" data-level="int" data-status="free" data-title="Reinforcement checking">
-        <div class="top"><h4>Reinforcement Checking</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Site · QA</div>
-        <p>Bar size, spacing, cover and lap checks before pour.</p>
-        <div class="tags"><span class="tag">REBAR</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="site" data-level="int" data-status="soon" data-title="Formwork inspection">
-        <div class="top"><h4>Formwork Inspection</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status soon">Coming Soon</span></div></div>
-        <div class="meta">Site · QA</div>
-        <p>Bracing, alignment, joints and release agent checks.</p>
-        <div class="tags"><span class="tag">FORMWORK</span></div>
-        <div class="actions"><button class="btn btn-outline" disabled>Coming Soon</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="site" data-level="beg" data-status="free" data-title="Site documentation">
-        <div class="top"><h4>Site Documentation</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Site · Records</div>
-        <p>Daily reports, RFIs, NCRs and how they fit together.</p>
-        <div class="tags"><span class="tag">DOC</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-
-      <!-- QS -->
-      <article class="tool-card preview-locked" data-cat="qs" data-level="beg" data-status="free" data-title="BOQ basics">
-        <div class="top"><h4>BOQ Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">QS · Estimating</div>
-        <p>What a BOQ is, structure, and how items are described.</p>
-        <div class="tags"><span class="tag">BOQ</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="qs" data-level="int" data-status="free" data-title="Taking-off quantities">
-        <div class="top"><h4>Taking-off Quantities</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">QS · Measurement</div>
-        <p>Systematic measurement, deductions and dimension sheets.</p>
-        <div class="tags"><span class="tag">TAKE-OFF</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="qs" data-level="int" data-status="free" data-title="BBS basics">
-        <div class="top"><h4>BBS Basics</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">QS · BBS</div>
-        <p>Bar mark, shape code, cutting length and weight calculation.</p>
-        <div class="tags"><span class="tag">BBS</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="qs" data-level="pro" data-status="premium" data-title="Variation claims">
-        <div class="top"><h4>Variation Claims</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level pro">Professional</span><span class="status premium">Premium</span></div></div>
-        <div class="meta">QS · Commercial</div>
-        <p>Notice, valuation and assessment of variations under common contracts.</p>
-        <div class="tags"><span class="tag">CLAIM</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Preview</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="qs" data-level="int" data-status="free" data-title="Payment certificates">
-        <div class="top"><h4>Payment Certificates</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">QS · Commercial</div>
-        <p>Interim valuation, retention, advances and certified amounts.</p>
-        <div class="tags"><span class="tag">PAYMENT</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-
-      <!-- SOFTWARE -->
-      <article class="tool-card preview-locked" data-cat="soft" data-level="beg" data-status="free" data-title="AutoCAD workflow">
-        <div class="top"><h4>AutoCAD Workflow</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Software · CAD</div>
-        <p>Layers, blocks, xrefs and sheet set publishing essentials.</p>
-        <div class="tags"><span class="tag">CAD</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="soft" data-level="int" data-status="free" data-title="Bluebeam for QS">
-        <div class="top"><h4>Bluebeam for QS</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Software · QS</div>
-        <p>Measurement tools, calibration and tool sets for take-off.</p>
-        <div class="tags"><span class="tag">BLUEBEAM</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="soft" data-level="beg" data-status="free" data-title="Excel templates">
-        <div class="top"><h4>Excel Templates for Engineers</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level beg">Beginner</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">Software · Excel</div>
-        <p>Structuring engineering calc sheets that are reviewable and reusable.</p>
-        <div class="tags"><span class="tag">EXCEL</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
-      <article class="tool-card preview-locked" data-cat="soft" data-level="pro" data-status="premium" data-title="Tekla/Tedds-style calculation reports">
-        <div class="top"><h4>Tekla/Tedds-style Calc Reports</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level pro">Professional</span><span class="status premium">Premium</span></div></div>
-        <div class="meta">Software · Reports</div>
-        <p>Design calculation report structure and professional formatting.</p>
-        <div class="tags"><span class="tag">REPORT</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Preview</button></div>
-      </article>
-
-      <!-- AI -->
-      <article class="tool-card preview-locked" data-cat="ai" data-level="int" data-status="free" data-title="AI-assisted engineering documentation">
-        <div class="top"><h4>AI-Assisted Engineering Documentation</h4><div style="display:flex;gap:6px;flex-wrap:wrap"><span class="level int">Intermediate</span><span class="status free">Free Guide</span></div></div>
-        <div class="meta">AI · Workflow</div>
-        <p>Practical, safe ways to use AI for drafting, checking and summarising — with engineer review always in the loop.</p>
-        <div class="tags"><span class="tag">AI</span><span class="tag">WORKFLOW</span></div>
-        <div class="actions"><button class="btn btn-primary" data-action="open">Read Guide</button></div>
-      </article>
+    <!-- CONSTRUCTION MANAGEMENT -->
+    <div class="cat-panel" data-cat="cm">
+      <div class="sub-group">
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">CPM</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4,6H12 M4,12H16 M4,18H9"></path></svg><h3>Programme &amp; CPM scheduling</h3></div><p class="sub-blurb">Critical path method, look-aheads, and programme control.</p><div class="waitlist-actions" data-code="CPM"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for CPM</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">FIDIC / NEC4</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6,3H15L18,6V21H6Z M15,3V6H18 M8,11H16 M8,15H13"></path></svg><h3>Contracts</h3></div><p class="sub-blurb">Contract mechanics for FIDIC and NEC4 forms.</p><div class="waitlist-actions" data-code="FIDIC-NEC4"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for FIDIC / NEC4</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">SUP</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,8H15V16H5Z M17,8V16 M15,8H19 M15,16H19"></path></svg><h3>Site supervision</h3></div><p class="sub-blurb">Inspection, ITPs, RFIs and quality on site.</p><div class="waitlist-actions" data-code="SUP"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for SUP</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">QS</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6,3H18V21H6Z M8,6H16 M8,10H10 M13,10H15 M8,14H10 M13,14H15 M8,18H10 M13,18H15"></path></svg><h3>QS / BOQ fundamentals</h3></div><p class="sub-blurb">Bills of quantities, measurement and valuation basics.</p><div class="waitlist-actions" data-code="QS"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for QS</span></div></article>
+        </div>
+      </div>
     </div>
-    <p id="emptyState" style="display:none;text-align:center;color:var(--text-muted);margin-top:24px">No topics match your search.</p>
-  </div>
-</section>
 
-<section class="block" style="padding-top:0">
-  <div class="container">
-    <div class="disclaimer">
-      <strong>Important:</strong> Academy content is educational only. It does not constitute engineering advice or design approval. All design decisions must be made and signed off by competent engineers in accordance with local codes, contracts and authority requirements.
+    <!-- GEOTECHNICAL -->
+    <div class="cat-panel" data-cat="geo">
+      <div class="sub-group">
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">FDN</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8,3V21 M16,3V21 M8,3H16 M8,21H16 M8,8H16 M8,14H16"></path></svg><h3>Foundation design fundamentals</h3></div><p class="sub-blurb">Bearing capacity, settlement and foundation selection.</p><div class="waitlist-actions" data-code="FDN"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for FDN</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">SI</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,7H21 M3,12H21 M3,17H21 M12,3L9,7H15Z"></path></svg><h3>Site investigation &amp; soil reports</h3></div><p class="sub-blurb">Reading and using geotechnical site investigation data.</p><div class="waitlist-actions" data-code="SI"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for SI</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">RET</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3,7H21 M3,12H21 M3,17H21 M12,3L9,7H15Z"></path></svg><h3>Retaining structures</h3></div><p class="sub-blurb">Earth pressure theory and retaining wall design.</p><div class="waitlist-actions" data-code="RET"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for RET</span></div></article>
+        </div>
+      </div>
     </div>
+
+    <!-- ARCHITECTURE -->
+    <div class="cat-panel" data-cat="arch">
+      <div class="sub-group">
+        <div class="sub-grid">
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">BIM</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4,9H14V19H4Z M9,5H19V15H9Z"></path></svg><h3>BIM &amp; ISO 19650 basics</h3></div><p class="sub-blurb">Information management fundamentals for coordinated delivery.</p><div class="waitlist-actions" data-code="BIM"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for BIM</span></div></article>
+          <article class="sub-card soon"><div class="row-top"><span class="code-chip">COORD</span><span class="status-chip soon">Coming soon</span></div><div class="sub-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5,8H15V16H5Z M17,8V16 M15,8H19 M15,16H19"></path></svg><h3>Drawing coordination</h3></div><p class="sub-blurb">Clash resolution and cross-discipline drawing checks.</p><div class="waitlist-actions" data-code="COORD"><button class="waitlist-btn" data-action="open-waitlist">Join waitlist</button><form class="waitlist-form" data-action="submit-waitlist"><input type="email" required placeholder="you@firm.com"/><button type="submit">Notify me</button></form><span class="waitlist-done">✓ You're on the list for COORD</span></div></article>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <section class="block alt">
   <div class="container">
-    <div class="cta-strip">
-      <h3>Apply what you learn — across the platform</h3>
-      <p>Go from theory to documentation using Design Studio, QS Office and PM Office.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <a class="btn btn-outline" href="../index.html">Back to Home</a>
-        <a class="btn btn-outline" href="../qs-office/index.html">Open QS Office →</a>
+    <div class="section-head" style="max-width:700px">
+      <div class="kicker">// Format</div>
+      <h2>Not a PDF, indexed</h2>
+      <p>The live EC6 module already ships with this format — every future module inherits it.</p>
+    </div>
+    <div class="format-grid">
+      <div class="format-card">
+        <svg width="100%" height="130" viewBox="0 0 300 130">
+          <defs><pattern id="stripe1" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#E6F2FA"></rect><rect width="4" height="8" fill="#D3E9F7"></rect></pattern></defs>
+          <rect width="300" height="130" fill="url(#stripe1)"></rect>
+          <text x="150" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#005A96">live calculator embed</text>
+        </svg>
+        <div class="format-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071BC" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6,3H18V21H6Z M8,6H16 M8,10H10 M13,10H15 M8,14H10 M13,14H15 M8,18H10 M13,18H15"></path></svg><h3>Live calculators, inline</h3></div>
+        <p>Every worked example carries a real calculator beside the derivation — change a section, load or span and watch the utilisation ratio update against the actual clause logic.</p>
       </div>
+      <div class="format-card">
+        <svg width="100%" height="130" viewBox="0 0 300 130">
+          <defs><pattern id="stripe2" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#FBEEDC"></rect><rect width="4" height="8" fill="#F6E0BE"></rect></pattern></defs>
+          <rect width="300" height="130" fill="url(#stripe2)"></rect>
+          <text x="150" y="62" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8A5A00">cl. 6.2.3.2 →</text>
+          <text x="150" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" fill="#8A5A00">clause reference chip</text>
+        </svg>
+        <div class="format-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0071BC" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7,3H17V21L12,17L7,21Z"></path></svg><h3>Clickable clause references</h3></div>
+        <p>Every citation is a live chip — jump straight to the clause, its national annex note, and everywhere else it's used in the book.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" style="padding-bottom:0">
+  <div class="container">
+    <div class="disclaimer">
+      <strong>Important:</strong> Academy content is educational only and does not constitute engineering advice or design approval. Design decisions must be made and signed off by competent engineers in accordance with local codes, contracts and authority requirements.
+    </div>
+  </div>
+</section>
+
+<section class="block" id="beta">
+  <div class="container">
+    <div class="cta-strip">
+      <h3>Request beta access</h3>
+      <p>Academy is currently gated behind a private beta. Leave your email and we'll send HTTP Basic Auth credentials as seats open.</p>
+
+      <form class="beta-form active" id="betaForm">
+        <input name="email" type="email" required placeholder="you@firm.com"/>
+        <button type="submit">Request access</button>
+      </form>
+      <span class="beta-done" id="betaDone">✓ Request received — we'll be in touch.</span>
+
+      <div class="beta-note">structuraeng.app/academy · access via HTTP Basic Auth credentials</div>
     </div>
   </div>
 </section>
@@ -358,8 +305,8 @@ section.block{padding:72px 0}section.block.alt{background:var(--bg-light)}
         <div class="code-badges"><span>EUROCODE</span><span>ACI 318</span><span>AISC 360</span><span>IS 456/800</span><span>BS 8110/5950</span><span>AS 3600/4100</span></div>
       </div>
       <div><h5>Platform</h5><a href="../index.html#design-studio">Design Studio</a><a href="../pm-office/index.html">PM Office</a><a href="../qs-office/index.html">QS Office</a><a href="../architecture/index.html">Architecture</a><a href="../academy/index.html">Academy</a></div>
-      <div><h5>Academy</h5><a href="#categories">Structural</a><a href="#categories">Site</a><a href="#categories">QS</a><a href="#categories">Software</a><a href="#categories">AI</a></div>
-      <div><h5>Resources</h5><a href="../index.html#beta">Join Beta</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+      <div><h5>Academy</h5><a href="#catalogue" data-cat-link="structural">Structural design</a><a href="#catalogue" data-cat-link="cm">Construction management</a><a href="#catalogue" data-cat-link="geo">Geotechnical</a><a href="#catalogue" data-cat-link="arch">Architecture</a></div>
+      <div><h5>Resources</h5><a href="#beta">Join Beta</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
     </div>
     <div class="footer-bottom"><span>© <span id="year"></span> STRUCTURA — Digital Engineering Office. All rights reserved.</span><span>Beta release · Public launch 2026</span></div>
   </div>
@@ -369,26 +316,43 @@ section.block{padding:72px 0}section.block.alt{background:var(--bg-light)}
 (function(){
   document.getElementById('year').textContent=new Date().getFullYear();
 
-  const grid=document.getElementById('toolGrid'),cards=Array.from(grid.querySelectorAll('.tool-card'));
-  const search=document.getElementById('searchInput'),pills=document.querySelectorAll('#filterPills .pill'),empty=document.getElementById('emptyState');
-  let active='all';
-  function apply(){const q=(search.value||'').toLowerCase().trim();let n=0;cards.forEach(c=>{const t=(c.dataset.title||'').toLowerCase();const mq=!q||t.includes(q);const mf=active==='all'||active===c.dataset.cat||active===c.dataset.level||active===c.dataset.status;const s=mq&&mf;c.style.display=s?'':'none';if(s)n++;});empty.style.display=n?'none':'block'}
-  search.addEventListener('input',apply);
-  pills.forEach(p=>p.addEventListener('click',()=>{pills.forEach(x=>x.classList.remove('active'));p.classList.add('active');active=p.dataset.filter;apply();}));
-  document.querySelectorAll('.cat-card').forEach(c=>c.addEventListener('click',()=>{const cat=c.dataset.cat;const pill=document.querySelector(`#filterPills .pill[data-filter="${cat}"]`);if(pill)pill.click();document.getElementById('topics').scrollIntoView({behavior:'smooth'});}));
-
-  const FAV='structura_favs_academy',REC='structura_recent_academy';
-  const get=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return[]}};
-  const set=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v.slice(0,20)))}catch(e){}};
-  function markFavs(){const f=get(FAV);cards.forEach(c=>{const b=c.querySelector('[data-action="fav"]');if(b)b.textContent=f.includes(c.dataset.title)?'★ Saved':'☆ Save'});}
-  markFavs();
-  grid.addEventListener('click',e=>{const b=e.target.closest('button[data-action]');if(!b)return;const c=b.closest('.tool-card'),t=c.dataset.title,a=b.dataset.action;
-    if(a==='fav'){const f=get(FAV);const i=f.indexOf(t);if(i>=0)f.splice(i,1);else f.unshift(t);set(FAV,f);markFavs();return;}
-    const r=get(REC).filter(x=>x!==t);r.unshift(t);set(REC,r);
-    alert(`Opening guide: ${t}\n\nBeta preview. Final delivery will be server-side authenticated.`);
+  // Category selector
+  var tabs=document.querySelectorAll('.cat-tab'),panels=document.querySelectorAll('.cat-panel');
+  function selectCategory(cat){
+    tabs.forEach(function(t){t.classList.toggle('active',t.dataset.cat===cat)});
+    panels.forEach(function(p){p.classList.toggle('active',p.dataset.cat===cat)});
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){selectCategory(t.dataset.cat)})});
+  document.querySelectorAll('[data-cat-link]').forEach(function(a){
+    a.addEventListener('click',function(){selectCategory(a.dataset.catLink)});
   });
-  document.addEventListener('contextmenu',e=>{if(e.target.closest('.preview-locked'))e.preventDefault();});
-  document.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(e.key==='F12')e.preventDefault();if((e.ctrlKey||e.metaKey)&&['u','s'].includes(k))e.preventDefault();if((e.ctrlKey||e.metaKey)&&e.shiftKey&&k==='i')e.preventDefault();});
+
+  // Waitlist join/submit per catalogue card
+  document.getElementById('catalogue').addEventListener('click',function(e){
+    var btn=e.target.closest('[data-action="open-waitlist"]');
+    if(btn){
+      var wrap=btn.closest('.waitlist-actions');
+      btn.style.display='none';
+      wrap.querySelector('.waitlist-form').classList.add('open');
+    }
+  });
+  document.getElementById('catalogue').addEventListener('submit',function(e){
+    var form=e.target.closest('[data-action="submit-waitlist"]');
+    if(form){
+      e.preventDefault();
+      var wrap=form.closest('.waitlist-actions');
+      form.classList.remove('open');
+      wrap.querySelector('.waitlist-done').classList.add('shown');
+    }
+  });
+
+  // Beta access request
+  var betaForm=document.getElementById('betaForm'),betaDone=document.getElementById('betaDone');
+  betaForm.addEventListener('submit',function(e){
+    e.preventDefault();
+    betaForm.classList.remove('active');
+    betaDone.classList.add('shown');
+  });
 })();
 </script>
 </body>
