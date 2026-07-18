@@ -3,6 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  PUBLIC_LAUNCH_DESTINATION,
+  PUBLIC_LAUNCH_NAV_ITEM_IDS,
+  TEMPORARY_PUBLIC_LAUNCH_MODE,
+} from "@/config/publicLaunch";
 
 /**
  * Single source of truth for the STRUCTURA header + breadcrumb bar.
@@ -26,7 +31,7 @@ export type BreadcrumbCrumb = {
   href?: string;
 };
 
-const NAV_ITEMS: NavItem[] = [
+const FULL_NAV_ITEMS: NavItem[] = [
   { id: "home", href: "/", label: "Home" },
   { id: "design-studio", href: "/design-studio", label: "Design Studio" },
   { id: "pm-office", href: "/pm-office", label: "PM Office" },
@@ -35,6 +40,12 @@ const NAV_ITEMS: NavItem[] = [
   { id: "academy", href: "/academy", label: "Academy" },
   { id: "tutorials", href: "/tutorials", label: "Video Tutorials" },
 ];
+
+const NAV_ITEMS = TEMPORARY_PUBLIC_LAUNCH_MODE
+  ? FULL_NAV_ITEMS.filter((item) =>
+      PUBLIC_LAUNCH_NAV_ITEM_IDS.some((id) => id === item.id),
+    )
+  : FULL_NAV_ITEMS;
 
 function isActiveNavItem(item: NavItem, pathname: string) {
   if (item.href === "/") return pathname === "/";
@@ -45,6 +56,12 @@ function buildBreadcrumbTrail(
   activeItem: NavItem,
   extra?: BreadcrumbCrumb[],
 ): BreadcrumbCrumb[] {
+  if (TEMPORARY_PUBLIC_LAUNCH_MODE) {
+    return extra && extra.length > 0
+      ? [{ label: activeItem.label, href: activeItem.href }, ...extra]
+      : [{ label: activeItem.label }];
+  }
+
   if (activeItem.id === "home" && (!extra || extra.length === 0)) {
     return [{ label: "Home" }];
   }
@@ -67,15 +84,23 @@ type SiteHeaderProps = {
 export default function SiteHeader({ breadcrumbExtra }: SiteHeaderProps = {}) {
   const pathname = usePathname();
   const activeItem =
-    NAV_ITEMS.find((item) => isActiveNavItem(item, pathname)) ?? NAV_ITEMS[0];
+    NAV_ITEMS.find((item) => isActiveNavItem(item, pathname)) ??
+    NAV_ITEMS.find((item) => item.href === PUBLIC_LAUNCH_DESTINATION) ??
+    NAV_ITEMS[0];
   const breadcrumbTrail = buildBreadcrumbTrail(activeItem, breadcrumbExtra);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const logoHref = TEMPORARY_PUBLIC_LAUNCH_MODE
+    ? PUBLIC_LAUNCH_DESTINATION
+    : "/";
+  const logoLabel = TEMPORARY_PUBLIC_LAUNCH_MODE
+    ? "STRUCTURA — Design Studio"
+    : "STRUCTURA — home";
 
   return (
     <div className="structura-header">
       <header className="site-header">
         <div className="container header-inner">
-          <Link className="logo" href="/" aria-label="STRUCTURA — home">
+          <Link className="logo" href={logoHref} aria-label={logoLabel}>
             <svg
               className="logo-icon"
               viewBox="0 0 34 34"
@@ -111,9 +136,11 @@ export default function SiteHeader({ breadcrumbExtra }: SiteHeaderProps = {}) {
                 {item.label}
               </Link>
             ))}
-            <Link className="btn-primary" href="/#beta">
-              Join Beta
-            </Link>
+            {!TEMPORARY_PUBLIC_LAUNCH_MODE && (
+              <Link className="btn-primary" href="/#beta">
+                Join Beta
+              </Link>
+            )}
           </nav>
 
           <button
