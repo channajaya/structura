@@ -1,0 +1,259 @@
+{
+  "total": 36,
+  "passed": 36,
+  "failed": 0,
+  "rows": [
+    {
+      "id": "aluminiumDoors",
+      "ok": true,
+      "metrics": 6,
+      "first": 24.8,
+      "source": "server-engine"
+    },
+    {
+      "id": "aluminiumWindows",
+      "ok": true,
+      "metrics": 7,
+      "first": 43.2,
+      "source": "server-engine"
+    },
+    {
+      "id": "beams",
+      "ok": true,
+      "metrics": 5,
+      "first": 0.35,
+      "source": "server-engine"
+    },
+    {
+      "id": "blockWall",
+      "ok": true,
+      "metrics": 6,
+      "first": 24,
+      "source": "server-engine"
+    },
+    {
+      "id": "brickWall",
+      "ok": true,
+      "metrics": 6,
+      "first": 24,
+      "source": "server-engine"
+    },
+    {
+      "id": "columns",
+      "ok": true,
+      "metrics": 4,
+      "first": 2.16,
+      "source": "server-engine"
+    },
+    {
+      "id": "externalRender",
+      "ok": true,
+      "metrics": 5,
+      "first": 75,
+      "source": "server-engine"
+    },
+    {
+      "id": "floorScreed",
+      "ok": true,
+      "metrics": 5,
+      "first": 39,
+      "source": "server-engine"
+    },
+    {
+      "id": "floorTiles",
+      "ok": true,
+      "metrics": 6,
+      "first": 24,
+      "source": "server-engine"
+    },
+    {
+      "id": "foundationExcavation",
+      "ok": true,
+      "metrics": 4,
+      "first": 18,
+      "source": "server-engine"
+    },
+    {
+      "id": "foundationRebar",
+      "ok": true,
+      "metrics": 5,
+      "first": 288,
+      "source": "server-engine"
+    },
+    {
+      "id": "generalConcrete",
+      "ok": true,
+      "metrics": 5,
+      "first": 3,
+      "source": "server-engine"
+    },
+    {
+      "id": "glazing",
+      "ok": true,
+      "metrics": 5,
+      "first": 12,
+      "source": "server-engine"
+    },
+    {
+      "id": "groundBeam",
+      "ok": true,
+      "metrics": 4,
+      "first": 1.35,
+      "source": "server-engine"
+    },
+    {
+      "id": "gutters",
+      "ok": true,
+      "metrics": 6,
+      "first": 25.200000000000003,
+      "source": "server-engine"
+    },
+    {
+      "id": "internalPlaster",
+      "ok": true,
+      "metrics": 5,
+      "first": 46,
+      "source": "server-engine"
+    },
+    {
+      "id": "ironmongery",
+      "ok": true,
+      "metrics": 6,
+      "first": 31.5,
+      "source": "server-engine"
+    },
+    {
+      "id": "lintels",
+      "ok": true,
+      "metrics": 5,
+      "first": 1.5,
+      "source": "server-engine"
+    },
+    {
+      "id": "mortar",
+      "ok": true,
+      "metrics": 6,
+      "first": 1.1,
+      "source": "server-engine"
+    },
+    {
+      "id": "padFooting",
+      "ok": true,
+      "metrics": 4,
+      "first": 2.178,
+      "source": "server-engine"
+    },
+    {
+      "id": "painting",
+      "ok": true,
+      "metrics": 4,
+      "first": 46,
+      "source": "server-engine"
+    },
+    {
+      "id": "randomRubble",
+      "ok": true,
+      "metrics": 5,
+      "first": 4.05,
+      "source": "server-engine"
+    },
+    {
+      "id": "reinforcement",
+      "ok": true,
+      "metrics": 6,
+      "first": 240,
+      "source": "server-engine"
+    },
+    {
+      "id": "roofGeometry",
+      "ok": true,
+      "metrics": 7,
+      "first": 3.95,
+      "source": "server-engine"
+    },
+    {
+      "id": "roofSheets",
+      "ok": true,
+      "metrics": 6,
+      "first": 4.396064557919625,
+      "source": "server-engine"
+    },
+    {
+      "id": "roofTiles",
+      "ok": true,
+      "metrics": 5,
+      "first": 91.22134253196087,
+      "source": "server-engine"
+    },
+    {
+      "id": "slabs",
+      "ok": true,
+      "metrics": 5,
+      "first": 46,
+      "source": "server-engine"
+    },
+    {
+      "id": "stairs",
+      "ok": true,
+      "metrics": 6,
+      "first": 4.620876540224809,
+      "source": "server-engine"
+    },
+    {
+      "id": "steelRoof",
+      "ok": true,
+      "metrics": 6,
+      "first": 5,
+      "source": "server-engine"
+    },
+    {
+      "id": "stoneMasonry",
+      "ok": true,
+      "metrics": 5,
+      "first": 5.25,
+      "source": "server-engine"
+    },
+    {
+      "id": "stripFooting",
+      "ok": true,
+      "metrics": 5,
+      "first": 3,
+      "source": "server-engine"
+    },
+    {
+      "id": "timberDoors",
+      "ok": true,
+      "metrics": 6,
+      "first": 9.450000000000001,
+      "source": "server-engine"
+    },
+    {
+      "id": "timberRoof",
+      "ok": true,
+      "metrics": 6,
+      "first": 18,
+      "source": "server-engine"
+    },
+    {
+      "id": "timberWindows",
+      "ok": true,
+      "metrics": 5,
+      "first": 28.799999999999997,
+      "source": "server-engine"
+    },
+    {
+      "id": "wallTies",
+      "ok": true,
+      "metrics": 5,
+      "first": 24,
+      "source": "server-engine"
+    },
+    {
+      "id": "waterproofing",
+      "ok": true,
+      "metrics": 5,
+      "first": 24.2,
+      "source": "server-engine"
+    }
+  ]
+}

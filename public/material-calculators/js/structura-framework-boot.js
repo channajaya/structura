@@ -253,6 +253,145 @@ html.in-frame .notice,html.in-frame .header,html.in-frame .crumb{display:none}
     };
   }
 
+  function defaultRender(out) {
+    const byId = (id) => document.getElementById(id);
+    const fmt = global.StructuraCore?.fmt || String;
+    const metrics = byId("metricGrid");
+    const body = byId("materialBody");
+    const notes = byId("notes");
+    const result = byId("result");
+    if (metrics) {
+      metrics.innerHTML = (out.metrics || [])
+        .map(
+          (x) =>
+            `<div class="metric"><span>${x.label}</span><strong>${fmt(x.value)} <small>${x.unit}</small></strong></div>`,
+        )
+        .join("");
+    }
+    if (body) {
+      body.innerHTML = (out.materials || [])
+        .map(
+          (x) =>
+            `<tr><td>${x.label}</td><td>${fmt(x.exact)} ${x.unit}</td><td><strong>${fmt(x.order)} ${x.unit}</strong></td></tr>`,
+        )
+        .join("");
+    }
+    if (notes) {
+      notes.innerHTML = (out.notes || []).map((n) => `<div>${n}</div>`).join("");
+    }
+    if (result) result.hidden = false;
+    global.__lastResult = out;
+    if (typeof global.updateQA === "function") global.updateQA();
+    else {
+      const qa = byId("qaStatus");
+      if (qa) qa.textContent = "Server calculation successful.";
+      document.body.dataset.qaStatus = "pass";
+    }
+  }
+
+  function showError(items) {
+    const box = document.getElementById("error");
+    if (!box) return;
+    box.innerHTML = (items || []).join("<br>");
+    box.classList.toggle("show", !!(items && items.length));
+    if (items && items.length) document.body.dataset.qaStatus = "fail";
+  }
+
+  function installServerCalculate(meta) {
+    let calcSeq = 0;
+    async function serverCalculate(options) {
+      const silent = options && options.silent;
+      const seq = ++calcSeq;
+      try {
+        if (typeof global.updateDiagram === "function") global.updateDiagram();
+        const v =
+          typeof global.values === "function"
+            ? global.values()
+            : global.StructuraCore.readFields();
+        const errors =
+          typeof global.validate === "function"
+            ? global.validate(v)
+            : global.StructuraValidation?.validateRequiredFields?.() || [];
+        global.__lastWarnings = errors;
+        if (errors.length) {
+          if (!silent) showError(errors);
+          return null;
+        }
+        if (!global.StructuraApi?.compute) {
+          throw new Error("StructuraApi.compute is unavailable.");
+        }
+        const qa = document.getElementById("qaStatus");
+        if (!silent && qa) qa.textContent = "Calculating on server…";
+        const payload = await global.StructuraApi.compute(meta.id, v, {
+          adapter: global.STRUCTURA_CALCULATOR,
+        });
+        if (seq !== calcSeq) return null;
+        const out = payload.results;
+        global.StructuraValidation?.assertFiniteResult?.(out);
+        global.__lastResult = out;
+        global.__lastSteps = payload.steps || [];
+        global.__lastAssumptions = payload.assumptions || [];
+        global.__lastWarnings = [];
+        if (!silent) {
+          showError([]);
+          if (typeof global.render === "function") global.render(out);
+          else defaultRender(out);
+        }
+        return out;
+      } catch (err) {
+        if (seq !== calcSeq) return null;
+        const msg = err?.message || String(err);
+        const offline = /Failed to fetch|NetworkError|Load failed/i.test(msg)
+          ? "Server calculation unavailable. This calculator requires an online connection — formulas are not run in the browser."
+          : msg;
+        if (!silent) {
+          showError([offline]);
+          console.error(err);
+        }
+        const qa = document.getElementById("qaStatus");
+        if (qa) qa.textContent = "Server calculation failed.";
+        document.body.dataset.qaStatus = "fail";
+        return null;
+      }
+    }
+
+    global.__structureServerCalculate = serverCalculate;
+    global.calculate = serverCalculate;
+
+    ["calculate", "mobileCalc"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+      clone.addEventListener("click", () => serverCalculate());
+    });
+
+    ["reset", "mobileReset"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+      clone.addEventListener("click", () => {
+        if (typeof global.resetForm === "function") global.resetForm();
+        else {
+          global.StructuraCore?.resetFields?.();
+          serverCalculate();
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-field]").forEach((el) => {
+      const evt = el.tagName === "SELECT" ? "change" : "input";
+      el.addEventListener(evt, () => {
+        if (typeof global.updateDiagram === "function") global.updateDiagram();
+        const live = document.getElementById("live");
+        if (!live || live.checked) serverCalculate();
+      });
+    });
+
+    return serverCalculate;
+  }
+
   function rewirePrint() {
     const printBtn = document.getElementById("print");
     if (!printBtn || !global.StructuraReport) return;
@@ -263,48 +402,65 @@ html.in-frame .notice,html.in-frame .header,html.in-frame .crumb{display:none}
     });
   }
 
-  function patchCalculateForSilent() {
-    if (typeof global.calculate !== "function") return;
-    const original = global.calculate;
-    global.calculate = function patchedCalculate(options) {
-      if (options && options.silent) {
-        try {
-          if (typeof global.updateDiagram === "function") global.updateDiagram();
-          const v =
-            typeof global.values === "function"
-              ? global.values()
-              : global.StructuraCore.readFields();
-          const errors =
-            typeof global.validate === "function"
-              ? global.validate(v)
-              : global.StructuraValidation?.validateRequiredFields?.() || [];
-          global.__lastWarnings = errors;
-          if (errors.length) return null;
-          const out = global.calculator(v);
-          global.StructuraValidation?.assertFiniteResult?.(out);
-          global.__lastResult = out;
-          return out;
-        } catch (err) {
-          console.error(err);
-          return null;
-        }
-      }
-      return original.apply(this, arguments);
+  function normalizeMeta(meta) {
+    const next = {
+      version: "1.0",
+      printOrientation: "portrait",
+      execution: "server",
+      ...(meta || {}),
     };
+    if (!next.report) {
+      next.report = {
+        style: "minimal",
+        includeSvg: false,
+        includeInputs: false,
+        includeSteps: false,
+        includeCost: false,
+        includeCountry: false,
+        includeValidation: false,
+      };
+    }
+    return next;
   }
 
   function boot(options) {
     const opts = options || {};
+    opts.meta = normalizeMeta(opts.meta);
     wireChrome(opts);
-    patchCalculateForSilent();
-    global.STRUCTURA_CALCULATOR = buildAdapter(opts);
+
+    if (opts.meta.execution === "server") {
+      installServerCalculate(opts.meta);
+    }
+
+    global.STRUCTURA_CALCULATOR = buildAdapter({
+      ...opts,
+      getCalculationSteps() {
+        if (global.__lastSteps?.length) return global.__lastSteps;
+        return (global.__lastResult?.metrics || []).map((m) => ({
+          label: m.label,
+          value: m.value,
+          unit: m.unit,
+        }));
+      },
+      getAssumptions() {
+        if (typeof opts.getAssumptions === "function") return opts.getAssumptions();
+        if (global.__lastAssumptions?.length) return global.__lastAssumptions;
+        return readAssumptionsFromDom();
+      },
+      getRawInputs() {
+        return typeof global.values === "function"
+          ? global.values()
+          : global.StructuraCore.readFields();
+      },
+    });
+
     rewirePrint();
-    // Ensure current values feed QA after boot.
+
     if (typeof global.calculate === "function") {
       try {
-        global.calculate();
+        Promise.resolve(global.calculate()).catch(() => {});
       } catch (_) {
-        /* page may already have calculated */
+        /* ignore boot-time calc errors */
       }
     }
     return global.STRUCTURA_CALCULATOR;
@@ -314,5 +470,6 @@ html.in-frame .notice,html.in-frame .header,html.in-frame .crumb{display:none}
     boot,
     buildAdapter,
     ensureControls,
+    installServerCalculate,
   };
 })(typeof window !== "undefined" ? window : globalThis);

@@ -26,12 +26,12 @@
 @media(max-width:560px){.svg-visual,.svg-visual svg{min-height:285px}.svg-visual .d-dim text{font-size:11px}.svg-visual .d-label{font-size:11px}.svg-visual .d-value{font-size:14px}}
 
 </style></head>
-<body data-calculator-id="stripFooting" data-qa-status="pending" data-svg-upgrade="set-01-foundations" data-framework="structura-v1">
+<body data-calculator-id="stripFooting" data-qa-status="pending" data-svg-upgrade="set-01-foundations" data-framework="structura-v1" data-execution="server">
 <div class="notice">Internal Stage 1 beta — verify project specifications and product data before procurement.</div>
 <header class="header"><div class="wrap"><div class="brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div><a class="back" href="../index.html">← Material Calculators</a></div></header>
 <div class="crumb"><div class="wrap">Design Studio / Material Calculators / Strip Footing</div></div>
 <main class="main"><div class="wrap">
-<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-6-7 · Foundations</div><h1>Strip Footing</h1><p class="intro">Continuous footing concrete and nominal mix materials</p><span class="status">Framework calculator<//span></div><img alt="Reinforced-concrete strip footing rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/stripFooting.webp" width="360"/></section>
+<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-6-7 · Foundations</div><h1>Strip Footing</h1><p class="intro">Continuous footing concrete and nominal mix materials</p><span class="status">Server-backed calculator<//span></div><img alt="Reinforced-concrete strip footing rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/stripFooting.webp" width="360"/></section>
 <div class="profile" id="profileBanner">🇱🇰 Sri Lanka · Metric inputs · Editable assumptions · Standalone offline calculator</div>
 <div class="grid"><section class="panel"><h2>Project inputs</h2><p>Enter project quantities. Values update live when enabled.</p><div class="field-grid"><div class="field"><label for="length"><span>Total footing length</span><span class="unit">m</span></label><input data-default="20" data-field="length" data-label="Total footing length" data-required="1" id="length" min="0" step="0.01" type="number" value="20"/></div>
 <div class="field"><label for="width"><span>Footing width</span><span class="unit">m</span></label><input data-default="0.6" data-field="width" data-label="Footing width" data-required="1" id="width" min="0" step="0.01" type="number" value="0.6"/></div>
@@ -56,8 +56,8 @@
 <script src="../js/structura-api-client.js"></script>
 <script src="../js/structura-report-engine.js"></script>
 <script src="../js/structura-framework-boot.js"></script>
-<script>function calculator(v){const wet=v.length*v.width*v.thickness*v.qty; const mix=mixMaterials(wet,v.cementPart,v.sandPart,v.aggPart,v.dryFactor,v.waste);
-return result([m('Net concrete volume',wet,'m³'),m('Concrete to order',mix.orderWet,'m³'),m('Cement',mix.bags,'50 kg bags'),m('Sand',mix.sand,'m³'),m('Coarse aggregate',mix.aggregate,'m³')],[q('Ready-mix / wet concrete',mix.orderWet,'m³',0.1),q('Cement',mix.bags,'bags',1),q('Sand',mix.sand,'m³',0.1),q('Coarse aggregate',mix.aggregate,'m³',0.1)],[mixNote]);}
+<script>/* quantity formulas removed — executed via /api/calculations/compute */
+
 
 
 function dclamp(n,min,max){n=Number(n);return Math.max(min,Math.min(max,Number.isFinite(n)?n:min));}
@@ -107,7 +107,12 @@ function labelOf(id){const el=byId(id);return el.options?el.options[el.selectedI
 function validate(v){const errors=[];document.querySelectorAll('[data-field][data-required="1"]').forEach(el=>{if(el.type==='number'&&(!(Number(el.value)>0)))errors.push(`${el.dataset.label} must be greater than zero.`)});numericFields.forEach(el=>{const val=Number(el.value);if(val<Number(el.min||0))errors.push(`${el.dataset.label} cannot be below ${el.min}.`);if(el.max!==''&&val>Number(el.max))errors.push(`${el.dataset.label} cannot exceed ${el.max}.`)});return [...new Set(errors)];}
 function render(out){const metrics=byId('metricGrid');metrics.innerHTML=out.metrics.map(x=>`<div class="metric"><span>${x.label}</span><strong>${fmt(x.value)} <small>${x.unit}</small></strong></div>`).join('');const body=byId('materialBody');body.innerHTML=out.materials.map(x=>`<tr><td>${x.label}</td><td>${fmt(x.exact)} ${x.unit}</td><td><strong>${fmt(x.order)} ${x.unit}</strong></td></tr>`).join('');byId('notes').innerHTML=(out.notes||[]).map(n=>`<div>${n}</div>`).join('');byId('result').hidden=false;window.__lastResult=out;updateQA();}
 function showError(items){const box=byId('error');box.innerHTML=items.join('<br>');box.classList.toggle('show',items.length>0);if(items.length)document.body.dataset.qaStatus='fail';}
-function calculate(){try{updateDiagram();const v=values();const errors=validate(v);showError(errors);if(errors.length)return;const out=calculator(v);const bad=out.metrics.some(x=>!Number.isFinite(x.value))||out.materials.some(x=>!Number.isFinite(x.exact)||!Number.isFinite(x.order));if(bad)throw new Error('A calculation returned a non-finite result.');render(out)}catch(err){showError([err.message||String(err)]);console.error(err)}}
+async function calculate(options){
+  if(typeof window.__structureServerCalculate==='function'){
+    return window.__structureServerCalculate(options);
+  }
+  throw new Error('Server calculation is not ready.');
+}
 function resetForm(){document.querySelectorAll('[data-field]').forEach(el=>{el.value=el.dataset.default});calculate()}
 function updateQA(){const icon=byId('calcIcon');const metrics=window.__lastResult?.metrics||[];const ok=icon.complete&&icon.naturalWidth>0&&metrics.length>0&&metrics.every(x=>Number.isFinite(x.value))&&!byId('error').classList.contains('show');document.body.dataset.qaStatus=ok?'pass':'pending';byId('qaStatus').textContent=ok?'Calculator loaded and calculated successfully.':'Checking calculator and icon…';}
 window.addEventListener('error',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent=`Page error: ${e.message}`});window.addEventListener('unhandledrejection',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent='Unhandled calculation error.'});
@@ -118,7 +123,7 @@ window.validate = validate;
 window.calculate = calculate;
 window.resetForm = resetForm;
 byId('calculate').addEventListener('click',calculate);byId('mobileCalc').addEventListener('click',calculate);byId('reset').addEventListener('click',resetForm);byId('mobileReset').addEventListener('click',resetForm);/* print rewired by StructuraFramework.boot */byId('calcIcon').addEventListener('load',updateQA);byId('calcIcon').addEventListener('error',updateQA);document.querySelectorAll('[data-field]').forEach(el=>{const evt=el.tagName==='SELECT'?'change':'input';el.addEventListener(evt,()=>{updateDiagram();if(byId('live').checked)calculate();});});StructuraFramework.boot({
-  meta: {"id":"stripFooting","title":"Strip Footing Material Calculator","category":"Foundations","version":"1.0","printOrientation":"portrait","code":"SA-MAT-1-6-7"},
+  meta: {"id":"stripFooting","title":"Strip Footing Material Calculator","category":"Foundations","version":"1.0","printOrientation":"portrait","execution":"server","report":{"style":"minimal","includeSvg":false,"includeInputs":false,"includeSteps":false,"includeCost":false,"includeCountry":false,"includeValidation":false}},
   getAssumptions(){
     const assumption = document.querySelector('.assumption');
     const list = [];
