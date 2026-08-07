@@ -185,6 +185,42 @@ html.structura-print-landscape @page {
   .sr-warn {
     color: #8a6100;
   }
+
+  /* Minimal 1–2 page report profile */
+  #structura-report-root .sr-minimal .sr-cover {
+    margin-bottom: 5mm;
+  }
+
+  #structura-report-root .sr-minimal .sr-doc-title {
+    margin: 3mm 0 1mm;
+    font-size: 14pt;
+  }
+
+  #structura-report-root .sr-minimal .sr-section {
+    margin: 0 0 3.5mm;
+    padding-top: 1.5mm;
+  }
+
+  #structura-report-root .sr-minimal .sr-section h2 {
+    margin: 0 0 1.5mm;
+    font-size: 10pt;
+  }
+
+  #structura-report-root .sr-minimal .sr-kv th,
+  #structura-report-root .sr-minimal .sr-kv td,
+  #structura-report-root .sr-minimal .sr-table th,
+  #structura-report-root .sr-minimal .sr-table td {
+    padding: 1mm 1.6mm;
+    font-size: 9pt;
+  }
+
+  #structura-report-root .sr-minimal .sr-footer {
+    margin-top: 4mm;
+  }
+
+  #structura-report-root .sr-minimal .sr-disclaimer {
+    font-size: 8pt;
+  }
 }
 
 /* Screen preview of assembled report (optional debug host). */

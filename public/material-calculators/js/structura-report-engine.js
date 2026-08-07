@@ -195,9 +195,65 @@
     ]);
   }
 
+  function resolveReportOptions(meta) {
+    const defaults = {
+      style: "full",
+      includeProject: true,
+      includeSummary: true,
+      includeSvg: true,
+      includeInputs: true,
+      includeSteps: true,
+      includeSchedule: true,
+      includeCost: true,
+      includeAssumptions: true,
+      includeValidation: true,
+      includeCountry: true,
+      includeDisclaimer: true,
+      projectCompact: false,
+    };
+    const fromMeta = meta?.report || {};
+    const style = fromMeta.style || meta?.reportStyle || defaults.style;
+    if (style === "minimal") {
+      return {
+        ...defaults,
+        style: "minimal",
+        includeSvg: false,
+        includeInputs: false,
+        includeSteps: false,
+        includeCost: false,
+        includeCountry: false,
+        includeValidation: false,
+        includeAssumptions: true,
+        projectCompact: true,
+        ...fromMeta,
+        style: "minimal",
+      };
+    }
+    return { ...defaults, ...fromMeta, style };
+  }
+
+  function projectRows(project, compact) {
+    const rows = [
+      { label: "Project ID", value: project.projectId || "" },
+      { label: "Project name", value: project.projectName || "" },
+      { label: "Client", value: project.client || "" },
+      { label: "Location", value: project.location || "" },
+      { label: "Prepared by", value: project.preparedBy || "" },
+      { label: "Checked by", value: project.checkedBy || "" },
+      { label: "Date", value: project.date || "" },
+      { label: "Notes", value: project.notes || "" },
+    ];
+    if (!compact) {
+      return rows.map((r) => ({ label: r.label, value: r.value || "—" }));
+    }
+    const filled = rows.filter((r) => String(r.value || "").trim());
+    return filled.length ? filled : [{ label: "Project", value: "—" }];
+  }
+
   function buildHtml(calc) {
     ensureFresh(calc);
     const meta = calc.meta || {};
+    const opts = resolveReportOptions(meta);
     const project = calc.getProjectData ? calc.getProjectData() : {};
     const inputs = calc.getInputs ? calc.getInputs() : {};
     const results = calc.getResults ? calc.getResults() : { metrics: [], materials: [], notes: [] };
@@ -211,66 +267,80 @@
     const country =
       global.StructuraCountry?.toReportBlock?.() ||
       (calc.getCountryProfile ? calc.getCountryProfile() : null);
-    const svg = cloneLiveSvg(calc);
     const generatedAt = new Date().toISOString();
+    const rootClass = opts.style === "minimal" ? "sr-minimal" : "sr-full";
 
-    return `
-      <header class="sr-cover">
-        <div class="sr-brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div>
-        <h1 class="sr-doc-title">${esc(t("report.docTitle", "Material Quantity Calculation"))}</h1>
-        <p class="sr-doc-sub">${esc(meta.title || meta.id || "Calculator")}</p>
-        <p class="sr-meta-line">${esc(meta.category || "")} · Version ${esc(meta.version || "1.0")} · Generated ${esc(generatedAt)}</p>
-      </header>
+    const sections = [];
 
+    if (opts.includeProject) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.projectInformation", "Project Information"))}</h2>
-        ${renderKv([
-          { label: "Project ID", value: project.projectId || "—" },
-          { label: "Project name", value: project.projectName || "—" },
-          { label: "Client", value: project.client || "—" },
-          { label: "Location", value: project.location || "—" },
-          { label: "Prepared by", value: project.preparedBy || "—" },
-          { label: "Checked by", value: project.checkedBy || "—" },
-          { label: "Date", value: project.date || "—" },
-          { label: "Notes", value: project.notes || "—" },
-        ])}
-      </section>
+        ${renderKv(projectRows(project, opts.projectCompact))}
+      </section>`);
+    }
 
+    if (opts.includeSummary) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.calculationSummary", "Calculation Summary"))}</h2>
         ${renderMetrics(results.metrics)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeSvg) {
+      const svg = cloneLiveSvg(calc);
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.liveSvg", "Live Vector SVG Quantity Model"))}</h2>
         <div class="sr-svg-wrap">${svg || "<p>No live SVG was available.</p>"}</div>
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeInputs) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.inputData", "Input Data"))}</h2>
         ${renderInputs(inputs)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeSteps) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.calculationDetails", "Calculation Details"))}</h2>
         ${renderSteps(steps)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeSchedule) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.materialSchedule", "Material Quantity Schedule"))}</h2>
         ${renderSchedule(schedule)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeCost && cost) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.costSummary", "Optional Cost Summary"))}</h2>
         ${renderCost(cost)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeAssumptions) {
+      const shortAssumptions =
+        opts.style === "minimal" ? (assumptions || []).slice(0, 3) : assumptions;
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.assumptions", "Assumptions and Allowances"))}</h2>
-        ${renderList(assumptions)}
-      </section>
+        ${renderList(shortAssumptions)}
+      </section>`);
+    }
 
+    if (opts.includeValidation) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.validation", "Validation Notes"))}</h2>
         ${
@@ -283,13 +353,29 @@
             ? renderList(results.notes)
             : ""
         }
-      </section>
+      </section>`);
+    } else if (
+      opts.style === "minimal" &&
+      Array.isArray(results.notes) &&
+      results.notes.length
+    ) {
+      sections.push(`
+      <section class="sr-section">
+        <h2>Notes</h2>
+        ${renderList(results.notes.slice(0, 2))}
+      </section>`);
+    }
 
+    if (opts.includeCountry) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.countryProfile", "Country / Specification Profile"))}</h2>
         ${renderCountry(country)}
-      </section>
+      </section>`);
+    }
 
+    if (opts.includeDisclaimer) {
+      sections.push(`
       <section class="sr-section">
         <h2>${esc(t("report.disclaimer", "Disclaimer"))}</h2>
         <p class="sr-disclaimer">${esc(
@@ -298,12 +384,23 @@
             "Educational quantity calculator. Technical design, specification, and procurement remain the user’s responsibility. Verify project product data before ordering materials.",
           ),
         )}</p>
-      </section>
+      </section>`);
+    }
 
+    return `
+      <div class="${rootClass}">
+      <header class="sr-cover">
+        <div class="sr-brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div>
+        <h1 class="sr-doc-title">${esc(t("report.docTitle", "Material Quantity Calculation"))}</h1>
+        <p class="sr-doc-sub">${esc(meta.title || meta.id || "Calculator")}</p>
+        <p class="sr-meta-line">${esc(meta.category || "")} · Version ${esc(meta.version || "1.0")} · Generated ${esc(generatedAt)}</p>
+      </header>
+      ${sections.join("\n")}
       <footer class="sr-footer">
         <span>STRUCTURA — Digital Engineering Office</span>
         <span>${esc(meta.id || "")} · ${esc(meta.version || "1.0")}</span>
       </footer>
+      </div>
     `;
   }
 

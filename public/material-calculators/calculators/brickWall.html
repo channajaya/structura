@@ -195,7 +195,16 @@ window.STRUCTURA_CALCULATOR = {
     version: '1.0',
     printOrientation: 'portrait',
     code: 'SA-MAT-4-1',
-    execution: 'server'
+    execution: 'server',
+    report: {
+      style: 'minimal',
+      includeSvg: false,
+      includeInputs: false,
+      includeSteps: false,
+      includeCost: false,
+      includeCountry: false,
+      includeValidation: false
+    }
   },
   getProjectData(){ return StructuraProject.getProjectData(); },
   getRawInputs(){ return values(); },
