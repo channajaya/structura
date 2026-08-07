@@ -1,0 +1,80 @@
+[
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "timberDoors",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "qty",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  },
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "aluminiumDoors",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "qty",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  },
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "timberWindows",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "qty",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  },
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "aluminiumWindows",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "qty",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  },
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "glazing",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "qty",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  },
+  {
+    "set": "06_Doors_and_Windows",
+    "calculator": "ironmongery",
+    "passed": true,
+    "syntax_ok": true,
+    "svg_changed": true,
+    "changed_field": "doors",
+    "title_desc": true,
+    "static_visual_image": false,
+    "event_hook": true,
+    "finite_svg": true,
+    "errors": []
+  }
+]

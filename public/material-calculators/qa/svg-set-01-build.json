@@ -1,0 +1,49 @@
+{
+  "set": "01 Foundations",
+  "updated": [
+    "foundationExcavation",
+    "randomRubble",
+    "stripFooting",
+    "padFooting",
+    "groundBeam",
+    "foundationRebar"
+  ],
+  "files": [
+    {
+      "calculator": "foundationExcavation",
+      "path": "calculators/foundationExcavation.html",
+      "sha256": "f403d3cbf44b68644a79147752e593b00d8f444cd6d2f1374cd92afa8edc3bd3",
+      "size": 23518
+    },
+    {
+      "calculator": "randomRubble",
+      "path": "calculators/randomRubble.html",
+      "sha256": "f8b1b22d5cff04b7649267db4a6e5fb9321884f9774785c2d69bcec3e61e0d84",
+      "size": 23218
+    },
+    {
+      "calculator": "stripFooting",
+      "path": "calculators/stripFooting.html",
+      "sha256": "4cfa736b2ba5eaa26fcc748ae88e5829d9f885078765fd59b28c75ecf5750525",
+      "size": 22718
+    },
+    {
+      "calculator": "padFooting",
+      "path": "calculators/padFooting.html",
+      "sha256": "dfc5347ef1b396982017059be1eb8ebf28a87185bf4202e177d480058baa753d",
+      "size": 23300
+    },
+    {
+      "calculator": "groundBeam",
+      "path": "calculators/groundBeam.html",
+      "sha256": "388162a6709bc512f52d3de2414137b8d43d1f07b20d153529bd105b5007a91c",
+      "size": 22841
+    },
+    {
+      "calculator": "foundationRebar",
+      "path": "calculators/foundationRebar.html",
+      "sha256": "84265d398d6025fc4d7e125abcd72a4cf75237218aa83701b81d861636bc5f3d",
+      "size": 22769
+    }
+  ]
+}

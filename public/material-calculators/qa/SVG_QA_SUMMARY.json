@@ -1,0 +1,9 @@
+{
+  "set": "06 Doors and Windows",
+  "set_calculators": 6,
+  "set_passed": 6,
+  "cumulative_svg_calculators": 36,
+  "cumulative_passed": 36,
+  "remaining_static_calculators": 0,
+  "qa_method": "Node JavaScript syntax check plus isolated DOM-mock SVG runtime, changed-input comparison, SVG title/description, finite markup, event-hook and static-image removal checks."
+}

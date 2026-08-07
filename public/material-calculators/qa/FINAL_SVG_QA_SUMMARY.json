@@ -1,0 +1,16 @@
+{
+  "total_calculators": 36,
+  "live_svg_calculators": 36,
+  "runtime_checks_passed": 36,
+  "failed": 0,
+  "static_right_panel_images": 0,
+  "sets_completed": [
+    "Foundations",
+    "Masonry",
+    "Reinforced Concrete",
+    "Finishes",
+    "Roofing",
+    "Doors and Windows"
+  ],
+  "public_release_status": "Internal beta \u2014 formula, product-data, localisation and visual browser/print review remain required."
+}

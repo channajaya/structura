@@ -1,0 +1,92 @@
+[
+  {
+    "calculator": "foundationExcavation",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 414,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  },
+  {
+    "calculator": "randomRubble",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 292,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  },
+  {
+    "calculator": "stripFooting",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 264,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  },
+  {
+    "calculator": "padFooting",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 286,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  },
+  {
+    "calculator": "groundBeam",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 236,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  },
+  {
+    "calculator": "foundationRebar",
+    "page_errors": [],
+    "svg_changed": true,
+    "svg_text_length": 319,
+    "bbox": {
+      "x": 765.15625,
+      "y": 359.34375,
+      "width": 500.828125,
+      "height": 350
+    },
+    "qa_status": "pass",
+    "has_svg": true,
+    "result_visible": true
+  }
+]

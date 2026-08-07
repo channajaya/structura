@@ -1,0 +1,151 @@
+{
+  "set": "01-foundations",
+  "generatedAt": "2026-08-07",
+  "status": "complete",
+  "entries": [
+    {
+      "calculator": "Foundation Excavation",
+      "id": "foundationExcavation",
+      "originalBaselineResult": {
+        "excavationVolume": 18,
+        "bulked": 21.599999999999998,
+        "disposal": 21.6,
+        "retained": 0
+      },
+      "refactoredResult": {
+        "excavationVolume": 18,
+        "bulked": 21.599999999999998,
+        "disposal": 21.6,
+        "retained": 0
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    },
+    {
+      "calculator": "Random Rubble Foundation Wall",
+      "id": "randomRubble",
+      "originalBaselineResult": {
+        "netMasonry": 4.05,
+        "stone": 3.047625,
+        "wetMortar": 1.3061249999999998,
+        "cement": 7.147115999999999,
+        "sand": 1.4889824999999999
+      },
+      "refactoredResult": {
+        "netMasonry": 4.05,
+        "stone": 3.047625,
+        "wetMortar": 1.3061249999999998,
+        "cement": 7.147115999999999,
+        "sand": 1.4889824999999999
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    },
+    {
+      "calculator": "Strip Footing",
+      "id": "stripFooting",
+      "originalBaselineResult": {
+        "netConcrete": 3,
+        "orderConcrete": 3.1500000000000004,
+        "cement": 19.958400000000005,
+        "sand": 1.3860000000000003,
+        "aggregate": 2.7720000000000007
+      },
+      "refactoredResult": {
+        "netConcrete": 3,
+        "orderConcrete": 3.1500000000000004,
+        "cement": 19.958400000000005,
+        "sand": 1.3860000000000003,
+        "aggregate": 2.7720000000000007
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    },
+    {
+      "calculator": "Pad Footing",
+      "id": "padFooting",
+      "originalBaselineResult": {
+        "concrete": 2.178,
+        "orderConcrete": 2.2869,
+        "rebar": 174.24,
+        "formwork": 8.879999999999999
+      },
+      "refactoredResult": {
+        "concrete": 2.178,
+        "orderConcrete": 2.2869,
+        "rebar": 174.24,
+        "formwork": 8.879999999999999
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    },
+    {
+      "calculator": "Ground Beam",
+      "id": "groundBeam",
+      "originalBaselineResult": {
+        "concrete": 1.35,
+        "orderConcrete": 1.4175000000000002,
+        "rebar": 162,
+        "formwork": 13.799999999999999
+      },
+      "refactoredResult": {
+        "concrete": 1.35,
+        "orderConcrete": 1.4175000000000002,
+        "rebar": 162,
+        "formwork": 13.799999999999999
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    },
+    {
+      "calculator": "Foundation Reinforcement",
+      "id": "foundationRebar",
+      "originalBaselineResult": {
+        "baseLength": 288,
+        "cuttingLength": 325.43999999999994,
+        "unitMass": 0.8888888888888888,
+        "net": 289.2799999999999,
+        "order": 303.7439999999999
+      },
+      "refactoredResult": {
+        "baseLength": 288,
+        "cuttingLength": 325.43999999999994,
+        "unitMass": 0.8888888888888888,
+        "net": 289.2799999999999,
+        "order": 303.7439999999999
+      },
+      "calculationMatch": true,
+      "svgTest": "pass",
+      "reportTest": "pass",
+      "printTest": "pass_shared_engine_bound",
+      "countryTest": "pass",
+      "translationTest": "pass",
+      "status": "migrated"
+    }
+  ]
+}

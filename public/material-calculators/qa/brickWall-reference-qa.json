@@ -1,0 +1,89 @@
+{
+  "calculationMatch": true,
+  "adapterOk": true,
+  "reportOk": true,
+  "formulaOk": true,
+  "noLocalPrintMedia": true,
+  "sharedScriptsOk": true,
+  "missing": [],
+  "rows": [
+    {
+      "label": "Net wall area",
+      "baseline": 24,
+      "refactored": 24,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "Exact brick count",
+      "baseline": 1422.2222222222222,
+      "refactored": 1422.2222222222222,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "Bricks incl. wastage",
+      "baseline": 1493.3333333333333,
+      "refactored": 1493.3333333333333,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "Wet mortar",
+      "baseline": 0.4227555555555558,
+      "refactored": 0.4227555555555558,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "Cement",
+      "baseline": 2.3133184000000013,
+      "refactored": 2.3133184000000013,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "Sand",
+      "baseline": 0.48194133333333367,
+      "refactored": 0.48194133333333367,
+      "match": true,
+      "delta": 0
+    },
+    {
+      "label": "mat:Bricks",
+      "baseline": {
+        "exact": 1493.3333333333333,
+        "order": 1500
+      },
+      "refactored": {
+        "exact": 1493.3333333333333,
+        "order": 1500
+      },
+      "match": true
+    },
+    {
+      "label": "mat:Cement",
+      "baseline": {
+        "exact": 2.3133184000000013,
+        "order": 3
+      },
+      "refactored": {
+        "exact": 2.3133184000000013,
+        "order": 3
+      },
+      "match": true
+    },
+    {
+      "label": "mat:Sand",
+      "baseline": {
+        "exact": 0.48194133333333367,
+        "order": 0.5
+      },
+      "refactored": {
+        "exact": 0.48194133333333367,
+        "order": 0.5
+      },
+      "match": true
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-08-07",
+  "referenceCalculator": "brickWall",
+  "status": "set01_complete_awaiting_set02_approval",
+  "completed": ["brickWall", "set01-foundations"],
+  "entries": [
+    {
+      "calculator": "Brick Wall",
+      "id": "brickWall",
+      "status": "reference_approved"
+    },
+    {
+      "set": "01-foundations",
+      "ids": [
+        "foundationExcavation",
+        "randomRubble",
+        "stripFooting",
+        "padFooting",
+        "groundBeam",
+        "foundationRebar"
+      ],
+      "status": "migrated",
+      "detailRegister": "set01-migration-register.json"
+    }
+  ],
+  "blockedUntilApproval": [
+    "Set 02 — Masonry (remaining)",
+    "Set 03 — Reinforced Concrete",
+    "Set 04 — Finishes",
+    "Set 05 — Roofing",
+    "Set 06 — Doors and Windows"
+  ]
+}

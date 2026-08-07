@@ -34,6 +34,11 @@ export type BreadcrumbCrumb = {
 const FULL_NAV_ITEMS: NavItem[] = [
   { id: "home", href: "/", label: "Home" },
   { id: "design-studio", href: "/design-studio", label: "Design Studio" },
+  {
+    id: "material-calculators",
+    href: "/material-calculators",
+    label: "Material Calculators",
+  },
   { id: "pm-office", href: "/pm-office", label: "PM Office" },
   { id: "qs-office", href: "/qs-office", label: "QS Office" },
   { id: "architecture", href: "/architecture", label: "Architecture" },

@@ -1,0 +1,25 @@
+{
+  "calculators_reviewed": 36,
+  "calculators_working": 36,
+  "calculators_failed": 0,
+  "calculators_excluded": 0,
+  "icons_reviewed": 42,
+  "icons_restored": 42,
+  "icons_newly_generated": 0,
+  "routes_corrected": 36,
+  "placeholder_pages_remaining": 0,
+  "external_dependencies": 0,
+  "broken_items": 0,
+  "landing_checks": {
+    "Calculator count": 36,
+    "All calculator pages exist": true,
+    "All calculator icons exist": true,
+    "All category icons exist": true,
+    "No planned cards": true,
+    "Dynamic count": true,
+    "Search function": true
+  },
+  "ready_for_internal_beta": true,
+  "ready_for_public_release": false,
+  "public_release_reason": "Independent QS/engineering formula review, product-data verification, country-default review, localisation and production integration remain required."
+}

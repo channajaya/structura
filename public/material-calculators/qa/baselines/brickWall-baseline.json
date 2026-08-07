@@ -1,0 +1,30 @@
+{
+  "calculatorId": "brickWall",
+  "capturedAt": "2026-08-07",
+  "inputs": {
+    "length": 10,
+    "height": 2.7,
+    "openings": 3,
+    "leaves": 1,
+    "brickL": 215,
+    "brickH": 65,
+    "brickW": 102.5,
+    "joint": 10,
+    "waste": 5,
+    "cementPart": 1,
+    "sandPart": 6
+  },
+  "metrics": [
+    { "label": "Net wall area", "value": 24, "unit": "m²" },
+    { "label": "Exact brick count", "value": 1422.2222222222222, "unit": "no." },
+    { "label": "Bricks incl. wastage", "value": 1493.3333333333333, "unit": "no." },
+    { "label": "Wet mortar", "value": 0.4227555555555558, "unit": "m³" },
+    { "label": "Cement", "value": 2.3133184000000013, "unit": "50 kg bags" },
+    { "label": "Sand", "value": 0.48194133333333367, "unit": "m³" }
+  ],
+  "materials": [
+    { "label": "Bricks", "exact": 1493.3333333333333, "order": 1500, "unit": "no." },
+    { "label": "Cement", "exact": 2.3133184000000013, "order": 3, "unit": "bags" },
+    { "label": "Sand", "exact": 0.48194133333333367, "order": 0.5, "unit": "m³" }
+  ]
+}

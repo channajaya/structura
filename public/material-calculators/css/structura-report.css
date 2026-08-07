@@ -1,0 +1,199 @@
+/**
+ * STRUCTURA shared print / PDF report stylesheet.
+ * Loaded by every framework calculator. Do not duplicate @media print rules
+ * inside calculator pages for the common A4 report chrome.
+ */
+
+@page {
+  size: A4 portrait;
+  margin: 12mm 14mm 14mm 14mm;
+}
+
+@page landscape {
+  size: A4 landscape;
+  margin: 12mm 14mm 14mm 14mm;
+}
+
+html.structura-print-landscape @page {
+  size: A4 landscape;
+  margin: 12mm 14mm 14mm 14mm;
+}
+
+#structura-report-root {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #151515 !important;
+  }
+
+  body.structura-printing > *:not(#structura-report-root) {
+    display: none !important;
+  }
+
+  body.structura-printing #structura-report-root {
+    display: block !important;
+  }
+
+  #structura-report-root {
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #151515;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
+  #structura-report-root * {
+    box-sizing: border-box;
+  }
+
+  .sr-cover {
+    margin-bottom: 10mm;
+  }
+
+  .sr-brand {
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    font-size: 14pt;
+  }
+
+  .sr-brand small {
+    display: block;
+    margin-top: 2mm;
+    color: #005a96;
+    font: 700 8pt Consolas, "Cascadia Mono", monospace;
+    letter-spacing: 0.16em;
+  }
+
+  .sr-doc-title {
+    margin: 6mm 0 1mm;
+    font-size: 16pt;
+    font-weight: 750;
+  }
+
+  .sr-doc-sub {
+    margin: 0;
+    color: #3f454a;
+    font-size: 11pt;
+  }
+
+  .sr-meta-line {
+    margin-top: 3mm;
+    font-size: 9pt;
+    color: #69757c;
+  }
+
+  .sr-section {
+    break-inside: avoid;
+    margin: 0 0 6mm;
+    padding-top: 2mm;
+    border-top: 1px solid #d7dce0;
+  }
+
+  .sr-section h2 {
+    margin: 0 0 2.5mm;
+    font-size: 11pt;
+    color: #005a96;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .sr-kv {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+  }
+
+  .sr-kv th,
+  .sr-kv td {
+    padding: 1.4mm 2mm;
+    border-bottom: 1px solid #edf0f2;
+    vertical-align: top;
+    text-align: left;
+  }
+
+  .sr-kv th {
+    width: 38%;
+    color: #52636d;
+    font-weight: 650;
+  }
+
+  .sr-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+  }
+
+  .sr-table th,
+  .sr-table td {
+    border: 1px solid #d7dce0;
+    padding: 1.6mm 2mm;
+    text-align: left;
+  }
+
+  .sr-table th {
+    background: #eef5f9;
+    font-weight: 700;
+    color: #31434d;
+  }
+
+  .sr-table td:nth-child(n + 2),
+  .sr-table th:nth-child(n + 2) {
+    text-align: right;
+  }
+
+  .sr-svg-wrap {
+    border: 1px solid #777;
+    background: #fff;
+    padding: 2mm;
+    break-inside: avoid;
+  }
+
+  .sr-svg-wrap svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 105mm;
+  }
+
+  .sr-list {
+    margin: 0;
+    padding-left: 4.5mm;
+  }
+
+  .sr-list li {
+    margin-bottom: 1.2mm;
+  }
+
+  .sr-disclaimer,
+  .sr-footer {
+    font-size: 8.5pt;
+    color: #52636d;
+  }
+
+  .sr-footer {
+    margin-top: 8mm;
+    padding-top: 3mm;
+    border-top: 1px solid #d7dce0;
+    display: flex;
+    justify-content: space-between;
+    gap: 4mm;
+  }
+
+  .sr-warn {
+    color: #8a6100;
+  }
+}
+
+/* Screen preview of assembled report (optional debug host). */
+.structura-report-preview #structura-report-root {
+  display: block;
+  max-width: 210mm;
+  margin: 18px auto;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid #d7dce0;
+  box-shadow: 0 3px 14px rgba(28, 48, 62, 0.09);
+}
