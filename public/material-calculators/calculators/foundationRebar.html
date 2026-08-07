@@ -31,7 +31,7 @@
 <header class="header"><div class="wrap"><div class="brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div><a class="back" href="../index.html">← Material Calculators</a></div></header>
 <div class="crumb"><div class="wrap">Design Studio / Material Calculators / Foundation Reinforcement</div></div>
 <main class="main"><div class="wrap">
-<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-8-3 · Foundations</div><h1>Foundation Reinforcement</h1><p class="intro">Bar length, laps, wastage and reinforcement weight</p><span class="status">Server-backed calculator<//span></div><img alt="Foundation reinforcement cage and starter bars rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/foundationRebar.webp" width="360"/></section>
+<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-8-3 · Foundations</div><h1>Foundation Reinforcement</h1><p class="intro">Bar length, laps, wastage and reinforcement weight</p><span class="status">Server-backed calculator</span></div><img alt="Foundation reinforcement cage and starter bars rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/foundationRebar.webp" width="360"/></section>
 <div class="profile" id="profileBanner">🇱🇰 Sri Lanka · Metric inputs · Editable assumptions · Standalone offline calculator</div>
 <div class="grid"><section class="panel"><h2>Project inputs</h2><p>Enter project quantities. Values update live when enabled.</p><div class="field-grid"><div class="field"><label for="diameter"><span>Bar diameter</span><span class="unit">mm</span></label><input data-default="12" data-field="diameter" data-label="Bar diameter" data-required="1" id="diameter" min="0" step="0.01" type="number" value="12"/></div>
 <div class="field"><label for="barLength"><span>Length of one bar/run</span><span class="unit">m</span></label><input data-default="12" data-field="barLength" data-label="Length of one bar/run" data-required="1" id="barLength" min="0" step="0.01" type="number" value="12"/></div>
@@ -113,9 +113,7 @@ async function calculate(options){
 }
 function resetForm(){document.querySelectorAll('[data-field]').forEach(el=>{el.value=el.dataset.default});calculate()}
 function updateQA(){const icon=byId('calcIcon');const metrics=window.__lastResult?.metrics||[];const ok=icon.complete&&icon.naturalWidth>0&&metrics.length>0&&metrics.every(x=>Number.isFinite(x.value))&&!byId('error').classList.contains('show');document.body.dataset.qaStatus=ok?'pass':'pending';byId('qaStatus').textContent=ok?'Calculator loaded and calculated successfully.':'Checking calculator and icon…';}
-window.addEventListener('error',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent=`Page error: ${e.message}`});window.addEventListener('unhandledrejection',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent='Unhandled calculation error.'});
-window.calculator = calculator;
-window.updateDiagram = updateDiagram;
+window.addEventListener('error',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent=`Page error: ${e.message}`});window.addEventListener('unhandledrejection',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent='Unhandled calculation error.'});window.updateDiagram = updateDiagram;
 window.values = values;
 window.validate = validate;
 window.calculate = calculate;

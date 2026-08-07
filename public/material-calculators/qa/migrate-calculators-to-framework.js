@@ -118,7 +118,6 @@ function exposeGlobals(html) {
     out = out.replace(
       /byId\('calculate'\)\.addEventListener/,
       [
-        "window.calculator = calculator;",
         "window.updateDiagram = updateDiagram;",
         "window.values = values;",
         "window.validate = validate;",

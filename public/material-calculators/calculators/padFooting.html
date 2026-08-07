@@ -31,7 +31,7 @@
 <header class="header"><div class="wrap"><div class="brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div><a class="back" href="../index.html">← Material Calculators</a></div></header>
 <div class="crumb"><div class="wrap">Design Studio / Material Calculators / Pad Footing</div></div>
 <main class="main"><div class="wrap">
-<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-6-1 · Foundations</div><h1>Pad Footing</h1><p class="intro">Rectangular pad, pedestal and concrete materials</p><span class="status">Server-backed calculator<//span></div><img alt="Reinforced-concrete pad footing with column starter rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/padFooting.webp" width="360"/></section>
+<section class="head-grid"><div><div class="eyebrow">SA-MAT-1-6-1 · Foundations</div><h1>Pad Footing</h1><p class="intro">Rectangular pad, pedestal and concrete materials</p><span class="status">Server-backed calculator</span></div><img alt="Reinforced-concrete pad footing with column starter rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/padFooting.webp" width="360"/></section>
 <div class="profile" id="profileBanner">🇱🇰 Sri Lanka · Metric inputs · Editable assumptions · Standalone offline calculator</div>
 <div class="grid"><section class="panel"><h2>Project inputs</h2><p>Enter project quantities. Values update live when enabled.</p><div class="field-grid"><div class="field"><label for="qty"><span>Number of footings</span><span class="unit">no.</span></label><input data-default="4" data-field="qty" data-label="Number of footings" data-required="1" id="qty" min="0" step="1" type="number" value="4"/></div>
 <div class="field"><label for="length"><span>Pad length</span><span class="unit">m</span></label><input data-default="1.2" data-field="length" data-label="Pad length" data-required="1" id="length" min="0" step="0.01" type="number" value="1.2"/></div>
@@ -120,9 +120,7 @@ async function calculate(options){
 }
 function resetForm(){document.querySelectorAll('[data-field]').forEach(el=>{el.value=el.dataset.default});calculate()}
 function updateQA(){const icon=byId('calcIcon');const metrics=window.__lastResult?.metrics||[];const ok=icon.complete&&icon.naturalWidth>0&&metrics.length>0&&metrics.every(x=>Number.isFinite(x.value))&&!byId('error').classList.contains('show');document.body.dataset.qaStatus=ok?'pass':'pending';byId('qaStatus').textContent=ok?'Calculator loaded and calculated successfully.':'Checking calculator and icon…';}
-window.addEventListener('error',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent=`Page error: ${e.message}`});window.addEventListener('unhandledrejection',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent='Unhandled calculation error.'});
-window.calculator = calculator;
-window.updateDiagram = updateDiagram;
+window.addEventListener('error',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent=`Page error: ${e.message}`});window.addEventListener('unhandledrejection',e=>{document.body.dataset.qaStatus='fail';byId('qaStatus').textContent='Unhandled calculation error.'});window.updateDiagram = updateDiagram;
 window.values = values;
 window.validate = validate;
 window.calculate = calculate;
