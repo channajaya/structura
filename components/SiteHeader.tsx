@@ -137,6 +137,15 @@ export default function SiteHeader({ breadcrumbExtra }: SiteHeaderProps = {}) {
                 key={item.id}
                 href={item.href}
                 className={item.id === activeItem.id ? "active" : undefined}
+                onClick={(event) => {
+                  // Parent route is already this section; iframe may still be on a
+                  // nested calculator/page. Reset the iframe instead of no-op nav.
+                  if (pathname === item.href) {
+                    event.preventDefault();
+                    window.dispatchEvent(new Event("structura:reset-iframe"));
+                    setMobileOpen(false);
+                  }
+                }}
               >
                 {item.label}
               </Link>
