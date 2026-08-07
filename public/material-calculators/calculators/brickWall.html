@@ -35,7 +35,7 @@ html.in-frame .notice,html.in-frame .header,html.in-frame .crumb{display:none}
 <header class="header"><div class="wrap"><div class="brand">STRUCTURA<small>DIGITAL ENGINEERING OFFICE</small></div><a class="back" href="../index.html">← Material Calculators</a></div></header>
 <div class="crumb"><div class="wrap">Design Studio / Material Calculators / Brick Wall</div></div>
 <main class="main"><div class="wrap">
-<section class="head-grid"><div><div class="eyebrow">SA-MAT-4-1 · Masonry</div><h1>Brick Wall</h1><p class="intro">Brick count, mortar, cement and sand</p><span class="status">Reference framework calculator</span></div><img alt="English-bond brick wall sample rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/brickWall.webp" width="360"/></section>
+<section class="head-grid"><div><div class="eyebrow">SA-MAT-4-1 · Masonry</div><h1>Brick Wall</h1><p class="intro">Brick count, mortar, cement and sand</p><span class="status">Server-backed calculator</span></div><img alt="English-bond brick wall sample rendered 3D construction icon" class="hero-icon" height="270" id="calcIcon" src="../assets/icons/brickWall.webp" width="360"/></section>
 
 <section class="panel project-panel">
   <h2 data-i18n="ui.projectInfo">Project information</h2>
@@ -82,11 +82,7 @@ html.in-frame .notice,html.in-frame .header,html.in-frame .crumb{display:none}
 <script src="../js/structura-api-client.js"></script>
 <script src="../js/structura-report-engine.js"></script>
 <script>
-/* ===== Calculator-specific engine (formulas preserved) ===== */
-function calculator(v){const area=Math.max(0,v.length*v.height-v.openings); const modL=(v.brickL+v.joint)/1000; const modH=(v.brickH+v.joint)/1000; const leaf=Number(v.leaves);
-const exact=area/(modL*modH)*leaf; const bricks=exact*(1+v.waste/100); const wallVol=area*(v.brickW/1000)*leaf; const solid=exact*(v.brickL*v.brickH*v.brickW/1e9); const wet=Math.max(0,wallVol-solid); const dry=wet*1.33; const parts=v.cementPart+v.sandPart; const bags=dry*v.cementPart/parts*1440/50; const sand=dry*v.sandPart/parts;
-return result([m('Net wall area',area,'m²'),m('Exact brick count',exact,'no.'),m('Bricks incl. wastage',bricks,'no.'),m('Wet mortar',wet,'m³'),m('Cement',bags,'50 kg bags'),m('Sand',sand,'m³')],[q('Bricks',bricks,'no.',10),q('Cement',bags,'bags',1),q('Sand',sand,'m³',0.1)],[`Count is based on the entered brick and joint dimensions. Confirm bond, closers and site breakage.`]);}
-
+/* UI + live SVG only. Quantity formulas execute via /api/calculations/compute. */
 function dclamp(n,min,max){n=Number(n);return Math.max(min,Math.min(max,Number.isFinite(n)?n:min));}
 function dnum(id,fallback=0){const el=byId(id);const n=Number(el?.value);return Number.isFinite(n)?n:fallback;}
 function svgEsc(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[ch]));}
@@ -102,7 +98,6 @@ function svgDefs(){return `<defs>
  <pattern id="blockPattern" width="70" height="34" patternUnits="userSpaceOnUse"><rect width="70" height="34" fill="#b8bdbe"/><path d="M0 0H70M0 34H70M35 0V17M0 17H70M0 17V34M70 17V34" stroke="#e8ebeb" stroke-width="2"/></pattern>
  <pattern id="stonePattern" width="48" height="34" patternUnits="userSpaceOnUse"><rect width="48" height="34" fill="#a98766"/><path d="M2 2h20l4 9-8 10H2zM29 1h18v14l-9 6-11-9zM18 24h28v9H12z" fill="#806247" stroke="#d9c4a9" stroke-width="1.2"/></pattern>
  <pattern id="tilePattern" width="34" height="34" patternUnits="userSpaceOnUse"><rect width="34" height="34" fill="#d5d7d7"/><path d="M0 0H34V34H0z" fill="none" stroke="#8d969a" stroke-width="1"/></pattern>
- <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#28424f" flood-opacity=".18"/></filter>
 </defs>`;}
 function dimLine(x1,y1,x2,y2,label,tx,ty,rotate=0){return `<g class="d-dim"><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-start="url(#dimArrow)" marker-end="url(#dimArrow)"/><text x="${tx}" y="${ty}" text-anchor="middle" transform="rotate(${rotate} ${tx} ${ty})">${svgEsc(label)}</text></g>`;}
 function callout(x,y,w,title,value){return `<g><rect class="d-callout" x="${x}" y="${y}" width="${w}" height="48" rx="8"/><text class="d-callout-title" x="${x+10}" y="${y+16}">${svgEsc(title)}</text><text class="d-callout-value" x="${x+10}" y="${y+37}">${svgEsc(value)}</text></g>`;}
@@ -120,14 +115,8 @@ function updateDiagram(){
  <text class="d-label" x="${ox+ow/2}" y="${oy+oh/2}">Opening ${fmt(open)} m²</text>${callout(470,302,125,'Brick size',`${fmt(bL)}×${fmt(bH)}×${fmt(bW)} mm`)}${callout(605,302,125,'Joint / waste',`${fmt(joint)} mm / ${fmt(waste)}%`)}${callout(470,360,260,'Mortar mix',`${fmt(cp)} : ${fmt(sp)} cement : sand`)}`;
 }
 
-/* ===== Shared helpers aliases ===== */
 const byId = StructuraCore.byId;
 const fmt = StructuraCore.fmt;
-const roundTo = StructuraCore.roundTo;
-const m = StructuraCore.m;
-const q = StructuraCore.q;
-const result = StructuraCore.result;
-const mixNote='Nominal mix quantities are indicative; use the project mix design or ready-mix supplier data for final procurement.';
 
 const INPUT_META = [
   {id:'length',label:'Wall length',unit:'m'},
@@ -143,10 +132,12 @@ const INPUT_META = [
   {id:'sandPart',label:'Mortar sand part',unit:'parts'},
 ];
 
+let calcSeq = 0;
+
 function values(){return StructuraCore.readFields();}
 function showError(items){const box=byId('error');box.innerHTML=items.join('<br>');box.classList.toggle('show',items.length>0);if(items.length)document.body.dataset.qaStatus='fail';}
 function render(out){const metrics=byId('metricGrid');metrics.innerHTML=out.metrics.map(x=>`<div class="metric"><span>${x.label}</span><strong>${fmt(x.value)} <small>${x.unit}</small></strong></div>`).join('');const body=byId('materialBody');body.innerHTML=out.materials.map(x=>`<tr><td>${x.label}</td><td>${fmt(x.exact)} ${x.unit}</td><td><strong>${fmt(x.order)} ${x.unit}</strong></td></tr>`).join('');byId('notes').innerHTML=(out.notes||[]).map(n=>`<div>${n}</div>`).join('');byId('result').hidden=false;window.__lastResult=out;updateQA();}
-function updateQA(){const icon=byId('calcIcon');const metrics=window.__lastResult?.metrics||[];const ok=icon.complete&&icon.naturalWidth>0&&metrics.length>0&&metrics.every(x=>Number.isFinite(x.value))&&!byId('error').classList.contains('show');document.body.dataset.qaStatus=ok?'pass':'pending';byId('qaStatus').textContent=ok?'Calculator loaded and calculated successfully.':'Checking calculator and icon…';}
+function updateQA(){const icon=byId('calcIcon');const metrics=window.__lastResult?.metrics||[];const ok=icon.complete&&icon.naturalWidth>0&&metrics.length>0&&metrics.every(x=>Number.isFinite(x.value))&&!byId('error').classList.contains('show');document.body.dataset.qaStatus=ok?'pass':'pending';byId('qaStatus').textContent=ok?'Server calculation successful.':'Waiting for server calculation…';}
 function refreshProfileBanner(){byId('profileBanner').textContent=StructuraCountry.profileSummary();}
 
 function applyCountryDefaults(profile, force){
@@ -159,29 +150,42 @@ function applyCountryDefaults(profile, force){
   });
 }
 
-function runCalculate(options){
+async function runCalculate(options){
   const silent=options&&options.silent;
+  const seq=++calcSeq;
   try{
     updateDiagram();
     const v=values();
     const errors=StructuraValidation.validateRequiredFields();
     if(!silent) showError(errors);
     if(errors.length){ window.__lastWarnings=errors; return null; }
-    const out=calculator(v);
+    if(!silent) byId('qaStatus').textContent='Calculating on server…';
+    const payload=await StructuraApi.compute('brickWall', v);
+    if(seq!==calcSeq) return null;
+    const out=payload.results;
     StructuraValidation.assertFiniteResult(out);
     window.__lastResult=out;
+    window.__lastSteps=payload.steps||[];
+    window.__lastAssumptions=payload.assumptions||[];
     window.__lastWarnings=[];
     if(!silent) render(out);
     else updateQA();
     return out;
   }catch(err){
-    if(!silent){ showError([err.message||String(err)]); console.error(err); }
+    if(seq!==calcSeq) return null;
+    const msg=err.message||String(err);
+    const offline=/Failed to fetch|NetworkError|Load failed/i.test(msg)
+      ? 'Server calculation unavailable. Brick Wall requires an online connection — formulas are not run in the browser.'
+      : msg;
+    if(!silent){ showError([offline]); console.error(err); }
+    byId('qaStatus').textContent='Server calculation failed.';
+    document.body.dataset.qaStatus='fail';
     return null;
   }
 }
 
-function resetForm(){StructuraCore.resetFields(); calculate();}
-function calculate(){return runCalculate();}
+function resetForm(){StructuraCore.resetFields(); return calculate();}
+function calculate(options){return runCalculate(options||{});}
 
 window.STRUCTURA_CALCULATOR = {
   meta: {
@@ -190,9 +194,11 @@ window.STRUCTURA_CALCULATOR = {
     category: 'Masonry',
     version: '1.0',
     printOrientation: 'portrait',
-    code: 'SA-MAT-4-1'
+    code: 'SA-MAT-4-1',
+    execution: 'server'
   },
   getProjectData(){ return StructuraProject.getProjectData(); },
+  getRawInputs(){ return values(); },
   getInputs(){
     const v=values();
     return INPUT_META.map((meta)=>{
@@ -208,49 +214,16 @@ window.STRUCTURA_CALCULATOR = {
     });
   },
   calculate(options){ return runCalculate(options||{}); },
-  getResults(){ return window.__lastResult || runCalculate({silent:true}); },
-  getCalculationSteps(){
-    const v=values();
-    const area=Math.max(0,v.length*v.height-v.openings);
-    const modL=(v.brickL+v.joint)/1000;
-    const modH=(v.brickH+v.joint)/1000;
-    const leaf=Number(v.leaves);
-    const exact=area/(modL*modH)*leaf;
-    const bricks=exact*(1+v.waste/100);
-    const wallVol=area*(v.brickW/1000)*leaf;
-    const solid=exact*(v.brickL*v.brickH*v.brickW/1e9);
-    const wet=Math.max(0,wallVol-solid);
-    const dry=wet*1.33;
-    const parts=v.cementPart+v.sandPart;
-    const bags=dry*v.cementPart/parts*1440/50;
-    const sand=dry*v.sandPart/parts;
-    return [
-      {label:'Net wall area',expression:`max(0, L×H − openings)`,value:area,unit:'m²'},
-      {label:'Modular brick face',expression:`(brickL+joint)/1000 × (brickH+joint)/1000`,value:modL*modH,unit:'m²'},
-      {label:'Exact brick count',expression:`area / modularFace × leaves`,value:exact,unit:'no.'},
-      {label:'Bricks incl. wastage',expression:`exact × (1 + waste/100)`,value:bricks,unit:'no.'},
-      {label:'Wall volume',expression:`area × brickW/1000 × leaves`,value:wallVol,unit:'m³'},
-      {label:'Solid brick volume',expression:`exact × brickL×brickH×brickW / 1e9`,value:solid,unit:'m³'},
-      {label:'Wet mortar',expression:`max(0, wallVol − solid)`,value:wet,unit:'m³'},
-      {label:'Dry mortar',expression:`wet × 1.33`,value:dry,unit:'m³'},
-      {label:'Cement bags',expression:`dry × cementPart/parts × 1440/50`,value:bags,unit:'50 kg bags'},
-      {label:'Sand',expression:`dry × sandPart/parts`,value:sand,unit:'m³'},
-    ];
-  },
+  getResults(){ return window.__lastResult || null; },
+  getCalculationSteps(){ return window.__lastSteps || []; },
   getMaterialSchedule(){ return (this.getResults()?.materials)||[]; },
   getAssumptions(){
-    return [
-      'Modular face size includes the mortar joint.',
-      'Double-leaf selection doubles the face count.',
-      'Dry mortar volume uses a 1.33 bulking factor on wet mortar.',
-      'Cement ordered as 50 kg bags at 1440 kg/m³ (baseline formula preserved).',
-      mixNote,
-      StructuraCountry.getActive().specificationProfile,
-    ];
+    const fromServer=window.__lastAssumptions||[];
+    return [...fromServer, StructuraCountry.getActive().specificationProfile];
   },
   getWarnings(){ return window.__lastWarnings || []; },
   getSVG(){ return byId('diagramSvg'); },
-  reset(){ resetForm(); }
+  reset(){ return resetForm(); }
 };
 
 function populateSelectors(){
@@ -278,10 +251,10 @@ byId('languageSelect').addEventListener('change',(e)=>{
   StructuraI18n.setLanguage(e.target.value);
 });
 
-byId('calculate').addEventListener('click',calculate);
-byId('mobileCalc').addEventListener('click',calculate);
-byId('reset').addEventListener('click',resetForm);
-byId('mobileReset').addEventListener('click',resetForm);
+byId('calculate').addEventListener('click',()=>calculate());
+byId('mobileCalc').addEventListener('click',()=>calculate());
+byId('reset').addEventListener('click',()=>resetForm());
+byId('mobileReset').addEventListener('click',()=>resetForm());
 byId('print').addEventListener('click',()=>StructuraReport.print(window.STRUCTURA_CALCULATOR));
 byId('calcIcon').addEventListener('load',updateQA);
 byId('calcIcon').addEventListener('error',updateQA);

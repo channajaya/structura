@@ -149,7 +149,22 @@ Print dialog itself was exercised via shared `StructuraReport.print` binding (fu
 
 ---
 
-## Set 01 — Foundations (completed after Brick Wall approval)
+## Backend calculation protection (Brick Wall)
+
+Brick Wall quantity formulas were moved out of public HTML into server-only code:
+
+- Engine: `lib/material-calculators/engines/brickWall.ts`
+- Registry: `lib/material-calculators/registry.ts`
+- API: `POST /api/calculations/compute`
+- Client: calls API only — **no offline formula fallback**
+- Live SVG remains client-side (geometry from inputs only)
+
+Verified baseline (defaults): net area 24, bricks incl. wastage 1493.33…, cement bags 2.313… — match pre-move results.
+
+Set 01 and other calculators still ship formulas in HTML until their server engines are added.
+
+---
+
 
 Migrated via shared `structura-framework-boot.js` (preserves calculator-specific formulas + SVG):
 

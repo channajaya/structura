@@ -1,6 +1,6 @@
 /**
- * STRUCTURA frontend API client (optional).
- * Basic client-side calculations do not require the backend.
+ * STRUCTURA frontend API client.
+ * Quantity calculations for protected engines must run via /api/calculations/compute.
  */
 (function (global) {
   "use strict";
@@ -32,22 +32,67 @@
     return data;
   }
 
-  function buildPayload(adapter) {
+  function contextFromAdapter(adapter) {
     const calc = adapter || global.STRUCTURA_CALCULATOR;
     if (!calc) throw new Error("STRUCTURA_CALCULATOR adapter is not registered.");
     const meta = calc.meta || {};
     const project = calc.getProjectData ? calc.getProjectData() : {};
-    const country =
-      global.StructuraCountry?.getActive?.()?.countryCode || "LK";
-    const language = global.StructuraI18n?.getLanguage?.() || "en";
-    if (typeof calc.calculate === "function") calc.calculate();
     return {
       calculatorId: meta.id,
       calculatorVersion: meta.version || "1.0",
       projectId: project.projectId || null,
-      country,
-      language,
-      inputs: calc.getInputs ? calc.getInputs() : {},
+      country: global.StructuraCountry?.getActive?.()?.countryCode || "LK",
+      language: global.StructuraI18n?.getLanguage?.() || "en",
+    };
+  }
+
+  function inputsFromAdapter(adapter) {
+    const calc = adapter || global.STRUCTURA_CALCULATOR;
+    if (typeof calc.getRawInputs === "function") return calc.getRawInputs();
+    if (typeof calc.getInputs === "function") {
+      const rows = calc.getInputs();
+      if (Array.isArray(rows)) {
+        const o = {};
+        rows.forEach((row) => {
+          o[row.id] = row.value;
+        });
+        return o;
+      }
+      return rows;
+    }
+    return global.StructuraCore?.readFields?.() || {};
+  }
+
+  /**
+   * Server-side compute. No client-side formula fallback.
+   */
+  function compute(calculatorId, inputs, options) {
+    const opts = options || {};
+    const calc = opts.adapter || global.STRUCTURA_CALCULATOR;
+    const ctx = calc ? contextFromAdapter(calc) : {};
+    return request("/calculations/compute", {
+      method: "POST",
+      body: JSON.stringify({
+        calculatorId: calculatorId || ctx.calculatorId,
+        calculatorVersion: ctx.calculatorVersion,
+        projectId: ctx.projectId,
+        country: opts.country || ctx.country,
+        language: opts.language || ctx.language,
+        inputs: inputs || inputsFromAdapter(calc),
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  }
+
+  async function buildPayload(adapter) {
+    const calc = adapter || global.STRUCTURA_CALCULATOR;
+    const ctx = contextFromAdapter(calc);
+    if (typeof calc.calculate === "function") {
+      await calc.calculate();
+    }
+    return {
+      ...ctx,
+      inputs: inputsFromAdapter(calc),
       results: calc.getResults ? calc.getResults() : null,
       assumptions: calc.getAssumptions ? calc.getAssumptions() : [],
       warnings: calc.getWarnings ? calc.getWarnings() : [],
@@ -56,10 +101,12 @@
   }
 
   function saveCalculation(adapter) {
-    return request("/calculations", {
-      method: "POST",
-      body: JSON.stringify(buildPayload(adapter)),
-    });
+    return buildPayload(adapter).then((payload) =>
+      request("/calculations", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }),
+    );
   }
 
   function getCalculation(id) {
@@ -67,10 +114,12 @@
   }
 
   function createReport(adapter) {
-    return request("/reports", {
-      method: "POST",
-      body: JSON.stringify(buildPayload(adapter)),
-    });
+    return buildPayload(adapter).then((payload) =>
+      request("/reports", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }),
+    );
   }
 
   function getProject(projectId) {
@@ -86,6 +135,7 @@
   }
 
   global.StructuraApi = {
+    compute,
     buildPayload,
     saveCalculation,
     getCalculation,

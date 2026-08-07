@@ -42,6 +42,10 @@
   }
 
   function ensureFresh(calc) {
+    // Prefer already-fetched server results. Callers should await
+    // STRUCTURA_CALCULATOR.calculate() before print when using server engines.
+    const existing = typeof calc.getResults === "function" ? calc.getResults() : null;
+    if (existing?.metrics?.length) return;
     if (typeof calc.calculate === "function") {
       calc.calculate({ silent: true });
     }
@@ -333,8 +337,12 @@
     };
   }
 
-  function print(adapter) {
-    const report = generate(adapter);
+  async function print(adapter) {
+    const calc = ensureAdapter(adapter);
+    if (typeof calc.calculate === "function") {
+      await calc.calculate();
+    }
+    const report = generate(calc);
     const cleanup = () => {
       document.body.classList.remove("structura-printing");
       window.removeEventListener("afterprint", cleanup);
