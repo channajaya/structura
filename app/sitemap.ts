@@ -8,6 +8,7 @@ import { tutorialSoftwareList } from "@/data/tutorials";
 const FULL_PUBLIC_ROUTES = [
   "",
   "/design-studio",
+  "/markup",
   "/material-calculators",
   "/pm-office",
   "/qs-office",
@@ -20,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = TEMPORARY_PUBLIC_LAUNCH_MODE
     ? [
         "/design-studio",
+        "/markup",
         "/material-calculators",
         "/tutorials",
         ...tutorialSoftwareList.map(

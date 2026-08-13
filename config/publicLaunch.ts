@@ -10,6 +10,7 @@ export const PUBLIC_LAUNCH_DESTINATION = "/design-studio";
 
 export const PUBLIC_LAUNCH_NAV_ITEM_IDS = [
   "design-studio",
+  "drawing-markup",
   "material-calculators",
   "tutorials",
 ] as const;
