@@ -2312,7 +2312,7 @@ export function StructuraEditor() {
           )}
         </section>
 
-        <aside className="inspector" aria-label="Inspector">
+        <aside className="inspector" aria-label="Inspector" tabIndex={0}>
           <div className="panel-heading compact">
             <div>
               <span className="eyebrow">Selection</span>

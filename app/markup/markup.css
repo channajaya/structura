@@ -313,7 +313,51 @@ button:disabled {
 .inspector {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: #788493 #e8edf2;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
   border-left: 1px solid #afb6c0;
+}
+
+.inspector::-webkit-scrollbar {
+  width: 10px;
+}
+
+.inspector::-webkit-scrollbar-track {
+  background: #e8edf2;
+  border-left: 1px solid #d5dce4;
+}
+
+.inspector::-webkit-scrollbar-thumb {
+  background: #788493;
+  border: 2px solid #e8edf2;
+  border-radius: 999px;
+}
+
+.inspector::-webkit-scrollbar-thumb:hover {
+  background: #556273;
+}
+
+.inspector > .panel-heading {
+  position: sticky;
+  z-index: 7;
+  top: 0;
+  flex: 0 0 auto;
+}
+
+.inspector .inspector-scroll {
+  flex: 0 0 auto;
+  min-height: auto;
+  overflow: visible;
+}
+
+.inspector > .inspector-section,
+.inspector > .empty-selection,
+.inspector > .inspector-footer {
+  flex: 0 0 auto;
 }
 
 .panel-heading {
@@ -1325,7 +1369,7 @@ button:disabled {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5px;
-  margin-top: auto;
+  margin-top: 0;
   padding: 8px;
   background: #eef1f4;
   border-top: 1px solid #d6dce3;
