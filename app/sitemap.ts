@@ -20,6 +20,7 @@ const FULL_PUBLIC_ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = TEMPORARY_PUBLIC_LAUNCH_MODE
     ? [
+        "",
         "/design-studio",
         "/markup",
         "/material-calculators",
@@ -33,6 +34,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${SITE_ORIGIN}${route}`,
     changeFrequency: "weekly",
-    priority: route === "/design-studio" ? 1 : 0.8,
+    priority: route === "" ? 1 : 0.8,
   }));
 }

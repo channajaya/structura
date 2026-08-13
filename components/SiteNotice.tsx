@@ -1,4 +1,12 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 export default function SiteNotice() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/markup")) return null;
+
   return (
     <div
       role="status"

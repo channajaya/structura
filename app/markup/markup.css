@@ -98,33 +98,68 @@ button:disabled {
 .brand-block {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  height: 36px;
+  padding: 0 9px 0 7px;
   margin-right: 8px;
+  color: #0c1826;
+  text-decoration: none;
   white-space: nowrap;
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.brand-block:hover {
+  border-color: #64a7d4;
+  box-shadow: 0 0 0 2px rgba(0, 113, 188, 0.18);
+}
+
+.brand-block:active {
+  transform: translateY(1px);
+}
+
+.brand-block:focus-visible {
+  outline: 2px solid #7cc5f5;
+  outline-offset: 2px;
 }
 
 .brand-mark {
+  display: block;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+}
+
+.brand-mark-light {
+  fill: #0071bc;
+}
+
+.brand-mark-dark {
+  fill: #005a96;
+}
+
+.brand-copy {
   display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  color: var(--navy);
-  font-size: 14px;
-  font-weight: 900;
-  background: var(--amber);
-  border-radius: 7px 7px 7px 2px;
+  gap: 0;
+  line-height: 1;
 }
 
 .brand-name {
-  font-size: 13px;
+  color: #111827;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
 }
 
 .brand-product {
-  color: #93a1b2;
-  font-size: 12px;
-  font-weight: 600;
+  margin-top: 3px;
+  color: #0071bc;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .document-chip,

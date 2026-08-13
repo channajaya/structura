@@ -20,10 +20,6 @@ export const PUBLIC_LAUNCH_NAV_ITEM_IDS = [
  * equivalents while temporary launch mode is enabled.
  */
 export const TEMPORARILY_HIDDEN_ROUTE_SOURCES = [
-  "/",
-  "/home/:path*",
-  "/index.html",
-  "/home.html",
   "/pm-office/:path*",
   "/pmOFFICE_v2.html",
   "/qs-office/:path*",

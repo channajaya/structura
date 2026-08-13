@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import {
   useCallback,
   useEffect,
@@ -2049,11 +2050,26 @@ export function StructuraEditor() {
       />
 
       <header className="topbar">
-        <div className="brand-block" aria-label="Structura Markup">
-          <span className="brand-mark">S</span>
-          <span className="brand-name">STRUCTURA</span>
-          <span className="brand-product">Markup</span>
-        </div>
+        <Link className="brand-block" href="/" aria-label="Go to STRUCTURA home" title="Back to STRUCTURA home">
+          <svg className="brand-mark" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+            <rect x="0" y="11.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="12.5" y="11.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="25" y="11.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="0" y="19.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="12.5" y="19.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="25" y="19.5" width="9" height="3" rx=".5" className="brand-mark-light" />
+            <rect x="11.5" y="0" width="3" height="9" rx=".5" className="brand-mark-dark" />
+            <rect x="11.5" y="12.5" width="3" height="9" rx=".5" className="brand-mark-dark" />
+            <rect x="11.5" y="25" width="3" height="9" rx=".5" className="brand-mark-dark" />
+            <rect x="19.5" y="0" width="3" height="9" rx=".5" className="brand-mark-dark" />
+            <rect x="19.5" y="12.5" width="3" height="9" rx=".5" className="brand-mark-dark" />
+            <rect x="19.5" y="25" width="3" height="9" rx=".5" className="brand-mark-dark" />
+          </svg>
+          <span className="brand-copy">
+            <span className="brand-name">STRUCTURA</span>
+            <span className="brand-product">Drawing Markup</span>
+          </span>
+        </Link>
         <button className="document-chip" type="button" onClick={() => fileInputRef.current?.click()}>
           {source?.kind === "image" ? <FileImage size={16} /> : <FileText size={16} />}
           <span>{source?.name || "Open a drawing"}</span>
