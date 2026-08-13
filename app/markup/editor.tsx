@@ -63,7 +63,16 @@ import {
   type Size,
   type Unit,
 } from "@/lib/markup/pdf-annotation-engine";
-import { degrees, PDFDocument, PDFName } from "pdf-lib";
+import {
+  deleteLocalProject,
+  getLocalProject,
+  listLocalProjects,
+  saveLocalProject,
+  updateLocalProjectState,
+  type LocalProjectState,
+  type LocalProjectSummary,
+} from "@/lib/markup/local-project-store";
+import { degrees, PDFDocument, PDFName, rgb, StandardFonts, type PDFFont } from "pdf-lib";
 
 let pdfJsPromise: Promise<typeof import("pdfjs-dist")> | null = null;
 
@@ -90,8 +99,10 @@ type SavedSymbol = {
 
 type LibraryStatus = "loading" | "saving" | "saved" | "temporary";
 type CalculationStatus = "idle" | "checking" | "verified" | "unavailable";
+type ProjectSaveStatus = "idle" | "saving" | "saved" | "error";
 
 const SYMBOL_STORAGE_KEY = "structura-markup-saved-symbols";
+const AUTOSAVE_STORAGE_KEY = "structura-pro-autosave";
 
 type SourceDocument = {
   kind: "pdf" | "image";
@@ -228,6 +239,41 @@ const SCALE_PRESETS = [
 ] as const;
 
 const COLORS = ["#f04a3e", "#f2b134", "#23b88b", "#2f8cff", "#8758e5", "#111827"];
+
+function formatFileSize(bytes: number) {
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(bytes < 10 * 1024 * 1024 ? 1 : 0)} MB`;
+}
+
+function formatProjectDate(value: string) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "Unknown date";
+  return new Intl.DateTimeFormat(undefined, {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function safePdfText(value: unknown) {
+  return String(value ?? "")
+    .replace(/²/g, "2")
+    .replace(/³/g, "3")
+    .replace(/°/g, " deg")
+    .normalize("NFKD")
+    .replace(/[^\x20-\x7E]/g, "");
+}
+
+function fitPdfText(text: string, width: number, font: PDFFont, size: number) {
+  const safe = safePdfText(text);
+  if (font.widthOfTextAtSize(safe, size) <= width) return safe;
+  let clipped = safe;
+  while (clipped.length > 1 && font.widthOfTextAtSize(`${clipped}...`, size) > width) {
+    clipped = clipped.slice(0, -1);
+  }
+  return `${clipped}...`;
+}
 
 function distance(a: Point, b: Point) {
   return Math.hypot(b.x - a.x, b.y - a.y);
@@ -962,6 +1008,14 @@ export function StructuraEditor() {
   const [bottomOpen, setBottomOpen] = useState(true);
   const [helpOpen, setHelpOpen] = useState(false);
   const [summaryOpen, setSummaryOpen] = useState(false);
+  const [proOpen, setProOpen] = useState(false);
+  const [localProjects, setLocalProjects] = useState<LocalProjectSummary[]>([]);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [projectName, setProjectName] = useState("");
+  const [projectSaveStatus, setProjectSaveStatus] = useState<ProjectSaveStatus>("idle");
+  const [projectStorageReady, setProjectStorageReady] = useState(true);
+  const [projectBusyId, setProjectBusyId] = useState<string | null>(null);
+  const [autoSaveEnabled, setAutoSaveEnabled] = useState(true);
   const [dropActive, setDropActive] = useState(false);
   const [error, setError] = useState("");
   const [exporting, setExporting] = useState(false);
@@ -976,6 +1030,8 @@ export function StructuraEditor() {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const projectBackupInputRef = useRef<HTMLInputElement>(null);
+  const presetLibraryInputRef = useRef<HTMLInputElement>(null);
   const backgroundCanvasRef = useRef<HTMLCanvasElement>(null);
   const overlayCanvasRef = useRef<HTMLCanvasElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -984,6 +1040,8 @@ export function StructuraEditor() {
   const dragRef = useRef<{ id: string; start: Point; original: Markup[]; moved: boolean } | null>(null);
   const vertexDragRef = useRef<{ id: string; index: number; original: Markup[]; moved: boolean } | null>(null);
   const draftRef = useRef<Draft | null>(null);
+  const localProjectsRef = useRef<LocalProjectSummary[]>([]);
+  const projectHydratingRef = useRef(false);
 
   const selectedMarkup = useMemo(
     () => markups.find((markup) => markup.id === selectedId) || null,
@@ -1078,6 +1136,26 @@ export function StructuraEditor() {
     }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  const refreshLocalProjects = useCallback(async () => {
+    try {
+      const projects = await listLocalProjects();
+      localProjectsRef.current = projects;
+      setLocalProjects(projects);
+      setProjectStorageReady(true);
+    } catch {
+      setProjectStorageReady(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      const storedPreference = window.localStorage.getItem(AUTOSAVE_STORAGE_KEY);
+      if (storedPreference === "off") setAutoSaveEnabled(false);
+      void refreshLocalProjects();
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [refreshLocalProjects]);
 
   const commitMarkups = useCallback(
     (next: Markup[]) => {
@@ -1187,6 +1265,21 @@ export function StructuraEditor() {
     setSelectedId(copy.id);
   }, [commitMarkups, markups, selectedMarkup]);
 
+  const getCurrentProjectState = useCallback((): LocalProjectState => ({
+    pageSizes,
+    scales,
+    markups,
+    layerVisibility,
+    activeLayer,
+    measurementSettings: {
+      precision: measurementPrecision,
+      snapEnabled,
+      gridSnapEnabled,
+      gridSpacing,
+    },
+    removedSourceAnnotationRefs,
+  }), [activeLayer, gridSnapEnabled, gridSpacing, layerVisibility, markups, measurementPrecision, pageSizes, removedSourceAnnotationRefs, scales, snapEnabled]);
+
   const loadFile = useCallback(async (file: File) => {
     setError("");
     if (file.size > 150 * 1024 * 1024) {
@@ -1251,8 +1344,13 @@ export function StructuraEditor() {
       setDraft(null);
       setRemovedSourceAnnotationRefs([]);
       setLayerVisibility((current) => ({ ...current, "Imported annotations": true }));
+      setActiveProjectId(null);
+      setProjectName(file.name.replace(/\.[^.]+$/, ""));
+      setProjectSaveStatus("idle");
+      return true;
     } catch (fileError) {
       setError(fileError instanceof Error ? fileError.message : "The document could not be opened.");
+      return false;
     } finally {
       setLoadingDocument(false);
     }
@@ -1964,6 +2062,130 @@ export function StructuraEditor() {
     setExportNotice("Measurement summary CSV created.");
   };
 
+  const exportQuantityReportPdf = async () => {
+    if (!measurementSummary.length) return;
+    setExporting(true);
+    setError("");
+    try {
+      const report = await PDFDocument.create();
+      const regular = await report.embedFont(StandardFonts.Helvetica);
+      const bold = await report.embedFont(StandardFonts.HelveticaBold);
+      const pageWidth = 842;
+      const pageHeight = 595;
+      const margin = 42;
+      const navy = rgb(0.047, 0.094, 0.149);
+      const amber = rgb(0.949, 0.694, 0.204);
+      const ink = rgb(0.11, 0.16, 0.22);
+      const muted = rgb(0.39, 0.45, 0.53);
+      const line = rgb(0.86, 0.88, 0.91);
+      const pale = rgb(0.96, 0.97, 0.98);
+      let page = report.addPage([pageWidth, pageHeight]);
+      let y = pageHeight - margin;
+
+      const drawPageHeader = (section: string) => {
+        page.drawRectangle({ x: 0, y: pageHeight - 48, width: pageWidth, height: 48, color: navy });
+        page.drawRectangle({ x: 0, y: pageHeight - 51, width: pageWidth, height: 3, color: amber });
+        page.drawText("STRUCTURA", { x: margin, y: pageHeight - 30, font: bold, size: 13, color: rgb(1, 1, 1) });
+        page.drawText(safePdfText(section).toUpperCase(), { x: pageWidth - margin - 170, y: pageHeight - 29, font: bold, size: 8, color: rgb(0.74, 0.82, 0.9) });
+        y = pageHeight - 78;
+      };
+
+      const addReportPage = (section: string) => {
+        page = report.addPage([pageWidth, pageHeight]);
+        drawPageHeader(section);
+      };
+
+      const drawTableHeader = (columns: { label: string; width: number }[]) => {
+        let x = margin;
+        page.drawRectangle({ x: margin, y: y - 5, width: pageWidth - margin * 2, height: 22, color: navy });
+        columns.forEach((column) => {
+          page.drawText(column.label.toUpperCase(), { x: x + 5, y: y + 2, font: bold, size: 6.5, color: rgb(1, 1, 1) });
+          x += column.width;
+        });
+        y -= 22;
+      };
+
+      const drawTableRow = (values: string[], columns: { label: string; width: number }[], shaded: boolean) => {
+        if (y < 45) return false;
+        let x = margin;
+        if (shaded) page.drawRectangle({ x: margin, y: y - 5, width: pageWidth - margin * 2, height: 20, color: pale });
+        columns.forEach((column, index) => {
+          page.drawText(fitPdfText(values[index] || "-", column.width - 10, regular, 7), { x: x + 5, y: y + 1, font: regular, size: 7, color: ink });
+          x += column.width;
+        });
+        page.drawLine({ start: { x: margin, y: y - 5 }, end: { x: pageWidth - margin, y: y - 5 }, thickness: 0.45, color: line });
+        y -= 20;
+        return true;
+      };
+
+      drawPageHeader("Quantity report");
+      page.drawText(safePdfText(projectName || source?.name.replace(/\.[^.]+$/, "") || "Drawing measurement report"), { x: margin, y, font: bold, size: 19, color: navy });
+      y -= 22;
+      page.drawText(`Source: ${safePdfText(source?.name || "Current drawing")}  |  Generated: ${new Date().toLocaleString()}`, { x: margin, y, font: regular, size: 8, color: muted });
+      y -= 26;
+
+      const summaryColumns = [
+        { label: "Layer", width: 165 },
+        { label: "Measurement", width: 165 },
+        { label: "Items", width: 80 },
+        { label: "Total", width: 150 },
+        { label: "Unit", width: 100 },
+      ];
+      page.drawText("MEASUREMENT SUMMARY", { x: margin, y, font: bold, size: 9, color: navy });
+      y -= 18;
+      drawTableHeader(summaryColumns);
+      measurementSummary.forEach((row, index) => {
+        if (!drawTableRow([row.layer, row.type, String(row.items), row.total.toFixed(row.precision), row.unit || "-"], summaryColumns, index % 2 === 1)) {
+          addReportPage("Quantity summary continued");
+          drawTableHeader(summaryColumns);
+          drawTableRow([row.layer, row.type, String(row.items), row.total.toFixed(row.precision), row.unit || "-"], summaryColumns, index % 2 === 1);
+        }
+      });
+
+      addReportPage("Measurement register");
+      const detailColumns = [
+        { label: "Page", width: 45 },
+        { label: "Type", width: 92 },
+        { label: "Layer", width: 105 },
+        { label: "Subject", width: 165 },
+        { label: "Measurement", width: 112 },
+        { label: "Status", width: 82 },
+        { label: "Author", width: 157 },
+      ];
+      drawTableHeader(detailColumns);
+      markups.filter((markup) => MEASUREMENT_KINDS.includes(markup.kind)).forEach((markup, index) => {
+        const values = [
+          String(markup.page),
+          TOOL_LABELS[markup.kind],
+          markup.layer || "Structural",
+          markup.subject || TOOL_LABELS[markup.kind],
+          formatMeasurement(markup, scales[markup.page]),
+          markup.status || "Open",
+          markup.author || "-",
+        ];
+        if (!drawTableRow(values, detailColumns, index % 2 === 1)) {
+          addReportPage("Measurement register continued");
+          drawTableHeader(detailColumns);
+          drawTableRow(values, detailColumns, index % 2 === 1);
+        }
+      });
+
+      const pages = report.getPages();
+      pages.forEach((reportPage, index) => {
+        reportPage.drawText(`Page ${index + 1} of ${pages.length}`, { x: pageWidth - margin - 60, y: 20, font: regular, size: 7, color: muted });
+        reportPage.drawText("Verify reference scales against a known dimension before relying on quantities.", { x: margin, y: 20, font: regular, size: 7, color: muted });
+      });
+      const output = await report.save();
+      const base = source?.name.replace(/\.[^.]+$/, "") || "structura";
+      downloadBytes(output, `${base}-quantity-report.pdf`);
+      setExportNotice("Professional quantity report PDF created.");
+    } catch (reportError) {
+      setError(reportError instanceof Error ? reportError.message : "The quantity report could not be created.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
   const exportProject = () => {
     if (!source) return;
     const backup = {
@@ -1984,6 +2206,227 @@ export function StructuraEditor() {
     downloadBytes(new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" }), `${base}-structura-project.json`, "application/json");
     setExportNotice("Structura project backup created.");
   };
+
+  const updateProjectSummaryList = useCallback((summary: LocalProjectSummary) => {
+    const next = [summary, ...localProjectsRef.current.filter((project) => project.id !== summary.id)]
+      .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+    localProjectsRef.current = next;
+    setLocalProjects(next);
+  }, []);
+
+  const saveCurrentProject = async () => {
+    if (!source) {
+      setError("Open a drawing before saving a project.");
+      return;
+    }
+    const sourceBytes = source.kind === "pdf" ? source.pdfBytes : source.imageBytes;
+    if (!sourceBytes) {
+      setError("The source drawing is not ready to save.");
+      return;
+    }
+    setProjectSaveStatus("saving");
+    try {
+      const now = new Date().toISOString();
+      const id = activeProjectId || crypto.randomUUID();
+      const existing = localProjectsRef.current.find((project) => project.id === id);
+      const summary: LocalProjectSummary = {
+        id,
+        name: projectName.trim() || source.name.replace(/\.[^.]+$/, ""),
+        sourceName: source.name,
+        sourceKind: source.kind,
+        pageCount: source.pageCount,
+        markupCount: markups.length,
+        measurementCount: markups.filter((markup) => MEASUREMENT_KINDS.includes(markup.kind)).length,
+        sourceSize: sourceBytes.byteLength,
+        createdAt: existing?.createdAt || now,
+        updatedAt: now,
+      };
+      await saveLocalProject({
+        summary,
+        document: {
+          sourceBytes: sourceBytes.slice(0),
+          imageType: source.kind === "image" ? source.imageType : undefined,
+        },
+        state: getCurrentProjectState(),
+      });
+      updateProjectSummaryList(summary);
+      setActiveProjectId(id);
+      setProjectName(summary.name);
+      setProjectSaveStatus("saved");
+      setProjectStorageReady(true);
+      setExportNotice(existing ? "Project saved on this device." : "Project added to your on-device workspace.");
+    } catch (saveError) {
+      setProjectSaveStatus("error");
+      setProjectStorageReady(false);
+      setError(saveError instanceof Error ? saveError.message : "The project could not be saved on this device.");
+    }
+  };
+
+  const openSavedProject = async (id: string) => {
+    setProjectBusyId(id);
+    projectHydratingRef.current = true;
+    setError("");
+    try {
+      const snapshot = await getLocalProject(id);
+      if (!snapshot) throw new Error("This saved project could not be found.");
+      const mimeType = snapshot.summary.sourceKind === "pdf"
+        ? "application/pdf"
+        : snapshot.document.imageType === "png" ? "image/png" : "image/jpeg";
+      const file = new File([snapshot.document.sourceBytes.slice(0)], snapshot.summary.sourceName, { type: mimeType });
+      const loaded = await loadFile(file);
+      if (!loaded) return;
+      setPageSizes(snapshot.state.pageSizes);
+      setScales(snapshot.state.scales);
+      setMarkups(snapshot.state.markups);
+      setLayerVisibility(snapshot.state.layerVisibility);
+      setActiveLayer(snapshot.state.activeLayer);
+      setMeasurementPrecision(snapshot.state.measurementSettings.precision);
+      setSnapEnabled(snapshot.state.measurementSettings.snapEnabled);
+      setGridSnapEnabled(snapshot.state.measurementSettings.gridSnapEnabled);
+      setGridSpacing(snapshot.state.measurementSettings.gridSpacing);
+      setRemovedSourceAnnotationRefs(snapshot.state.removedSourceAnnotationRefs);
+      setPast([]);
+      setFuture([]);
+      setSelectedId(null);
+      setActiveProjectId(snapshot.summary.id);
+      setProjectName(snapshot.summary.name);
+      setProjectSaveStatus("saved");
+      setProOpen(false);
+      setExportNotice(`Opened ${snapshot.summary.name}.`);
+    } catch (openError) {
+      setError(openError instanceof Error ? openError.message : "The saved project could not be opened.");
+    } finally {
+      setProjectBusyId(null);
+      window.requestAnimationFrame(() => {
+        projectHydratingRef.current = false;
+      });
+    }
+  };
+
+  const removeSavedProject = async (project: LocalProjectSummary) => {
+    if (!window.confirm(`Delete the on-device project “${project.name}”? This cannot be undone.`)) return;
+    setProjectBusyId(project.id);
+    try {
+      await deleteLocalProject(project.id);
+      const next = localProjectsRef.current.filter((item) => item.id !== project.id);
+      localProjectsRef.current = next;
+      setLocalProjects(next);
+      if (activeProjectId === project.id) {
+        setActiveProjectId(null);
+        setProjectSaveStatus("idle");
+      }
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "The saved project could not be deleted.");
+    } finally {
+      setProjectBusyId(null);
+    }
+  };
+
+  const importProjectBackup = async (file: File) => {
+    try {
+      const parsed = JSON.parse(await file.text()) as {
+        format?: string;
+        source?: { name?: string };
+        pageSizes?: Record<number, Size>;
+        scales?: Record<number, PageScale>;
+        markups?: Markup[];
+        layers?: { visibility?: Record<string, boolean>; active?: string };
+        measurementSettings?: LocalProjectState["measurementSettings"];
+        removedSourceAnnotationRefs?: string[];
+        savedPresets?: SavedSymbol[];
+      };
+      if (parsed.format !== "structura-project" || !Array.isArray(parsed.markups) || !parsed.pageSizes || !parsed.scales) {
+        throw new Error("Choose a valid Structura project backup JSON file.");
+      }
+      if (!source) throw new Error("Open the original source drawing before restoring its project backup.");
+      if (parsed.source?.name && parsed.source.name !== source.name) {
+        throw new Error(`This backup expects “${parsed.source.name}”. Open that source drawing first.`);
+      }
+      setPageSizes(parsed.pageSizes);
+      setScales(parsed.scales);
+      setMarkups(parsed.markups);
+      setLayerVisibility(parsed.layers?.visibility || layerVisibility);
+      setActiveLayer(parsed.layers?.active || activeLayer);
+      if (parsed.measurementSettings) {
+        setMeasurementPrecision(parsed.measurementSettings.precision);
+        setSnapEnabled(parsed.measurementSettings.snapEnabled);
+        setGridSnapEnabled(parsed.measurementSettings.gridSnapEnabled);
+        setGridSpacing(parsed.measurementSettings.gridSpacing);
+      }
+      setRemovedSourceAnnotationRefs(parsed.removedSourceAnnotationRefs || []);
+      if (Array.isArray(parsed.savedPresets)) {
+        setSavedSymbols(parsed.savedPresets);
+        window.localStorage.setItem(SYMBOL_STORAGE_KEY, JSON.stringify(parsed.savedPresets));
+      }
+      setPast([]);
+      setFuture([]);
+      setSelectedId(null);
+      setProjectSaveStatus("idle");
+      setExportNotice("Project backup restored. Save it to the Pro workspace to keep it on this device.");
+      setProOpen(false);
+    } catch (backupError) {
+      setError(backupError instanceof Error ? backupError.message : "The project backup could not be restored.");
+    }
+  };
+
+  const exportPresetLibrary = () => {
+    const library = {
+      format: "structura-preset-library",
+      version: 1,
+      presets: savedSymbols,
+      exportedAt: new Date().toISOString(),
+    };
+    downloadBytes(new Blob([JSON.stringify(library, null, 2)], { type: "application/json" }), "structura-preset-library.json", "application/json");
+    setExportNotice("Reusable preset library downloaded.");
+  };
+
+  const importPresetLibrary = async (file: File) => {
+    try {
+      const parsed = JSON.parse(await file.text()) as { format?: string; presets?: SavedSymbol[] };
+      if (parsed.format !== "structura-preset-library" || !Array.isArray(parsed.presets)) {
+        throw new Error("Choose a valid Structura preset library JSON file.");
+      }
+      const valid = parsed.presets.filter((preset) =>
+        preset && typeof preset.name === "string" && preset.markup && Array.isArray(preset.markup.points),
+      );
+      const imported = valid.map((preset) => ({ ...preset, id: crypto.randomUUID() }));
+      const next = [...imported, ...savedSymbols].slice(0, 500);
+      setSavedSymbols(next);
+      window.localStorage.setItem(SYMBOL_STORAGE_KEY, JSON.stringify(next));
+      setLibraryStatus("saved");
+      setExportNotice(`${imported.length} preset${imported.length === 1 ? "" : "s"} added to this device.`);
+    } catch (libraryError) {
+      setError(libraryError instanceof Error ? libraryError.message : "The preset library could not be imported.");
+    }
+  };
+
+  useEffect(() => {
+    if (!autoSaveEnabled || !activeProjectId || !source || projectHydratingRef.current) return;
+    const timer = window.setTimeout(() => {
+      const existing = localProjectsRef.current.find((project) => project.id === activeProjectId);
+      if (!existing) return;
+      const sourceBytes = source.kind === "pdf" ? source.pdfBytes : source.imageBytes;
+      const summary: LocalProjectSummary = {
+        ...existing,
+        name: projectName.trim() || existing.name,
+        markupCount: markups.length,
+        measurementCount: markups.filter((markup) => MEASUREMENT_KINDS.includes(markup.kind)).length,
+        sourceSize: sourceBytes?.byteLength || existing.sourceSize,
+        updatedAt: new Date().toISOString(),
+      };
+      setProjectSaveStatus("saving");
+      void updateLocalProjectState(summary, getCurrentProjectState())
+        .then(() => {
+          updateProjectSummaryList(summary);
+          setProjectSaveStatus("saved");
+        })
+        .catch((autosaveError) => {
+          setProjectSaveStatus("error");
+          setError(autosaveError instanceof Error ? autosaveError.message : "Autosave could not update this project.");
+        });
+    }, 1400);
+    return () => window.clearTimeout(timer);
+  }, [activeProjectId, autoSaveEnabled, getCurrentProjectState, markups, projectName, source, updateProjectSummaryList]);
 
   const beginCutout = () => {
     if (!selectedMarkup || !["area", "volume"].includes(selectedMarkup.kind)) return;
@@ -2048,6 +2491,28 @@ export function StructuraEditor() {
           event.target.value = "";
         }}
       />
+      <input
+        ref={projectBackupInputRef}
+        type="file"
+        accept=".json,application/json"
+        hidden
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          if (file) void importProjectBackup(file);
+          event.target.value = "";
+        }}
+      />
+      <input
+        ref={presetLibraryInputRef}
+        type="file"
+        accept=".json,application/json"
+        hidden
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          if (file) void importPresetLibrary(file);
+          event.target.value = "";
+        }}
+      />
 
       <header className="topbar">
         <Link className="brand-block" href="/" aria-label="Go to STRUCTURA home" title="Back to STRUCTURA home">
@@ -2099,6 +2564,12 @@ export function StructuraEditor() {
           <span className="status-dot" />
           {currentScale ? `Scale · ${currentScale.label || currentScale.unit}` : "Scale not set"}
         </span>
+        <button className="pro-workspace-button" type="button" onClick={() => setProOpen(true)} title="Open the Pro project workspace">
+          <Cloud size={16} />
+          <span>Pro workspace</span>
+          {projectSaveStatus === "saving" && <small>Saving</small>}
+          {projectSaveStatus === "saved" && <small>Saved</small>}
+        </button>
         <button className="icon-button" type="button" aria-label="Undo" title="Undo (Ctrl+Z)" onClick={undo} disabled={!past.length}>
           <Undo2 size={17} />
         </button>
@@ -2792,6 +3263,112 @@ export function StructuraEditor() {
         </div>
       )}
 
+      {proOpen && (
+        <div className="modal-backdrop" role="presentation">
+          <section className="dialog pro-dialog" role="dialog" aria-modal="true" aria-labelledby="pro-workspace-title">
+            <button className="dialog-close" type="button" aria-label="Close Pro workspace" onClick={() => setProOpen(false)}><X size={17} /></button>
+            <div className="pro-dialog-header">
+              <span className="dialog-icon pro-dialog-icon"><Cloud size={21} /></span>
+              <div>
+                <span className="eyebrow">Pro workspace · early access</span>
+                <h2 id="pro-workspace-title">Projects, reports and libraries</h2>
+                <p>Keep complete drawings editable on this device, autosave active projects and prepare professional outputs.</p>
+              </div>
+            </div>
+
+            <div className="pro-metrics" aria-label="Workspace summary">
+              <div><strong>{localProjects.length}</strong><span>Saved projects</span></div>
+              <div><strong>{markups.length}</strong><span>Current markups</span></div>
+              <div><strong>{measurementSummary.reduce((total, row) => total + row.items, 0)}</strong><span>Measurements</span></div>
+              <div><strong>{savedSymbols.length}</strong><span>Presets</span></div>
+            </div>
+
+            <section className="pro-section current-project-card">
+              <div className="pro-section-heading">
+                <div>
+                  <span className="field-title">Current project</span>
+                  <small>{source ? `${source.name} · ${source.pageCount} page${source.pageCount === 1 ? "" : "s"}` : "Open a drawing to create a project"}</small>
+                </div>
+                <span className={`project-save-state state-${projectSaveStatus}`}>
+                  {projectSaveStatus === "saving" ? "Saving…" : projectSaveStatus === "saved" ? "Saved" : projectSaveStatus === "error" ? "Storage issue" : "Not saved"}
+                </span>
+              </div>
+              <div className="project-name-row">
+                <label>
+                  Project name
+                  <input value={projectName} onChange={(event) => setProjectName(event.target.value)} placeholder="e.g. Ground floor coordination" disabled={!source} />
+                </label>
+                <button type="button" className="primary-button" onClick={() => void saveCurrentProject()} disabled={!source || projectSaveStatus === "saving"}>
+                  <Save size={15} /> {activeProjectId ? "Save now" : "Save project"}
+                </button>
+              </div>
+              <label className="autosave-toggle">
+                <input
+                  type="checkbox"
+                  checked={autoSaveEnabled}
+                  onChange={(event) => {
+                    const enabled = event.target.checked;
+                    setAutoSaveEnabled(enabled);
+                    window.localStorage.setItem(AUTOSAVE_STORAGE_KEY, enabled ? "on" : "off");
+                  }}
+                />
+                <span><b>Autosave active project</b><small>Updates markups, scales, layers and measurement settings after changes.</small></span>
+              </label>
+            </section>
+
+            <section className="pro-section">
+              <div className="pro-section-heading">
+                <div><span className="field-title">On-device projects</span><small>The source PDF or photo is included for one-click restoration.</small></div>
+                <button type="button" className="text-button" onClick={() => void refreshLocalProjects()}>Refresh</button>
+              </div>
+              {!projectStorageReady ? (
+                <div className="pro-empty warning"><OctagonAlert size={17} /><span>Browser project storage is unavailable. Portable JSON backups remain available.</span></div>
+              ) : localProjects.length ? (
+                <div className="project-list">
+                  {localProjects.map((project) => (
+                    <article className={`project-row ${activeProjectId === project.id ? "is-active" : ""}`} key={project.id}>
+                      <span className="project-file-icon">{project.sourceKind === "pdf" ? <FileText size={18} /> : <FileImage size={18} />}</span>
+                      <div className="project-row-copy">
+                        <strong>{project.name}</strong>
+                        <span>{project.sourceName} · {project.pageCount} page{project.pageCount === 1 ? "" : "s"} · {formatFileSize(project.sourceSize)}</span>
+                        <small>{project.markupCount} markups · {project.measurementCount} measurements · {formatProjectDate(project.updatedAt)}</small>
+                      </div>
+                      <div className="project-row-actions">
+                        <button type="button" className="secondary-button" onClick={() => void openSavedProject(project.id)} disabled={projectBusyId === project.id}>
+                          {projectBusyId === project.id ? "Opening…" : "Open"}
+                        </button>
+                        <button type="button" className="icon-danger" aria-label={`Delete ${project.name}`} title="Delete project" onClick={() => void removeSavedProject(project)} disabled={projectBusyId === project.id}>
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="pro-empty"><Save size={18} /><span>Your saved projects will appear here.</span></div>
+              )}
+            </section>
+
+            <section className="pro-section pro-output-section">
+              <div className="pro-section-heading"><div><span className="field-title">Professional outputs</span><small>Reports and portable files stay under your control.</small></div></div>
+              <div className="pro-action-grid">
+                <button type="button" onClick={() => void exportQuantityReportPdf()} disabled={!measurementSummary.length || exporting}><ListChecks size={17} /><span><b>Quantity report PDF</b><small>Summary and itemised register</small></span></button>
+                <button type="button" onClick={exportSummaryCsv} disabled={!measurementSummary.length}><Download size={17} /><span><b>Summary spreadsheet</b><small>CSV grouped by layer and unit</small></span></button>
+                <button type="button" onClick={exportProject} disabled={!source}><Download size={17} /><span><b>Portable project backup</b><small>Markup data, scales and settings</small></span></button>
+                <button type="button" onClick={() => projectBackupInputRef.current?.click()}><Upload size={17} /><span><b>Restore project backup</b><small>Requires its original source drawing</small></span></button>
+                <button type="button" onClick={exportPresetLibrary} disabled={!savedSymbols.length}><Library size={17} /><span><b>Download preset library</b><small>Move symbols between devices</small></span></button>
+                <button type="button" onClick={() => presetLibraryInputRef.current?.click()}><Upload size={17} /><span><b>Import preset library</b><small>Add reusable markup presets</small></span></button>
+              </div>
+            </section>
+
+            <div className="pro-privacy-note">
+              <Cloud size={17} />
+              <div><strong>Private on-device storage</strong><p>No account or remote drawing upload is used in this early-access workspace. Secure cross-device cloud sync requires the separate account and database stage.</p></div>
+            </div>
+          </section>
+        </div>
+      )}
+
       {summaryOpen && (
         <div className="modal-backdrop" role="presentation">
           <section className="dialog summary-dialog" role="dialog" aria-modal="true" aria-labelledby="summary-title">
@@ -2814,6 +3391,7 @@ export function StructuraEditor() {
             </div>
             <div className="dialog-actions">
               <button type="button" className="secondary-button" onClick={() => setSummaryOpen(false)}>Close</button>
+              <button type="button" className="secondary-button" onClick={() => void exportQuantityReportPdf()} disabled={exporting}><FileText size={15} /> Export PDF report</button>
               <button type="button" className="primary-button" onClick={exportSummaryCsv}><Download size={15} /> Export CSV</button>
             </div>
           </section>
