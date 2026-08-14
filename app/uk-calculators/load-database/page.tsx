@@ -5,10 +5,10 @@ import LoadLibrary from "./load-library";
 export const metadata: Metadata = {
   title: "UK Load Database | Structural Load Builder",
   description:
-    "Search, inspect, copy and adapt transparent UK domestic structural load presets for roofs, floors, walls, ceilings and openings.",
+    "Search 100 transparent UK structural load assemblies with layer-by-layer dead loads and UK National Annex imposed actions.",
   openGraph: {
     title: "Structura UK Load Library",
-    description: "Build the load. See the evidence.",
+    description: "100 visual UK load build-ups with traceable component calculations.",
     images: [{ url: "/uk-load-library-og.png", width: 1731, height: 909, alt: "Structura UK Load Library technical load path" }],
   },
 };
