@@ -40,6 +40,7 @@ const FULL_NAV_ITEMS: NavItem[] = [
     href: "/material-calculators",
     label: "Material Calculators",
   },
+  { id: "uk-calculators", href: "/uk-calculators", label: "UK Calculators" },
   { id: "pm-office", href: "/pm-office", label: "PM Office" },
   { id: "qs-office", href: "/qs-office", label: "QS Office" },
   { id: "architecture", href: "/architecture", label: "Architecture" },
@@ -255,7 +256,7 @@ export default function SiteHeader({ breadcrumbExtra }: SiteHeaderProps = {}) {
         .structura-header .menu-toggle span {
           display: block; width: 22px; height: 2px; background: var(--su-text-1); margin: 5px 0; transition: .2s;
         }
-        @media (max-width: 680px) {
+        @media (max-width: 1080px) {
           .structura-header .nav-main {
             display: none; position: absolute; top: 68px; left: 0; right: 0;
             background: var(--su-white); border-bottom: 1px solid var(--su-border);

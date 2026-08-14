@@ -12,6 +12,7 @@ export const PUBLIC_LAUNCH_NAV_ITEM_IDS = [
   "design-studio",
   "drawing-markup",
   "material-calculators",
+  "uk-calculators",
   "tutorials",
 ] as const;
 

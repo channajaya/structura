@@ -10,6 +10,8 @@ const FULL_PUBLIC_ROUTES = [
   "/design-studio",
   "/markup",
   "/material-calculators",
+  "/uk-calculators",
+  "/uk-calculators/load-database",
   "/pm-office",
   "/qs-office",
   "/architecture",
@@ -24,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
         "/design-studio",
         "/markup",
         "/material-calculators",
+        "/uk-calculators",
+        "/uk-calculators/load-database",
         "/tutorials",
         ...tutorialSoftwareList.map(
           (software) => `/tutorials/${software.slug}`,
