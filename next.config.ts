@@ -5,6 +5,8 @@ import {
   TEMPORARY_PUBLIC_LAUNCH_MODE,
 } from "./config/publicLaunch";
 
+const pmOfficeOrigin = process.env.PM_OFFICE_ORIGIN?.replace(/\/$/, "");
+
 const nextConfig: NextConfig = {
   async redirects() {
     if (!TEMPORARY_PUBLIC_LAUNCH_MODE) {
@@ -16,6 +18,16 @@ const nextConfig: NextConfig = {
       destination: PUBLIC_LAUNCH_DESTINATION,
       permanent: false,
     }));
+  },
+  async rewrites() {
+    if (!pmOfficeOrigin) {
+      return [];
+    }
+
+    return [
+      { source: "/pmo", destination: `${pmOfficeOrigin}/pmo` },
+      { source: "/pmo/:path*", destination: `${pmOfficeOrigin}/pmo/:path*` },
+    ];
   },
 };
 
