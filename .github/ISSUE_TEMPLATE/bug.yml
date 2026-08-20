@@ -1,0 +1,130 @@
+name: Bug report
+description: Report a reproducible STRUCTURA defect without exposing sensitive information.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not report exploitable security vulnerabilities publicly and never include credentials, customer records, or private project files. Ask an owner for the repository's private security-reporting route.
+
+  - type: input
+    id: product
+    attributes:
+      label: Product, SKU, route, or artifact
+      placeholder: STRUCTURA-EST-001 /calc-ec/... / workbook version 1.2.0
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version, release tag, or commit
+      description: Give the most exact identifier available.
+      placeholder: v1.2.0 or 40-character commit SHA
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Production
+        - Preview
+        - Staging/release candidate
+        - Local development
+        - Downloaded Excel/PDF/template
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Critical — safety, security, major data loss, or production unavailable
+        - High — materially wrong engineering/commercial result or core journey blocked
+        - Medium — degraded behaviour with a workaround
+        - Low — minor or cosmetic defect
+        - Unconfirmed
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behaviour
+      description: Describe what happened, including exact error text with sensitive values removed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: State the expected result and any requirement, test, formula, or source ID.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Give deterministic steps and sanitised sample inputs.
+      placeholder: |
+        1. Open ...
+        2. Enter sanitised value ...
+        3. Select ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitised evidence and environment details
+      description: Add browser/OS/Excel version, logs, screenshot, preview URL, and frequency. Remove tokens and private data.
+      placeholder: Windows 11; Excel 365 build ...; Chrome ...; occurs 3/3 times.
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_risk
+    attributes:
+      label: Calculation, data, security, or regression risk
+      description: Explain whether results, saved data, access, payments, or a previously approved release are affected.
+      placeholder: Risk level; affected outputs; suspected first bad version; temporary containment.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Fix acceptance and regression tests
+      description: State the pass/fail test that must accompany the correction.
+      placeholder: TEST-... reproduces before fix, passes after fix, and existing known-answer tests remain unchanged.
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Containment or rollback
+      description: Identify a last-known-good tag, safe feature disablement, or why rollback is not applicable.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched for an existing issue and this is not a duplicate.
+          required: true
+        - label: I removed secrets, customer data, private project information, and licensed standards text.
+          required: true
+        - label: This report does not publicly disclose an exploitable security vulnerability.
+          required: true

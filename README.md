@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STRUCTURA — Digital Engineering Office
 
-## Getting Started
+STRUCTURA is a Next.js platform for engineering tools, project and commercial workflows, learning content and governed downloadable templates.
 
-First, run the development server:
+The current public launch is controlled by `config/publicLaunch.ts`. Some routes remain in the repository while temporary launch mode directs public traffic to Design Studio. Do not delete hidden products merely because they are not presently linked in the public navigation.
+
+## Local development
+
+This repository uses Node.js 24 and npm.
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Before requesting review:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run governance:check
+npm run lint
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Production governance
 
-## Learn More
+Git is the authoritative technical and audit record. Every material change follows:
 
-To learn more about Next.js, take a look at the following resources:
+`Issue → Branch → Commits → Pull request → Independent checks → Human review → Candidate staging → Release attestation → Tag → Production promotion`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Start with [STRUCTURA Production Governance](./docs/governance/README.md). Machine-readable product, approval and release records are under [`project-control`](./project-control/README.md).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Key rules:
 
-## Deploy on Vercel
+- Do not commit directly to `main`.
+- AI may produce and check work but may not approve its own release.
+- Risk C engineering outputs remain `DRAFT_NOT_FOR_USE` until a named competent engineer approves the exact candidate.
+- A merge to `main` does not automatically publish production.
+- Production may promote only the staged candidate identified by a valid approval record and canonical annotated `vX.Y.Z` attestation tag.
+- Never commit secrets, customer data, paid standards or private project files.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Automatic Vercel Git deployment is disabled in `vercel.json`. Optional preview and staged-candidate workflows must be explicitly enabled and configured with separated environment credentials. Production promotion is manual, protected and release-record driven.
+
+See [Release and Deployment Policy](./docs/governance/RELEASE-AND-DEPLOYMENT-POLICY.md) for the complete process.

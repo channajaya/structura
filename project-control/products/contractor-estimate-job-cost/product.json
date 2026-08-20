@@ -1,0 +1,147 @@
+{
+  "$schema": "../../schemas/product-manifest.schema.json",
+  "schema_version": "1.0.0",
+  "sku": "STRUCTURA-TPL-EST-001",
+  "slug": "contractor-estimate-job-cost",
+  "title": "Contractor Estimate, Quote and Job-Cost Control Workbook",
+  "description": "A jurisdiction-aware estimating and job-cost workbook for small contractors, created as the first Risk B pilot for the STRUCTURA AI Production Factory.",
+  "risk_level": "B",
+  "status": "EVIDENCED",
+  "version": "0.1.0",
+  "jurisdictions": ["UK", "US", "AU"],
+  "standards": [],
+  "routes": ["/templates/contractor-estimate-job-cost"],
+  "requirements": [
+    {
+      "id": "REQ-EST-001",
+      "description": "Create estimates from categorised labour, material, plant, subcontract and allowance cost lines.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-001"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-002",
+      "description": "Calculate and clearly distinguish cost markup from sales margin.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-002"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-003",
+      "description": "Convert an accepted quotation into an original controlled job budget without re-entry.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-003"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-004",
+      "description": "Track budget, commitments, actual costs, forecast final cost and forecast profit without double counting.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-004"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-005",
+      "description": "Track approved and pending variations or change orders separately from the original contract.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-005"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-006",
+      "description": "Support configurable VAT, sales-tax or GST treatment without embedding time-sensitive tax advice.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-006"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-007",
+      "description": "Provide a print-ready quotation and a management dashboard with visible assumptions and warnings.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-007"],
+      "status": "PROPOSED"
+    },
+    {
+      "id": "REQ-EST-008",
+      "description": "Protect calculated cells while keeping formulas auditable and all intended inputs clearly identified.",
+      "source_ids": ["SRC-EST-001"],
+      "test_ids": ["TEST-EST-008"],
+      "status": "PROPOSED"
+    }
+  ],
+  "formula_register": [],
+  "source_register": [
+    {
+      "id": "SRC-EST-001",
+      "title": "STRUCTURA template-market prioritisation decision",
+      "type": "INTERNAL_DECISION",
+      "location": "Project issue and product-evidence pack to be committed before SPECIFIED",
+      "verification_status": "PENDING"
+    }
+  ],
+  "test_register": [
+    {
+      "id": "TEST-EST-001",
+      "description": "Verify category and total calculations over empty, ordinary and boundary-value cost lines.",
+      "requirement_ids": ["REQ-EST-001"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-002",
+      "description": "Verify markup and margin against independently calculated known-answer cases.",
+      "requirement_ids": ["REQ-EST-002"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-003",
+      "description": "Verify quotation-to-budget conversion preserves the approved baseline and audit trail.",
+      "requirement_ids": ["REQ-EST-003"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-004",
+      "description": "Verify commitment, actual, forecast and profit reconciliation without duplicate costs.",
+      "requirement_ids": ["REQ-EST-004"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-005",
+      "description": "Verify pending and approved changes affect contract value and forecasts correctly.",
+      "requirement_ids": ["REQ-EST-005"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-006",
+      "description": "Verify configurable tax calculations, rounding and tax-exclusive or inclusive presentation.",
+      "requirement_ids": ["REQ-EST-006"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-007",
+      "description": "Verify dashboard reconciliation and print rendering in supported Excel environments.",
+      "requirement_ids": ["REQ-EST-007"],
+      "status": "PLANNED"
+    },
+    {
+      "id": "TEST-EST-008",
+      "description": "Verify protected cells, editable inputs, formula visibility and error messages.",
+      "requirement_ids": ["REQ-EST-008"],
+      "status": "PLANNED"
+    }
+  ],
+  "known_limitations": [
+    "This EVIDENCED manifest is not a sellable or approved workbook release.",
+    "Tax percentages, labour rates, prices and legal wording must be supplied and verified by the user for the applicable jurisdiction.",
+    "The product provides commercial decision support and is not accounting, tax, legal or financial advice.",
+    "Google Sheets parity is not committed until compatibility acceptance criteria are approved during specification."
+  ],
+  "builder_agent": "pending",
+  "checker_agent": "pending-independent-context",
+  "human_reviewers": ["product-owner:pending", "commercial-or-engineering-reviewer:pending"],
+  "approved_commit": null,
+  "artifact_hashes": {},
+  "release_tag": null,
+  "deployment_id": null,
+  "legacy": false,
+  "legacy_review_required": false
+}

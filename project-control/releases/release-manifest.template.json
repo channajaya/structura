@@ -1,0 +1,25 @@
+{
+  "$schema": "../schemas/release-manifest.schema.json",
+  "schema_version": "1.0.0",
+  "release_id": "RELEASE-TEMPLATE",
+  "release_tag": "v0.1.0",
+  "product_sku": "REPLACE-WITH-SKU",
+  "product_version": "0.1.0",
+  "risk_level": "B",
+  "status": "REVIEW_READY",
+  "candidate_commit_sha": "REPLACE_WITH_EXACT_40_CHARACTER_CANDIDATE_COMMIT",
+  "approval_record": "project-control/approvals/approval-record.template.json",
+  "created_at": "2026-08-20T00:00:00Z",
+  "artifacts": [
+    {
+      "name": "replace-with-artifact-name.zip",
+      "path": "dist/replace-with-artifact-name.zip",
+      "sha256": "REPLACE_WITH_EXACT_64_CHARACTER_SHA256"
+    }
+  ],
+  "deployment": {
+    "target": "none",
+    "status": "NOT_STARTED",
+    "deployment_id": null
+  }
+}

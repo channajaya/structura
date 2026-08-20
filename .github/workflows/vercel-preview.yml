@@ -1,0 +1,134 @@
+name: Vercel preview
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+concurrency:
+  group: preview-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  preview:
+    name: Same-repository preview
+    if: >-
+      ${{
+        vars.ENABLE_VERCEL_PREVIEWS == 'true' &&
+        github.event.pull_request.head.repo.full_name == github.repository &&
+        github.event.pull_request.draft == false
+      }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: preview
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      VERCEL_CLI_VERSION: ${{ vars.VERCEL_CLI_VERSION }}
+    steps:
+      - name: Check out pull-request commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Validate pinned Vercel CLI version
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "${VERCEL_CLI_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Set VERCEL_CLI_VERSION to an exact version such as 50.3.0; ranges and 'latest' are not permitted." >&2
+            exit 1
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate governance and lint
+        run: |
+          npm run governance:check
+          npm run lint
+
+      - name: Install pinned Vercel CLI
+        run: npm install --global "vercel@${VERCEL_CLI_VERSION}"
+
+      - name: Verify preview credentials are configured
+        shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!name:-}" ]]; then
+              echo "Required preview secret ${name} is not configured." >&2
+              exit 1
+            fi
+          done
+
+      - name: Pull preview configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          vercel pull --yes --environment=preview --token "$VERCEL_TOKEN"
+
+      - name: Build preview
+        run: |
+          set -euo pipefail
+          # The pull step has already created the preview-scoped Vercel files.
+          # Do not place the deployment token in the environment of untrusted
+          # application build scripts.
+          vercel build
+
+      - name: Deploy immutable preview
+        id: deploy
+        shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          deployment_url="$(vercel deploy --prebuilt --yes --token "$VERCEL_TOKEN" | tail -n 1 | tr -d '\r')"
+          if [[ ! "$deployment_url" =~ ^https://[A-Za-z0-9.-]+$ ]]; then
+            echo "Vercel did not return a valid HTTPS preview URL." >&2
+            exit 1
+          fi
+          echo "url=$deployment_url" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke-test preview
+        env:
+          DEPLOYMENT_URL: ${{ steps.deploy.outputs.url }}
+          PREVIEW_SMOKE_PATH: ${{ vars.PREVIEW_SMOKE_PATH }}
+        run: |
+          set -euo pipefail
+          smoke_path="${PREVIEW_SMOKE_PATH:-/}"
+          if [[ "$smoke_path" != /* || "$smoke_path" == *$'\n'* ]]; then
+            echo "PREVIEW_SMOKE_PATH must be a single relative URL path beginning with /." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 3 --retry-all-errors --max-time 30 \
+            "${DEPLOYMENT_URL%/}${smoke_path}" > /dev/null

@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://structuraeng.app/schemas/release-manifest.schema.json",
+  "title": "STRUCTURA release manifest",
+  "description": "Binds a release candidate to one product, candidate Git commit, approval attestation and exact artifact hashes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "release_id",
+    "release_tag",
+    "product_sku",
+    "product_version",
+    "risk_level",
+    "status",
+    "candidate_commit_sha",
+    "approval_record",
+    "created_at",
+    "artifacts",
+    "deployment"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "release_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9._-]{2,95}$"
+    },
+    "release_tag": {
+      "$ref": "#/$defs/semanticVersionTag"
+    },
+    "product_sku": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9-]{2,63}$"
+    },
+    "product_version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "risk_level": {
+      "enum": ["A", "B", "C"]
+    },
+    "status": {
+      "enum": ["REVIEW_READY", "APPROVED", "RELEASED", "DEPLOYED", "ROLLED_BACK"]
+    },
+    "candidate_commit_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "approval_record": {
+      "type": "string",
+      "pattern": "^project-control/approvals/.+\\.json$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      }
+    },
+    "deployment": {
+      "$ref": "#/$defs/deployment"
+    }
+  },
+  "$defs": {
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "semanticVersionTag": {
+      "type": "string",
+      "pattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "path", "sha256"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{64}$"
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "status", "deployment_id"],
+      "properties": {
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": ["NOT_STARTED", "PREVIEW", "STAGING", "PRODUCTION", "ROLLED_BACK"]
+        },
+        "deployment_id": {
+          "type": ["string", "null"]
+        }
+      }
+    }
+  }
+}

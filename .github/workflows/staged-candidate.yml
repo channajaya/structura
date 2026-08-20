@@ -1,0 +1,177 @@
+name: Staged production candidate
+
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_commit_sha:
+        description: Exact 40-character candidate commit already integrated into main
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: staged-candidate-${{ inputs.candidate_commit_sha }}
+  cancel-in-progress: false
+
+jobs:
+  stage-candidate:
+    name: Build, deploy without domain, and smoke
+    if: ${{ vars.ENABLE_VERCEL_STAGED_CANDIDATES == 'true' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: staging
+      url: ${{ steps.deploy.outputs.candidate_url }}
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      VERCEL_CLI_VERSION: ${{ vars.VERCEL_CLI_VERSION }}
+    steps:
+      - name: Validate candidate input before checkout
+        env:
+          CANDIDATE_COMMIT_SHA: ${{ inputs.candidate_commit_sha }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$CANDIDATE_COMMIT_SHA" =~ ^[0-9a-f]{40}$ || "$CANDIDATE_COMMIT_SHA" =~ ^0{40}$ ]]; then
+            echo "candidate_commit_sha must be an exact non-placeholder lowercase 40-character Git commit SHA." >&2
+            exit 1
+          fi
+
+      - name: Check out exact candidate commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.candidate_commit_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Verify candidate is integrated into main
+        env:
+          CANDIDATE_COMMIT_SHA: ${{ inputs.candidate_commit_sha }}
+        run: |
+          set -euo pipefail
+          checked_out_sha="$(git rev-parse HEAD)"
+          if [[ "$checked_out_sha" != "$CANDIDATE_COMMIT_SHA" ]]; then
+            echo "Checked-out commit does not match candidate_commit_sha." >&2
+            exit 1
+          fi
+          if ! git show-ref --verify --quiet refs/remotes/origin/main; then
+            echo "origin/main is unavailable; the workflow cannot prove integration." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$CANDIDATE_COMMIT_SHA" refs/remotes/origin/main; then
+            echo "Candidate commit is not integrated into main." >&2
+            exit 1
+          fi
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Candidate checkout is not clean." >&2
+            exit 1
+          fi
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies from candidate commit
+        run: npm ci
+
+      - name: Validate candidate governance
+        run: npm run governance:check
+
+      - name: Lint candidate
+        run: npm run lint
+
+      - name: Build candidate locally
+        run: npm run build
+
+      - name: Validate pinned Vercel CLI version
+        run: |
+          set -euo pipefail
+          if [[ ! "${VERCEL_CLI_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Set VERCEL_CLI_VERSION to an exact version; ranges and 'latest' are not permitted." >&2
+            exit 1
+          fi
+
+      - name: Install pinned Vercel CLI
+        run: npm install --global "vercel@${VERCEL_CLI_VERSION}"
+
+      - name: Verify staging credentials are configured
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!name:-}" ]]; then
+              echo "Required staging secret ${name} is not configured." >&2
+              exit 1
+            fi
+          done
+
+      - name: Pull production-scoped configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          vercel pull --yes --environment=production --token "$VERCEL_TOKEN"
+
+      - name: Build production-scoped candidate
+        run: |
+          set -euo pipefail
+          # The pull step created the project link and production-scoped files.
+          # Keep the Vercel deployment token out of application build scripts.
+          vercel build --prod
+
+      - name: Deploy candidate without assigning production domain
+        id: deploy
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          candidate_url="$(vercel deploy --prebuilt --prod --skip-domain --yes --token "$VERCEL_TOKEN" | tail -n 1 | tr -d '\r')"
+          if [[ ! "$candidate_url" =~ ^https://[A-Za-z0-9.-]+\.vercel\.app/?$ ]]; then
+            echo "Vercel did not return an immutable HTTPS vercel.app candidate URL." >&2
+            exit 1
+          fi
+          echo "candidate_url=${candidate_url%/}" >> "$GITHUB_OUTPUT"
+
+      - name: Smoke-test staged candidate
+        env:
+          CANDIDATE_URL: ${{ steps.deploy.outputs.candidate_url }}
+          PRODUCTION_SMOKE_PATH: ${{ vars.PRODUCTION_SMOKE_PATH }}
+        run: |
+          set -euo pipefail
+          smoke_path="${PRODUCTION_SMOKE_PATH:-/}"
+          if [[ "$smoke_path" != /* || "$smoke_path" == *$'\n'* ]]; then
+            echo "PRODUCTION_SMOKE_PATH must be a single relative URL path beginning with /." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 3 --retry-all-errors --max-time 30 \
+            "${CANDIDATE_URL%/}${smoke_path}" > /dev/null
+
+      - name: Record candidate for human review
+        env:
+          CANDIDATE_COMMIT_SHA: ${{ inputs.candidate_commit_sha }}
+          CANDIDATE_URL: ${{ steps.deploy.outputs.candidate_url }}
+        run: |
+          {
+            echo "## Staged production candidate"
+            echo
+            echo "- Candidate commit: \`$CANDIDATE_COMMIT_SHA\`"
+            echo "- Immutable deployment: $CANDIDATE_URL"
+            echo "- Production-scoped smoke test: passed"
+            echo "- Production domain promotion: not performed"
+            echo
+            echo "Record this exact URL in the approval record only after human review."
+          } >> "$GITHUB_STEP_SUMMARY"
