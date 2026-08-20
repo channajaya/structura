@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://structuraeng.app/schemas/product-manifest.schema.json",
+  "title": "STRUCTURA product manifest",
+  "description": "Machine-readable lifecycle, risk, traceability and release metadata for one STRUCTURA SKU.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sku",
+    "slug",
+    "title",
+    "description",
+    "risk_level",
+    "status",
+    "version",
+    "jurisdictions",
+    "standards",
+    "routes",
+    "requirements",
+    "formula_register",
+    "source_register",
+    "test_register",
+    "known_limitations",
+    "builder_agent",
+    "checker_agent",
+    "human_reviewers",
+    "approved_commit",
+    "artifact_hashes",
+    "release_tag",
+    "deployment_id",
+    "legacy",
+    "legacy_review_required"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "sku": {
+      "type": "string",
+      "pattern": "^[A-Z0-9][A-Z0-9-]{2,63}$"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10
+    },
+    "risk_level": {
+      "enum": ["A", "B", "C"]
+    },
+    "status": {
+      "$ref": "#/$defs/productStatus"
+    },
+    "version": {
+      "$ref": "#/$defs/semanticVersion"
+    },
+    "jurisdictions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "standards": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^/"
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    },
+    "formula_register": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/formula"
+      }
+    },
+    "source_register": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "test_register": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/test"
+      }
+    },
+    "known_limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 3
+      }
+    },
+    "builder_agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "checker_agent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "human_reviewers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 2
+      }
+    },
+    "approved_commit": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/gitCommit"
+        }
+      ]
+    },
+    "artifact_hashes": {
+      "type": "object",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/sha256"
+      }
+    },
+    "release_tag": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/semanticVersionTag"
+        }
+      ]
+    },
+    "deployment_id": {
+      "type": ["string", "null"]
+    },
+    "legacy": {
+      "type": "boolean"
+    },
+    "legacy_review_required": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "productStatus": {
+      "enum": [
+        "IDEA",
+        "EVIDENCED",
+        "SPECIFIED",
+        "BUILDING",
+        "TESTING",
+        "COLLABORATION",
+        "REVIEW_READY",
+        "ENGINEER_REVIEW",
+        "APPROVED",
+        "RELEASED",
+        "DEPLOYED",
+        "BLOCKED",
+        "REWORK",
+        "DRAFT_NOT_FOR_USE",
+        "RETIRED",
+        "ROLLED_BACK"
+      ]
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"
+    },
+    "semanticVersionTag": {
+      "type": "string",
+      "pattern": "^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "gitCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "source_ids", "test_ids", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^REQ-[A-Z0-9-]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5
+        },
+        "source_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "test_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": ["PROPOSED", "ACCEPTED", "IMPLEMENTED", "VERIFIED", "DEFERRED"]
+        }
+      }
+    },
+    "formula": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "source_ids", "requirement_ids"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^FORM-[A-Z0-9-]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5
+        },
+        "source_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "requirement_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "type", "location", "verification_status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SRC-[A-Z0-9-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 3
+        },
+        "type": {
+          "enum": ["AUTHORITATIVE", "MARKET_EVIDENCE", "INTERNAL_DECISION", "DERIVATION"]
+        },
+        "location": {
+          "type": "string",
+          "minLength": 3
+        },
+        "verification_status": {
+          "enum": ["PENDING", "VERIFIED", "SUPERSEDED"]
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "description", "requirement_ids", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TEST-[A-Z0-9-]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 5
+        },
+        "requirement_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": ["PLANNED", "PASS", "FAIL", "BLOCKED"]
+        }
+      }
+    }
+  }
+}

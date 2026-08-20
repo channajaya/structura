@@ -1,0 +1,128 @@
+name: Product or production change
+description: Propose a traceable STRUCTURA product, calculator, template, platform, or governance change.
+title: "[Product]: "
+labels:
+  - product
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every material change starts here and follows: Issue -> Branch -> Commits -> Pull request -> Review -> Approved commit -> Tag -> Deployment.
+        Do not include secrets, customer data, private project files, or copyrighted standards text.
+
+  - type: input
+    id: product
+    attributes:
+      label: Product or SKU
+      description: Give the registered product name and SKU, or state that a new SKU is required.
+      placeholder: STRUCTURA-EST-001 — Contractor Estimate and Job-Cost Control
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk_level
+    attributes:
+      label: Risk level
+      description: Select the highest applicable risk. Reclassify and stop if the risk increases during production.
+      options:
+        - A — Administrative
+        - B — Commercial or decision support
+        - C — Engineering calculation (including high-consequence work)
+        - Unconfirmed — classification decision required
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Business objective and user
+      description: Identify the buyer/user, their job-to-be-done, the problem, and measurable business outcome.
+      placeholder: Who needs this, why now, and what success looks like.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and exclusions
+      description: Define what is included and explicitly excluded from this issue.
+      placeholder: Included behaviours, outputs, routes, artifacts, and out-of-scope work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Requirements and acceptance criteria
+      description: Use stable requirement IDs and measurable pass/fail criteria.
+      placeholder: |
+        REQ-001 — ...
+        Accept when ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_areas
+    attributes:
+      label: Affected products, routes, files, and shared components
+      description: Include shared or owner-controlled files and cross-product dependencies.
+      placeholder: apps/web/..., packages/config/..., products/..., project-control/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Jurisdiction, standards, sources, and assumptions
+      description: Identify authoritative sources and exact code/National Annex editions where applicable. Link references without reproducing licensed text.
+      placeholder: Jurisdiction; standard and edition; source URL/register ID; assumptions; unresolved conflicts.
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation
+    attributes:
+      label: Test, independent-check, and validation requirements
+      description: Include deterministic, known-answer, boundary, invalid-input, regression, compatibility, rendering, accessibility, and smoke tests as applicable.
+      placeholder: Test IDs, expected results/tolerances, reference model, and checker independence.
+    validations:
+      required: true
+
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Engineer or owner decisions required
+      description: Record mandatory judgements, departures from approved standards, and final approval authority.
+      placeholder: Decision, named role required, and latest point at which it must be resolved.
+    validations:
+      required: true
+
+  - type: textarea
+    id: security
+    attributes:
+      label: Security, privacy, authentication, and payment impact
+      description: Identify data, access, secrets, PayHere/payment, database, licensing, and preview-environment implications.
+      placeholder: State N/A with a reason if none applies. Do not disclose a vulnerability here.
+    validations:
+      required: true
+
+  - type: textarea
+    id: deployment
+    attributes:
+      label: Deployment, migration, monitoring, and rollback
+      description: Define preview/staging needs, migrations, smoke tests, last-known-good target, and safe rollback.
+      placeholder: Deployment environment, required variables, migration/backup, smoke path, rollback tag.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: Submission checks
+      options:
+        - label: I have not included secrets, customer data, private project files, or licensed standards text.
+          required: true
+        - label: I understand Risk C output remains DRAFT_NOT_FOR_USE until the required engineer approval is recorded.
+          required: true
+        - label: I will link all production work, commits, pull requests, evidence, and release records back to this issue.
+          required: true

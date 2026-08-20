@@ -1,0 +1,298 @@
+name: Controlled production release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Immutable annotated release tag, for example v1.2.0
+        required: true
+        type: string
+      release_record_path:
+        description: Version-controlled JSON record under project-control/releases/
+        required: true
+        type: string
+      confirmation:
+        description: Type PROMOTE TO PRODUCTION
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: structura-production-release
+  cancel-in-progress: false
+
+jobs:
+  deploy-production:
+    name: Validate, smoke, and promote
+    if: ${{ vars.ENABLE_GIT_CONTROLLED_PRODUCTION == 'true' && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+      url: ${{ steps.release_gate.outputs.candidate_deployment_url }}
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      VERCEL_CLI_VERSION: ${{ vars.VERCEL_CLI_VERSION }}
+    steps:
+      - name: Require explicit production confirmation
+        env:
+          CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          if [[ "$CONFIRMATION" != "PROMOTE TO PRODUCTION" ]]; then
+            echo "Production confirmation did not match the required phrase." >&2
+            exit 1
+          fi
+
+      - name: Validate release inputs before checkout
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          RELEASE_RECORD_PATH: ${{ inputs.release_record_path }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "release_tag must be an immutable semantic-version tag such as v1.2.0." >&2
+            exit 1
+          fi
+          if [[ "$RELEASE_RECORD_PATH" == /* || "$RELEASE_RECORD_PATH" == *".."* || ! "$RELEASE_RECORD_PATH" =~ ^project-control/releases/[A-Za-z0-9._/-]+\.json$ ]]; then
+            echo "release_record_path must be a JSON file below project-control/releases/." >&2
+            exit 1
+          fi
+
+      - name: Check out immutable release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.release_tag }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Validate candidate, attestation tag, approval, and artifact hashes
+        id: release_gate
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          RELEASE_RECORD_PATH: ${{ inputs.release_record_path }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "release_tag must be an immutable semantic-version tag such as v1.2.0." >&2
+            exit 1
+          fi
+
+          if [[ "$RELEASE_RECORD_PATH" == /* || "$RELEASE_RECORD_PATH" == *".."* || ! "$RELEASE_RECORD_PATH" =~ ^project-control/releases/[A-Za-z0-9._/-]+\.json$ ]]; then
+            echo "release_record_path must be a JSON file below project-control/releases/." >&2
+            exit 1
+          fi
+
+          if [[ ! -f "$RELEASE_RECORD_PATH" ]]; then
+            echo "Release record does not exist at the approved tag: $RELEASE_RECORD_PATH" >&2
+            exit 1
+          fi
+
+          if [[ "$(git cat-file -t "refs/tags/${RELEASE_TAG}")" != "tag" ]]; then
+            echo "The release ref must be an annotated immutable tag, not a lightweight tag." >&2
+            exit 1
+          fi
+
+          tag_sha="$(git rev-parse --verify "refs/tags/${RELEASE_TAG}^{commit}")"
+          head_sha="$(git rev-parse HEAD)"
+          candidate_sha="$(node -e 'const fs=require("node:fs"); const r=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); process.stdout.write(String(r.candidate_commit_sha || ""));' "$RELEASE_RECORD_PATH")"
+          record_tag="$(node -e 'const fs=require("node:fs"); const r=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); process.stdout.write(String(r.release_tag || r.tag || ""));' "$RELEASE_RECORD_PATH")"
+          approval_record_path="$(node -e 'const fs=require("node:fs"); const r=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); process.stdout.write(String(r.approval_record || ""));' "$RELEASE_RECORD_PATH")"
+
+          if [[ "$tag_sha" != "$head_sha" ]]; then
+            echo "The checked-out commit is not the commit referenced by the selected annotated tag." >&2
+            exit 1
+          fi
+          if [[ ! "$candidate_sha" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "The release record must contain an exact lowercase 40-character candidate_commit_sha." >&2
+            exit 1
+          fi
+          if [[ "$record_tag" != "$RELEASE_TAG" ]]; then
+            echo "Release record tag does not match the dispatched immutable tag." >&2
+            exit 1
+          fi
+
+          release_basename="${RELEASE_RECORD_PATH##*/}"
+          approval_basename="${approval_record_path##*/}"
+          if [[ "${release_basename,,}" == *template* ]]; then
+            echo "A template release manifest cannot authorize production." >&2
+            exit 1
+          fi
+          if [[ "$approval_record_path" == /* || "$approval_record_path" == *".."* || ! "$approval_record_path" =~ ^project-control/approvals/[A-Za-z0-9._/-]+\.json$ || "${approval_basename,,}" == *template* ]]; then
+            echo "approval_record must select a non-template JSON file below project-control/approvals/." >&2
+            exit 1
+          fi
+          if [[ ! -f "$approval_record_path" ]]; then
+            echo "The selected approval record does not exist at the release tag." >&2
+            exit 1
+          fi
+          candidate_deployment_url="$(node -e 'const fs=require("node:fs"); const r=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); process.stdout.write(String(r.candidate_deployment_url || ""));' "$approval_record_path")"
+          if [[ ! "$candidate_deployment_url" =~ ^https://[A-Za-z0-9.-]+\.vercel\.app/?$ ]]; then
+            echo "The approval record must contain the exact immutable HTTPS candidate_deployment_url on vercel.app." >&2
+            exit 1
+          fi
+
+          if ! git cat-file -e "${candidate_sha}^{commit}" 2>/dev/null; then
+            echo "candidate_commit_sha does not identify a commit available in this repository." >&2
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$candidate_sha" "$tag_sha"; then
+            echo "The approved candidate commit must be an ancestor of the release-attestation tag commit." >&2
+            exit 1
+          fi
+
+          mapfile -t changed_paths < <(git diff --name-only --no-renames "$candidate_sha" "$tag_sha")
+          if [[ "${#changed_paths[@]}" -eq 0 ]]; then
+            echo "The release tag must point to a later metadata-only attestation commit." >&2
+            exit 1
+          fi
+
+          release_record_changed=false
+          approval_record_changed=false
+          for changed_path in "${changed_paths[@]}"; do
+            case "$changed_path" in
+              "$RELEASE_RECORD_PATH") release_record_changed=true ;;
+              "$approval_record_path") approval_record_changed=true ;;
+              *)
+                echo "Candidate-to-tag diff contains a prohibited path: $changed_path" >&2
+                exit 1
+                ;;
+            esac
+          done
+          if [[ "$release_record_changed" != true || "$approval_record_changed" != true ]]; then
+            echo "The attestation diff must contain both the selected release manifest and selected approval record." >&2
+            exit 1
+          fi
+
+          node scripts/validate-governance.mjs --release "$RELEASE_RECORD_PATH"
+
+          if [[ -n "$(git status --porcelain)" ]]; then
+            echo "Release validation changed the immutable working tree." >&2
+            exit 1
+          fi
+
+          echo "candidate_commit_sha=$candidate_sha" >> "$GITHUB_OUTPUT"
+          echo "attestation_commit_sha=$tag_sha" >> "$GITHUB_OUTPUT"
+          echo "approval_record_path=$approval_record_path" >> "$GITHUB_OUTPUT"
+          echo "candidate_deployment_url=${candidate_deployment_url%/}" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies from the release-attestation tag tree
+        run: npm ci
+
+      - name: Lint unchanged candidate source from the tag tree
+        run: npm run lint
+
+      - name: Build unchanged candidate source from the tag tree
+        run: npm run build
+
+      - name: Validate pinned Vercel CLI version
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! "${VERCEL_CLI_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([+-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Set VERCEL_CLI_VERSION to an exact version; ranges and 'latest' are not permitted." >&2
+            exit 1
+          fi
+
+      - name: Install pinned Vercel CLI
+        run: npm install --global "vercel@${VERCEL_CLI_VERSION}"
+
+      - name: Verify production credentials are configured
+        shell: bash
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            if [[ -z "${!name:-}" ]]; then
+              echo "Required production secret ${name} is not configured." >&2
+              exit 1
+            fi
+          done
+
+      - name: Inspect exact reviewed staged candidate
+        env:
+          CANDIDATE_URL: ${{ steps.release_gate.outputs.candidate_deployment_url }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          vercel inspect "$CANDIDATE_URL" --token "$VERCEL_TOKEN"
+
+      - name: Smoke-test exact reviewed staged candidate
+        env:
+          CANDIDATE_URL: ${{ steps.release_gate.outputs.candidate_deployment_url }}
+          PRODUCTION_SMOKE_PATH: ${{ vars.PRODUCTION_SMOKE_PATH }}
+        run: |
+          set -euo pipefail
+          smoke_path="${PRODUCTION_SMOKE_PATH:-/}"
+          if [[ "$smoke_path" != /* || "$smoke_path" == *$'\n'* ]]; then
+            echo "PRODUCTION_SMOKE_PATH must be a single relative URL path beginning with /." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 3 --retry-all-errors --max-time 30 \
+            "${CANDIDATE_URL%/}${smoke_path}" > /dev/null
+
+      - name: Promote the smoke-tested immutable deployment
+        env:
+          CANDIDATE_URL: ${{ steps.release_gate.outputs.candidate_deployment_url }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          set +x
+          vercel promote "$CANDIDATE_URL" --yes --token "$VERCEL_TOKEN"
+
+      - name: Verify promoted production domain
+        if: ${{ vars.PRODUCTION_SMOKE_URL != '' }}
+        env:
+          PRODUCTION_SMOKE_URL: ${{ vars.PRODUCTION_SMOKE_URL }}
+          PRODUCTION_SMOKE_PATH: ${{ vars.PRODUCTION_SMOKE_PATH }}
+        run: |
+          set -euo pipefail
+          smoke_path="${PRODUCTION_SMOKE_PATH:-/}"
+          if [[ ! "$PRODUCTION_SMOKE_URL" =~ ^https://[A-Za-z0-9.-]+/?$ ]]; then
+            echo "PRODUCTION_SMOKE_URL must be an HTTPS origin without a path or query." >&2
+            exit 1
+          fi
+          curl --fail --silent --show-error --location \
+            --retry 5 --retry-delay 3 --retry-all-errors --max-time 30 \
+            "${PRODUCTION_SMOKE_URL%/}${smoke_path}" > /dev/null
+
+      - name: Record deployment summary
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          RELEASE_RECORD_PATH: ${{ inputs.release_record_path }}
+          APPROVAL_RECORD_PATH: ${{ steps.release_gate.outputs.approval_record_path }}
+          CANDIDATE_COMMIT: ${{ steps.release_gate.outputs.candidate_commit_sha }}
+          ATTESTATION_COMMIT: ${{ steps.release_gate.outputs.attestation_commit_sha }}
+          CANDIDATE_URL: ${{ steps.release_gate.outputs.candidate_deployment_url }}
+        run: |
+          {
+            echo "## Controlled production release"
+            echo
+            echo "- Tag: \`$RELEASE_TAG\`"
+            echo "- Approved candidate commit: \`$CANDIDATE_COMMIT\`"
+            echo "- Release-attestation commit: \`$ATTESTATION_COMMIT\`"
+            echo "- Release record: \`$RELEASE_RECORD_PATH\`"
+            echo "- Approval record: \`$APPROVAL_RECORD_PATH\`"
+            echo "- Promoted deployment: $CANDIDATE_URL"
+            echo "- Candidate smoke test: passed"
+          } >> "$GITHUB_STEP_SUMMARY"
